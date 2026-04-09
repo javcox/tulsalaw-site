@@ -43,12 +43,12 @@ export const firm = {
 	bioHighlights: [
 		'Tracy A. Cinocca combines legal strategy with business fluency, which is especially helpful for contracts, business setup, and practical document work.',
 		'Her background includes full-time purchasing work during MBA studies, including contract negotiation and acquisitions in a manufacturing environment.',
-		'The firm serves clients from Tulsa while handling Oklahoma matters that benefit from clear drafting, organized intake, and direct attorney guidance.',
+		'The practice is based in Tulsa and serves clients across Oklahoma.',
 	],
 	brandPillars: [
-		'Clear next steps instead of vague legalese',
-		'Thoughtful document work that protects the long game',
-		'Direct attorney review for the matters that affect family, money, and business decisions',
+		'Clear explanations and practical next steps',
+		'Careful document preparation',
+		'Direct attorney guidance on family, business, and planning matters',
 	],
 };
 
