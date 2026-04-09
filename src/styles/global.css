@@ -17,21 +17,21 @@
 }
 
 :root {
-	--bg: #f8f4ee;
-	--paper: rgba(255, 252, 247, 0.9);
-	--paper-strong: rgba(255, 253, 249, 0.97);
-	--paper-deep: #efe4d6;
-	--ink: #102133;
-	--ink-soft: #536271;
-	--accent: #b46b35;
-	--accent-deep: #8b4b24;
-	--trust: #183347;
-	--trust-deep: #102334;
-	--forest: #5e6f63;
-	--line: rgba(16, 33, 51, 0.1);
-	--line-strong: rgba(16, 33, 51, 0.18);
-	--shadow: 0 24px 60px rgba(16, 33, 51, 0.1);
-	--shadow-soft: 0 16px 32px rgba(16, 33, 51, 0.06);
+	--bg: #f8f5f0;
+	--paper: rgba(255, 253, 249, 0.92);
+	--paper-strong: rgba(255, 253, 249, 0.98);
+	--paper-deep: #f1ece4;
+	--ink: #14263a;
+	--ink-soft: #5a6b7c;
+	--accent: #2f5d86;
+	--accent-deep: #244a6b;
+	--trust: #14263a;
+	--trust-deep: #0f2031;
+	--forest: #456b5a;
+	--line: rgba(20, 38, 58, 0.1);
+	--line-strong: rgba(20, 38, 58, 0.18);
+	--shadow: 0 24px 60px rgba(20, 38, 58, 0.08);
+	--shadow-soft: 0 16px 32px rgba(20, 38, 58, 0.05);
 	--max: 1180px;
 	--radius: 28px;
 	--font-body: 'Manrope Variable', 'Segoe UI', sans-serif;
@@ -55,9 +55,9 @@ body {
 	font-family: var(--font-body);
 	color: var(--ink);
 	background:
-		radial-gradient(circle at top left, rgba(180, 107, 53, 0.12), transparent 24%),
-		radial-gradient(circle at top right, rgba(24, 51, 71, 0.08), transparent 22%),
-		linear-gradient(180deg, #fbf7f1 0%, #f1e8dc 100%);
+		radial-gradient(circle at top left, rgba(47, 93, 134, 0.08), transparent 24%),
+		radial-gradient(circle at top right, rgba(69, 107, 90, 0.05), transparent 22%),
+		linear-gradient(180deg, #fbf9f5 0%, #f2ede6 100%);
 	line-height: 1.65;
 }
 
@@ -106,7 +106,7 @@ main {
 	top: 0;
 	z-index: 40;
 	backdrop-filter: blur(18px);
-	background: rgba(251, 247, 241, 0.82);
+	background: rgba(248, 245, 240, 0.88);
 	border-bottom: 1px solid var(--line);
 	box-shadow: 0 10px 24px rgba(16, 33, 51, 0.04);
 }
@@ -133,9 +133,9 @@ main {
 	height: 44px;
 	border-radius: 16px 16px 6px 16px;
 	background:
-		linear-gradient(135deg, rgba(180, 107, 53, 0.14), rgba(24, 51, 71, 0.12)),
-		#fffaf4;
-	border: 1px solid rgba(180, 107, 53, 0.2);
+		linear-gradient(135deg, rgba(47, 93, 134, 0.12), rgba(20, 38, 58, 0.1)),
+		#fffdf9;
+	border: 1px solid rgba(47, 93, 134, 0.16);
 	box-shadow: var(--shadow-soft);
 	font-family: var(--font-display);
 	font-variation-settings:
@@ -143,7 +143,7 @@ main {
 		'WONK' 0;
 	font-size: 1.1rem;
 	font-weight: 700;
-	color: var(--accent-deep);
+	color: var(--trust);
 }
 
 .brand-copy {
@@ -223,23 +223,23 @@ main {
 }
 
 .button:focus-visible {
-	outline: 3px solid rgba(180, 107, 53, 0.22);
+	outline: 3px solid rgba(47, 93, 134, 0.22);
 	outline-offset: 2px;
 }
 
 .button-primary {
 	background: linear-gradient(135deg, var(--accent), var(--accent-deep));
 	color: #fffaf3;
-	border-color: rgba(139, 75, 36, 0.36);
-	box-shadow: 0 14px 32px rgba(180, 107, 53, 0.2);
+	border-color: rgba(36, 74, 107, 0.32);
+	box-shadow: 0 14px 32px rgba(47, 93, 134, 0.2);
 }
 
 .button-primary:hover {
-	box-shadow: 0 18px 38px rgba(180, 107, 53, 0.24);
+	box-shadow: 0 18px 38px rgba(47, 93, 134, 0.24);
 }
 
 .button-secondary {
-	background: linear-gradient(180deg, var(--trust), var(--trust-deep));
+	background: linear-gradient(180deg, #1b3148, #122739);
 	color: #fffaf3;
 	border-color: rgba(16, 33, 51, 0.2);
 	box-shadow: 0 12px 28px rgba(16, 33, 51, 0.16);
@@ -327,7 +327,7 @@ main {
 	width: 240px;
 	height: 240px;
 	border-radius: 50%;
-	background: radial-gradient(circle, rgba(180, 107, 53, 0.12), transparent 68%);
+	background: radial-gradient(circle, rgba(47, 93, 134, 0.1), transparent 68%);
 }
 
 .hero-title,
@@ -443,7 +443,7 @@ main {
 	padding: 8px 12px;
 	border-radius: 999px;
 	background: rgba(24, 51, 71, 0.055);
-	border: 1px solid rgba(24, 51, 71, 0.08);
+	border: 1px solid rgba(47, 93, 134, 0.1);
 	color: var(--trust);
 	font-size: 0.9rem;
 	font-weight: 700;
@@ -531,7 +531,7 @@ main {
 .service-card:focus-visible {
 	transform: translateY(-4px);
 	box-shadow: var(--shadow);
-	border-color: rgba(180, 107, 53, 0.28);
+	border-color: rgba(47, 93, 134, 0.24);
 	outline: none;
 }
 
@@ -587,7 +587,7 @@ main {
 	margin-top: 9px;
 	border-radius: 50%;
 	background: linear-gradient(135deg, var(--accent), var(--accent-deep));
-	box-shadow: 0 0 0 4px rgba(180, 107, 53, 0.12);
+	box-shadow: 0 0 0 4px rgba(47, 93, 134, 0.1);
 }
 
 .service-card-footer {
@@ -630,8 +630,8 @@ main {
 	position: absolute;
 	inset: 0;
 	background:
-		linear-gradient(135deg, rgba(180, 107, 53, 0.06), transparent 48%),
-		radial-gradient(circle at bottom right, rgba(24, 51, 71, 0.08), transparent 30%);
+		linear-gradient(135deg, rgba(47, 93, 134, 0.05), transparent 48%),
+		radial-gradient(circle at bottom right, rgba(69, 107, 90, 0.06), transparent 30%);
 	pointer-events: none;
 }
 
@@ -679,8 +679,8 @@ main {
 	position: absolute;
 	inset: 0;
 	background:
-		linear-gradient(135deg, rgba(180, 107, 53, 0.06), transparent 48%),
-		radial-gradient(circle at bottom right, rgba(24, 51, 71, 0.08), transparent 30%);
+		linear-gradient(135deg, rgba(47, 93, 134, 0.05), transparent 48%),
+		radial-gradient(circle at bottom right, rgba(69, 107, 90, 0.06), transparent 30%);
 	pointer-events: none;
 }
 
@@ -736,8 +736,8 @@ main {
 .pill {
 	padding: 9px 14px;
 	border-radius: 999px;
-	background: rgba(24, 51, 71, 0.05);
-	border: 1px solid rgba(24, 51, 71, 0.08);
+	background: rgba(47, 93, 134, 0.05);
+	border: 1px solid rgba(47, 93, 134, 0.1);
 	font-size: 0.9rem;
 	font-weight: 700;
 	color: var(--ink-soft);
@@ -943,7 +943,7 @@ main {
 	}
 
 	.site-header {
-		background: rgba(251, 247, 241, 0.96);
+		background: rgba(248, 245, 240, 0.96);
 	}
 
 	.header-row {
