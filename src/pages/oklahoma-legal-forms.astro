@@ -3,6 +3,8 @@ import CtaPanel from '../components/CtaPanel.astro';
 import PracticeCard from '../components/PracticeCard.astro';
 import { featuredServices, firm } from '../data/site';
 import Layout from '../layouts/Layout.astro';
+
+const simpleServices = featuredServices.filter((service) => service.slug !== 'personal-injury');
 ---
 
 <Layout
@@ -50,7 +52,7 @@ import Layout from '../layouts/Layout.astro';
 
 	<section class="section-xl">
 		<div class="shell service-grid">
-			{featuredServices.map((service) => <PracticeCard service={service} />)}
+			{simpleServices.map((service) => <PracticeCard service={service} />)}
 		</div>
 	</section>
 

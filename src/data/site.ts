@@ -29,7 +29,7 @@ export const firm = {
 	region: 'Oklahoma',
 	serviceArea: 'Clients across Oklahoma',
 	tagline:
-		'Modern legal guidance for wills, powers of attorney, guardianship planning, family matters, and business documents.',
+		'Modern legal guidance for estate planning, family matters, personal injury claims, and business documents.',
 	intakeSummary:
 		'New client matters are reviewed for fit, conflicts, urgency, and scheduling before representation begins.',
 	credentials: [
@@ -54,7 +54,7 @@ export const homepageFAQs = [
 	{
 		question: 'What kinds of legal matters fit this site best?',
 		answer:
-			'Tulsa Law is built around higher-intent document and planning matters like wills, trusts, powers of attorney, guardianship preparation, uncontested divorce paths, LLC formation, and contract review.',
+			'Tulsa Law is built around higher-intent legal matters like wills, trusts, powers of attorney, guardianship preparation, personal injury review, uncontested divorce paths, LLC formation, and contract review.',
 	},
 	{
 		question: 'Does Tulsa Law handle clients outside Tulsa?',
@@ -400,6 +400,61 @@ export const services: Service[] = [
 		related: ['family-law', 'estate-planning', 'guardianship'],
 	},
 	{
+		slug: 'personal-injury',
+		name: 'Personal Injury',
+		navLabel: 'Personal Injury',
+		category: 'Injury',
+		metaTitle: 'Tulsa Personal Injury Attorney | Injury Claims and Liability Review',
+		metaDescription:
+			'Talk with a Tulsa personal injury attorney about auto collisions, trucking wrecks, injury claims, liability review, treatment issues, and next steps in Oklahoma.',
+		eyebrow: 'Personal Injury',
+		heroTitle:
+			'Tulsa personal injury attorney for collision and injury matters where liability and damages need careful review',
+		intro:
+			'Injury matters turn on timing, treatment, liability, and whether someone else can actually be held responsible. A good first review should separate a real claim from a dead end.',
+		summary:
+			'Tulsa Law reviews Oklahoma personal injury matters involving vehicle collisions and other injury claims where liability, insurance, and damages need a serious first look.',
+		searchPhrases: [
+			'Tulsa personal injury attorney',
+			'Tulsa car accident lawyer',
+			'Oklahoma injury claim attorney',
+		],
+		idealFor: [
+			'People hurt in a crash or injury event where another person, driver, or business may be responsible',
+			'Clients who have treatment, damage documentation, or insurance information that can be evaluated early',
+			'People who want attorney review before spending time on a claim that may not be worth pursuing',
+		],
+		includes: [
+			'Initial liability and damages review',
+			'Auto, trucking, and injury claim screening',
+			'Insurance and claim-position review',
+			'Guidance on whether the matter appears strong enough to move forward',
+		],
+		process: [
+			'We review the basic facts, timing, location, parties, and how the injury happened.',
+			'The matter is screened for liability, damages, treatment, and whether there appears to be a realistic path forward.',
+			'You get a clearer answer on whether the claim is worth pursuing and what the next step should be.',
+		],
+		faqs: [
+			{
+				question: 'Does every injury lead to a viable personal injury claim?',
+				answer:
+					'No. A claim usually depends on more than being hurt. Liability, damages, treatment, timing, and insurance often make the difference.',
+			},
+			{
+				question: 'Should I reach out even if I am not sure the claim is strong yet?',
+				answer:
+					'Yes. Early screening can help determine whether the matter appears worth further time and attention.',
+			},
+			{
+				question: 'What information helps with a first review?',
+				answer:
+					'The date range, location, parties involved, injury details, treatment status, insurance information, and anything that helps explain who was at fault.',
+			},
+		],
+		related: [],
+	},
+	{
 		slug: 'business-law',
 		name: 'Business Law',
 		navLabel: 'Business Law',
@@ -570,6 +625,7 @@ export const featuredServices = services.filter((service) =>
 	[
 		'estate-planning',
 		'power-of-attorney',
+		'personal-injury',
 		'uncontested-divorce',
 		'llc-formation',
 		'contract-drafting-review',
