@@ -837,6 +837,11 @@ main {
 	color: var(--ink-soft);
 }
 
+.text-link::after {
+	content: '->';
+	font-size: 0.95rem;
+}
+
 @media (max-width: 1080px) {
 	.hero-grid,
 	.highlight-band,

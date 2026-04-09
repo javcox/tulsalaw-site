@@ -24,7 +24,13 @@ npm run build
 
 ## Analytics env vars
 
-Set any of these in `Settings -> Secrets and variables -> Actions -> Variables` or your local `.env` when ready:
+This repo now ships with live defaults for:
+
+- `GA4`: `G-H44ZPBQL5Z`
+- `Clarity`: `w92505y0yo`
+- GA linked domains: `tulsalaw.llc,cinoccalaw.com`
+
+You only need GitHub Actions variables or local `.env` values if you want to override those defaults or add optional PostHog later:
 
 - `PUBLIC_GA_MEASUREMENT_ID`
 - `PUBLIC_GA_LINKED_DOMAINS`
