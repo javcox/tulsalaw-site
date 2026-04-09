@@ -14,7 +14,7 @@ const schemas = [
 
 <Layout
 	title="Contact Tulsa Law | Consultation Requests"
-	description="Call, email, or use the secure intake path to request a consultation with Tulsa Law for Oklahoma estate planning, family-law, and business-document matters."
+	description="Email or use the secure intake path to request a consultation with Tulsa Law for Oklahoma estate planning, family-law, and business-document matters."
 	path="/contact/"
 	schemas={schemas}
 >
@@ -30,8 +30,8 @@ const schemas = [
 				<h1 class="page-title">Choose the fastest intake path for your matter.</h1>
 				<p class="lead">
 					New matters are screened for fit, urgency, conflicts, and attorney availability. The
-					best ways to reach the firm are phone, email, or the secure contact form on the main
-					firm site.
+					best ways to reach the firm are email or the secure contact form on the main firm
+					site.
 				</p>
 			</div>
 
@@ -56,22 +56,6 @@ const schemas = [
 	<section class="section-xl">
 		<div class="shell contact-grid">
 			<div class="contact-card">
-				<p class="section-label">Call</p>
-				<strong>{firm.phoneDisplay}</strong>
-				<p>The fastest path for urgent questions and consultation availability.</p>
-				<div class="stack-actions">
-					<a
-						class="button button-primary"
-						href={firm.phoneHref}
-						data-track="generate_lead"
-						data-track-label="contact-call"
-					>
-						Call now
-					</a>
-				</div>
-			</div>
-
-			<div class="contact-card">
 				<p class="section-label">Email</p>
 				<strong>{firm.email}</strong>
 				<p>Best when you want to explain the matter, timing, and what documents already exist.</p>
@@ -91,8 +75,7 @@ const schemas = [
 				<p class="section-label">Secure intake form</p>
 				<strong>Main firm consultation request</strong>
 				<p>
-					Use the existing secure intake page if you prefer a form submission instead of phone or
-					email.
+					Use the existing secure intake page if you prefer a form submission instead of email.
 				</p>
 				<div class="stack-actions">
 					<a
@@ -112,7 +95,7 @@ const schemas = [
 					<li>Your matter type and what result you are trying to achieve</li>
 					<li>Any deadline, hearing date, filing pressure, or urgent timing</li>
 					<li>County, location, and whether the matter is already active</li>
-					<li>The best call-back number and email for follow-up</li>
+					<li>The best email address for follow-up</li>
 				</ul>
 			</div>
 		</div>

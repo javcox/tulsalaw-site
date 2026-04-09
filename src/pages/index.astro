@@ -11,7 +11,6 @@ const schemas = [
 		name: `${firm.name} | ${firm.legalName}`,
 		url: firm.url,
 		areaServed: ['Tulsa', 'Oklahoma'],
-		telephone: firm.phoneDisplay,
 		email: firm.email,
 		description: firm.tagline,
 		serviceType: [
@@ -57,11 +56,11 @@ const schemas = [
 					</a>
 					<a
 						class="button button-secondary"
-						href={firm.phoneHref}
+						href={firm.emailHref}
 						data-track="generate_lead"
-						data-track-label="home-call"
+						data-track-label="home-email"
 					>
-						Call {firm.phoneDisplay}
+						Email the Firm
 					</a>
 				</div>
 
@@ -76,7 +75,7 @@ const schemas = [
 					</div>
 					<div class="stat-card">
 						<strong>Clear intake path</strong>
-						<span>Phone, email, or secure consultation request through the main firm intake.</span>
+						<span>Email or secure consultation request through the main firm intake.</span>
 					</div>
 				</div>
 			</div>
@@ -103,8 +102,8 @@ const schemas = [
 					<p class="mini-kicker">Contact</p>
 					<h2 class="mini-title">Choose the best way to get in touch.</h2>
 					<p class="mini-copy">
-						If you already know the service you need, go straight to that page. If not, call,
-						email, or request a consultation and describe the situation.
+						If you already know the service you need, go straight to that page. If not, send
+						an email or request a consultation and describe the situation.
 					</p>
 				</div>
 			</div>
@@ -227,6 +226,6 @@ const schemas = [
 
 	<CtaPanel
 		title="Ready to send a matter in for review?"
-		copy="Use the contact page to call, email, or route the consultation through the main secure intake form."
+		copy="Use the contact page to email the firm or route the consultation through the main secure intake form."
 	/>
 </Layout>

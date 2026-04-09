@@ -86,11 +86,11 @@ const schemas = [
 					</a>
 					<a
 						class="button button-secondary"
-						href={firm.phoneHref}
+						href={firm.emailHref}
 						data-track="generate_lead"
-						data-track-label={`${service.slug}-call`}
+						data-track-label={`${service.slug}-email`}
 					>
-						Call {firm.phoneDisplay}
+						Email the Firm
 					</a>
 				</div>
 			</div>
@@ -196,6 +196,6 @@ const schemas = [
 
 	<CtaPanel
 		title={`Ready to talk about ${service.name.toLowerCase()}?`}
-		copy={`Call ${firm.phoneDisplay}, send an email, or use the consultation page to have the matter reviewed.`}
+		copy="Send an email or use the consultation page to have the matter reviewed."
 	/>
 </Layout>

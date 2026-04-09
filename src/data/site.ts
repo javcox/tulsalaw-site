@@ -23,8 +23,6 @@ export const firm = {
 	url: 'https://tulsalaw.llc',
 	legacyUrl: 'https://cinoccalaw.com',
 	consultationUrl: 'https://cinoccalaw.com/contact/',
-	phoneDisplay: '(918) 488-9117',
-	phoneHref: 'tel:+19184889117',
 	email: 'tcinocca@cinoccalaw.com',
 	emailHref: 'mailto:tcinocca@cinoccalaw.com?subject=Consultation%20Request%20from%20TulsaLaw.llc',
 	city: 'Tulsa',
@@ -66,7 +64,7 @@ export const homepageFAQs = [
 	{
 		question: 'How do consultation requests work?',
 		answer:
-			'The fastest paths are phone, email, or the secure consultation request form on the main firm contact page. Every new matter is reviewed for conflicts, fit, and scheduling before representation begins.',
+			'The fastest paths are email or the secure consultation request form on the main firm contact page. Every new matter is reviewed for conflicts, fit, and scheduling before representation begins.',
 	},
 ];
 
