@@ -24,12 +24,17 @@ npm run build
 
 ## Analytics env vars
 
-Set any of these in GitHub Pages repository secrets or your local `.env` when ready:
+Set any of these in `Settings -> Secrets and variables -> Actions -> Variables` or your local `.env` when ready:
 
 - `PUBLIC_GA_MEASUREMENT_ID`
+- `PUBLIC_GA_LINKED_DOMAINS`
 - `PUBLIC_CLARITY_ID`
 - `PUBLIC_POSTHOG_KEY`
 - `PUBLIC_POSTHOG_HOST`
+
+Recommended linked domains for GA4 on this project:
+
+- `tulsalaw.llc,cinoccalaw.com`
 
 ## GitHub Pages setup
 

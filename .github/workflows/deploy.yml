@@ -18,6 +18,12 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      PUBLIC_GA_MEASUREMENT_ID: ${{ vars.PUBLIC_GA_MEASUREMENT_ID }}
+      PUBLIC_GA_LINKED_DOMAINS: ${{ vars.PUBLIC_GA_LINKED_DOMAINS }}
+      PUBLIC_CLARITY_ID: ${{ vars.PUBLIC_CLARITY_ID }}
+      PUBLIC_POSTHOG_KEY: ${{ vars.PUBLIC_POSTHOG_KEY }}
+      PUBLIC_POSTHOG_HOST: ${{ vars.PUBLIC_POSTHOG_HOST }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
