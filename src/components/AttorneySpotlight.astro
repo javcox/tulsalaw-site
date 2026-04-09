@@ -1,0 +1,44 @@
+---
+import { Image } from 'astro:assets';
+import ownerImage from '../assets/owner.jpg';
+import { firm } from '../data/site';
+---
+
+<section class="section">
+	<div class="shell spotlight-grid">
+		<div class="portrait-card">
+			<div class="portrait-frame">
+				<Image
+					src={ownerImage}
+					alt="Tracy A. Cinocca"
+					widths={[360, 520, 720]}
+					sizes="(max-width: 1080px) 100vw, 34vw"
+					loading="lazy"
+					format="avif"
+				/>
+			</div>
+			<div class="portrait-caption">
+				<strong>Tracy A. Cinocca, J.D.</strong>
+				<span>{firm.serviceArea}</span>
+			</div>
+		</div>
+
+		<div class="band">
+			<p class="eyebrow">Meet Tracy</p>
+			<h2 class="section-title">A clear, steady point of contact for serious legal matters.</h2>
+			<p class="lead">
+				Clients are often looking for two things at once: strong legal judgment and someone who
+				will explain the next step without creating more confusion. Tulsa Law is built to do both.
+			</p>
+			<ul class="checklist">
+				<li>Direct attorney-led review for new matters</li>
+				<li>Clearer communication about timing, fit, and next steps</li>
+				<li>Practical guidance across planning, injury, family, and business matters</li>
+			</ul>
+			<div class="quote" style="margin-top: 18px;">
+				Clients should feel informed, respected, and better oriented before any important decision
+				is made.
+			</div>
+		</div>
+	</div>
+</section>

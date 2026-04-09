@@ -17,6 +17,16 @@ export type Service = {
 	related: string[];
 };
 
+export type Testimonial = {
+	author: string;
+	quote: string;
+};
+
+export type IntakeExpectation = {
+	title: string;
+	copy: string;
+};
+
 export const firm = {
 	name: 'Tulsa Law',
 	legalName: 'Tracy A. Cinocca, P.C.',
@@ -635,3 +645,64 @@ export const featuredServices = services.filter((service) =>
 export const getServiceUrl = (slug: string) => `/${slug}/`;
 
 export const getAbsoluteUrl = (path: string) => new URL(path, firm.url).toString();
+
+export const testimonials: Testimonial[] = [
+	{
+		author: 'S.C.',
+		quote: 'Cinocca is the consummate professional, diligent and thorough.',
+	},
+	{
+		author: 'S.C.',
+		quote:
+			'She is up-front, honest, and forthcoming in her work, and honesty can sometimes be something you need to hear, not what you want to hear.',
+	},
+	{
+		author: 'K.M.',
+		quote: 'Tracy Cinocca helped me navigate my way through a very emotional legal issue.',
+	},
+	{
+		author: 'K.M.',
+		quote: 'She was kind and gentle with the subject matter and proved to be a font of knowledge.',
+	},
+	{
+		author: 'D.B.',
+		quote: 'I appreciate upfront details on pricing, time frames, and what to expect.',
+	},
+	{
+		author: 'D.B.',
+		quote: 'Ms. Cinocca was understanding and listened to my needs.',
+	},
+	{
+		author: 'J.N.',
+		quote:
+			'I have always come away learning something from her that I otherwise would not have known.',
+	},
+	{
+		author: 'S.R.',
+		quote:
+			'Miss Cinocca’s experience and expertise is demonstrated in her work and professionalism displayed.',
+	},
+];
+
+export const intakeExpectations: IntakeExpectation[] = [
+	{
+		title: 'Who reviews the request',
+		copy:
+			'New matters are reviewed by the firm for fit, conflicts, urgency, and current scheduling before next steps are offered.',
+	},
+	{
+		title: 'How the reply usually works',
+		copy:
+			'If the matter appears to fit, the next step is usually an email reply with scheduling options or a request for a little more information.',
+	},
+	{
+		title: 'Whether a consultation may be paid',
+		copy:
+			'Depending on the type of matter and the amount of review required, the first consultation may be paid.',
+	},
+	{
+		title: 'What may not be a fit',
+		copy:
+			'The site is not built for emergency matters, requests for free legal advice, out-of-state issues, or matters outside the listed practice areas.',
+	},
+];

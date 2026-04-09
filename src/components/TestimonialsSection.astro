@@ -1,0 +1,41 @@
+---
+import { testimonials } from '../data/site';
+
+interface Props {
+	limit?: number;
+}
+
+const { limit } = Astro.props;
+const items = typeof limit === 'number' ? testimonials.slice(0, limit) : testimonials;
+---
+
+<section class="section-xl">
+	<div class="shell">
+		<div class="section-head">
+			<div>
+				<p class="eyebrow">Client Feedback</p>
+				<h2 class="section-title">What people remember about working with the firm</h2>
+			</div>
+			<p class="section-copy">
+				These comments emphasize the same themes clients care about most before they reach out:
+				clarity, professionalism, honesty, and thoughtful follow-through.
+			</p>
+		</div>
+
+		<div class="review-grid">
+			{
+				items.map((item) => (
+					<article class="review-card">
+						<p class="review-quote">“{item.quote}”</p>
+						<p class="review-author">{item.author}</p>
+					</article>
+				))
+			}
+		</div>
+
+		<p class="review-note">
+			Selected client feedback. These statements describe individual experiences and do not
+			guarantee a similar outcome.
+		</p>
+	</div>
+</section>

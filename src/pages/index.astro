@@ -1,6 +1,9 @@
 ---
+import AttorneySpotlight from '../components/AttorneySpotlight.astro';
 import CtaPanel from '../components/CtaPanel.astro';
+import IntakeExpectationsSection from '../components/IntakeExpectationsSection.astro';
 import PracticeCard from '../components/PracticeCard.astro';
+import TestimonialsSection from '../components/TestimonialsSection.astro';
 import { featuredServices, firm, homepageFAQs } from '../data/site';
 import Layout from '../layouts/Layout.astro';
 
@@ -127,45 +130,7 @@ const schemas = [
 		</div>
 	</section>
 
-	<section class="section">
-		<div class="shell highlight-band">
-			<div class="band">
-				<p class="eyebrow">About the attorney</p>
-				<h2 class="section-title">Real credentials, practical judgment, and a sharper business lens.</h2>
-				<p class="lead">
-					Tracy A. Cinocca brings together legal training, MBA-level business perspective, and
-					experience that helps clients think about documents in the real world, not just on paper.
-				</p>
-				<ul class="checklist">
-					{firm.credentials.map((credential) => <li>{credential}</li>)}
-				</ul>
-			</div>
-
-			<div class="band">
-				<p class="section-label">Approach</p>
-				<div class="split-copy">
-					<div>
-						<h3>Practical legal help</h3>
-						<p>
-							The site is organized so visitors can quickly find the service that fits their
-							matter and contact the office without sorting through unnecessary material.
-						</p>
-					</div>
-					<div>
-						<h3>Straightforward communication</h3>
-						<p>
-							The goal is to explain the process clearly, prepare documents carefully, and help
-							clients understand what comes next.
-						</p>
-					</div>
-				</div>
-				<div class="quote" style="margin-top: 18px;">
-					Clients should understand the plan, the paperwork, and the next step before they sign
-					anything important.
-				</div>
-			</div>
-		</div>
-	</section>
+	<AttorneySpotlight />
 
 	<section class="section-xl">
 		<div class="shell">
@@ -201,6 +166,9 @@ const schemas = [
 			</div>
 		</div>
 	</section>
+
+	<TestimonialsSection limit={6} />
+	<IntakeExpectationsSection />
 
 	<section class="section">
 		<div class="shell">

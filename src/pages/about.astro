@@ -1,5 +1,7 @@
 ---
+import AttorneySpotlight from '../components/AttorneySpotlight.astro';
 import CtaPanel from '../components/CtaPanel.astro';
+import TestimonialsSection from '../components/TestimonialsSection.astro';
 import { firm } from '../data/site';
 import Layout from '../layouts/Layout.astro';
 
@@ -74,6 +76,8 @@ const schemas = [
 		</div>
 	</section>
 
+	<AttorneySpotlight />
+
 	<section class="section-xl">
 		<div class="shell">
 			<div class="section-head">
@@ -147,6 +151,8 @@ const schemas = [
 			</div>
 		</div>
 	</section>
+
+	<TestimonialsSection />
 
 	<CtaPanel
 		title="Want to send a matter in for review?"
