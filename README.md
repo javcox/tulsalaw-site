@@ -49,6 +49,12 @@ Recommended linked domains for GA4 on this project:
 3. Push to `main`.
 4. The workflow at `.github/workflows/deploy.yml` will publish the site.
 
+## Sitemap to submit
+
+Submit this URL in Google Search Console:
+
+- `https://tulsalaw.llc/sitemap.xml`
+
 ## Namecheap DNS target
 
 If you want `tulsalaw.llc` as the main domain on GitHub Pages:
