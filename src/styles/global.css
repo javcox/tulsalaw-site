@@ -1,13 +1,4 @@
 @font-face {
-	font-family: 'Fraunces Variable';
-	font-style: normal;
-	font-display: swap;
-	font-weight: 100 900;
-	src: url('@fontsource-variable/fraunces/files/fraunces-latin-wght-normal.woff2')
-		format('woff2-variations');
-}
-
-@font-face {
 	font-family: 'Manrope Variable';
 	font-style: normal;
 	font-display: swap;
@@ -41,7 +32,7 @@
 	--max: 1180px;
 	--radius: 28px;
 	--font-body: 'Manrope Variable', 'Segoe UI', sans-serif;
-	--font-display: 'Fraunces Variable', Georgia, serif;
+	--font-display: 'Manrope Variable', 'Segoe UI', sans-serif;
 	--font-heading: 'Manrope Variable', 'Segoe UI', sans-serif;
 }
 
@@ -143,12 +134,10 @@ main {
 		#fffdf9;
 	border: 1px solid rgba(47, 93, 134, 0.16);
 	box-shadow: var(--shadow-soft);
-	font-family: var(--font-display);
-	font-variation-settings:
-		'SOFT' 0,
-		'WONK' 0;
+	font-family: var(--font-heading);
 	font-size: 1.1rem;
-	font-weight: 700;
+	font-weight: 800;
+	letter-spacing: -0.03em;
 	color: var(--trust);
 }
 
@@ -340,14 +329,10 @@ main {
 .page-title,
 .section-title {
 	margin: 0;
-	font-family: var(--font-display);
-	font-optical-sizing: none;
-	font-variation-settings:
-		'SOFT' 0,
-		'WONK' 0;
-	font-weight: 700;
-	letter-spacing: -0.045em;
-	line-height: 1.02;
+	font-family: var(--font-heading);
+	font-weight: 800;
+	letter-spacing: -0.04em;
+	line-height: 1.04;
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
 }

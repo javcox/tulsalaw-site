@@ -4,7 +4,6 @@ import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { firm, getAbsoluteUrl } from '../data/site';
 import '../styles/global.css';
-import frauncesLatinWoff2 from '@fontsource-variable/fraunces/files/fraunces-latin-wght-normal.woff2';
 import manropeLatinWoff2 from '@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2';
 
 interface Props {
@@ -67,7 +66,6 @@ const mergedSchemas = [...baseSchemas, ...schemas];
 		<meta name="description" content={description} />
 		<link rel="canonical" href={canonical} />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="preload" href={frauncesLatinWoff2} as="font" type="font/woff2" crossorigin />
 		<link rel="preload" href={manropeLatinWoff2} as="font" type="font/woff2" crossorigin />
 		<meta property="og:type" content="website" />
 		<meta property="og:title" content={pageTitle} />
