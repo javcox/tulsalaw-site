@@ -143,12 +143,12 @@ main {
 
 .brand-copy {
 	display: grid;
-	gap: 2px;
+	gap: 3px;
 }
 
 .brand-copy strong {
 	font-family: var(--font-heading);
-	font-size: 1rem;
+	font-size: 1.08rem;
 	font-weight: 800;
 	letter-spacing: -0.02em;
 	line-height: 1.15;
@@ -157,6 +157,14 @@ main {
 .brand-copy span {
 	font-size: 0.88rem;
 	color: var(--ink-soft);
+}
+
+.brand-meta {
+	font-weight: 700;
+}
+
+.brand-location {
+	font-size: 0.8rem;
 }
 
 .nav {
@@ -401,6 +409,11 @@ main {
 	border-radius: 28px;
 }
 
+.office-copy {
+	margin-top: 16px;
+	font-size: 0.92rem;
+}
+
 .mini-kicker {
 	margin: 0;
 	font-size: 0.82rem;
@@ -582,7 +595,7 @@ main {
 .service-card-footer {
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: flex-end;
 	gap: 16px;
 	margin-top: 20px;
 	padding-top: 18px;
@@ -925,6 +938,15 @@ main {
 	color: #b6882b;
 }
 
+.review-context {
+	margin: 10px 0 0;
+	font-size: 0.78rem;
+	font-weight: 800;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--forest);
+}
+
 .centered-head {
 	justify-content: center;
 	text-align: center;
@@ -981,6 +1003,33 @@ main {
 	color: var(--ink-soft);
 }
 
+.intake-panel .mini-title {
+	max-width: 13ch;
+}
+
+.intake-steps {
+	margin: 16px 0 0;
+	padding: 0;
+	list-style: none;
+	display: grid;
+	gap: 14px;
+}
+
+.intake-steps li {
+	display: grid;
+	gap: 4px;
+}
+
+.intake-steps strong {
+	font-size: 0.98rem;
+	letter-spacing: -0.01em;
+}
+
+.intake-steps span {
+	color: var(--ink-soft);
+	font-size: 0.96rem;
+}
+
 .footer {
 	padding: 42px 0 54px;
 }
@@ -1035,6 +1084,17 @@ main {
 	margin-top: 18px;
 	font-size: 0.86rem;
 	color: var(--ink-soft);
+}
+
+.footer-trust-list {
+	display: grid;
+	gap: 8px;
+	margin-top: 16px;
+}
+
+.footer-trust-list p {
+	margin: 0;
+	font-size: 0.92rem;
 }
 
 .text-link::after {

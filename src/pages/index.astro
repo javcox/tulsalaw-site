@@ -2,6 +2,7 @@
 import AttorneySpotlight from '../components/AttorneySpotlight.astro';
 import CtaPanel from '../components/CtaPanel.astro';
 import IntakeExpectationsSection from '../components/IntakeExpectationsSection.astro';
+import IntakePathPanel from '../components/IntakePathPanel.astro';
 import PracticeCard from '../components/PracticeCard.astro';
 import TestimonialsSection from '../components/TestimonialsSection.astro';
 import WhyChooseSection from '../components/WhyChooseSection.astro';
@@ -31,8 +32,8 @@ const schemas = [
 ---
 
 <Layout
-	title="Tulsa Attorney for Wills, Injury Claims, Divorce Filings, Business Formation, and Everyday Legal Matters"
-	description="Tulsa Law is a modern Oklahoma legal site focused on wills, trusts, powers of attorney, personal injury review, guardianship planning, family-law filings, LLC formation, and contract review."
+	title="Tulsa Attorney for Personal Injury Review, Legal Guidance, and Estate Planning"
+	description="Tulsa Law is a Tulsa-based Oklahoma legal site focused on personal injury review, practical legal guidance, estate planning, family matters, and business documents."
 	path="/"
 	schemas={schemas}
 >
@@ -41,13 +42,13 @@ const schemas = [
 			<div class="hero-card">
 				<p class="eyebrow">Tulsa-based. Oklahoma-wide.</p>
 				<h1 class="hero-title">
-					Modern legal help for the documents and decisions people need handled now.
+					Personal injury review, practical legal guidance, and estate planning with a clearer next step.
 				</h1>
 				<p class="lead">
-					Tulsa Law is built around the matters that often turn into urgent intake requests:
-					wills, trusts, powers of attorney, personal injury review, guardianship planning,
-					uncontested-divorce paths, LLC formation, and contract review. The goal is simple:
-					clearer documents, cleaner next steps, and direct attorney guidance.
+					Most people who land here are trying to solve one of three problems: they need an
+					injury matter screened quickly, they need practical legal guidance on a family or
+					business issue, or they need estate documents handled before a problem grows. Practice
+					Areas is the full service map. Simple Services is the faster document-focused path.
 				</p>
 
 				<div class="hero-actions">
@@ -71,47 +72,44 @@ const schemas = [
 
 				<div class="hero-meta">
 					<div class="stat-card">
-						<strong>Estate + Family + Injury + Business</strong>
-						<span>Focused on the legal matters clients most commonly bring to the firm.</span>
+						<strong>01 Personal injury review</strong>
+						<span>For collision and injury matters where liability, treatment, and damages need a serious first look.</span>
 					</div>
 					<div class="stat-card">
-						<strong>JD + MBA perspective</strong>
-						<span>Helpful when documents affect money, ownership, and long-range planning.</span>
+						<strong>02 Legal guidance</strong>
+						<span>For family, business, and active matters that need a clear next step instead of guesswork.</span>
 					</div>
 					<div class="stat-card">
-						<strong>Clear intake path</strong>
-						<span>Email or secure consultation request through the main firm intake.</span>
+						<strong>03 Estate planning</strong>
+						<span>For wills, trusts, powers of attorney, and planning decisions that should be handled before a crisis.</span>
 					</div>
 				</div>
 			</div>
 
 			<div class="hero-aside">
 				<div class="panel">
-					<p class="mini-kicker">Services</p>
-					<h2 class="mini-title">Common matters.</h2>
+					<p class="mini-kicker">Practice Areas</p>
+					<h2 class="mini-title">The full service map.</h2>
 					<p class="mini-copy">
-						These are some of the matters people most often contact the firm about.
+						Practice Areas covers the full range of injury, planning, family, and business work.
+						Simple Services is the faster path for document-driven matters.
 					</p>
 					<div class="chips">
-						<span class="chip">Wills</span>
-						<span class="chip">Trusts</span>
-						<span class="chip">Power of Attorney</span>
 						<span class="chip">Personal Injury</span>
-						<span class="chip">Guardianship</span>
+						<span class="chip">Estate Planning</span>
+						<span class="chip">Family Law</span>
+						<span class="chip">Power of Attorney</span>
 						<span class="chip">Uncontested Divorce</span>
+						<span class="chip">Business Law</span>
 						<span class="chip">LLC Formation</span>
 						<span class="chip">Contracts</span>
 					</div>
-				</div>
-
-				<div class="panel">
-					<p class="mini-kicker">Contact</p>
-					<h2 class="mini-title">Choose the best way to get in touch.</h2>
-					<p class="mini-copy">
-						If you already know the service you need, go straight to that page. If not, send
-						an email or request a consultation and describe the situation.
+					<p class="mini-copy office-copy">
+						Tulsa office: {firm.fullAddress}
 					</p>
 				</div>
+
+				<IntakePathPanel />
 			</div>
 		</div>
 	</section>

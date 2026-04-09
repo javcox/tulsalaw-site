@@ -1,35 +1,42 @@
 ---
 const reviews = [
-	{ author: 'A.M.', quote: "It's no wonder they call her Super!" },
+	{ author: 'A.M.', context: 'Planning', quote: "It's no wonder they call her Super!" },
 	{
 		author: 'S.C.',
+		context: 'General guidance',
 		quote:
 			'She is up-front, honest, and forthcoming in her work, and honesty can sometimes be something you need to hear, not what you want to hear.',
 	},
 	{
 		author: 'N.C.',
+		context: 'Legal advice',
 		quote: 'Tracy Cinocca has been extremely helpful with giving legal advice.',
 	},
 	{
 		author: 'J.N.',
+		context: 'General counsel',
 		quote:
 			'I have always come away learning something from her that I otherwise would not have known.',
 	},
 	{
 		author: 'T.T.',
+		context: 'Complex matters',
 		quote: 'I recommend her, and have done so to my friends.',
 	},
 	{
 		author: 'K.M.',
+		context: 'Family matter',
 		quote: 'She was kind and gentle with the subject matter and proved to be a font of knowledge.',
 	},
 	{
 		author: 'S.R.',
+		context: 'Professionalism',
 		quote:
 			"Miss Cinocca's experience and expertise is demonstrated in her work and professionalism displayed.",
 	},
 	{
 		author: 'D.B.',
+		context: 'Client communication',
 		quote: 'Ms. Cinocca was understanding and listened to my needs.',
 	},
 ];
@@ -50,6 +57,7 @@ const reviews = [
 					<article class="review-card">
 						<p class="review-author">{item.author}</p>
 						<p class="review-stars" aria-label="5 out of 5 stars">&starf;&starf;&starf;&starf;&starf;</p>
+						<p class="review-context">{item.context}</p>
 						<p class="review-quote">"{item.quote}"</p>
 					</article>
 				))

@@ -43,8 +43,10 @@ const baseSchemas = [
 		areaServed: ['Tulsa', 'Oklahoma'],
 		address: {
 			'@type': 'PostalAddress',
+			streetAddress: firm.streetAddress,
 			addressLocality: firm.city,
 			addressRegion: firm.region,
+			postalCode: firm.postalCode,
 			addressCountry: 'US',
 		},
 		sameAs: [firm.legacyUrl],

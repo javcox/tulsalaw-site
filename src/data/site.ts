@@ -35,11 +35,14 @@ export const firm = {
 	consultationUrl: 'https://cinoccalaw.com/contact/',
 	email: 'tcinocca@cinoccalaw.com',
 	emailHref: 'mailto:tcinocca@cinoccalaw.com?subject=Consultation%20Request%20from%20TulsaLaw.llc',
+	streetAddress: '10026-A S. Mingo Rd., Suite 238',
 	city: 'Tulsa',
 	region: 'Oklahoma',
-	serviceArea: 'Clients across Oklahoma',
+	postalCode: '74133',
+	fullAddress: '10026-A S. Mingo Rd., Suite 238, Tulsa, OK 74133',
+	serviceArea: 'Based in Tulsa, serving clients across Oklahoma',
 	tagline:
-		'Modern legal guidance for estate planning, family matters, personal injury claims, and business documents.',
+		'Attorney-led guidance for personal injury review, estate planning, family matters, and business documents across Oklahoma.',
 	intakeSummary:
 		'New client matters are reviewed for fit, conflicts, urgency, and scheduling before representation begins.',
 	credentials: [
@@ -51,12 +54,12 @@ export const firm = {
 	bioHighlights: [
 		'Tracy A. Cinocca combines legal strategy with business fluency, which is especially helpful for contracts, business setup, and practical document work.',
 		'Her background includes full-time purchasing work during MBA studies, including contract negotiation and acquisitions in a manufacturing environment.',
-		'The practice is based in Tulsa and serves clients across Oklahoma.',
+		'The practice is based in Tulsa at 10026-A S. Mingo Rd., Suite 238 and serves clients across Oklahoma.',
 	],
 	brandPillars: [
 		'Clear explanations and practical next steps',
 		'Careful document preparation',
-		'Direct attorney guidance on family, business, and planning matters',
+		'Direct attorney guidance on injury, family, business, and planning matters',
 	],
 };
 
@@ -69,12 +72,17 @@ export const homepageFAQs = [
 	{
 		question: 'Does Tulsa Law handle clients outside Tulsa?',
 		answer:
-			'Yes. The site is Tulsa-based, but the firm is designed to welcome Oklahoma matters that can be handled within the attorney’s practice scope and availability.',
+			'Yes. The office is in Tulsa, and the firm reviews matters from clients across Oklahoma that fit the listed practice areas and current availability.',
 	},
 	{
 		question: 'How do consultation requests work?',
 		answer:
-			'The fastest paths are email or the secure consultation request form on the main firm contact page. Every new matter is reviewed for conflicts, fit, and scheduling before representation begins.',
+			'The fastest paths are email or the secure consultation request form on the main firm contact page. Most requests are reviewed within 1 business day when submitted on a business day, and matters that require detailed document or strategy review may begin with a paid consultation.',
+	},
+	{
+		question: 'What is the difference between Practice Areas and Simple Services?',
+		answer:
+			'Practice Areas is the full list of injury, planning, family, and business work. Simple Services is the faster path for document-driven matters like estate planning, powers of attorney, uncontested divorce paperwork, LLC formation, and contract review.',
 	},
 ];
 
@@ -631,16 +639,18 @@ export const services: Service[] = [
 	},
 ];
 
-export const featuredServices = services.filter((service) =>
-	[
-		'estate-planning',
-		'power-of-attorney',
-		'personal-injury',
-		'uncontested-divorce',
-		'llc-formation',
-		'contract-drafting-review',
-	].includes(service.slug),
-);
+const featuredServiceOrder = [
+	'personal-injury',
+	'estate-planning',
+	'power-of-attorney',
+	'uncontested-divorce',
+	'llc-formation',
+	'contract-drafting-review',
+];
+
+export const featuredServices = featuredServiceOrder
+	.map((slug) => services.find((service) => service.slug === slug))
+	.filter((service): service is Service => Boolean(service));
 
 export const getServiceUrl = (slug: string) => `/${slug}/`;
 
@@ -688,17 +698,17 @@ export const intakeExpectations: IntakeExpectation[] = [
 	{
 		title: 'Who reviews the request',
 		copy:
-			'New matters are reviewed by the firm for fit, conflicts, urgency, and current scheduling before next steps are offered.',
+			'New requests are reviewed by the firm for fit, timing, conflicts, and current scheduling before the next step is offered.',
 	},
 	{
-		title: 'How the reply usually works',
+		title: 'How fast the reply usually works',
 		copy:
-			'If the matter appears to fit, the next step is usually an email reply with scheduling options or a request for a little more information.',
+			'Most requests are reviewed within 1 business day when submitted on a business day. If the matter appears to fit, the next step is usually an email reply with scheduling options or a request for a little more information.',
 	},
 	{
 		title: 'Whether a consultation may be paid',
 		copy:
-			'Depending on the type of matter and the amount of review required, the first consultation may be paid.',
+			'If the matter needs document review, strategy analysis, or detailed injury screening before advice can be given, the first consultation may be paid.',
 	},
 	{
 		title: 'What may not be a fit',

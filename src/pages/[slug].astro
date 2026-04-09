@@ -1,5 +1,6 @@
 ---
 import CtaPanel from '../components/CtaPanel.astro';
+import IntakePathPanel from '../components/IntakePathPanel.astro';
 import PracticeCard from '../components/PracticeCard.astro';
 import { firm, getServiceUrl, services, type Service } from '../data/site';
 import Layout from '../layouts/Layout.astro';
@@ -13,6 +14,43 @@ export function getStaticPaths() {
 
 const { service } = Astro.props as { service: Service };
 const relatedServices = services.filter((entry) => service.related.includes(entry.slug));
+
+const categoryCopy = {
+	Planning: {
+		overview:
+			'This is usually a fit when the goal is to get important documents, authority decisions, or family planning handled before a crisis makes everything harder.',
+		expectation:
+			'Most planning clients are trying to avoid confusion later. The first question is usually whether the documents match the family, the assets, and the people who may have to act.',
+		consultation:
+			'Planning consultations may be paid when the matter requires document review, family-structure analysis, or more customized strategy work.',
+	},
+	Family: {
+		overview:
+			'This is usually a fit when the matter involves family change, document preparation, filings, agreements, or a need for clearer next steps before tensions rise.',
+		expectation:
+			'Most family-law clients want to know what is urgent, what can wait, and what paperwork or decisions need attention first.',
+		consultation:
+			'Family-law consultations may be paid when the matter needs document review, strategy analysis, or review of existing filings or agreements.',
+	},
+	Injury: {
+		overview:
+			'This is usually a fit when the question is whether an injury matter has enough liability, treatment, insurance, and damages to justify moving forward.',
+		expectation:
+			'Most injury clients want an honest first look at fault, treatment, and whether the claim appears worth more time and attention.',
+		consultation:
+			'Injury consultations may begin as a paid review when the matter requires screening of liability, treatment history, documents, or claim materials before advice can be given.',
+	},
+	Business: {
+		overview:
+			'This is usually a fit when the work involves ownership, agreements, document cleanup, or business decisions that are better handled before they become disputes.',
+		expectation:
+			'Most business clients want to know whether the agreement, structure, or filing is sound enough to move forward without avoidable risk.',
+		consultation:
+			'Business consultations may be paid when contracts, company records, or transaction documents need to be reviewed before direction can be given.',
+	},
+} as const;
+
+const currentCategory = categoryCopy[service.category as keyof typeof categoryCopy];
 
 const schemas = [
 	{
@@ -71,10 +109,6 @@ const schemas = [
 					{service.intro} {service.summary}
 				</p>
 
-				<div class="pill-row">
-					{service.searchPhrases.map((phrase) => <span class="pill">{phrase}</span>)}
-				</div>
-
 				<div class="hero-actions">
 					<a
 						class="button button-primary"
@@ -102,13 +136,7 @@ const schemas = [
 						{service.idealFor.map((item) => <li>{item}</li>)}
 					</ul>
 				</div>
-				<div class="panel">
-					<p class="mini-kicker">Overview</p>
-					<p class="mini-copy">
-						This page provides an overview of {service.name.toLowerCase()} matters for clients
-						in Tulsa and across Oklahoma.
-					</p>
-				</div>
+				<IntakePathPanel />
 			</div>
 		</div>
 	</section>
@@ -135,23 +163,21 @@ const schemas = [
 	<section class="section">
 		<div class="shell highlight-band">
 			<div class="band">
-				<p class="eyebrow">What to Expect</p>
-				<h2 class="section-title">A practical overview before you decide how to move forward.</h2>
+				<p class="eyebrow">Before you reach out</p>
+				<h2 class="section-title">What this page is helping you decide.</h2>
 				<p class="lead" style="margin-top: 0;">
-					Many clients begin with one specific question, document need, or legal concern. This
-					page is meant to explain the issue clearly, outline the work involved, and help you
-					decide whether it makes sense to contact the firm.
+					{currentCategory.overview}
 				</p>
 			</div>
 			<div class="band">
 				<p class="section-label">Consultation note</p>
 				<p class="lead" style="margin-top: 0;">
-					Consultation requests are reviewed for fit, urgency, conflict issues, and schedule
-					capacity. Sending a request does not create an attorney-client relationship.
+					Most requests are reviewed within 1 business day when submitted on a business day.
+					{` ${currentCategory.consultation}`} Sending a request does not create an
+					attorney-client relationship.
 				</p>
 				<div class="quote" style="margin-top: 18px;">
-					When a matter is document-heavy, time-sensitive, or likely to affect family or business
-					decisions later, careful drafting matters.
+					{currentCategory.expectation}
 				</div>
 			</div>
 		</div>

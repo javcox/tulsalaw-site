@@ -1,5 +1,6 @@
 ---
 import IntakeExpectationsSection from '../components/IntakeExpectationsSection.astro';
+import IntakePathPanel from '../components/IntakePathPanel.astro';
 import { featuredServices, firm, getServiceUrl } from '../data/site';
 import Layout from '../layouts/Layout.astro';
 
@@ -32,24 +33,21 @@ const schemas = [
 				<p class="lead">
 					New matters are screened for fit, urgency, conflicts, and attorney availability. The
 					best ways to reach the firm are email or the secure contact form on the main firm
-					site.
+					site. Most requests are reviewed within 1 business day when submitted on a business
+					day.
 				</p>
 			</div>
 
 			<div class="hero-aside">
 				<div class="panel">
-					<p class="mini-kicker">Good fit examples</p>
+					<p class="mini-kicker">Tulsa office</p>
+					<h2 class="mini-title">Serving Oklahoma from Tulsa.</h2>
+					<p class="mini-copy">{firm.fullAddress}</p>
 					<div class="chips">
 						{featuredServices.map((service) => <span class="chip">{service.name}</span>)}
 					</div>
 				</div>
-				<div class="panel">
-					<p class="mini-kicker">Important note</p>
-					<p class="mini-copy">
-						Sending a request does not create an attorney-client relationship. Representation
-						starts only after conflict review and a confirmed engagement.
-					</p>
-				</div>
+				<IntakePathPanel />
 			</div>
 		</div>
 	</section>

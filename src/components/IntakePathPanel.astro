@@ -1,0 +1,32 @@
+---
+const steps = [
+	{
+		title: '1. Tell us the matter',
+		copy: 'Share the issue, county, timing, and what you are trying to get handled.',
+	},
+	{
+		title: '2. The request is reviewed',
+		copy: 'New matters are screened for fit, urgency, conflicts, and current availability.',
+	},
+	{
+		title: '3. You get the next step',
+		copy: 'If it fits, the next move is usually an email reply, scheduling option, or consultation note.',
+	},
+];
+---
+
+<div class="panel intake-panel">
+	<p class="mini-kicker">3-Step Intake Path</p>
+	<h2 class="mini-title">How requests usually move.</h2>
+	<ol class="intake-steps">
+		{
+			steps.map((step) => (
+				<li>
+					<strong>{step.title}</strong>
+					<span>{step.copy}</span>
+				</li>
+			))
+		}
+	</ol>
+	<p class="mini-copy">Most requests are reviewed within 1 business day when submitted on a business day.</p>
+</div>
