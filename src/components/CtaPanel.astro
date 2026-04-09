@@ -13,14 +13,14 @@ const { title, copy } = Astro.props;
 	<div class="shell">
 		<div class="cta-panel">
 			<div>
-				<p class="eyebrow" style="color: rgba(255,247,238,0.72);">Consultation Path</p>
-				<h2 class="section-title" style="color: #fff7ee; max-width: 16ch;">{title}</h2>
+				<p class="eyebrow">Consultation Path</p>
+				<h2 class="section-title">{title}</h2>
 				<p>{copy}</p>
 			</div>
 
 			<div class="stack-actions">
 				<a
-					class="button button-secondary"
+					class="button button-primary"
 					href="/contact/"
 					data-track="generate_lead"
 					data-track-label="cta-contact-page"

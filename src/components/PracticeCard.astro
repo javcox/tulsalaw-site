@@ -9,7 +9,12 @@ interface Props {
 const { service } = Astro.props;
 ---
 
-<article class="service-card">
+<a
+	class="service-card"
+	href={getServiceUrl(service.slug)}
+	data-track="select_content"
+	data-track-label={`service-card-${service.slug}`}
+>
 	<div>
 		<div class="category">{service.category}</div>
 		<h3>{service.name}</h3>
@@ -22,8 +27,6 @@ const { service } = Astro.props;
 
 	<div class="service-card-footer">
 		<span class="microcopy">{service.searchPhrases[0]}</span>
-		<a class="text-link" href={getServiceUrl(service.slug)}>
-			View page
-		</a>
+		<span class="text-link">View page</span>
 	</div>
-</article>
+</a>

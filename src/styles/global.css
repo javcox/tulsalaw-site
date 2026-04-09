@@ -462,12 +462,15 @@ main {
 		transform 180ms ease,
 		box-shadow 180ms ease,
 		border-color 180ms ease;
+	cursor: pointer;
 }
 
-.service-card:hover {
+.service-card:hover,
+.service-card:focus-visible {
 	transform: translateY(-4px);
 	box-shadow: var(--shadow);
 	border-color: rgba(183, 104, 44, 0.24);
+	outline: none;
 }
 
 .service-card .category {
@@ -594,20 +597,42 @@ main {
 	gap: 20px;
 	align-items: center;
 	background:
-		linear-gradient(135deg, rgba(19, 34, 51, 0.96), rgba(37, 52, 69, 0.92)),
-		#172435;
-	color: #fff7ee;
-	border: 1px solid rgba(255, 255, 255, 0.08);
+		linear-gradient(180deg, rgba(255, 250, 243, 0.96), rgba(242, 233, 219, 0.9)),
+		#fffaf3;
+	color: var(--ink);
+	border: 1px solid rgba(18, 34, 51, 0.09);
+	box-shadow: var(--shadow);
+	position: relative;
+	overflow: hidden;
 }
 
 .cta-panel p {
-	color: rgba(255, 247, 238, 0.78);
+	color: var(--ink-soft);
 }
 
-.cta-panel .button-secondary {
-	background: rgba(255, 255, 255, 0.12);
-	border-color: rgba(255, 255, 255, 0.16);
-	color: #fff7ee;
+.cta-panel::before,
+.footer-grid::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background:
+		linear-gradient(135deg, rgba(183, 104, 44, 0.08), transparent 48%),
+		radial-gradient(circle at bottom right, rgba(80, 100, 90, 0.14), transparent 30%);
+	pointer-events: none;
+}
+
+.cta-panel > *,
+.footer-grid > * {
+	position: relative;
+	z-index: 1;
+}
+
+.cta-panel .eyebrow {
+	color: var(--accent-deep);
+}
+
+.cta-panel .section-title {
+	max-width: 16ch;
 }
 
 .page-hero {
@@ -764,21 +789,26 @@ main {
 	gap: 18px;
 	padding: 28px;
 	border-radius: 30px;
-	background: rgba(19, 34, 51, 0.92);
-	color: #fff7ee;
+	background:
+		linear-gradient(180deg, rgba(255, 250, 243, 0.96), rgba(242, 233, 219, 0.9)),
+		#fffaf3;
+	color: var(--ink);
 	box-shadow: var(--shadow);
+	border: 1px solid rgba(18, 34, 51, 0.09);
+	position: relative;
+	overflow: hidden;
 }
 
 .footer-grid p,
 .footer-grid a,
 .footer-grid li {
-	color: rgba(255, 247, 238, 0.76);
+	color: var(--ink-soft);
 }
 
 .footer-grid strong {
 	display: block;
 	font-size: 1rem;
-	color: #fff7ee;
+	color: var(--ink);
 }
 
 .footer-links {
@@ -804,7 +834,7 @@ main {
 .footer-note {
 	margin-top: 18px;
 	font-size: 0.86rem;
-	color: rgba(255, 247, 238, 0.62);
+	color: var(--ink-soft);
 }
 
 @media (max-width: 1080px) {
