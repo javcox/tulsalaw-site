@@ -844,6 +844,13 @@ main {
 	font-size: 0.95rem;
 }
 
+.button-primary,
+.button-secondary,
+.footer-grid .button,
+.cta-panel .button {
+	color: #fffaf3;
+}
+
 @media (max-width: 1080px) {
 	.hero-grid,
 	.highlight-band,
