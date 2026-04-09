@@ -1,0 +1,42 @@
+---
+const reasons = [
+	{
+		title: 'Direct attorney attention',
+		copy:
+			'New matters are reviewed with an emphasis on fit, timing, and practical next steps instead of being treated like a generic intake pile.',
+	},
+	{
+		title: 'Honest, steady guidance',
+		copy:
+			'Clients often need clear judgment more than a sales pitch. The firm focuses on realistic guidance, careful review, and straightforward communication.',
+	},
+	{
+		title: 'Clearer expectations',
+		copy:
+			'From planning work to injury review and business matters, the process is designed to clarify what happens next before time and money are committed.',
+	},
+];
+---
+
+<section class="section-xl">
+	<div class="shell">
+		<div class="section-head centered-head">
+			<div>
+				<p class="eyebrow">Why Choose</p>
+				<h2 class="section-title">Why Choose Cinocca Law?</h2>
+			</div>
+		</div>
+
+		<div class="grid-3 why-choose-grid">
+			{
+				reasons.map((item, index) => (
+					<div class="why-card">
+						<p class="why-number">{String(index + 1).padStart(2, '0')}</p>
+						<h3>{item.title}</h3>
+						<p>{item.copy}</p>
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>

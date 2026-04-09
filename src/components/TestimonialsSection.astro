@@ -1,41 +1,59 @@
 ---
-import { testimonials } from '../data/site';
-
-interface Props {
-	limit?: number;
-}
-
-const { limit } = Astro.props;
-const items = typeof limit === 'number' ? testimonials.slice(0, limit) : testimonials;
+const reviews = [
+	{ author: 'A.M.', quote: "It's no wonder they call her Super!" },
+	{
+		author: 'S.C.',
+		quote:
+			'She is up-front, honest, and forthcoming in her work, and honesty can sometimes be something you need to hear, not what you want to hear.',
+	},
+	{
+		author: 'N.C.',
+		quote: 'Tracy Cinocca has been extremely helpful with giving legal advice.',
+	},
+	{
+		author: 'J.N.',
+		quote:
+			'I have always come away learning something from her that I otherwise would not have known.',
+	},
+	{
+		author: 'T.T.',
+		quote: 'I recommend her, and have done so to my friends.',
+	},
+	{
+		author: 'K.M.',
+		quote: 'She was kind and gentle with the subject matter and proved to be a font of knowledge.',
+	},
+	{
+		author: 'S.R.',
+		quote:
+			"Miss Cinocca's experience and expertise is demonstrated in her work and professionalism displayed.",
+	},
+	{
+		author: 'D.B.',
+		quote: 'Ms. Cinocca was understanding and listened to my needs.',
+	},
+];
 ---
 
 <section class="section-xl">
 	<div class="shell">
-		<div class="section-head">
+		<div class="section-head centered-head">
 			<div>
-				<p class="eyebrow">Client Feedback</p>
-				<h2 class="section-title">What people remember about working with the firm</h2>
+				<p class="eyebrow">Customer Reviews</p>
+				<h2 class="section-title">Customer Reviews</h2>
 			</div>
-			<p class="section-copy">
-				These comments emphasize the same themes clients care about most before they reach out:
-				clarity, professionalism, honesty, and thoughtful follow-through.
-			</p>
 		</div>
 
 		<div class="review-grid">
 			{
-				items.map((item) => (
+				reviews.map((item) => (
 					<article class="review-card">
-						<p class="review-quote">“{item.quote}”</p>
 						<p class="review-author">{item.author}</p>
+						<p class="review-stars" aria-label="5 out of 5 stars">&starf;&starf;&starf;&starf;&starf;</p>
+						<p class="review-quote">"{item.quote}"</p>
 					</article>
 				))
 			}
 		</div>
-
-		<p class="review-note">
-			Selected client feedback. These statements describe individual experiences and do not
-			guarantee a similar outcome.
-		</p>
 	</div>
 </section>

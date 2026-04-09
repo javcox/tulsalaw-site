@@ -4,6 +4,7 @@ import CtaPanel from '../components/CtaPanel.astro';
 import IntakeExpectationsSection from '../components/IntakeExpectationsSection.astro';
 import PracticeCard from '../components/PracticeCard.astro';
 import TestimonialsSection from '../components/TestimonialsSection.astro';
+import WhyChooseSection from '../components/WhyChooseSection.astro';
 import { featuredServices, firm, homepageFAQs } from '../data/site';
 import Layout from '../layouts/Layout.astro';
 
@@ -167,7 +168,8 @@ const schemas = [
 		</div>
 	</section>
 
-	<TestimonialsSection limit={6} />
+	<WhyChooseSection />
+	<TestimonialsSection />
 	<IntakeExpectationsSection />
 
 	<section class="section">
