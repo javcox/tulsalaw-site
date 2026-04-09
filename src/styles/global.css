@@ -197,9 +197,10 @@ main {
 }
 
 .button-secondary {
-	background: rgba(255, 250, 243, 0.76);
-	color: var(--ink);
-	border-color: rgba(18, 34, 51, 0.12);
+	background: linear-gradient(135deg, rgba(183, 104, 44, 0.92), rgba(135, 67, 31, 0.96));
+	color: #fffaf3;
+	border-color: rgba(135, 67, 31, 0.35);
+	box-shadow: 0 12px 28px rgba(183, 104, 44, 0.18);
 }
 
 .button-ghost {
