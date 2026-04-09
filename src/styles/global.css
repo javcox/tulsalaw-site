@@ -32,6 +32,9 @@
 	--shadow-soft: 0 18px 36px rgba(24, 34, 49, 0.08);
 	--max: 1180px;
 	--radius: 28px;
+	--font-body: 'Manrope Variable', 'Segoe UI', sans-serif;
+	--font-display: 'Fraunces Variable', Georgia, serif;
+	--font-heading: 'Manrope Variable', 'Segoe UI', sans-serif;
 }
 
 *,
@@ -47,7 +50,7 @@ html {
 body {
 	margin: 0;
 	min-width: 320px;
-	font-family: 'Manrope Variable', 'Segoe UI', sans-serif;
+	font-family: var(--font-body);
 	color: var(--ink);
 	background:
 		radial-gradient(circle at top left, rgba(183, 104, 44, 0.18), transparent 24%),
@@ -131,7 +134,10 @@ main {
 		#fff8ef;
 	border: 1px solid rgba(183, 104, 44, 0.24);
 	box-shadow: var(--shadow-soft);
-	font-family: 'Fraunces Variable', Georgia, serif;
+	font-family: var(--font-display);
+	font-variation-settings:
+		'SOFT' 0,
+		'WONK' 0;
 	font-size: 1.1rem;
 	font-weight: 700;
 	color: var(--accent-deep);
@@ -143,9 +149,10 @@ main {
 }
 
 .brand-copy strong {
-	font-family: 'Fraunces Variable', Georgia, serif;
+	font-family: var(--font-heading);
 	font-size: 1rem;
-	letter-spacing: -0.03em;
+	font-weight: 800;
+	letter-spacing: -0.02em;
 	line-height: 1.15;
 }
 
@@ -301,10 +308,16 @@ main {
 .page-title,
 .section-title {
 	margin: 0;
-	font-family: 'Fraunces Variable', Georgia, serif;
+	font-family: var(--font-display);
+	font-optical-sizing: none;
+	font-variation-settings:
+		'SOFT' 0,
+		'WONK' 0;
 	font-weight: 700;
 	letter-spacing: -0.045em;
 	line-height: 1.02;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
 }
 
 .hero-title {
@@ -382,9 +395,10 @@ main {
 
 .mini-title {
 	margin: 10px 0 0;
-	font-family: 'Fraunces Variable', Georgia, serif;
+	font-family: var(--font-heading);
 	font-size: 1.6rem;
-	letter-spacing: -0.03em;
+	font-weight: 800;
+	letter-spacing: -0.02em;
 }
 
 .mini-copy {
@@ -454,9 +468,10 @@ main {
 .panel h3,
 .value-card h3 {
 	margin: 0;
-	font-family: 'Fraunces Variable', Georgia, serif;
+	font-family: var(--font-heading);
 	font-size: 1.35rem;
-	letter-spacing: -0.03em;
+	font-weight: 800;
+	letter-spacing: -0.02em;
 }
 
 .card p,
@@ -503,9 +518,10 @@ main {
 
 .service-card h3 {
 	margin-top: 10px;
-	font-family: 'Fraunces Variable', Georgia, serif;
+	font-family: var(--font-heading);
 	font-size: 1.55rem;
-	letter-spacing: -0.03em;
+	font-weight: 800;
+	letter-spacing: -0.02em;
 }
 
 .service-card p {
