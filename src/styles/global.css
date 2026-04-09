@@ -8,10 +8,10 @@
 }
 
 :root {
-	--bg: #f8f5f0;
-	--paper: rgba(252, 249, 244, 0.92);
-	--paper-strong: rgba(255, 252, 248, 0.98);
-	--paper-deep: #ece7de;
+	--bg: #f4f7fb;
+	--paper: rgba(249, 251, 253, 0.92);
+	--paper-strong: rgba(252, 253, 255, 0.98);
+	--paper-deep: #e6edf4;
 	--ink: #14263a;
 	--ink-soft: #5a6b7c;
 	--accent: #2f5d86;
@@ -25,10 +25,10 @@
 	--shadow-soft: 0 18px 34px rgba(20, 38, 58, 0.055);
 	--surface-wash:
 		radial-gradient(circle at top right, rgba(47, 93, 134, 0.05), transparent 34%),
-		linear-gradient(180deg, rgba(255, 253, 249, 0.99), rgba(244, 247, 250, 0.96));
+		linear-gradient(180deg, rgba(252, 253, 255, 0.99), rgba(239, 244, 249, 0.97));
 	--surface-wash-strong:
 		radial-gradient(circle at top right, rgba(47, 93, 134, 0.065), transparent 32%),
-		linear-gradient(180deg, rgba(255, 253, 249, 0.99), rgba(241, 245, 249, 0.95));
+		linear-gradient(180deg, rgba(252, 253, 255, 0.995), rgba(235, 241, 247, 0.97));
 	--max: 1180px;
 	--radius: 28px;
 	--font-body: 'Manrope Variable', 'Segoe UI', sans-serif;
@@ -52,9 +52,9 @@ body {
 	font-family: var(--font-body);
 	color: var(--ink);
 	background:
-		radial-gradient(circle at top left, rgba(47, 93, 134, 0.08), transparent 24%),
-		radial-gradient(circle at top right, rgba(69, 107, 90, 0.05), transparent 22%),
-		linear-gradient(180deg, #fbf9f5 0%, #f2ede6 100%);
+		radial-gradient(circle at top left, rgba(47, 93, 134, 0.1), transparent 24%),
+		radial-gradient(circle at top right, rgba(69, 107, 90, 0.035), transparent 22%),
+		linear-gradient(180deg, #f9fbfe 0%, #edf3f8 100%);
 	line-height: 1.65;
 }
 
@@ -103,7 +103,7 @@ main {
 	top: 0;
 	z-index: 40;
 	backdrop-filter: blur(18px);
-	background: rgba(248, 245, 240, 0.88);
+	background: rgba(244, 247, 251, 0.9);
 	border-bottom: 1px solid var(--line);
 	box-shadow: 0 10px 24px rgba(16, 33, 51, 0.04);
 }
@@ -930,7 +930,7 @@ main {
 	}
 
 	.site-header {
-		background: rgba(248, 245, 240, 0.96);
+		background: rgba(244, 247, 251, 0.96);
 	}
 
 	.header-row {
