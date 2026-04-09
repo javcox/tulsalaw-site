@@ -1,0 +1,237 @@
+---
+import CtaPanel from '../components/CtaPanel.astro';
+import PracticeCard from '../components/PracticeCard.astro';
+import { featuredServices, firm, homepageFAQs } from '../data/site';
+import Layout from '../layouts/Layout.astro';
+
+const schemas = [
+	{
+		'@context': 'https://schema.org',
+		'@type': 'LegalService',
+		name: `${firm.name} | ${firm.legalName}`,
+		url: firm.url,
+		areaServed: ['Tulsa', 'Oklahoma'],
+		telephone: firm.phoneDisplay,
+		email: firm.email,
+		description: firm.tagline,
+		serviceType: [
+			'Estate planning',
+			'Power of attorney',
+			'Guardianship planning',
+			'Uncontested divorce',
+			'LLC formation',
+			'Contract drafting and review',
+		],
+	},
+];
+---
+
+<Layout
+	title="Tulsa Attorney for Wills, Divorce Filings, Business Formation, and Everyday Legal Matters"
+	description="Tulsa Law is a modern Oklahoma legal site focused on wills, trusts, powers of attorney, guardianship planning, family-law filings, LLC formation, and contract review."
+	path="/"
+	schemas={schemas}
+>
+	<section class="hero">
+		<div class="shell hero-grid">
+			<div class="hero-card">
+				<p class="eyebrow">Tulsa-based. Oklahoma-wide.</p>
+				<h1 class="hero-title">
+					Modern legal help for the documents and decisions people need handled now.
+				</h1>
+				<p class="lead">
+					Tulsa Law is built around the matters that often turn into urgent intake requests:
+					wills, trusts, powers of attorney, guardianship planning, uncontested-divorce paths,
+					LLC formation, and contract review. The goal is simple: clearer documents, cleaner
+					next steps, and direct attorney guidance.
+				</p>
+
+				<div class="hero-actions">
+					<a
+						class="button button-primary"
+						href="/contact/"
+						data-track="generate_lead"
+						data-track-label="home-contact"
+					>
+						Request a Consultation
+					</a>
+					<a
+						class="button button-secondary"
+						href={firm.phoneHref}
+						data-track="generate_lead"
+						data-track-label="home-call"
+					>
+						Call {firm.phoneDisplay}
+					</a>
+				</div>
+
+				<div class="hero-meta">
+					<div class="stat-card">
+						<strong>Estate + Family + Business</strong>
+						<span>Built for the legal work people actually search for first.</span>
+					</div>
+					<div class="stat-card">
+						<strong>JD + MBA perspective</strong>
+						<span>Helpful when documents affect money, ownership, and long-range planning.</span>
+					</div>
+					<div class="stat-card">
+						<strong>Clear intake path</strong>
+						<span>Phone, email, or secure consultation request through the main firm intake.</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="hero-aside">
+				<div class="panel">
+					<p class="mini-kicker">Fastest fit matters</p>
+					<h2 class="mini-title">The highest-intent pages start with simpler legal work.</h2>
+					<p class="mini-copy">
+						That is why this site leans into everyday legal planning, business setup, and
+						document-heavy matters instead of trying to look like every broad, cluttered law
+						firm homepage on the internet.
+					</p>
+					<div class="chips">
+						<span class="chip">Wills</span>
+						<span class="chip">Trusts</span>
+						<span class="chip">POA</span>
+						<span class="chip">Guardianship</span>
+						<span class="chip">Uncontested Divorce</span>
+						<span class="chip">LLC Formation</span>
+						<span class="chip">Contracts</span>
+					</div>
+				</div>
+
+				<div class="panel">
+					<p class="mini-kicker">Built to convert</p>
+					<h2 class="mini-title">A sharper path from search to consultation.</h2>
+					<p class="mini-copy">
+						Every page is designed to answer the core question fast, show the next best action,
+						and move qualified visitors toward phone, email, or a secure intake request.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section-xl">
+		<div class="shell">
+			<div class="section-head">
+				<div>
+					<p class="eyebrow">Most Requested</p>
+					<h2 class="section-title">The pages built to capture money-making search intent first</h2>
+				</div>
+				<p class="section-copy">
+					These are the highest-leverage service pages for a forms-forward, intake-focused site.
+				</p>
+			</div>
+
+			<div class="service-grid">
+				{featuredServices.map((service) => <PracticeCard service={service} />)}
+			</div>
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="shell highlight-band">
+			<div class="band">
+				<p class="eyebrow">About the attorney</p>
+				<h2 class="section-title">Real credentials, practical judgment, and a sharper business lens.</h2>
+				<p class="lead">
+					Tracy A. Cinocca brings together legal training, MBA-level business perspective, and
+					experience that helps clients think about documents in the real world, not just on paper.
+				</p>
+				<ul class="checklist">
+					{firm.credentials.map((credential) => <li>{credential}</li>)}
+				</ul>
+			</div>
+
+			<div class="band">
+				<p class="section-label">Why this positioning works</p>
+				<div class="split-copy">
+					<div>
+						<h3>Simple services convert faster</h3>
+						<p>
+							Wills, powers of attorney, LLC setup, contract review, and uncontested-divorce
+							paths are easier for consumers to recognize, search for, and act on quickly.
+						</p>
+					</div>
+					<div>
+						<h3>Clear choices reduce drop-off</h3>
+						<p>
+							Instead of one vague “contact us” lane, the site gives visitors obvious pathways
+							to the exact matter type they are trying to solve.
+						</p>
+					</div>
+				</div>
+				<div class="quote" style="margin-top: 18px;">
+					“People usually do not want a dramatic legal journey. They want a competent attorney,
+					clear documents, and confidence that the next step is being handled right.”
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section-xl">
+		<div class="shell">
+			<div class="section-head">
+				<div>
+					<p class="eyebrow">Client Fit</p>
+					<h2 class="section-title">Who this site is built to help first</h2>
+				</div>
+			</div>
+
+			<div class="grid-3">
+				<div class="value-card">
+					<h3>Families planning ahead</h3>
+					<p>
+						Clients who need wills, trusts, powers of attorney, guardianship decisions, and a
+						more organized estate plan.
+					</p>
+				</div>
+				<div class="value-card">
+					<h3>People navigating change</h3>
+					<p>
+						Clients dealing with family-law transitions who want cleaner paperwork and clearer
+						next steps instead of confusion.
+					</p>
+				</div>
+				<div class="value-card">
+					<h3>Owners protecting the business side</h3>
+					<p>
+						Founders and business owners who want LLC setup, operating agreements, and contracts
+						done with more care than a filing service can offer.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="shell">
+			<div class="section-head">
+				<div>
+					<p class="eyebrow">FAQ</p>
+					<h2 class="section-title">The questions most visitors need answered before they reach out</h2>
+				</div>
+			</div>
+
+			<div class="faq-list">
+				{
+					homepageFAQs.map((item) => (
+						<div class="faq-item">
+							<details>
+								<summary>{item.question}</summary>
+								<p>{item.answer}</p>
+							</details>
+						</div>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<CtaPanel
+		title="Ready to turn search traffic into qualified intake?"
+		copy="The best next move is to start with the practice area that matches the matter, then use phone, email, or the secure consultation request page to get it reviewed."
+	/>
+</Layout>

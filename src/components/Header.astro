@@ -1,0 +1,57 @@
+---
+import { services } from '../data/site';
+
+const pathname = Astro.url.pathname;
+const servicePaths = new Set(services.map((service) => `/${service.slug}/`));
+const navLinks = [
+	{ href: '/practice-areas/', label: 'Practice Areas' },
+	{ href: '/oklahoma-legal-forms/', label: 'Simple Services' },
+	{ href: '/about/', label: 'About Tracy' },
+	{ href: '/faq/', label: 'FAQ' },
+	{ href: '/contact/', label: 'Contact' },
+];
+---
+
+<header class="site-header">
+	<div class="shell header-row">
+		<a class="brand" href="/">
+			<span class="brand-mark">TL</span>
+			<span class="brand-copy">
+				<strong>Tulsa Law</strong>
+				<span>Serving Tulsa and clients across Oklahoma</span>
+			</span>
+		</a>
+
+		<nav class="nav" aria-label="Primary">
+			{
+				navLinks.map((link) => (
+					<a
+						class={
+							link.href === '/practice-areas/'
+								? pathname.startsWith(link.href) || servicePaths.has(pathname)
+									? 'active'
+									: ''
+								: pathname.startsWith(link.href)
+									? 'active'
+									: ''
+						}
+						href={link.href}
+					>
+						{link.label}
+					</a>
+				))
+			}
+		</nav>
+
+		<div class="header-cta">
+			<a
+				class="button button-primary"
+				href="/contact/"
+				data-track="generate_lead"
+				data-track-label="header-intake"
+			>
+				Start Intake
+			</a>
+		</div>
+	</div>
+</header>

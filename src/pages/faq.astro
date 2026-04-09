@@ -1,0 +1,78 @@
+---
+import CtaPanel from '../components/CtaPanel.astro';
+import { firm, homepageFAQs } from '../data/site';
+import Layout from '../layouts/Layout.astro';
+
+const faqItems = [
+	...homepageFAQs,
+	{
+		question: 'Does Tulsa Law only help Tulsa clients?',
+		answer:
+			'No. The site is Tulsa-branded because Tulsa is a strong local search market, but the firm can review matters from across Oklahoma that fit the attorney’s scope and availability.',
+	},
+	{
+		question: 'What if I am not sure which practice area fits my issue?',
+		answer:
+			'That is common. Start with the page that feels closest to the matter or use the contact page and explain the issue in plain language.',
+	},
+	{
+		question: 'Can I use Tulsa Law even if I found the main firm site first?',
+		answer:
+			'Yes. This site is a focused intake and search site. The main firm site remains available, especially for secure form intake.',
+	},
+	{
+		question: 'What is the fastest way to hear back?',
+		answer:
+			'Calling or sending a clear email with the matter type, timing, and callback information is usually the fastest way to move the intake forward.',
+	},
+];
+---
+
+<Layout
+	title="Tulsa Law FAQ | Oklahoma Consultation and Practice Questions"
+	description="Answers to common questions about Tulsa Law, consultation requests, practice areas, and how the site works for Oklahoma legal matters."
+	path="/faq/"
+>
+	<section class="page-hero">
+		<div class="shell">
+			<div class="hero-card">
+				<div class="breadcrumbs">
+					<a href="/">Home</a>
+					<span>/</span>
+					<span>FAQ</span>
+				</div>
+				<p class="eyebrow">FAQ</p>
+				<h1 class="page-title">Questions people ask before they decide to reach out.</h1>
+				<p class="lead">
+					This page is here to reduce friction. If you still have a question after reading, the
+					next best move is a phone call, an email, or a secure consultation request.
+				</p>
+				<div class="pill-row">
+					<span class="pill">Tulsa-based</span>
+					<span class="pill">Oklahoma matters</span>
+					<span class="pill">Phone + email + secure intake</span>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section-xl">
+		<div class="shell">
+			<div class="faq-list">
+				{faqItems.map((item) => (
+					<div class="faq-item">
+						<details>
+							<summary>{item.question}</summary>
+							<p>{item.answer}</p>
+						</details>
+					</div>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<CtaPanel
+		title="Still deciding whether the matter is a fit?"
+		copy={`Use the contact page, email ${firm.email}, or call ${firm.phoneDisplay} and describe the issue in plain language.`}
+	/>
+</Layout>

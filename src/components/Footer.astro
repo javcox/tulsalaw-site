@@ -1,0 +1,73 @@
+---
+import { featuredServices, firm, getServiceUrl } from '../data/site';
+---
+
+<footer class="footer">
+	<div class="shell footer-grid">
+		<div>
+			<div class="brand">
+				<span class="brand-mark">TL</span>
+				<span class="brand-copy">
+					<strong>{firm.name}</strong>
+					<span>{firm.legalName}</span>
+				</span>
+			</div>
+
+			<p class="microcopy" style="margin-top: 18px;">
+				{firm.tagline}
+			</p>
+
+			<div class="stack-actions">
+				<a
+					class="button button-secondary"
+					href={firm.phoneHref}
+					data-track="generate_lead"
+					data-track-label="footer-call"
+				>
+					Call {firm.phoneDisplay}
+				</a>
+				<a
+					class="button button-secondary"
+					href={firm.emailHref}
+					data-track="generate_lead"
+					data-track-label="footer-email"
+				>
+					Email the Firm
+				</a>
+			</div>
+
+			<p class="footer-note">
+				Attorney advertising. The information on this site is for general information only and
+				does not create an attorney-client relationship. Representation begins only after
+				conflict review and a confirmed engagement.
+			</p>
+		</div>
+
+		<div class="footer-links">
+			<div>
+				<strong>Most Requested</strong>
+				<ul>
+					{
+						featuredServices.slice(0, 4).map((service) => (
+							<li>
+								<a href={getServiceUrl(service.slug)}>{service.name}</a>
+							</li>
+						))
+					}
+				</ul>
+			</div>
+
+			<div>
+				<strong>Quick Links</strong>
+				<ul>
+					<li><a href="/practice-areas/">Practice Areas</a></li>
+					<li><a href="/oklahoma-legal-forms/">Simple Legal Services</a></li>
+					<li><a href="/about/">About Tracy</a></li>
+					<li><a href="/faq/">FAQ</a></li>
+					<li><a href="/contact/">Contact</a></li>
+					<li><a href={firm.legacyUrl}>Main Firm Site</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>

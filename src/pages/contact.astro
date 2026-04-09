@@ -1,0 +1,145 @@
+---
+import { featuredServices, firm, getServiceUrl } from '../data/site';
+import Layout from '../layouts/Layout.astro';
+
+const schemas = [
+	{
+		'@context': 'https://schema.org',
+		'@type': 'ContactPage',
+		name: 'Contact Tulsa Law',
+		url: `${firm.url}/contact/`,
+	},
+];
+---
+
+<Layout
+	title="Contact Tulsa Law | Consultation Requests"
+	description="Call, email, or use the secure intake path to request a consultation with Tulsa Law for Oklahoma estate planning, family-law, and business-document matters."
+	path="/contact/"
+	schemas={schemas}
+>
+	<section class="page-hero">
+		<div class="shell page-frame">
+			<div class="hero-card">
+				<div class="breadcrumbs">
+					<a href="/">Home</a>
+					<span>/</span>
+					<span>Contact</span>
+				</div>
+				<p class="eyebrow">Contact</p>
+				<h1 class="page-title">Choose the fastest intake path for your matter.</h1>
+				<p class="lead">
+					New matters are screened for fit, urgency, conflicts, and attorney availability. The
+					best ways to reach the firm are phone, email, or the secure contact form on the main
+					firm site.
+				</p>
+			</div>
+
+			<div class="hero-aside">
+				<div class="panel">
+					<p class="mini-kicker">Good fit examples</p>
+					<div class="chips">
+						{featuredServices.map((service) => <span class="chip">{service.name}</span>)}
+					</div>
+				</div>
+				<div class="panel">
+					<p class="mini-kicker">Important note</p>
+					<p class="mini-copy">
+						Sending a request does not create an attorney-client relationship. Representation
+						starts only after conflict review and a confirmed engagement.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section-xl">
+		<div class="shell contact-grid">
+			<div class="contact-card">
+				<p class="section-label">Call</p>
+				<strong>{firm.phoneDisplay}</strong>
+				<p>The fastest path for urgent questions and consultation availability.</p>
+				<div class="stack-actions">
+					<a
+						class="button button-primary"
+						href={firm.phoneHref}
+						data-track="generate_lead"
+						data-track-label="contact-call"
+					>
+						Call now
+					</a>
+				</div>
+			</div>
+
+			<div class="contact-card">
+				<p class="section-label">Email</p>
+				<strong>{firm.email}</strong>
+				<p>Best when you want to explain the matter, timing, and what documents already exist.</p>
+				<div class="stack-actions">
+					<a
+						class="button button-primary"
+						href={firm.emailHref}
+						data-track="generate_lead"
+						data-track-label="contact-email"
+					>
+						Email the firm
+					</a>
+				</div>
+			</div>
+
+			<div class="contact-card">
+				<p class="section-label">Secure intake form</p>
+				<strong>Main firm consultation request</strong>
+				<p>
+					Use the existing secure intake page if you prefer a form submission instead of phone or
+					email.
+				</p>
+				<div class="stack-actions">
+					<a
+						class="button button-primary"
+						href={firm.consultationUrl}
+						data-track="generate_lead"
+						data-track-label="contact-secure-form"
+					>
+						Open secure form
+					</a>
+				</div>
+			</div>
+
+			<div class="contact-card">
+				<p class="section-label">What to send</p>
+				<ul class="info-list">
+					<li>Your matter type and what result you are trying to achieve</li>
+					<li>Any deadline, hearing date, filing pressure, or urgent timing</li>
+					<li>County, location, and whether the matter is already active</li>
+					<li>The best call-back number and email for follow-up</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="shell">
+			<div class="section-head">
+				<div>
+					<p class="eyebrow">Start with the right page</p>
+					<h2 class="section-title">If you already know the matter type, go straight there</h2>
+				</div>
+			</div>
+
+			<div class="grid-3">
+				{featuredServices.map((service) => (
+					<div class="card">
+						<h3>{service.name}</h3>
+						<p>{service.summary}</p>
+						<div class="stack-actions">
+							<a class="button button-ghost" href={getServiceUrl(service.slug)}>
+								Open {service.name}
+							</a>
+						</div>
+					</div>
+				))}
+			</div>
+		</div>
+	</section>
+</Layout>

@@ -1,0 +1,84 @@
+---
+import CtaPanel from '../components/CtaPanel.astro';
+import PracticeCard from '../components/PracticeCard.astro';
+import { featuredServices, firm } from '../data/site';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+	title="Oklahoma Legal Documents and Simple Attorney Services"
+	description="Tulsa Law focuses on simple, higher-intent Oklahoma legal services like wills, powers of attorney, uncontested divorce paths, LLC formation, and contract review."
+	path="/oklahoma-legal-forms/"
+>
+	<section class="page-hero">
+		<div class="shell page-frame">
+			<div class="hero-card">
+				<div class="breadcrumbs">
+					<a href="/">Home</a>
+					<span>/</span>
+					<span>Simple Services</span>
+				</div>
+				<p class="eyebrow">Simple Services</p>
+				<h1 class="page-title">Oklahoma legal services built around the matters people actually buy first.</h1>
+				<p class="lead">
+					This page is for visitors who want a simpler path to legal help without sorting through
+					an oversized list of practice areas. The strongest fit here is document-driven work that
+					can move from search to intake quickly.
+				</p>
+			</div>
+
+			<div class="hero-aside">
+				<div class="panel">
+					<p class="mini-kicker">Best fit matters</p>
+					<ul class="checklist">
+						<li>Estate documents and planning updates</li>
+						<li>Power of attorney and guardianship planning</li>
+						<li>Uncontested-divorce and family-law document work</li>
+						<li>LLC setup, operating agreements, and contract review</li>
+					</ul>
+				</div>
+				<div class="panel">
+					<p class="mini-kicker">Why this page exists</p>
+					<p class="mini-copy">
+						It gives consumers a cleaner intake lane than a broad “full service” law-firm menu.
+						That is better for conversion and better for client expectations.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section-xl">
+		<div class="shell service-grid">
+			{featuredServices.map((service) => <PracticeCard service={service} />)}
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="shell grid-2">
+			<div class="band">
+				<p class="eyebrow">Good fit</p>
+				<h2 class="section-title">When this site is likely to be the right next step</h2>
+				<ul class="checklist">
+					<li>You need planning documents, not a DIY packet with no attorney review.</li>
+					<li>You want clearer business or family paperwork before the matter gets messier.</li>
+					<li>You want direct guidance from a Tulsa attorney serving Oklahoma clients.</li>
+				</ul>
+			</div>
+			<div class="band">
+				<p class="eyebrow">Not the main angle</p>
+				<h2 class="section-title">What this site intentionally does not emphasize</h2>
+				<ul class="checklist">
+					<li>Overloaded menus with every possible practice area under the sun.</li>
+					<li>Generic “contact us” messaging with no matter-type triage.</li>
+					<li>Language that sounds inflated, vague, or disconnected from what people search for.</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<CtaPanel
+		title="Ready to send in a simpler legal matter?"
+		copy={`Call ${firm.phoneDisplay}, send an email, or use the secure intake page to get the matter reviewed.`}
+	/>
+</Layout>

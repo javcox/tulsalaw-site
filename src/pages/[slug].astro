@@ -1,0 +1,201 @@
+---
+import CtaPanel from '../components/CtaPanel.astro';
+import PracticeCard from '../components/PracticeCard.astro';
+import { firm, getServiceUrl, services, type Service } from '../data/site';
+import Layout from '../layouts/Layout.astro';
+
+export function getStaticPaths() {
+	return services.map((service) => ({
+		params: { slug: service.slug },
+		props: { service },
+	}));
+}
+
+const { service } = Astro.props as { service: Service };
+const relatedServices = services.filter((entry) => service.related.includes(entry.slug));
+
+const schemas = [
+	{
+		'@context': 'https://schema.org',
+		'@type': 'LegalService',
+		name: service.name,
+		url: `${firm.url}/${service.slug}/`,
+		description: service.metaDescription,
+		provider: {
+			'@type': 'Attorney',
+			name: firm.legalName,
+		},
+		areaServed: ['Tulsa', 'Oklahoma'],
+		serviceType: service.name,
+	},
+	{
+		'@context': 'https://schema.org',
+		'@type': 'BreadcrumbList',
+		itemListElement: [
+			{
+				'@type': 'ListItem',
+				position: 1,
+				name: 'Home',
+				item: firm.url,
+			},
+			{
+				'@type': 'ListItem',
+				position: 2,
+				name: service.name,
+				item: `${firm.url}/${service.slug}/`,
+			},
+		],
+	},
+];
+---
+
+<Layout
+	title={service.metaTitle}
+	description={service.metaDescription}
+	path={getServiceUrl(service.slug)}
+	schemas={schemas}
+>
+	<section class="page-hero">
+		<div class="shell page-frame">
+			<div class="hero-card">
+				<div class="breadcrumbs">
+					<a href="/">Home</a>
+					<span>/</span>
+					<a href="/practice-areas/">Practice Areas</a>
+					<span>/</span>
+					<span>{service.name}</span>
+				</div>
+				<p class="eyebrow">{service.eyebrow}</p>
+				<h1 class="page-title">{service.heroTitle}</h1>
+				<p class="lead">
+					{service.intro} {service.summary}
+				</p>
+
+				<div class="pill-row">
+					{service.searchPhrases.map((phrase) => <span class="pill">{phrase}</span>)}
+				</div>
+
+				<div class="hero-actions">
+					<a
+						class="button button-primary"
+						href="/contact/"
+						data-track="generate_lead"
+						data-track-label={`${service.slug}-contact`}
+					>
+						Request a Consultation
+					</a>
+					<a
+						class="button button-secondary"
+						href={firm.phoneHref}
+						data-track="generate_lead"
+						data-track-label={`${service.slug}-call`}
+					>
+						Call {firm.phoneDisplay}
+					</a>
+				</div>
+			</div>
+
+			<div class="hero-aside">
+				<div class="panel">
+					<p class="mini-kicker">Best fit</p>
+					<ul class="checklist">
+						{service.idealFor.map((item) => <li>{item}</li>)}
+					</ul>
+				</div>
+				<div class="panel">
+					<p class="mini-kicker">Search angle</p>
+					<p class="mini-copy">
+						This page is written for people searching around <strong>{service.searchPhrases[0]}</strong>{' '}
+						and closely related Oklahoma terms.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section-xl">
+		<div class="shell grid-2">
+			<div class="band">
+				<p class="eyebrow">What this can include</p>
+				<h2 class="section-title">Common needs inside this matter type</h2>
+				<ul class="checklist">
+					{service.includes.map((item) => <li>{item}</li>)}
+				</ul>
+			</div>
+			<div class="band">
+				<p class="eyebrow">How the work usually moves</p>
+				<h2 class="section-title">A cleaner path from first question to next step</h2>
+				<ul class="checklist">
+					{service.process.map((item) => <li>{item}</li>)}
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="shell highlight-band">
+			<div class="band">
+				<p class="eyebrow">Why this page exists</p>
+				<h2 class="section-title">A focused intake lane converts better than a vague all-purpose page.</h2>
+				<p class="lead" style="margin-top: 0;">
+					People usually do not search for “legal solutions.” They search for a specific matter,
+					a specific document, or a specific problem. This page is designed to meet that moment
+					with clear language and a direct next step.
+				</p>
+			</div>
+			<div class="band">
+				<p class="section-label">Consultation note</p>
+				<p class="lead" style="margin-top: 0;">
+					Consultation requests are reviewed for fit, urgency, conflict issues, and schedule
+					capacity. Sending a request does not create an attorney-client relationship.
+				</p>
+				<div class="quote" style="margin-top: 18px;">
+					When a matter is document-heavy, time-sensitive, or likely to affect family or business
+					decisions later, careful drafting matters.
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="shell">
+			<div class="section-head">
+				<div>
+					<p class="eyebrow">FAQ</p>
+					<h2 class="section-title">Questions that come up before people reach out</h2>
+				</div>
+			</div>
+			<div class="faq-list">
+				{service.faqs.map((item) => (
+					<div class="faq-item">
+						<details>
+							<summary>{item.question}</summary>
+							<p>{item.answer}</p>
+						</details>
+					</div>
+				))}
+			</div>
+		</div>
+	</section>
+
+	{relatedServices.length > 0 && (
+		<section class="section-xl">
+			<div class="shell">
+				<div class="section-head">
+					<div>
+						<p class="eyebrow">Related pages</p>
+						<h2 class="section-title">People looking for this page often need one of these next</h2>
+					</div>
+				</div>
+				<div class="service-grid">
+					{relatedServices.map((entry) => <PracticeCard service={entry} />)}
+				</div>
+			</div>
+		</section>
+	)}
+
+	<CtaPanel
+		title={`Ready to talk about ${service.name.toLowerCase()}?`}
+		copy={`Call ${firm.phoneDisplay}, send an email, or use the consultation page to have the matter reviewed.`}
+	/>
+</Layout>

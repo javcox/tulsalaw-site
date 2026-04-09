@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Tulsa Law</title>
+  <desc id="desc">Modern legal help for Oklahoma estate planning, family law, and business documents.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff5e8"/>
+      <stop offset="100%" stop-color="#eadfce"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c97a39"/>
+      <stop offset="100%" stop-color="#86401f"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="1050" cy="120" r="180" fill="#d6c1aa" opacity=".35"/>
+  <circle cx="180" cy="530" r="170" fill="#c97a39" opacity=".12"/>
+  <rect x="70" y="70" width="1060" height="490" rx="42" fill="#fff8ef" stroke="#e1d1bf"/>
+  <rect x="110" y="110" width="90" height="90" rx="26" fill="#fff2e5" stroke="#ddbf9c"/>
+  <path d="M132 130h46v10h-18v16l20 11v7h-50v-7l20-11v-16h-18z" fill="url(#accent)"/>
+  <path d="M120 185h70v10h-70z" fill="#132233"/>
+  <text x="110" y="280" fill="#87431f" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="800" letter-spacing="7">TULSA LAW</text>
+  <text x="110" y="360" fill="#132233" font-family="Fraunces, Georgia, serif" font-size="74" font-weight="700">Modern legal help</text>
+  <text x="110" y="436" fill="#132233" font-family="Fraunces, Georgia, serif" font-size="74" font-weight="700">for Oklahoma life.</text>
+  <text x="110" y="500" fill="#425568" font-family="Manrope, Arial, sans-serif" font-size="28">Wills, powers of attorney, family-law documents, LLC formation, and contracts.</text>
+</svg>

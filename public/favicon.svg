@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title>Tulsa Law</title>
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c97a39" />
+      <stop offset="100%" stop-color="#86401f" />
+    </linearGradient>
+  </defs>
+  <rect x="4" y="4" width="56" height="56" rx="18" fill="#fff7ee" />
+  <rect x="4.5" y="4.5" width="55" height="55" rx="17.5" fill="none" stroke="#e3cbb6" />
+  <path d="M22 18h20v5h-8v6.5l9 5v3H21v-3l9-5V23h-8z" fill="url(#g)" />
+  <path d="M16 41h32v5H16z" fill="#132233" opacity=".9" />
+  <circle cx="32" cy="33" r="3" fill="#132233" />
+</svg>

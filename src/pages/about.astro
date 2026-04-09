@@ -1,0 +1,157 @@
+---
+import CtaPanel from '../components/CtaPanel.astro';
+import { firm } from '../data/site';
+import Layout from '../layouts/Layout.astro';
+
+const schemas = [
+	{
+		'@context': 'https://schema.org',
+		'@type': 'ProfilePage',
+		name: 'About Tracy A. Cinocca',
+		mainEntity: {
+			'@type': 'Person',
+			name: 'Tracy A. Cinocca',
+			jobTitle: 'Attorney',
+			alumniOf: [
+				'University of Tulsa',
+				'Oklahoma City University',
+				'University of Oklahoma',
+				'Villanova University',
+			],
+			worksFor: {
+				'@type': 'LegalService',
+				name: firm.legalName,
+			},
+		},
+	},
+];
+---
+
+<Layout
+	title="About Tracy A. Cinocca | Tulsa Attorney Serving Oklahoma"
+	description="Learn about Tracy A. Cinocca, JD, MBA, and the experience behind Tulsa Law’s estate planning, family law, and business-document focus."
+	path="/about/"
+	schemas={schemas}
+>
+	<section class="page-hero">
+		<div class="shell page-frame">
+			<div class="hero-card">
+				<div class="breadcrumbs">
+					<a href="/">Home</a>
+					<span>/</span>
+					<span>About Tracy</span>
+				</div>
+				<p class="eyebrow">About Tracy</p>
+				<h1 class="page-title">A Tulsa attorney with legal depth and practical business instinct.</h1>
+				<p class="lead">
+					Tracy A. Cinocca’s background blends legal training, MBA-level business understanding,
+					and real contract and acquisition experience. That combination helps clients make better
+					decisions when the stakes touch family, money, ownership, and future planning.
+				</p>
+				<div class="pill-row">
+					{firm.credentials.map((credential) => <span class="pill">{credential}</span>)}
+				</div>
+			</div>
+
+			<div class="hero-aside">
+				<div class="panel">
+					<p class="mini-kicker">Practice lens</p>
+					<h2 class="mini-title">Clarity before conflict.</h2>
+					<p class="mini-copy">
+						Many clients come in before a dispute is fully formed. That is where smart drafting,
+						better planning, and direct attorney guidance can create the most value.
+					</p>
+				</div>
+				<div class="panel">
+					<p class="mini-kicker">Current focus</p>
+					<h2 class="mini-title">Tulsa-first, Oklahoma-wide intake.</h2>
+					<p class="mini-copy">
+						This site is tuned for the Oklahoma matters that generate the strongest consumer
+						intent: estate planning, family-law document work, and business setup documents.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section-xl">
+		<div class="shell">
+			<div class="section-head">
+				<div>
+					<p class="eyebrow">What stands out</p>
+					<h2 class="section-title">The background behind the legal judgment</h2>
+				</div>
+			</div>
+
+			<div class="grid-3">
+				{firm.bioHighlights.map((item) => (
+					<div class="value-card">
+						<h3>Client-facing advantage</h3>
+						<p>{item}</p>
+					</div>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="shell">
+			<div class="section-head">
+				<div>
+					<p class="eyebrow">Education + foundation</p>
+					<h2 class="section-title">A path that blends legal, business, and analytical training</h2>
+				</div>
+			</div>
+
+			<div class="timeline">
+				<div class="card">
+					<h3>University of Tulsa</h3>
+					<p>Law degree completed in 1997.</p>
+				</div>
+				<div class="card">
+					<h3>Oklahoma City University</h3>
+					<p>MBA completed in 1994 while working full-time in purchasing and acquisitions.</p>
+				</div>
+				<div class="card">
+					<h3>University of Oklahoma</h3>
+					<p>BA completed in 1993.</p>
+				</div>
+				<div class="card">
+					<h3>Villanova University</h3>
+					<p>Additional mathematics and science studies, including physics coursework.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="shell highlight-band">
+			<div class="band">
+				<p class="eyebrow">Working style</p>
+				<h2 class="section-title">What clients can expect from the process</h2>
+				<ul class="checklist">
+					{firm.brandPillars.map((item) => <li>{item}</li>)}
+				</ul>
+			</div>
+
+			<div class="band">
+				<p class="section-label">Why it matters</p>
+				<p class="lead" style="margin-top: 0;">
+					For estate documents, family-law paperwork, and business agreements, the difference
+					between “good enough” and “handled well” often shows up later. That is why this site is
+					designed to attract matters where careful drafting and measured attorney judgment still
+					make a real difference.
+				</p>
+				<div class="quote" style="margin-top: 18px;">
+					Clients should feel like they understand the plan, the paperwork, and the next move
+					before they sign anything important.
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<CtaPanel
+		title="Want to send a matter in for review?"
+		copy="Use the contact page to call, email, or route the consultation through the main secure intake form."
+	/>
+</Layout>

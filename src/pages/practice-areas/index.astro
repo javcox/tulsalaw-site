@@ -1,0 +1,42 @@
+---
+import CtaPanel from '../../components/CtaPanel.astro';
+import PracticeCard from '../../components/PracticeCard.astro';
+import { services } from '../../data/site';
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+	title="Practice Areas | Tulsa Law"
+	description="Explore Tulsa Law practice areas, including estate planning, wills and trusts, powers of attorney, guardianship planning, family-law matters, LLC formation, and contracts."
+	path="/practice-areas/"
+>
+	<section class="page-hero">
+		<div class="shell">
+			<div class="hero-card">
+				<div class="breadcrumbs">
+					<a href="/">Home</a>
+					<span>/</span>
+					<span>Practice Areas</span>
+				</div>
+				<p class="eyebrow">Practice Areas</p>
+				<h1 class="page-title">Practice-area pages built for cleaner search intent and faster intake.</h1>
+				<p class="lead">
+					Every page here is designed around the way consumers actually search: by matter type,
+					document need, or immediate legal task. Start with the closest match and move into
+					contact from there.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="section-xl">
+		<div class="shell service-grid">
+			{services.map((service) => <PracticeCard service={service} />)}
+		</div>
+	</section>
+
+	<CtaPanel
+		title="Need help choosing the right matter type?"
+		copy="Use the contact page if you want the firm to help sort the issue into the right intake lane before you move forward."
+	/>
+</Layout>

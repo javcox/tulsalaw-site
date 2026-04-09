@@ -1,0 +1,98 @@
+---
+import Analytics from '../components/Analytics.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { firm, getAbsoluteUrl } from '../data/site';
+import '../styles/global.css';
+
+interface Props {
+	title?: string;
+	description?: string;
+	path?: string;
+	image?: string;
+	schemas?: Record<string, unknown>[];
+}
+
+const {
+	title = `${firm.name} | Modern Oklahoma Legal Help`,
+	description = firm.tagline,
+	path = '/',
+	image = '/social-card.svg',
+	schemas = [],
+} = Astro.props;
+
+const canonical = getAbsoluteUrl(path);
+const socialImage = image.startsWith('http') ? image : getAbsoluteUrl(image);
+const pageTitle = title.includes(firm.name) ? title : `${title} | ${firm.name}`;
+
+const baseSchemas = [
+	{
+		'@context': 'https://schema.org',
+		'@type': 'WebSite',
+		name: firm.name,
+		url: firm.url,
+		description: firm.tagline,
+	},
+	{
+		'@context': 'https://schema.org',
+		'@type': 'Attorney',
+		name: firm.legalName,
+		url: firm.url,
+		email: firm.email,
+		telephone: firm.phoneDisplay,
+		areaServed: ['Tulsa', 'Oklahoma'],
+		address: {
+			'@type': 'PostalAddress',
+			addressLocality: firm.city,
+			addressRegion: firm.region,
+			addressCountry: 'US',
+		},
+		sameAs: [firm.legacyUrl],
+	},
+];
+
+const mergedSchemas = [...baseSchemas, ...schemas];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="theme-color" content="#132233" />
+		<title>{pageTitle}</title>
+		<meta name="description" content={description} />
+		<link rel="canonical" href={canonical} />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap"
+			rel="stylesheet"
+		/>
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={pageTitle} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonical} />
+		<meta property="og:image" content={socialImage} />
+		<meta property="og:site_name" content={firm.name} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={pageTitle} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={socialImage} />
+		{
+			mergedSchemas.map((schema) => (
+				<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+			))
+		}
+		<Analytics />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<slot />
+		</main>
+		<Footer />
+	</body>
+</html>
