@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import headerLogo from '../assets/header-logo.png';
 import { services } from '../data/site';
 
 const pathname = Astro.url.pathname;
@@ -16,6 +18,16 @@ const navLinks = [
 	<div class="shell header-row">
 		<a class="brand" href="/">
 			<span class="brand-mark">TL</span>
+			<span class="brand-emblem" aria-hidden="true">
+				<Image
+					src={headerLogo}
+					alt=""
+					widths={[72, 96, 128]}
+					sizes="56px"
+					loading="eager"
+					format="avif"
+				/>
+			</span>
 			<span class="brand-copy">
 				<strong>Tulsa Law</strong>
 				<span class="brand-meta">Super Lawyer&reg; | Tracy Cinocca, J.D.</span>
