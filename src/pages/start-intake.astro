@@ -40,9 +40,9 @@ const schemas = [
 					<span>Start Intake</span>
 				</div>
 				<p class="eyebrow">Guided Intake</p>
-				<h1 class="page-title">Start the intake in one path the firm can review fast.</h1>
+				<h1 class="page-title">Start the intake in one guided path the firm can review quickly.</h1>
 				<p class="lead">
-					Choose the service lane first, answer the fit questions, and send only the core facts
+					Choose the right service lane, answer the fit questions, and send only the core facts
 					needed for review. Most people finish this in about 2 to 4 minutes, and most requests are reviewed within 1 business day.
 				</p>
 				<div class="quick-facts">
@@ -69,8 +69,8 @@ const schemas = [
 					<ul class="checklist">
 						<li>Most requests are reviewed within 1 business day.</li>
 						<li>Personal injury matters are screened for fit first.</li>
-						<li>Non-injury matters that fit usually move next to an email with scheduling instructions.</li>
-						<li>The current consultation path is a $100 30-minute review where appropriate.</li>
+						<li>Non-injury matters that fit usually move next to scheduling instructions by email.</li>
+						<li>For many non-injury matters that fit, the next step is a $100 30-minute consultation.</li>
 					</ul>
 				</div>
 				<IntakePathPanel />
@@ -94,17 +94,17 @@ const schemas = [
 						<p class="eyebrow">2 to 4 minutes</p>
 						<div class="intake-progress-copy">
 							<p class="mini-copy"><span data-progress-current>Step 1 of 4 - 25% complete</span></p>
-							<p class="mini-copy" data-progress-detail>Choose the matter type first. No long story required up front.</p>
+							<p class="mini-copy" data-progress-detail>Choose the matter type first. You do not need a long written history to begin.</p>
 						</div>
 					</div>
 					<div class="progress-track" aria-hidden="true">
 						<div class="progress-fill" data-progress-fill></div>
 					</div>
 					<ol class="progress-steps">
-						<li class="is-active" data-progress-step="1"><strong>1</strong><span>Matter</span></li>
-						<li data-progress-step="2"><strong>2</strong><span>Fit</span></li>
-						<li data-progress-step="3"><strong>3</strong><span>Details</span></li>
-						<li data-progress-step="4"><strong>4</strong><span>Send</span></li>
+						<li class="is-active" data-progress-step="1" role="button" tabindex="0" aria-label="Open matter step"><strong>1</strong><span>Matter</span></li>
+						<li data-progress-step="2" role="button" tabindex="-1" aria-label="Open fit step"><strong>2</strong><span>Fit</span></li>
+						<li data-progress-step="3" role="button" tabindex="-1" aria-label="Open details step"><strong>3</strong><span>Details</span></li>
+						<li data-progress-step="4" role="button" tabindex="-1" aria-label="Open send step"><strong>4</strong><span>Send</span></li>
 					</ol>
 				</div>
 				<input type="hidden" name="startedAtMs" value="" data-started-at />
@@ -122,7 +122,7 @@ const schemas = [
 							<h2 class="section-title">Choose the service lane first</h2>
 						</div>
 					</div>
-					<p class="mini-copy">If you are not sure where the matter fits, choose Legal Guidance and the form will route from there.</p>
+					<p class="mini-copy">If you are not sure which lane fits, choose Legal Guidance and the firm can route the matter appropriately.</p>
 					<div class="service-selector-grid">
 						{
 							intakeServices.map((service) => (
@@ -154,16 +154,21 @@ const schemas = [
 							<span>I understand and want to continue with the intake request.</span>
 						</label>
 					</div>
+					<div class="intake-stage-actions">
+						<button class="button button-primary" type="button" data-stage-next>
+							Continue to fit questions
+						</button>
+					</div>
 				</section>
 
-				<section class="intake-step-card" data-intake-stage="2">
+				<section class="intake-step-card is-stage-hidden" data-intake-stage="2" aria-hidden="true">
 					<div class="section-head intake-head">
 						<div>
 							<p class="eyebrow">Step 2</p>
 							<h2 class="section-title">Who this is for and how to reply</h2>
 						</div>
 					</div>
-					<p class="mini-copy">Keep this short and factual. The goal is fit review, not a full memo.</p>
+					<p class="mini-copy">Keep this short and factual. The goal is fit review, not a full case memo.</p>
 					<div class="field-grid">
 						<label>
 							<span>Full name</span>
@@ -269,9 +274,17 @@ const schemas = [
 							</div>
 						</div>
 					</div>
+					<div class="intake-stage-actions">
+						<button class="button button-ghost" type="button" data-stage-back>
+							Back
+						</button>
+						<button class="button button-primary" type="button" data-stage-next>
+							Continue to service details
+						</button>
+					</div>
 				</section>
 
-				<section class="intake-step-card" data-intake-stage="3">
+				<section class="intake-step-card is-stage-hidden" data-intake-stage="3" aria-hidden="true">
 					<div class="section-head intake-head">
 						<div>
 							<p class="eyebrow">Step 3</p>
@@ -344,9 +357,9 @@ const schemas = [
 								<span>When did it happen?</span>
 								<div class="toggle-grid">
 									<label><input type="radio" name="piTimingBucket" value="within-30-days" data-required="true" /> <span>Within 30 days</span></label>
-									<label><input type="radio" name="piTimingBucket" value="1-6-months" /> <span>1–6 months ago</span></label>
-									<label><input type="radio" name="piTimingBucket" value="6-12-months" /> <span>6–12 months ago</span></label>
-									<label><input type="radio" name="piTimingBucket" value="1-2-years" /> <span>1–2 years ago</span></label>
+									<label><input type="radio" name="piTimingBucket" value="1-6-months" /> <span>1-6 months ago</span></label>
+									<label><input type="radio" name="piTimingBucket" value="6-12-months" /> <span>6-12 months ago</span></label>
+									<label><input type="radio" name="piTimingBucket" value="1-2-years" /> <span>1-2 years ago</span></label>
 									<label><input type="radio" name="piTimingBucket" value="more-than-2-years" /> <span>More than 2 years ago</span></label>
 									<label><input type="radio" name="piTimingBucket" value="exact-date-known" /> <span>Exact date known</span></label>
 								</div>
@@ -434,7 +447,7 @@ const schemas = [
 								<select name="piMedicalBillsRange" data-required="true">
 									<option value="">Select one</option>
 									<option value="10k-plus">$10,000+</option>
-									<option value="1k-10k">$1,000–$10,000</option>
+									<option value="1k-10k">$1,000-$10,000</option>
 									<option value="under-1k">Under $1,000</option>
 									<option value="none">None yet</option>
 									<option value="unknown">Unknown</option>
@@ -473,7 +486,7 @@ const schemas = [
 					<div class="service-question-group" data-service-group="estate-planning,wills-and-trusts,power-of-attorney" hidden>
 						<div class="service-question-header">
 							<h3>Planning details</h3>
-							<p>Only answer what is needed to show fit and planning depth.</p>
+							<p>Answer only what is needed to show fit and planning depth.</p>
 						</div>
 						<div class="field-grid field-grid-wide">
 							<label>
@@ -584,7 +597,7 @@ const schemas = [
 					<div class="service-question-group" data-service-group="uncontested-divorce" hidden>
 						<div class="service-question-header">
 							<h3>Uncontested divorce details</h3>
-							<p>This should tell the firm whether it really sounds uncontested.</p>
+							<p>These answers help the firm tell whether the matter is truly uncontested.</p>
 						</div>
 						<div class="field-grid">
 							<div class="question-card">
@@ -734,7 +747,7 @@ const schemas = [
 					<div class="service-question-group" data-service-group="contract-drafting-review" hidden>
 						<div class="service-question-header">
 							<h3>Contract details</h3>
-							<p>Enough detail to separate preventive review from an active dispute.</p>
+							<p>These answers help distinguish preventive review from an active dispute.</p>
 						</div>
 						<div class="field-grid">
 							<label>
@@ -755,7 +768,7 @@ const schemas = [
 								<select name="contractDeadline" data-required="true">
 									<option value="">Select one</option>
 									<option value="within-7-days">Within 7 days</option>
-									<option value="1-4-weeks">1–4 weeks</option>
+									<option value="1-4-weeks">1-4 weeks</option>
 									<option value="flexible">Flexible / no immediate deadline</option>
 								</select>
 							</label>
@@ -772,7 +785,7 @@ const schemas = [
 					<div class="service-question-group" data-service-group="legal-guidance" hidden>
 						<div class="service-question-header">
 							<h3>Legal-guidance details</h3>
-							<p>This is for people who need an attorney review before deciding the proper lane.</p>
+							<p>This lane is for people who need attorney review before choosing the right next step.</p>
 						</div>
 						<div class="field-grid">
 							<label>
@@ -782,7 +795,7 @@ const schemas = [
 									<option value="issue-review">Issue review and next-step guidance</option>
 									<option value="which-lane">Help deciding the right legal lane</option>
 									<option value="second-look">Second look at a document or situation</option>
-									<option value="just-question">I mostly have a quick question</option>
+									<option value="just-question">I mainly need guidance before deciding what to do next</option>
 								</select>
 							</label>
 							<div class="question-card">
@@ -794,9 +807,17 @@ const schemas = [
 							</div>
 						</div>
 					</div>
+					<div class="intake-stage-actions">
+						<button class="button button-ghost" type="button" data-stage-back>
+							Back
+						</button>
+						<button class="button button-primary" type="button" data-stage-next>
+							Continue to final details
+						</button>
+					</div>
 				</section>
 
-				<section class="intake-step-card" data-intake-stage="4">
+				<section class="intake-step-card is-stage-hidden" data-intake-stage="4" aria-hidden="true">
 					<div class="section-head intake-head">
 						<div>
 							<p class="eyebrow">Step 4</p>
@@ -833,12 +854,17 @@ const schemas = [
 					<div class="intake-submit-row">
 						<div class="mini-copy">
 							By submitting, you are requesting review of the matter for fit and next-step
-							availability. If the matter appears to fit, the next step is usually an email with
-							scheduling instructions and the $100 30-minute consultation payment link.
+							availability. If the matter appears to fit, the next step for many non-injury matters
+							is an email with scheduling instructions and the $100 30-minute consultation payment link.
 						</div>
-						<button class="button button-primary" type="submit" data-submit-button>
-							Send intake request
-						</button>
+						<div class="intake-submit-actions">
+							<button class="button button-ghost" type="button" data-stage-back>
+								Back
+							</button>
+							<button class="button button-primary" type="submit" data-submit-button>
+								Send intake request
+							</button>
+						</div>
 					</div>
 					<div class="intake-status" data-form-status hidden></div>
 				</section>

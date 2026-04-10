@@ -236,7 +236,7 @@ export const services: Service[] = [
 		],
 		includes: [
 			'Simple and more customized will planning',
-			'Revocable trust planning where appropriate',
+			'Revocable trust planning when it fits the family and the goals',
 			'Document updates after major family or financial changes',
 			'Coordination with powers of attorney and related planning documents',
 		],

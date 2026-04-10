@@ -1255,6 +1255,10 @@ main {
 	box-shadow: var(--shadow-soft);
 }
 
+.intake-step-card.is-stage-hidden {
+	display: none;
+}
+
 .intake-step-card.has-errors {
 	border-color: rgba(127, 31, 31, 0.22);
 	box-shadow:
@@ -1413,6 +1417,7 @@ main {
 		box-shadow 160ms ease,
 		transform 160ms ease,
 		color 160ms ease;
+	cursor: default;
 }
 
 .progress-steps li strong {
@@ -1463,6 +1468,18 @@ main {
 	background: rgba(255, 255, 255, 0.94);
 	border-color: rgba(127, 31, 31, 0.2);
 	color: #7d1f1f;
+}
+
+.progress-steps li.is-available {
+	cursor: pointer;
+}
+
+.progress-steps li.is-available:hover,
+.progress-steps li.is-available:focus-visible {
+	border-color: rgba(47, 93, 134, 0.18);
+	box-shadow: 0 12px 24px rgba(20, 38, 58, 0.06);
+	transform: translateY(-1px);
+	outline: none;
 }
 
 .service-selector-card {
@@ -1688,6 +1705,28 @@ main {
 	margin-top: 20px;
 }
 
+.intake-stage-actions,
+.intake-submit-actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 12px;
+	margin-top: 20px;
+}
+
+.intake-stage-actions {
+	justify-content: flex-end;
+}
+
+.intake-submit-actions {
+	justify-content: flex-end;
+}
+
+.intake-stage-actions .button,
+.intake-submit-actions .button {
+	min-width: 180px;
+}
+
 .intake-submit-row .mini-copy {
 	max-width: 760px;
 }
@@ -1722,6 +1761,28 @@ main {
 	width: 1px;
 	height: 1px;
 	overflow: hidden;
+}
+
+@media (min-width: 901px) {
+	.lead,
+	.section-copy,
+	.card p,
+	.value-card p,
+	.service-card p,
+	.cta-panel > div > p:not(.eyebrow):not(.mini-copy),
+	.faq-item p,
+	.lane-card p,
+	.contact-card p,
+	.why-card p,
+	.expectation-card p,
+	.service-question-header p,
+	.review-quote,
+	.intake-step-card > .mini-copy,
+	.intake-submit-row .mini-copy,
+	.intake-steps span {
+		text-align: justify;
+		text-justify: inter-word;
+	}
 }
 
 @media (max-width: 1080px) {
@@ -1904,6 +1965,18 @@ main {
 	.intake-submit-row {
 		flex-direction: column;
 		align-items: stretch;
+	}
+
+	.intake-stage-actions,
+	.intake-submit-actions {
+		flex-direction: column-reverse;
+		align-items: stretch;
+	}
+
+	.intake-stage-actions .button,
+	.intake-submit-actions .button {
+		min-width: 0;
+		width: 100%;
 	}
 }
 

@@ -48,9 +48,14 @@ export function mountIntakeForm() {
 	const progressFill = document.querySelector<HTMLElement>('[data-progress-fill]');
 	const progressCurrent = document.querySelector<HTMLElement>('[data-progress-current]');
 	const progressDetail = document.querySelector<HTMLElement>('[data-progress-detail]');
+	const nextButtons = Array.from(form.querySelectorAll<HTMLButtonElement>('[data-stage-next]'));
+	const backButtons = Array.from(form.querySelectorAll<HTMLButtonElement>('[data-stage-back]'));
+	const totalStages = stageCards.length;
+	let activeStage = 1;
+	let furthestStage = 1;
 
 	const progressMeta: Record<number, string> = {
-		1: 'Choose the matter type first. No long story required up front.',
+		1: 'Choose the matter type first. You do not need a long written history to begin.',
 		2: 'Reply details and fit questions come next.',
 		3: 'Answer only the service-specific details needed for review.',
 		4: 'Final summary, conflict names, and send.',
@@ -85,6 +90,24 @@ export function mountIntakeForm() {
 		const targetTop = Math.max(
 			0,
 			window.scrollY + container.getBoundingClientRect().top - getStickyOffset(),
+		);
+
+		window.scrollTo({
+			top: targetTop,
+			behavior: 'smooth',
+		});
+	};
+
+	const getStageCard = (stageNumber: number) =>
+		stageCards.find((card) => Number(card.dataset.intakeStage || '0') === stageNumber);
+
+	const scrollStageIntoView = (stageNumber: number) => {
+		const stage = getStageCard(stageNumber);
+		if (!stage) return;
+
+		const targetTop = Math.max(
+			0,
+			window.scrollY + stage.getBoundingClientRect().top - getStickyOffset(),
 		);
 
 		window.scrollTo({
@@ -176,6 +199,8 @@ export function mountIntakeForm() {
 			return;
 		}
 
+		const errorStages = new Set<number>();
+
 		issues.forEach((issue) => {
 			const container = findFieldContainer(issue.field);
 			container?.classList.add('is-invalid');
@@ -183,9 +208,11 @@ export function mountIntakeForm() {
 
 			const stage = issue.field.closest<HTMLElement>('[data-intake-stage]');
 			if (stage) {
+				const stageNumber = Number(stage.dataset.intakeStage || '0');
+				errorStages.add(stageNumber);
 				stage.classList.add('has-errors');
 				const step = progressSteps.find(
-					(entry) => Number(entry.dataset.progressStep || '0') === Number(stage.dataset.intakeStage || '0'),
+					(entry) => Number(entry.dataset.progressStep || '0') === stageNumber,
 				);
 				step?.classList.add('has-errors');
 			}
@@ -193,12 +220,13 @@ export function mountIntakeForm() {
 
 		const firstIssue = issues[0];
 		const stage = firstIssue.field.closest<HTMLElement>('[data-intake-stage]');
-		if (stage) {
-			updateProgress(Number(stage.dataset.intakeStage || '1'));
+		const firstStage = stage ? Number(stage.dataset.intakeStage || '1') : 1;
+		if (errorStages.size) {
+			furthestStage = Math.max(furthestStage, ...Array.from(errorStages));
 		}
+		revealStage(firstStage, { scroll: true });
 
 		setStatus(summarizeIssues(issues), 'error');
-		scrollFieldIntoView(firstIssue.field);
 
 		window.setTimeout(() => {
 			firstIssue.field.focus({ preventScroll: true });
@@ -209,8 +237,8 @@ export function mountIntakeForm() {
 		}, 140);
 	};
 
-	const collectNativeValidationIssues = (): ValidationIssue[] => {
-		const fields = Array.from(form.querySelectorAll<FormField>('input, select, textarea')).filter(
+	const collectValidationIssues = (root: ParentNode = form): ValidationIssue[] => {
+		const fields = Array.from(root.querySelectorAll<FormField>('input, select, textarea')).filter(
 			(field) => !field.disabled && !field.closest('[hidden]'),
 		);
 		const checkedGroups = new Set<string>();
@@ -267,6 +295,10 @@ export function mountIntakeForm() {
 			const shouldRequire = field.dataset.required === 'true';
 			field.disabled = !enabled;
 			field.required = enabled && shouldRequire;
+			if (!enabled) {
+				field.removeAttribute('aria-invalid');
+				findFieldContainer(field)?.classList.remove('is-invalid');
+			}
 		});
 	};
 
@@ -311,22 +343,59 @@ export function mountIntakeForm() {
 		updatePiGroups();
 	};
 
+	const canOpenStage = (stageNumber: number) => {
+		const step = progressSteps.find(
+			(entry) => Number(entry.dataset.progressStep || '0') === stageNumber,
+		);
+		return stageNumber <= furthestStage || Boolean(step?.classList.contains('has-errors'));
+	};
+
 	const updateProgress = (stageNumber: number) => {
-		const normalized = Math.min(Math.max(stageNumber, 1), 4);
-		const percent = Math.round((normalized / 4) * 100);
+		const normalized = Math.min(Math.max(stageNumber, 1), totalStages);
+		activeStage = normalized;
+		const percent = Math.round((normalized / totalStages) * 100);
 		progressSteps.forEach((step) => {
 			const value = Number(step.dataset.progressStep || '0');
 			step.classList.toggle('is-active', value === normalized);
 			step.classList.toggle('is-complete', value < normalized);
+			const available = canOpenStage(value);
+			step.classList.toggle('is-available', available);
+			step.tabIndex = available ? 0 : -1;
+			step.setAttribute('aria-disabled', available ? 'false' : 'true');
+			if (value === normalized) {
+				step.setAttribute('aria-current', 'step');
+			} else {
+				step.removeAttribute('aria-current');
+			}
 		});
 		if (progressFill) {
-			progressFill.style.width = `${(normalized / 4) * 100}%`;
+			progressFill.style.width = `${(normalized / totalStages) * 100}%`;
 		}
 		if (progressCurrent) {
-			progressCurrent.textContent = `Step ${normalized} of 4 - ${percent}% complete`;
+			progressCurrent.textContent = `Step ${normalized} of ${totalStages} - ${percent}% complete`;
 		}
 		if (progressDetail) {
 			progressDetail.textContent = progressMeta[normalized];
+		}
+	};
+
+	const revealStage = (stageNumber: number, options?: { scroll?: boolean }) => {
+		const normalized = Math.min(Math.max(stageNumber, 1), totalStages);
+		furthestStage = Math.max(furthestStage, normalized);
+
+		stageCards.forEach((card) => {
+			const value = Number(card.dataset.intakeStage || '0');
+			const isVisible = value === normalized;
+			card.classList.toggle('is-stage-hidden', !isVisible);
+			card.setAttribute('aria-hidden', String(!isVisible));
+		});
+
+		updateProgress(normalized);
+
+		if (options?.scroll) {
+			window.setTimeout(() => {
+				scrollStageIntoView(normalized);
+			}, 30);
 		}
 	};
 
@@ -418,6 +487,20 @@ export function mountIntakeForm() {
 		}
 
 		return issues.filter((issue): issue is ValidationIssue => Boolean(issue.field));
+	};
+
+	const collectStageIssues = (stageNumber: number) => {
+		const stage = getStageCard(stageNumber);
+		if (!stage) {
+			return [];
+		}
+
+		const issues = collectValidationIssues(stage);
+		if (stageNumber === 3) {
+			issues.push(...validateSpecialCases());
+		}
+
+		return issues;
 	};
 
 	const buildFallbackFormData = (payload: IntakeSubmission) => {
@@ -530,7 +613,7 @@ export function mountIntakeForm() {
 	});
 
 	updateServiceSections();
-	updateProgress(1);
+	revealStage(1);
 	setStatus('');
 
 	form.addEventListener('input', (event) => {
@@ -550,42 +633,69 @@ export function mountIntakeForm() {
 					(entry) => Number(entry.dataset.progressStep || '0') === Number(stage.dataset.intakeStage || '0'),
 				);
 				step?.classList.remove('has-errors');
+				updateProgress(activeStage);
 			}
 		}
 	});
 
-	if (stageCards.length) {
-		const observer = new IntersectionObserver(
-			(entries) => {
-				const visible = entries
-					.filter((entry) => entry.isIntersecting)
-					.sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-				if (visible) {
-					updateProgress(Number((visible.target as HTMLElement).dataset.intakeStage || '1'));
-				}
-			},
-			{
-				rootMargin: '-20% 0px -45% 0px',
-				threshold: [0.2, 0.35, 0.5],
-			},
-		);
+	nextButtons.forEach((button) => {
+		button.addEventListener('click', () => {
+			const issues = collectStageIssues(activeStage);
+			if (issues.length) {
+				showValidationIssues(issues);
+				return;
+			}
 
-		stageCards.forEach((card) => observer.observe(card));
-		form.addEventListener('focusin', (event) => {
-			const target = event.target;
-			if (!(target instanceof HTMLElement)) return;
-			const stage = target.closest<HTMLElement>('[data-intake-stage]');
-			if (!stage) return;
-			updateProgress(Number(stage.dataset.intakeStage || '1'));
+			const nextStage = Math.min(activeStage + 1, totalStages);
+			setStatus('');
+			revealStage(nextStage, { scroll: true });
 		});
-	}
+	});
+
+	backButtons.forEach((button) => {
+		button.addEventListener('click', () => {
+			const previousStage = Math.max(activeStage - 1, 1);
+			setStatus('');
+			revealStage(previousStage, { scroll: true });
+		});
+	});
+
+	progressSteps.forEach((step) => {
+		const openStep = () => {
+			const stageNumber = Number(step.dataset.progressStep || '0');
+			if (!canOpenStage(stageNumber)) {
+				return;
+			}
+			setStatus('');
+			revealStage(stageNumber, { scroll: true });
+		};
+
+		step.addEventListener('click', openStep);
+		step.addEventListener('keydown', (event) => {
+			if (event.key === 'Enter' || event.key === ' ') {
+				event.preventDefault();
+				openStep();
+			}
+		});
+	});
+
+	form.addEventListener('focusin', (event) => {
+		const target = event.target;
+		if (!(target instanceof HTMLElement)) return;
+		const stage = target.closest<HTMLElement>('[data-intake-stage]');
+		if (!stage) return;
+		const stageNumber = Number(stage.dataset.intakeStage || '1');
+		if (stageNumber !== activeStage) {
+			revealStage(stageNumber);
+		}
+	});
 
 	form.addEventListener('submit', async (event) => {
 		event.preventDefault();
 		setStatus('');
 		clearInvalidMarkers();
 
-		const issues = [...collectNativeValidationIssues(), ...validateSpecialCases()];
+		const issues = [...collectValidationIssues(), ...validateSpecialCases()];
 		if (issues.length) {
 			showValidationIssues(issues);
 			return;
