@@ -1,5 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import IntakePathPanel from '../components/IntakePathPanel.astro';
+import intakeTrustCollage from '../assets/intake-trust-collage.png';
 import { firm } from '../data/site';
 import { intakeServices } from '../lib/intake';
 import Layout from '../layouts/Layout.astro';
@@ -47,6 +49,16 @@ const schemas = [
 					<span class="quick-fact">Choose the matter type first</span>
 					<span class="quick-fact">Mostly multiple choice</span>
 					<span class="quick-fact">Reviewed within 1 business day</span>
+				</div>
+				<div class="intake-hero-visual">
+					<Image
+						src={intakeTrustCollage}
+						alt="Tracy Cinocca in courtroom and client-review scenes"
+						widths={[520, 760, 980]}
+						sizes="(max-width: 960px) 100vw, 46vw"
+						loading="eager"
+						format="avif"
+					/>
 				</div>
 			</div>
 
