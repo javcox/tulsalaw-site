@@ -88,7 +88,7 @@ The repo includes:
 
 - frontend page: `src/pages/start-intake.astro`
 - shared scoring logic: `src/lib/intake.ts`
-- Vercel-style serverless endpoint: `api/intake.ts`
+- Vercel-style serverless endpoint: `api/intake.js`
 
 If you want to use a dedicated endpoint, configure these values in the environment that serves it:
 
@@ -101,7 +101,7 @@ Defaults are documented in `.env.example`.
 
 Current production intake endpoint:
 
-- `https://tulsalaw-intake-as0yfj5rk-javcoxs-projects.vercel.app/api/intake`
+- `https://project-et1y6.vercel.app/api/intake`
 
 If the site stays on GitHub Pages and no `PUBLIC_INTAKE_API_URL` is configured, the frontend will fall back to FormSubmit so submissions can still be emailed out from a static deployment. The recipient may need to confirm the FormSubmit activation email the first time the fallback is used.
 
