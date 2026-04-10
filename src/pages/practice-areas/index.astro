@@ -71,14 +71,16 @@ const laneGroups = [
 		<div class="shell lane-grid">
 			{laneGroups.map((group) => (
 				<div class="lane-card">
-					<p class="section-label">{group.title}</p>
-					<h2>{group.title}</h2>
-					<p>{group.copy}</p>
-					<div class="chips">
-						{group.links.map((slug) => {
-							const service = services.find((entry) => entry.slug === slug);
-							return service ? <a class="chip" href={getServiceUrl(service.slug)}>{service.name}</a> : null;
-						})}
+					<div>
+						<p class="section-label">{group.title}</p>
+						<h2>{group.title}</h2>
+						<p>{group.copy}</p>
+						<div class="chips">
+							{group.links.map((slug) => {
+								const service = services.find((entry) => entry.slug === slug);
+								return service ? <a class="chip" href={getServiceUrl(service.slug)}>{service.name}</a> : null;
+							})}
+						</div>
 					</div>
 				</div>
 			))}
