@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import headerLogo from '../assets/header-logo-clean.png';
 import { featuredServices, firm, getServiceUrl } from '../data/site';
 ---
 
@@ -6,7 +8,16 @@ import { featuredServices, firm, getServiceUrl } from '../data/site';
 	<div class="shell footer-grid">
 		<div>
 			<div class="brand">
-				<span class="brand-mark">TL</span>
+				<span class="brand-emblem" aria-hidden="true">
+					<Image
+						src={headerLogo}
+						alt=""
+						widths={[48, 64, 80]}
+						sizes="40px"
+						loading="lazy"
+						format="avif"
+					/>
+				</span>
 				<span class="brand-copy">
 					<strong>{firm.name}</strong>
 					<span>{firm.legalName}</span>
