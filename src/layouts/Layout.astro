@@ -37,6 +37,7 @@ const baseSchemas = [
 	{
 		'@context': 'https://schema.org',
 		'@type': 'Attorney',
+		'@id': `${firm.url}/#attorney`,
 		name: firm.legalName,
 		url: firm.url,
 		email: firm.email,
@@ -50,6 +51,34 @@ const baseSchemas = [
 			addressCountry: 'US',
 		},
 		sameAs: [firm.legacyUrl],
+	},
+	{
+		'@context': 'https://schema.org',
+		'@type': 'LegalService',
+		'@id': `${firm.url}/#legalservice`,
+		name: firm.name,
+		legalName: firm.legalName,
+		url: firm.url,
+		description: firm.tagline,
+		email: firm.email,
+		telephone: '+1-918-884-7791',
+		priceRange: '$$',
+		founder: {
+			'@id': `${firm.url}/#attorney`,
+		},
+		address: {
+			'@type': 'PostalAddress',
+			streetAddress: firm.streetAddress,
+			addressLocality: firm.city,
+			addressRegion: firm.region,
+			postalCode: firm.postalCode,
+			addressCountry: 'US',
+		},
+		areaServed: ['Tulsa', 'Bixby', 'Broken Arrow', 'Oklahoma'],
+		serviceArea: {
+			'@type': 'AdministrativeArea',
+			name: 'Oklahoma',
+		},
 	},
 ];
 

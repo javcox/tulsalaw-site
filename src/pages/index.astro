@@ -7,18 +7,18 @@ import PracticeCard from '../components/PracticeCard.astro';
 import PracticeAreasCard from '../components/PracticeAreasCard.astro';
 import TestimonialsSection from '../components/TestimonialsSection.astro';
 import WhyChooseSection from '../components/WhyChooseSection.astro';
-import { featuredServices, firm, getServiceUrl, homepageFAQs } from '../data/site';
+import { featuredServices, firm, getServiceUrl, homepageFAQs, homepageLanes } from '../data/site';
 import Layout from '../layouts/Layout.astro';
 
-const mapLinks = [
-	{ label: 'Personal Injury', href: getServiceUrl('personal-injury') },
-	{ label: 'Estate Planning', href: getServiceUrl('estate-planning') },
+const trustItems = ['Tulsa office', '2–4 minute intake', 'Attorney-led review', 'Reviewed within 1 business day'];
+
+const quickLinks = [
+	{ label: 'Personal Injury Review', href: getServiceUrl('personal-injury') },
 	{ label: 'Legal Guidance', href: getServiceUrl('legal-guidance') },
-	{ label: 'Power of Attorney', href: getServiceUrl('power-of-attorney') },
+	{ label: 'Estate Planning', href: getServiceUrl('estate-planning') },
+	{ label: 'More Practice Areas', href: '/practice-areas/' },
 	{ label: 'Uncontested Divorce', href: getServiceUrl('uncontested-divorce') },
 	{ label: 'LLC Formation', href: getServiceUrl('llc-formation') },
-	{ label: 'Contracts', href: getServiceUrl('contract-drafting-review') },
-	{ label: 'More Practice Areas', href: '/practice-areas/' },
 ];
 
 const schemas = [
@@ -27,43 +27,59 @@ const schemas = [
 		'@type': 'LegalService',
 		name: `${firm.name} | ${firm.legalName}`,
 		url: firm.url,
-		areaServed: ['Tulsa', 'Oklahoma'],
+		areaServed: ['Tulsa', 'Bixby', 'Broken Arrow', 'Oklahoma'],
 		email: firm.email,
 		description: firm.tagline,
 		serviceType: [
+			'Personal injury review',
 			'Legal guidance',
 			'Estate planning',
 			'Power of attorney',
-			'Personal injury',
-			'Car accidents',
-			'Truck accidents',
+			'Wills and trusts',
 			'Guardianship planning',
 			'Uncontested divorce',
 			'LLC formation',
 			'Contract drafting and review',
 		],
+		address: {
+			'@type': 'PostalAddress',
+			streetAddress: firm.streetAddress,
+			addressLocality: firm.city,
+			addressRegion: firm.region,
+			postalCode: firm.postalCode,
+			addressCountry: 'US',
+		},
+	},
+	{
+		'@context': 'https://schema.org',
+		'@type': 'ItemList',
+		name: 'Tulsa Law homepage service lanes',
+		itemListElement: homepageLanes.map((lane, index) => ({
+			'@type': 'ListItem',
+			position: index + 1,
+			name: lane.title,
+			url: new URL(lane.href, firm.url).toString(),
+		})),
 	},
 ];
 ---
 
 <Layout
-	title="Tulsa Attorney for Personal Injury Review, Legal Guidance, and Estate Planning"
-	description="Tulsa Law is a Tulsa-based Oklahoma legal site focused on personal injury review, practical legal guidance, estate planning, family matters, and business documents."
+	title="Tulsa Lawyer for Personal Injury Review, Estate Planning, and Clear Legal Guidance"
+	description="Tulsa Law is a Tulsa-based Oklahoma law office focused on personal injury review, estate planning, legal guidance, and clear next steps for clients across Tulsa, Bixby, Broken Arrow, and Oklahoma."
 	path="/"
 	schemas={schemas}
 >
 	<section class="hero">
 		<div class="shell hero-grid">
 			<div class="hero-card">
-				<p class="eyebrow">Tulsa-based. Oklahoma-wide.</p>
+				<p class="eyebrow">Tulsa office. Attorney-led review. Clear next steps.</p>
 				<h1 class="hero-title">
-					Personal injury review, practical legal guidance, and estate planning with a clearer next step.
+					Tulsa lawyer for personal injury review, estate planning, and clear legal guidance.
 				</h1>
 				<p class="lead">
-					Most people who land here are trying to solve one of three problems: they need an
-					injury matter screened quickly, they need practical legal guidance on a family or
-					business issue, or they need estate documents handled before a problem grows. Practice
-					Areas is the full service map. Simple Services is the faster document-focused path.
+					If you need to know whether an injury matter is worth pursuing, what documents need attention,
+					or what should happen next, start the intake. Most requests are reviewed within 1 business day.
 				</p>
 
 				<div class="hero-actions">
@@ -75,36 +91,35 @@ const schemas = [
 					>
 						Start Intake
 					</a>
+					<a class="button button-ghost" href="/practice-areas/">See Practice Areas</a>
 				</div>
-				<p class="mini-copy">Takes about 2 to 4 minutes. If you are not sure which lane fits, choose Legal Guidance after you click.</p>
+				<p class="mini-copy">Most people finish intake in 2 to 4 minutes. If you are not sure which lane fits, choose Legal Guidance.</p>
 
-				<div class="hero-meta">
-					<div class="stat-card">
-						<strong>01 Personal injury review</strong>
-						<span>For collision and injury matters where liability, treatment, and damages need a serious first look.</span>
-					</div>
-					<div class="stat-card">
-						<strong>02 Legal guidance</strong>
-						<span>For family, business, and active matters that need a clear next step instead of guesswork.</span>
-					</div>
-					<div class="stat-card">
-						<strong>03 Estate planning</strong>
-						<span>For wills, trusts, powers of attorney, and planning decisions that should be handled before a crisis.</span>
-					</div>
+				<div class="trust-strip" aria-label="Trust indicators">
+					{trustItems.map((item) => <span>{item}</span>)}
+				</div>
+
+				<div class="hero-meta hero-meta-lanes">
+					{homepageLanes.map((lane, index) => (
+						<a class="stat-card lane-stat" href={lane.href}>
+							<strong>{`0${index + 1}`} {lane.title}</strong>
+							<span>{lane.copy}</span>
+						</a>
+					))}
 				</div>
 			</div>
 
 			<div class="hero-aside">
 				<div class="panel">
 					<p class="mini-kicker">Practice Areas</p>
-					<h2 class="mini-title">The full service map.</h2>
+					<h2 class="mini-title">Three main lanes, plus the full service map.</h2>
 					<p class="mini-copy">
-						Practice Areas covers the full range of injury, planning, family, and business work.
-						Simple Services is the faster path for document-driven matters.
+						The homepage stays focused on personal injury review, legal guidance, and estate planning.
+						Practice Areas shows the broader family, business, planning, and injury map without making the homepage feel scattered.
 					</p>
 					<div class="chips">
 						{
-							mapLinks.map((item) => (
+							quickLinks.map((item) => (
 								<a class="chip" href={item.href}>
 									{item.label}
 								</a>
@@ -112,7 +127,7 @@ const schemas = [
 						}
 					</div>
 					<p class="mini-copy office-copy">
-						Tulsa office: {firm.fullAddress}
+						Tulsa office near Bixby and Broken Arrow: {firm.fullAddress}
 					</p>
 				</div>
 
@@ -125,8 +140,68 @@ const schemas = [
 		<div class="shell">
 			<div class="section-head">
 				<div>
+					<p class="eyebrow">Start Here</p>
+					<h2 class="section-title">Choose the lane that matches the real problem.</h2>
+					<p class="section-copy">
+						Personal injury review should not feel like the same offer as planning, business documents, or broader legal guidance. The homepage now separates those paths more clearly before someone starts intake.
+					</p>
+				</div>
+			</div>
+
+			<div class="lane-grid">
+				{homepageLanes.map((lane) => (
+					<article class="lane-card">
+						<div>
+							<p class="section-label">{lane.title}</p>
+							<h3>
+								<a href={lane.href}>{lane.title}</a>
+							</h3>
+							<p>{lane.copy}</p>
+							<div class="chips">
+								{lane.links.map((link) => (
+									<a class="chip" href={link.href}>{link.label}</a>
+								))}
+							</div>
+						</div>
+						<div class="service-card-footer">
+							<a class="text-link" href={lane.href}>Explore lane</a>
+						</div>
+					</article>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="shell highlight-band">
+			<div class="band">
+				<p class="eyebrow">What Happens Next</p>
+				<h2 class="section-title">A clearer intake path from first request to follow-up.</h2>
+				<ul class="checklist">
+					<li>Start Intake and choose the lane that best fits the matter.</li>
+					<li>The firm reviews fit, timing, conflicts, and urgency.</li>
+					<li>Personal injury matters are screened first for whether the claim appears worth pursuing.</li>
+					<li>Non-injury matters that fit usually move next to an email with scheduling instructions for a $100 30-minute consultation.</li>
+				</ul>
+			</div>
+			<div class="band">
+				<p class="section-label">Before you submit</p>
+				<p class="lead" style="margin-top: 0;">
+					The intake is meant to save time, not create a high-pressure funnel. You do not need to write a long memo, upload documents, or guess the legal strategy before reaching out.
+				</p>
+				<div class="quote" style="margin-top: 18px;">
+					This site is built for attorney review, not instant free legal advice. It is strongest for Tulsa and nearby Oklahoma matters that fit the listed practice areas and current availability.
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section-xl">
+		<div class="shell">
+			<div class="section-head">
+				<div>
 					<p class="eyebrow">Most Requested</p>
-					<h2 class="section-title">The legal services people most often ask about first</h2>
+					<h2 class="section-title">The service pages doing the most work for consult intent</h2>
 				</div>
 			</div>
 
@@ -145,6 +220,11 @@ const schemas = [
 				<div>
 					<p class="eyebrow">Client Fit</p>
 					<h2 class="section-title">Who this site is built to help first</h2>
+					<p class="section-copy">
+						The focus stays on high-intent matters with a real next step: families planning ahead,
+						people navigating change, owners protecting the business side, and injury matters that
+						need an honest viability review.
+					</p>
 				</div>
 			</div>
 
@@ -170,6 +250,28 @@ const schemas = [
 						done with more care than a filing service can offer.
 					</p>
 				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="shell highlight-band">
+			<div class="band">
+				<p class="eyebrow">Service Area</p>
+				<h2 class="section-title">Tulsa first, with natural relevance for nearby Bixby.</h2>
+				<p class="lead" style="margin-top: 0;">
+					The office is in south Tulsa near Bixby and Broken Arrow, so it makes sense to be explicit
+					about helping clients in Tulsa and nearby communities without turning the site into doorway
+					pages or fake-local content.
+				</p>
+			</div>
+			<div class="band">
+				<p class="section-label">Where this matters most</p>
+				<ul class="checklist" style="margin-top: 18px;">
+					<li>Estate planning for families choosing a nearby Tulsa attorney instead of generic online forms</li>
+					<li>Uncontested divorce and legal guidance for south Tulsa and Bixby households that want a calmer process</li>
+					<li>LLC formation and contract help for founders operating in Tulsa, Bixby, Broken Arrow, and surrounding business corridors</li>
+				</ul>
 			</div>
 		</div>
 	</section>
@@ -204,6 +306,6 @@ const schemas = [
 
 	<CtaPanel
 		title="Ready to send a matter in for review?"
-		copy="Use the guided intake to route the matter for fit review without waiting on a call back first."
+		copy="Use the guided intake to route the matter into the right review lane and get clearer next steps without waiting on a call-back loop."
 	/>
 </Layout>

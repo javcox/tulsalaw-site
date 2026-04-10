@@ -1,13 +1,44 @@
 ---
 import CtaPanel from '../../components/CtaPanel.astro';
 import PracticeCard from '../../components/PracticeCard.astro';
-import { featuredServices, services } from '../../data/site';
+import { featuredServices, getServiceUrl, services } from '../../data/site';
 import Layout from '../../layouts/Layout.astro';
 
 const primarySlugs = new Set(featuredServices.map((service) => service.slug));
 const orderedServices = [
 	...featuredServices,
 	...services.filter((service) => !primarySlugs.has(service.slug)),
+];
+
+const laneGroups = [
+	{
+		title: 'Personal Injury Review',
+		copy: 'Primary injury lane plus the supporting accident pages that reinforce topical authority.',
+		links: [
+			'personal-injury',
+			'tulsa-car-accident-lawyer',
+			'tulsa-truck-accident-lawyer',
+			'tulsa-motorcycle-accident-lawyer',
+			'tulsa-pedestrian-accident-lawyer',
+			'tulsa-wrongful-death-lawyer',
+			'tulsa-slip-and-fall-lawyer',
+		],
+	},
+	{
+		title: 'Legal Guidance',
+		copy: 'The lane for issues that need attorney judgment before they fit neatly into another bucket.',
+		links: ['legal-guidance', 'family-law', 'business-law'],
+	},
+	{
+		title: 'Estate Planning',
+		copy: 'A planning cluster built around estate planning, wills and trusts, power of attorney, and guardianship.',
+		links: ['estate-planning', 'wills-and-trusts', 'power-of-attorney', 'guardianship'],
+	},
+	{
+		title: 'More Practice Areas',
+		copy: 'High-intent family and business money pages that support consult quality and local search relevance.',
+		links: ['uncontested-divorce', 'llc-formation', 'contract-drafting-review'],
+	},
 ];
 ---
 
@@ -25,13 +56,31 @@ const orderedServices = [
 					<span>Practice Areas</span>
 				</div>
 				<p class="eyebrow">Practice Areas</p>
-				<h1 class="page-title">Explore the firm's primary practice areas.</h1>
+				<h1 class="page-title">Explore the firm&apos;s primary practice areas.</h1>
 				<p class="lead">
-					Practice Areas is the full map of the firm's planning, injury, family, and business
-					work. If you want the shorter, document-focused path, use Simple Services. If you want
-					the full list, start here and choose the area that matches your situation best.
+					Practice Areas is the full map of the firm&apos;s planning, injury, family, and business
+					work. The structure below makes the lane hierarchy clearer for both visitors and search
+					engines, with the strongest money pages and their support pages grouped more intentionally.
 				</p>
 			</div>
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="shell lane-grid">
+			{laneGroups.map((group) => (
+				<div class="lane-card">
+					<p class="section-label">{group.title}</p>
+					<h2>{group.title}</h2>
+					<p>{group.copy}</p>
+					<div class="chips">
+						{group.links.map((slug) => {
+							const service = services.find((entry) => entry.slug === slug);
+							return service ? <a class="chip" href={getServiceUrl(service.slug)}>{service.name}</a> : null;
+						})}
+					</div>
+				</div>
+			))}
 		</div>
 	</section>
 

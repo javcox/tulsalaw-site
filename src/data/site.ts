@@ -15,6 +15,13 @@ export type Service = {
 	process: string[];
 	faqs: Array<{ question: string; answer: string }>;
 	related: string[];
+	localSupport?: {
+		heading: string;
+		copy: string;
+		bullets: string[];
+	};
+	moneyPageLinks?: string[];
+	siblingSupportLinks?: string[];
 };
 
 export type Testimonial = {
@@ -87,6 +94,53 @@ export const homepageFAQs = [
 	},
 ];
 
+export const homepageLanes = [
+	{
+		title: 'Personal Injury Review',
+		href: '/personal-injury/',
+		copy:
+			'For Tulsa and nearby Oklahoma injury matters where liability, treatment, insurance, and damages need an honest first review before more time is spent.',
+		links: [
+			{ label: 'Car Accidents', href: '/tulsa-car-accident-lawyer/' },
+			{ label: 'Truck Accidents', href: '/tulsa-truck-accident-lawyer/' },
+			{ label: 'Motorcycle Accidents', href: '/tulsa-motorcycle-accident-lawyer/' },
+		],
+	},
+	{
+		title: 'Legal Guidance',
+		href: '/legal-guidance/',
+		copy:
+			'For situations that do not fit neatly into one label yet and need attorney judgment on documents, deadlines, family questions, business decisions, or the smartest next step.',
+		links: [
+			{ label: 'Family Law', href: '/family-law/' },
+			{ label: 'Business Law', href: '/business-law/' },
+			{ label: 'Contact the firm', href: '/contact/' },
+		],
+	},
+	{
+		title: 'Estate Planning',
+		href: '/estate-planning/',
+		copy:
+			'For wills, trusts, powers of attorney, and guardianship-related planning that should be handled before a health event, family change, or avoidable confusion hits.',
+		links: [
+			{ label: 'Wills and Trusts', href: '/wills-and-trusts/' },
+			{ label: 'Power of Attorney', href: '/power-of-attorney/' },
+			{ label: 'Guardianship', href: '/guardianship/' },
+		],
+	},
+	{
+		title: 'More Practice Areas',
+		href: '/practice-areas/',
+		copy:
+			'For family and business matters like uncontested divorce, LLC formation, and contract drafting, plus the full map of related support pages.',
+		links: [
+			{ label: 'Uncontested Divorce', href: '/uncontested-divorce/' },
+			{ label: 'LLC Formation', href: '/llc-formation/' },
+			{ label: 'Contracts', href: '/contract-drafting-review/' },
+		],
+	},
+];
+
 export const services: Service[] = [
 	{
 		slug: 'estate-planning',
@@ -100,9 +154,9 @@ export const services: Service[] = [
 		heroTitle:
 			'Tulsa estate planning attorney for wills, trusts, powers of attorney, and family-ready document planning',
 		intro:
-			'The right estate plan should make life easier for the people you care about, not leave them sorting through uncertainty during a crisis.',
+			'The right estate plan should make life easier for the people you care about, not leave them sorting through uncertainty during a crisis. This page is designed for Tulsa-area families who want attorney-guided planning instead of piecing together forms and hoping they work later.',
 		summary:
-			'Tulsa Law helps Oklahoma clients prepare practical estate documents, organize decision-making authority, and put a clear plan in place before problems become expensive.',
+			'Tulsa Law helps Oklahoma clients prepare practical estate documents, organize decision-making authority, and put a clear plan in place before problems become expensive. Most estate-planning matters that fit move next to the $100 30-minute consultation path after intake review.',
 		searchPhrases: [
 			'Tulsa estate planning attorney',
 			'Oklahoma wills and trusts lawyer',
@@ -142,6 +196,18 @@ export const services: Service[] = [
 			},
 		],
 		related: ['wills-and-trusts', 'power-of-attorney', 'guardianship'],
+		localSupport: {
+			heading: 'Tulsa estate planning with Bixby relevance where it is real',
+			copy:
+				'The office is in south Tulsa near Bixby, which makes this page especially relevant for families in Tulsa, Bixby, and Broken Arrow who want a nearby attorney-guided planning process instead of online forms and guesswork.',
+			bullets: [
+				'Useful for families updating wills or trusts after marriage, divorce, children, or a move within the Tulsa-Bixby area',
+				'Helpful when aging parents, adult children, or decision-makers are spread between Tulsa, Bixby, and surrounding communities',
+				'Built for practical planning conversations before incapacity or family confusion creates pressure',
+			],
+		},
+		moneyPageLinks: ['wills-and-trusts', 'power-of-attorney', 'guardianship'],
+		siblingSupportLinks: ['legal-guidance'],
 	},
 	{
 		slug: 'wills-and-trusts',
@@ -375,9 +441,9 @@ export const services: Service[] = [
 		heroTitle:
 			'Tulsa uncontested divorce attorney for clients who want a cleaner, more organized divorce process',
 		intro:
-			'When both sides are closer to agreement, the goal should be a clean process, solid paperwork, and fewer avoidable setbacks.',
+			'When both sides are closer to agreement, the goal should be a clean process, solid paperwork, and fewer avoidable setbacks. This page is meant for people who want a calmer uncontested-divorce path, not a fight-first sales funnel.',
 		summary:
-			'Tulsa Law helps Oklahoma clients move through uncontested-divorce matters with stronger documents, clearer expectations, and direct attorney guidance.',
+			'Tulsa Law helps Oklahoma clients move through uncontested-divorce matters with stronger documents, clearer expectations, and direct attorney guidance. Fit matters usually move next to the $100 30-minute consultation path after intake review.',
 		searchPhrases: [
 			'Tulsa uncontested divorce lawyer',
 			'Oklahoma uncontested divorce attorney',
@@ -417,6 +483,18 @@ export const services: Service[] = [
 			},
 		],
 		related: ['family-law', 'estate-planning', 'guardianship'],
+		localSupport: {
+			heading: 'A cleaner uncontested divorce path for Tulsa and nearby Bixby families',
+			copy:
+				'This page is meant for people in Tulsa, Bixby, Broken Arrow, and nearby Oklahoma communities who are looking for a calmer, more organized divorce process when the matter is closer to agreement than conflict.',
+			bullets: [
+				'Useful when both sides want the paperwork handled more carefully, not more aggressively',
+				'Helpful when you need attorney guidance on next steps before filing or signing anything important',
+				'Relevant for clients who want a nearby Tulsa office and an intake-first path instead of a high-pressure sales funnel',
+			],
+		},
+		moneyPageLinks: ['family-law', 'legal-guidance'],
+		siblingSupportLinks: ['guardianship'],
 	},
 	{
 		slug: 'personal-injury',
@@ -430,9 +508,9 @@ export const services: Service[] = [
 		heroTitle:
 			'Tulsa personal injury attorney for collision and injury matters where liability and damages need careful review',
 		intro:
-			'Injury matters turn on timing, treatment, liability, and whether someone else can actually be held responsible. A good first review should separate a real claim from a dead end.',
+			'Injury matters turn on timing, treatment, liability, and whether someone else can actually be held responsible. A good first review should separate a real claim from a dead end before you spend months pursuing the wrong case.',
 		summary:
-			'Tulsa Law reviews Oklahoma personal injury matters involving vehicle collisions and other injury claims where liability, insurance, and damages need a serious first look.',
+			'Tulsa Law reviews Oklahoma personal injury matters involving vehicle collisions and other injury claims where liability, insurance, and damages need a serious first look. Personal injury matters are screened for fit first rather than being treated like the same offer as planning or consultation-based work.',
 		searchPhrases: [
 			'Tulsa personal injury attorney',
 			'Tulsa car accident lawyer',
@@ -492,9 +570,9 @@ export const services: Service[] = [
 		heroTitle:
 			'Tulsa legal guidance for people who need an attorney to sort the issue and point to the right next step',
 		intro:
-			'Some matters do not start with a clean label. They start with a difficult situation, a deadline, a document, or a decision that needs attorney judgment before the wrong move is made.',
+			'Some matters do not start with a clean label. They start with a difficult situation, a deadline, a document, or a decision that needs attorney judgment before the wrong move is made. This is the right lane when the issue is real but the category is not obvious yet.',
 		summary:
-			'Tulsa Law offers legal guidance for Oklahoma clients who need a serious review, a clearer strategy, and help deciding what should happen next before they commit more time or money.',
+			'Tulsa Law offers legal guidance for Oklahoma clients who need a serious review, a clearer strategy, and help deciding what should happen next before they commit more time or money. Fit matters usually move next to the $100 30-minute consultation path after intake review.',
 		searchPhrases: [
 			'Tulsa legal guidance attorney',
 			'Tulsa legal advice consultation',
@@ -932,9 +1010,9 @@ export const services: Service[] = [
 		heroTitle:
 			'Tulsa LLC formation lawyer for owners who want the setup done cleanly from the start',
 		intro:
-			'Business formation should not stop at filing a name. The early structure matters because it shapes ownership, authority, and how conflict gets handled later.',
+			'Business formation should not stop at filing a name. The early structure matters because it shapes ownership, authority, and how conflict gets handled later. This page is for owners who want cleaner setup and better documents from the start.',
 		summary:
-			'Tulsa Law helps founders and business owners form Oklahoma LLCs with stronger documentation and more thoughtful upfront planning.',
+			'Tulsa Law helps founders and business owners form Oklahoma LLCs with stronger documentation and more thoughtful upfront planning. Fit matters usually move next to the $100 30-minute consultation path after intake review.',
 		searchPhrases: [
 			'Tulsa LLC formation lawyer',
 			'Oklahoma LLC attorney',
@@ -974,6 +1052,18 @@ export const services: Service[] = [
 			},
 		],
 		related: ['business-law', 'contract-drafting-review'],
+		localSupport: {
+			heading: 'Tulsa LLC formation help for founders in Tulsa, Bixby, and nearby business corridors',
+			copy:
+				'This page is built for Oklahoma owners who want more than a filing service, especially founders in south Tulsa, Bixby, and Broken Arrow who need entity setup, operating terms, and early-stage business documents that actually fit the business.',
+			bullets: [
+				'Good fit for solo founders and partners launching service businesses, professional firms, and local companies',
+				'Useful when a Bixby or Tulsa-area owner wants a nearby attorney to review ownership, authority, and cleanup issues early',
+				'Strong next step if an existing LLC already exists but the documents need tightening before growth or conflict',
+			],
+		},
+		moneyPageLinks: ['business-law', 'contract-drafting-review', 'legal-guidance'],
+		siblingSupportLinks: [],
 	},
 	{
 		slug: 'contract-drafting-review',

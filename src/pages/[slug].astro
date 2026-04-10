@@ -14,6 +14,10 @@ export function getStaticPaths() {
 
 const { service } = Astro.props as { service: Service };
 const relatedServices = services.filter((entry) => service.related.includes(entry.slug));
+const moneyPageServices = services.filter((entry) => service.moneyPageLinks?.includes(entry.slug));
+const siblingSupportServices = services.filter((entry) => service.siblingSupportLinks?.includes(entry.slug));
+const moneyPageLinks = services.filter((entry) => service.moneyPageLinks?.includes(entry.slug));
+const siblingSupportLinks = services.filter((entry) => service.siblingSupportLinks?.includes(entry.slug));
 
 const categoryCopy = {
 	Guidance: {
@@ -22,7 +26,7 @@ const categoryCopy = {
 		expectation:
 			'Most legal guidance clients want a serious review of the facts, the pressure points, and the smartest next step before they commit more time or money.',
 		consultation:
-			'Legal guidance consultations are often paid because they usually require strategy review, document review, or attorney judgment before a recommendation can be made.',
+			'Legal guidance matters that fit usually move next to a paid consultation because they often require strategy review, document review, or attorney judgment before a recommendation can be be made.',
 	},
 	Planning: {
 		overview:
@@ -30,7 +34,7 @@ const categoryCopy = {
 		expectation:
 			'Most planning clients are trying to avoid confusion later. The first question is usually whether the documents match the family, the assets, and the people who may have to act.',
 		consultation:
-			'Planning consultations may be paid when the matter requires document review, family-structure analysis, or more customized strategy work.',
+			'Planning matters that fit often move next to a paid consultation when the work requires document review, family-structure analysis, or more customized strategy work.',
 	},
 	Family: {
 		overview:
@@ -38,7 +42,7 @@ const categoryCopy = {
 		expectation:
 			'Most family-law clients want to know what is urgent, what can wait, and what paperwork or decisions need attention first.',
 		consultation:
-			'Family-law consultations may be paid when the matter needs document review, strategy analysis, or review of existing filings or agreements.',
+			'Family-law matters that fit often move next to a paid consultation when the matter needs document review, strategy analysis, or review of existing filings or agreements.',
 	},
 	Injury: {
 		overview:
@@ -46,7 +50,7 @@ const categoryCopy = {
 		expectation:
 			'Most injury clients want an honest first look at fault, treatment, and whether the claim appears worth more time and attention.',
 		consultation:
-			'Injury consultations may begin as a paid review when the matter requires screening of liability, treatment history, documents, or claim materials before advice can be given.',
+			'Personal injury matters are usually screened for fit first. If more detailed review is appropriate, the next step may include a paid review of liability, treatment history, documents, or claim materials before advice can be given.',
 	},
 	Business: {
 		overview:
@@ -54,7 +58,7 @@ const categoryCopy = {
 		expectation:
 			'Most business clients want to know whether the agreement, structure, or filing is sound enough to move forward without avoidable risk.',
 		consultation:
-			'Business consultations may be paid when contracts, company records, or transaction documents need to be reviewed before direction can be given.',
+			'Business matters that fit often move next to a paid consultation when contracts, company records, or transaction documents need to be reviewed before direction can be given.',
 	},
 } as const;
 
@@ -67,11 +71,12 @@ const schemas = [
 		name: service.name,
 		url: `${firm.url}/${service.slug}/`,
 		description: service.metaDescription,
+		keywords: service.searchPhrases,
 		provider: {
 			'@type': 'Attorney',
 			name: firm.legalName,
 		},
-		areaServed: ['Tulsa', 'Oklahoma'],
+		areaServed: ['Tulsa', 'Bixby', 'Broken Arrow', 'Oklahoma'],
 		serviceType: service.name,
 	},
 	{
@@ -117,6 +122,12 @@ const schemas = [
 					{service.intro} {service.summary}
 				</p>
 
+				<div class="quick-facts">
+					<span class="quick-fact">Tulsa office</span>
+					<span class="quick-fact">Near Bixby and Broken Arrow</span>
+					<span class="quick-fact">Attorney-led intake</span>
+				</div>
+
 				<div class="hero-actions">
 					<a
 						class="button button-primary"
@@ -126,6 +137,7 @@ const schemas = [
 					>
 						Start Intake
 					</a>
+					<a class="button button-ghost" href="/contact/">Contact the firm</a>
 				</div>
 				<p class="mini-copy">This usually takes about 2 to 4 minutes and preselects {service.name.toLowerCase()} for the firm.</p>
 			</div>
@@ -184,6 +196,56 @@ const schemas = [
 		</div>
 	</section>
 
+	{service.localSupport && (
+		<section class="section">
+			<div class="shell highlight-band">
+				<div class="band">
+					<p class="eyebrow">Tulsa and Nearby</p>
+					<h2 class="section-title">{service.localSupport.heading}</h2>
+					<p class="lead" style="margin-top: 0;">{service.localSupport.copy}</p>
+				</div>
+				<div class="band">
+					<p class="section-label">Local fit</p>
+					<ul class="checklist" style="margin-top: 18px;">
+						{service.localSupport.bullets.map((item) => <li>{item}</li>)}
+					</ul>
+				</div>
+			</div>
+		</section>
+	)}
+
+	{(moneyPageServices.length > 0 || siblingSupportServices.length > 0) && (
+		<section class="section">
+			<div class="shell">
+				<div class="section-head">
+					<div>
+						<p class="eyebrow">Related Next Steps</p>
+						<h2 class="section-title">Pages that help this matter make more sense</h2>
+					</div>
+				</div>
+				<div class="service-grid">
+					{moneyPageServices.map((entry) => <PracticeCard service={entry} />)}
+					{siblingSupportServices.map((entry) => <PracticeCard service={entry} />)}
+				</div>
+			</div>
+		</section>
+	)}
+
+	{service.localSupport && (
+		<section class="section">
+			<div class="shell local-support-card">
+				<div>
+					<p class="eyebrow">Local Fit</p>
+					<h2 class="section-title">{service.localSupport.heading}</h2>
+					<p class="lead" style="margin-top: 0;">{service.localSupport.copy}</p>
+				</div>
+				<ul class="checklist" style="margin-top: 0;">
+					{service.localSupport.bullets.map((item) => <li>{item}</li>)}
+				</ul>
+			</div>
+		</section>
+	)}
+
 	<section class="section">
 		<div class="shell">
 			<div class="section-head">
@@ -204,6 +266,36 @@ const schemas = [
 			</div>
 		</div>
 	</section>
+
+	{(moneyPageLinks.length > 0 || siblingSupportLinks.length > 0) && (
+		<section class="section">
+			<div class="shell internal-link-grid">
+				{moneyPageLinks.length > 0 && (
+					<div class="band">
+						<p class="eyebrow">Next Strong Match</p>
+						<h2 class="section-title">Money pages closely tied to this topic</h2>
+						<div class="chips">
+							{moneyPageLinks.map((entry) => (
+								<a class="chip" href={getServiceUrl(entry.slug)}>{entry.name}</a>
+							))}
+						</div>
+					</div>
+				)}
+				{siblingSupportLinks.length > 0 && (
+					<div class="band">
+						<p class="eyebrow">Related Support</p>
+						<h2 class="section-title">Support pages that help visitors choose the right next step</h2>
+						<div class="chips">
+							{siblingSupportLinks.map((entry) => (
+								<a class="chip" href={getServiceUrl(entry.slug)}>{entry.name}</a>
+							))}
+							<a class="chip" href={`/start-intake/?service=${service.slug}`}>Start Intake</a>
+						</div>
+					</div>
+				)}
+			</div>
+		</section>
+	)}
 
 	{relatedServices.length > 0 && (
 		<section class="section-xl">
