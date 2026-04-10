@@ -16,6 +16,8 @@ function asFieldString(value: unknown) {
 	return String(value);
 }
 
+type FormField = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+
 export function mountIntakeForm() {
 	const form = document.querySelector<HTMLFormElement>('[data-intake-form]');
 	if (!form || form.dataset.enhanced === 'true') {
@@ -58,6 +60,90 @@ export function mountIntakeForm() {
 		statusBox.hidden = !message;
 		statusBox.textContent = message;
 		statusBox.dataset.tone = tone;
+	};
+
+	const findFieldContainer = (field: FormField) =>
+		field.closest<HTMLElement>('.question-card, .service-selector-card, .check-row') ??
+		field.closest<HTMLElement>('label');
+
+	const getFieldLabel = (field: FormField) => {
+		const container = findFieldContainer(field);
+		const directLabel =
+			container?.firstElementChild instanceof HTMLElement &&
+			container.firstElementChild.tagName === 'SPAN'
+				? container.firstElementChild.textContent?.trim()
+				: '';
+		const ariaLabel = field.getAttribute('aria-label')?.trim();
+		const placeholder = field.getAttribute('placeholder')?.trim();
+		const fallbackName = field.name
+			.replace(/([A-Z])/g, ' $1')
+			.replace(/[-_]/g, ' ')
+			.trim();
+
+		return directLabel || ariaLabel || placeholder || fallbackName || 'the highlighted field';
+	};
+
+	const clearInvalidMarkers = () => {
+		form
+			.querySelectorAll<HTMLElement>('.is-invalid')
+			.forEach((element) => element.classList.remove('is-invalid'));
+		form
+			.querySelectorAll<FormField>('input[aria-invalid="true"], select[aria-invalid="true"], textarea[aria-invalid="true"]')
+			.forEach((field) => field.removeAttribute('aria-invalid'));
+	};
+
+	const focusFieldError = (field: FormField | null | undefined, message?: string) => {
+		if (!field) {
+			if (message) {
+				setStatus(message, 'error');
+			}
+			return;
+		}
+
+		const stage = field.closest<HTMLElement>('[data-intake-stage]');
+		if (stage) {
+			updateProgress(Number(stage.dataset.intakeStage || '1'));
+		}
+
+		const container = findFieldContainer(field);
+		container?.classList.add('is-invalid');
+		field.setAttribute('aria-invalid', 'true');
+
+		const fieldLabel = getFieldLabel(field);
+		setStatus(message || `Please complete ${fieldLabel}.`, 'error');
+
+		(container ?? field).scrollIntoView({
+			behavior: 'smooth',
+			block: 'center',
+		});
+
+		window.setTimeout(() => {
+			field.focus({ preventScroll: true });
+			field.reportValidity();
+		}, 120);
+	};
+
+	const findFirstInvalidField = (): FormField | null => {
+		const fields = Array.from(form.querySelectorAll<FormField>('input, select, textarea')).filter(
+			(field) => !field.disabled && !field.closest('[hidden]'),
+		);
+		const checkedRadioGroups = new Set<string>();
+
+		for (const field of fields) {
+			if ((field.type === 'radio' || field.type === 'checkbox') && field.name) {
+				const key = `${field.type}:${field.name}`;
+				if (checkedRadioGroups.has(key)) {
+					continue;
+				}
+				checkedRadioGroups.add(key);
+			}
+
+			if (!field.checkValidity()) {
+				return field;
+			}
+		}
+
+		return null;
 	};
 
 	const setSectionState = (section: HTMLElement, enabled: boolean) => {
@@ -146,12 +232,15 @@ export function mountIntakeForm() {
 	const validatePlanningNeeds = () => {
 		const service = getSelectedService();
 		if (!['estate-planning', 'wills-and-trusts', 'power-of-attorney'].includes(service)) {
-			return '';
+			return null;
 		}
 		if (!form.querySelector<HTMLInputElement>('input[name="planNeeds"]:checked')) {
-			return 'Choose at least one planning need before submitting.';
+			return {
+				message: 'Choose at least one planning need before submitting.',
+				field: form.querySelector<HTMLInputElement>('input[name="planNeeds"]'),
+			};
 		}
-		return '';
+		return null;
 	};
 
 	const validateSpecialCases = () => {
@@ -160,7 +249,7 @@ export function mountIntakeForm() {
 
 		const service = getSelectedService();
 		if (service !== 'personal-injury') {
-			return '';
+			return null;
 		}
 
 		const opposingName = form.querySelector<HTMLInputElement>('[name="opposingPartyName"]')?.value?.trim();
@@ -168,30 +257,47 @@ export function mountIntakeForm() {
 			.querySelector<HTMLInputElement>('[name="opposingPartyDescription"]')
 			?.value?.trim();
 		if (!opposingName && !opposingDescription) {
-			return 'For personal injury matters, provide the opposing party name or a short description.';
+			return {
+				message: 'For personal injury matters, provide the opposing party name or a short description.',
+				field:
+					form.querySelector<HTMLInputElement>('[name="opposingPartyName"]') ??
+					form.querySelector<HTMLInputElement>('[name="opposingPartyDescription"]'),
+			};
 		}
 
 		const autoRelated = form.querySelector<HTMLInputElement>('input[name="piAutoRelated"]:checked')?.value;
 		if (autoRelated === 'yes' && !form.querySelector<HTMLSelectElement>('[name="piAutoSubtype"]')?.value) {
-			return 'Choose the auto-related accident type.';
+			return {
+				message: 'Choose the auto-related accident type.',
+				field: form.querySelector<HTMLSelectElement>('[name="piAutoSubtype"]'),
+			};
 		}
 		if (autoRelated === 'no' && !form.querySelector<HTMLSelectElement>('[name="piNonAutoSubtype"]')?.value) {
-			return 'Choose the non-auto injury type.';
+			return {
+				message: 'Choose the non-auto injury type.',
+				field: form.querySelector<HTMLSelectElement>('[name="piNonAutoSubtype"]'),
+			};
 		}
 
 		const timingBucket = form.querySelector<HTMLInputElement>('input[name="piTimingBucket"]:checked')?.value;
 		if (timingBucket === 'exact-date-known' && !form.querySelector<HTMLInputElement>('[name="piExactDate"]')?.value) {
-			return 'Enter the exact accident date or choose a different timing option.';
+			return {
+				message: 'Enter the exact accident date or choose a different timing option.',
+				field: form.querySelector<HTMLInputElement>('[name="piExactDate"]'),
+			};
 		}
 		if (
 			timingBucket &&
 			timingBucket !== 'exact-date-known' &&
 			!form.querySelector<HTMLTextAreaElement>('[name="piTimingExplanation"]')?.value?.trim()
 		) {
-			return 'If the exact date is not known, explain when it happened or when you learned about it.';
+			return {
+				message: 'If the exact date is not known, explain when it happened or when you learned about it.',
+				field: form.querySelector<HTMLTextAreaElement>('[name="piTimingExplanation"]'),
+			};
 		}
 
-		return '';
+		return null;
 	};
 
 	const buildFallbackFormData = (payload: IntakeSubmission) => {
@@ -278,6 +384,14 @@ export function mountIntakeForm() {
 		const target = event.target;
 		if (!(target instanceof HTMLElement)) return;
 		if (
+			target instanceof HTMLInputElement ||
+			target instanceof HTMLSelectElement ||
+			target instanceof HTMLTextAreaElement
+		) {
+			findFieldContainer(target)?.classList.remove('is-invalid');
+			target.removeAttribute('aria-invalid');
+		}
+		if (
 			target.matches('input[name="service"]') ||
 			target.matches('input[name="piAutoRelated"]') ||
 			target.matches('input[name="piTimingBucket"]')
@@ -289,6 +403,18 @@ export function mountIntakeForm() {
 	updateServiceSections();
 	updateProgress(1);
 	setStatus('');
+
+	form.addEventListener('input', (event) => {
+		const target = event.target;
+		if (
+			target instanceof HTMLInputElement ||
+			target instanceof HTMLSelectElement ||
+			target instanceof HTMLTextAreaElement
+		) {
+			findFieldContainer(target)?.classList.remove('is-invalid');
+			target.removeAttribute('aria-invalid');
+		}
+	});
 
 	if (stageCards.length) {
 		const observer = new IntersectionObserver(
@@ -319,15 +445,17 @@ export function mountIntakeForm() {
 	form.addEventListener('submit', async (event) => {
 		event.preventDefault();
 		setStatus('');
+		clearInvalidMarkers();
 
-		if (!form.reportValidity()) {
-			setStatus('Please complete the required fields before submitting.', 'error');
+		const invalidField = findFirstInvalidField();
+		if (invalidField) {
+			focusFieldError(invalidField);
 			return;
 		}
 
 		const specialCaseError = validateSpecialCases();
 		if (specialCaseError) {
-			setStatus(specialCaseError, 'error');
+			focusFieldError(specialCaseError.field, specialCaseError.message);
 			return;
 		}
 
