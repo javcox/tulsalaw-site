@@ -41,7 +41,7 @@ export const firm = {
 	region: 'Oklahoma',
 	postalCode: '74133',
 	fullAddress: '10026-A S. Mingo Rd., Suite 238, Tulsa, OK 74133',
-	serviceArea: 'Based in Tulsa, serving clients across Oklahoma',
+	serviceArea: 'Based in Tulsa near Bixby and Broken Arrow, serving clients across Oklahoma',
 	tagline:
 		'Attorney-led guidance for personal injury review, estate planning, family matters, and business documents across Oklahoma.',
 	intakeSummary:
@@ -55,7 +55,7 @@ export const firm = {
 	bioHighlights: [
 		'Tracy A. Cinocca combines legal strategy with business fluency, which is especially helpful for contracts, business setup, and practical document work.',
 		'Her background includes full-time purchasing work during MBA studies, including contract negotiation and acquisitions in a manufacturing environment.',
-		'The practice is based in Tulsa at 10026-A S. Mingo Rd., Suite 238 and serves clients across Oklahoma.',
+		'The practice is based in Tulsa at 10026-A S. Mingo Rd., Suite 238, near Bixby and Broken Arrow, and serves clients across Oklahoma.',
 	],
 	brandPillars: [
 		'Clear explanations and practical next steps',
@@ -73,7 +73,7 @@ export const homepageFAQs = [
 	{
 		question: 'Does Tulsa Law handle clients outside Tulsa?',
 		answer:
-			'Yes. The office is in Tulsa, and the firm reviews matters from clients across Oklahoma that fit the listed practice areas and current availability.',
+			'Yes. The office is in Tulsa near Bixby and Broken Arrow, and the firm reviews matters from clients across Oklahoma that fit the listed practice areas and current availability.',
 	},
 	{
 		question: 'How do consultation requests work?',

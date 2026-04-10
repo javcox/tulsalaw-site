@@ -1139,6 +1139,13 @@ main {
 	box-shadow: var(--shadow-soft);
 }
 
+.intake-step-card.has-errors {
+	border-color: rgba(127, 31, 31, 0.22);
+	box-shadow:
+		0 0 0 3px rgba(127, 31, 31, 0.05),
+		0 18px 34px rgba(127, 31, 31, 0.08);
+}
+
 .intake-head {
 	margin-bottom: 16px;
 }
@@ -1295,11 +1302,23 @@ main {
 	background: rgba(255, 255, 255, 0.78);
 }
 
+.progress-steps li.has-errors:not(.is-active) {
+	color: #7d1f1f;
+	background: rgba(255, 247, 247, 0.92);
+	border-color: rgba(127, 31, 31, 0.22);
+}
+
 .progress-steps li.is-active strong,
 .progress-steps li.is-complete strong {
 	background: linear-gradient(135deg, var(--accent), var(--accent-deep));
 	border-color: rgba(36, 74, 107, 0.28);
 	color: #fffaf3;
+}
+
+.progress-steps li.has-errors:not(.is-active) strong {
+	background: rgba(255, 255, 255, 0.94);
+	border-color: rgba(127, 31, 31, 0.2);
+	color: #7d1f1f;
 }
 
 .service-selector-card {

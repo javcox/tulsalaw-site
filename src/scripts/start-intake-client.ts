@@ -17,6 +17,11 @@ function asFieldString(value: unknown) {
 }
 
 type FormField = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+type ValidationIssue = {
+	field: FormField;
+	message: string;
+	summaryLabel?: string;
+};
 
 export function mountIntakeForm() {
 	const form = document.querySelector<HTMLFormElement>('[data-intake-form]');
@@ -66,8 +71,43 @@ export function mountIntakeForm() {
 		field.closest<HTMLElement>('.question-card, .service-selector-card, .check-row') ??
 		field.closest<HTMLElement>('label');
 
+	const getStickyOffset = () => {
+		const header = document.querySelector<HTMLElement>('.site-header');
+		const progress = document.querySelector<HTMLElement>('[data-intake-progress]');
+		const headerHeight = header?.getBoundingClientRect().height ?? 0;
+		const progressHeight = progress?.getBoundingClientRect().height ?? 0;
+		const progressTop = progress ? Number.parseFloat(window.getComputedStyle(progress).top) || 0 : 0;
+
+		return Math.max(headerHeight + 18, progressTop + progressHeight + 18);
+	};
+
+	const scrollFieldIntoView = (field: FormField) => {
+		const container = findFieldContainer(field) ?? field;
+		const targetTop = Math.max(
+			0,
+			window.scrollY + container.getBoundingClientRect().top - getStickyOffset(),
+		);
+
+		window.scrollTo({
+			top: targetTop,
+			behavior: 'smooth',
+		});
+	};
+
 	const getFieldLabel = (field: FormField) => {
 		const container = findFieldContainer(field);
+		const checkRowLabel = container?.classList.contains('check-row')
+			? container.querySelector('span:last-child')?.textContent?.trim()
+			: '';
+		const questionLabel = container?.classList.contains('question-card')
+			? container.querySelector(':scope > span')?.textContent?.trim()
+			: '';
+		const serviceLabel = container?.classList.contains('service-selector-card')
+			? 'the service lane'
+			: '';
+		const disclaimerLabel = field.name === 'disclaimerAccepted'
+			? 'the intake disclaimer acknowledgment'
+			: '';
 		const directLabel =
 			container?.firstElementChild instanceof HTMLElement &&
 			container.firstElementChild.tagName === 'SPAN'
@@ -80,70 +120,143 @@ export function mountIntakeForm() {
 			.replace(/[-_]/g, ' ')
 			.trim();
 
-		return directLabel || ariaLabel || placeholder || fallbackName || 'the highlighted field';
+		return (
+			disclaimerLabel ||
+			serviceLabel ||
+			checkRowLabel ||
+			questionLabel ||
+			directLabel ||
+			ariaLabel ||
+			placeholder ||
+			fallbackName ||
+			'the highlighted field'
+		);
 	};
 
 	const clearInvalidMarkers = () => {
 		form
 			.querySelectorAll<HTMLElement>('.is-invalid')
 			.forEach((element) => element.classList.remove('is-invalid'));
+		stageCards.forEach((card) => card.classList.remove('has-errors'));
+		progressSteps.forEach((step) => step.classList.remove('has-errors'));
 		form
 			.querySelectorAll<FormField>('input[aria-invalid="true"], select[aria-invalid="true"], textarea[aria-invalid="true"]')
 			.forEach((field) => field.removeAttribute('aria-invalid'));
 	};
 
-	const focusFieldError = (field: FormField | null | undefined, message?: string) => {
-		if (!field) {
-			if (message) {
-				setStatus(message, 'error');
-			}
+	const summarizeIssues = (issues: ValidationIssue[]) => {
+		const labels = Array.from(
+			new Set(
+				issues
+					.map((issue) => issue.summaryLabel?.trim() || getFieldLabel(issue.field))
+					.filter(Boolean),
+			),
+		);
+
+		if (!labels.length) {
+			return 'Please complete the highlighted items before submitting.';
+		}
+
+		if (labels.length === 1) {
+			return `Please complete ${labels[0]} before submitting.`;
+		}
+
+		if (labels.length === 2) {
+			return `Please complete ${labels[0]} and ${labels[1]} before submitting.`;
+		}
+
+		const preview = labels.slice(0, 3).join(', ');
+		const remaining = labels.length - 3;
+		return remaining > 0
+			? `Please complete the highlighted items before submitting. Still missing: ${preview}, and ${remaining} more.`
+			: `Please complete the highlighted items before submitting. Still missing: ${preview}.`;
+	};
+
+	const showValidationIssues = (issues: ValidationIssue[]) => {
+		if (!issues.length) {
 			return;
 		}
 
-		const stage = field.closest<HTMLElement>('[data-intake-stage]');
+		issues.forEach((issue) => {
+			const container = findFieldContainer(issue.field);
+			container?.classList.add('is-invalid');
+			issue.field.setAttribute('aria-invalid', 'true');
+
+			const stage = issue.field.closest<HTMLElement>('[data-intake-stage]');
+			if (stage) {
+				stage.classList.add('has-errors');
+				const step = progressSteps.find(
+					(entry) => Number(entry.dataset.progressStep || '0') === Number(stage.dataset.intakeStage || '0'),
+				);
+				step?.classList.add('has-errors');
+			}
+		});
+
+		const firstIssue = issues[0];
+		const stage = firstIssue.field.closest<HTMLElement>('[data-intake-stage]');
 		if (stage) {
 			updateProgress(Number(stage.dataset.intakeStage || '1'));
 		}
 
-		const container = findFieldContainer(field);
-		container?.classList.add('is-invalid');
-		field.setAttribute('aria-invalid', 'true');
-
-		const fieldLabel = getFieldLabel(field);
-		setStatus(message || `Please complete ${fieldLabel}.`, 'error');
-
-		(container ?? field).scrollIntoView({
-			behavior: 'smooth',
-			block: 'center',
-		});
+		setStatus(summarizeIssues(issues), 'error');
+		scrollFieldIntoView(firstIssue.field);
 
 		window.setTimeout(() => {
-			field.focus({ preventScroll: true });
-			field.reportValidity();
-		}, 120);
+			firstIssue.field.focus({ preventScroll: true });
+			firstIssue.field.reportValidity();
+		}, 140);
 	};
 
-	const findFirstInvalidField = (): FormField | null => {
+	const collectNativeValidationIssues = (): ValidationIssue[] => {
 		const fields = Array.from(form.querySelectorAll<FormField>('input, select, textarea')).filter(
 			(field) => !field.disabled && !field.closest('[hidden]'),
 		);
-		const checkedRadioGroups = new Set<string>();
+		const checkedGroups = new Set<string>();
+		const issues: ValidationIssue[] = [];
 
 		for (const field of fields) {
-			if ((field.type === 'radio' || field.type === 'checkbox') && field.name) {
+			if (field.type === 'radio' && field.name) {
 				const key = `${field.type}:${field.name}`;
-				if (checkedRadioGroups.has(key)) {
+				if (checkedGroups.has(key)) {
 					continue;
 				}
-				checkedRadioGroups.add(key);
+				checkedGroups.add(key);
+				const group = fields.filter(
+					(candidate) =>
+						candidate instanceof HTMLInputElement &&
+						candidate.type === 'radio' &&
+						candidate.name === field.name,
+				);
+				const groupRequired = group.some((candidate) => candidate.required);
+				const groupChecked = group.some((candidate) => candidate.checked);
+				if (groupRequired && !groupChecked) {
+					issues.push({
+						field,
+						message: `Please complete ${getFieldLabel(field)}.`,
+						summaryLabel: getFieldLabel(field),
+					});
+				}
+				continue;
+			}
+
+			if (field.type === 'checkbox' && field.name) {
+				const key = `${field.type}:${field.name}`;
+				if (checkedGroups.has(key)) {
+					continue;
+				}
+				checkedGroups.add(key);
 			}
 
 			if (!field.checkValidity()) {
-				return field;
+				issues.push({
+					field,
+					message: `Please complete ${getFieldLabel(field)}.`,
+					summaryLabel: getFieldLabel(field),
+				});
 			}
 		}
 
-		return null;
+		return issues;
 	};
 
 	const setSectionState = (section: HTMLElement, enabled: boolean) => {
@@ -229,27 +342,27 @@ export function mountIntakeForm() {
 		return payload;
 	};
 
-	const validatePlanningNeeds = () => {
+	const validatePlanningNeeds = (): ValidationIssue[] => {
 		const service = getSelectedService();
 		if (!['estate-planning', 'wills-and-trusts', 'power-of-attorney'].includes(service)) {
-			return null;
+			return [];
 		}
 		if (!form.querySelector<HTMLInputElement>('input[name="planNeeds"]:checked')) {
-			return {
+			return [{
 				message: 'Choose at least one planning need before submitting.',
 				field: form.querySelector<HTMLInputElement>('input[name="planNeeds"]'),
-			};
+				summaryLabel: 'at least one planning need',
+			}];
 		}
-		return null;
+		return [];
 	};
 
-	const validateSpecialCases = () => {
-		const planningError = validatePlanningNeeds();
-		if (planningError) return planningError;
+	const validateSpecialCases = (): ValidationIssue[] => {
+		const issues: ValidationIssue[] = [...validatePlanningNeeds()];
 
 		const service = getSelectedService();
 		if (service !== 'personal-injury') {
-			return null;
+			return issues;
 		}
 
 		const opposingName = form.querySelector<HTMLInputElement>('[name="opposingPartyName"]')?.value?.trim();
@@ -257,47 +370,52 @@ export function mountIntakeForm() {
 			.querySelector<HTMLInputElement>('[name="opposingPartyDescription"]')
 			?.value?.trim();
 		if (!opposingName && !opposingDescription) {
-			return {
+			issues.push({
 				message: 'For personal injury matters, provide the opposing party name or a short description.',
 				field:
 					form.querySelector<HTMLInputElement>('[name="opposingPartyName"]') ??
 					form.querySelector<HTMLInputElement>('[name="opposingPartyDescription"]'),
-			};
+				summaryLabel: 'opposing party information',
+			});
 		}
 
 		const autoRelated = form.querySelector<HTMLInputElement>('input[name="piAutoRelated"]:checked')?.value;
 		if (autoRelated === 'yes' && !form.querySelector<HTMLSelectElement>('[name="piAutoSubtype"]')?.value) {
-			return {
+			issues.push({
 				message: 'Choose the auto-related accident type.',
 				field: form.querySelector<HTMLSelectElement>('[name="piAutoSubtype"]'),
-			};
+				summaryLabel: 'the auto-related accident type',
+			});
 		}
 		if (autoRelated === 'no' && !form.querySelector<HTMLSelectElement>('[name="piNonAutoSubtype"]')?.value) {
-			return {
+			issues.push({
 				message: 'Choose the non-auto injury type.',
 				field: form.querySelector<HTMLSelectElement>('[name="piNonAutoSubtype"]'),
-			};
+				summaryLabel: 'the non-auto injury type',
+			});
 		}
 
 		const timingBucket = form.querySelector<HTMLInputElement>('input[name="piTimingBucket"]:checked')?.value;
 		if (timingBucket === 'exact-date-known' && !form.querySelector<HTMLInputElement>('[name="piExactDate"]')?.value) {
-			return {
+			issues.push({
 				message: 'Enter the exact accident date or choose a different timing option.',
 				field: form.querySelector<HTMLInputElement>('[name="piExactDate"]'),
-			};
+				summaryLabel: 'the exact accident date',
+			});
 		}
 		if (
 			timingBucket &&
 			timingBucket !== 'exact-date-known' &&
 			!form.querySelector<HTMLTextAreaElement>('[name="piTimingExplanation"]')?.value?.trim()
 		) {
-			return {
+			issues.push({
 				message: 'If the exact date is not known, explain when it happened or when you learned about it.',
 				field: form.querySelector<HTMLTextAreaElement>('[name="piTimingExplanation"]'),
-			};
+				summaryLabel: 'the injury timing explanation',
+			});
 		}
 
-		return null;
+		return issues.filter((issue): issue is ValidationIssue => Boolean(issue.field));
 	};
 
 	const buildFallbackFormData = (payload: IntakeSubmission) => {
@@ -388,8 +506,17 @@ export function mountIntakeForm() {
 			target instanceof HTMLSelectElement ||
 			target instanceof HTMLTextAreaElement
 		) {
-			findFieldContainer(target)?.classList.remove('is-invalid');
+			const container = findFieldContainer(target);
+			container?.classList.remove('is-invalid');
 			target.removeAttribute('aria-invalid');
+			const stage = target.closest<HTMLElement>('[data-intake-stage]');
+			if (stage && !stage.querySelector('.is-invalid')) {
+				stage.classList.remove('has-errors');
+				const step = progressSteps.find(
+					(entry) => Number(entry.dataset.progressStep || '0') === Number(stage.dataset.intakeStage || '0'),
+				);
+				step?.classList.remove('has-errors');
+			}
 		}
 		if (
 			target.matches('input[name="service"]') ||
@@ -411,8 +538,17 @@ export function mountIntakeForm() {
 			target instanceof HTMLSelectElement ||
 			target instanceof HTMLTextAreaElement
 		) {
-			findFieldContainer(target)?.classList.remove('is-invalid');
+			const container = findFieldContainer(target);
+			container?.classList.remove('is-invalid');
 			target.removeAttribute('aria-invalid');
+			const stage = target.closest<HTMLElement>('[data-intake-stage]');
+			if (stage && !stage.querySelector('.is-invalid')) {
+				stage.classList.remove('has-errors');
+				const step = progressSteps.find(
+					(entry) => Number(entry.dataset.progressStep || '0') === Number(stage.dataset.intakeStage || '0'),
+				);
+				step?.classList.remove('has-errors');
+			}
 		}
 	});
 
@@ -447,15 +583,9 @@ export function mountIntakeForm() {
 		setStatus('');
 		clearInvalidMarkers();
 
-		const invalidField = findFirstInvalidField();
-		if (invalidField) {
-			focusFieldError(invalidField);
-			return;
-		}
-
-		const specialCaseError = validateSpecialCases();
-		if (specialCaseError) {
-			focusFieldError(specialCaseError.field, specialCaseError.message);
+		const issues = [...collectNativeValidationIssues(), ...validateSpecialCases()];
+		if (issues.length) {
+			showValidationIssues(issues);
 			return;
 		}
 
