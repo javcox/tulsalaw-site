@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import headerLogo from '../assets/header-logo.png';
+import headerLogo from '../assets/header-logo-clean.png';
 import { services } from '../data/site';
 
 const pathname = Astro.url.pathname;
@@ -17,13 +17,12 @@ const navLinks = [
 <header class="site-header">
 	<div class="shell header-row">
 		<a class="brand" href="/">
-			<span class="brand-mark">TL</span>
 			<span class="brand-emblem" aria-hidden="true">
 				<Image
 					src={headerLogo}
 					alt=""
-					widths={[72, 96, 128]}
-					sizes="56px"
+					widths={[48, 64, 80]}
+					sizes="40px"
 					loading="eager"
 					format="avif"
 				/>
