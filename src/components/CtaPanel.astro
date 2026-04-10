@@ -4,9 +4,10 @@ import { firm } from '../data/site';
 interface Props {
 	title: string;
 	copy: string;
+	href?: string;
 }
 
-const { title, copy } = Astro.props;
+const { title, copy, href = firm.consultationUrl } = Astro.props;
 ---
 
 <section class="section">
@@ -16,24 +17,17 @@ const { title, copy } = Astro.props;
 				<p class="eyebrow">Consultation Path</p>
 				<h2 class="section-title">{title}</h2>
 				<p>{copy}</p>
+				<p class="mini-copy">This usually takes about 2 to 4 minutes and moves the matter into the firm's review queue right away.</p>
 			</div>
 
 			<div class="stack-actions">
 				<a
 					class="button button-primary"
-					href={firm.consultationUrl}
+					href={href}
 					data-track="generate_lead"
-					data-track-label="cta-contact-page"
+					data-track-label="cta-start-intake"
 				>
-					Request a Consultation
-				</a>
-				<a
-					class="button button-secondary"
-					href={firm.emailHref}
-					data-track="generate_lead"
-					data-track-label="cta-email"
-				>
-					Email the Firm
+					Start Intake
 				</a>
 			</div>
 		</div>

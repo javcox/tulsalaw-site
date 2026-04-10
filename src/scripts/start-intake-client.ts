@@ -36,6 +36,10 @@ export function mountIntakeForm() {
 	const serviceSections = Array.from(document.querySelectorAll<HTMLElement>('[data-service-group]'));
 	const piAutoGroups = Array.from(document.querySelectorAll<HTMLElement>('[data-pi-subgroup]'));
 	const piTimingGroups = Array.from(document.querySelectorAll<HTMLElement>('[data-pi-timing]'));
+	const stageCards = Array.from(document.querySelectorAll<HTMLElement>('[data-intake-stage]'));
+	const progressSteps = Array.from(document.querySelectorAll<HTMLElement>('[data-progress-step]'));
+	const progressFill = document.querySelector<HTMLElement>('[data-progress-fill]');
+	const progressCurrent = document.querySelector<HTMLElement>('[data-progress-current]');
 
 	if (startedAtField) {
 		startedAtField.value = String(Date.now());
@@ -96,6 +100,21 @@ export function mountIntakeForm() {
 			setSectionState(section, Boolean(matches));
 		});
 		updatePiGroups();
+	};
+
+	const updateProgress = (stageNumber: number) => {
+		const normalized = Math.min(Math.max(stageNumber, 1), 4);
+		progressSteps.forEach((step) => {
+			const value = Number(step.dataset.progressStep || '0');
+			step.classList.toggle('is-active', value === normalized);
+			step.classList.toggle('is-complete', value < normalized);
+		});
+		if (progressFill) {
+			progressFill.style.width = `${((normalized - 1) / 3) * 100}%`;
+		}
+		if (progressCurrent) {
+			progressCurrent.textContent = `Step ${normalized} of 4`;
+		}
 	};
 
 	const serializeForm = (formData: FormData): IntakeSubmission => {
@@ -256,7 +275,34 @@ export function mountIntakeForm() {
 	});
 
 	updateServiceSections();
+	updateProgress(1);
 	setStatus('');
+
+	if (stageCards.length) {
+		const observer = new IntersectionObserver(
+			(entries) => {
+				const visible = entries
+					.filter((entry) => entry.isIntersecting)
+					.sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+				if (visible) {
+					updateProgress(Number((visible.target as HTMLElement).dataset.intakeStage || '1'));
+				}
+			},
+			{
+				rootMargin: '-20% 0px -45% 0px',
+				threshold: [0.2, 0.35, 0.5],
+			},
+		);
+
+		stageCards.forEach((card) => observer.observe(card));
+		form.addEventListener('focusin', (event) => {
+			const target = event.target;
+			if (!(target instanceof HTMLElement)) return;
+			const stage = target.closest<HTMLElement>('[data-intake-stage]');
+			if (!stage) return;
+			updateProgress(Number(stage.dataset.intakeStage || '1'));
+		});
+	}
 
 	form.addEventListener('submit', async (event) => {
 		event.preventDefault();
@@ -315,6 +361,7 @@ export function mountIntakeForm() {
 					'Your request has been sent. If the matter appears to fit, the next step is usually an email with scheduling instructions.';
 			}
 			successPanel?.removeAttribute('hidden');
+			updateProgress(4);
 		} catch (error) {
 			setStatus(
 				error instanceof Error ? error.message : 'Something went wrong while sending the intake request.',

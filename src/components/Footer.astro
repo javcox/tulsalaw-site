@@ -39,24 +39,17 @@ import { featuredServices, firm, getServiceUrl } from '../data/site';
 					class="button button-primary"
 					href={firm.consultationUrl}
 					data-track="generate_lead"
-					data-track-label="footer-contact"
+					data-track-label="footer-start-intake"
 				>
-					Request a Consultation
-				</a>
-				<a
-					class="button button-secondary"
-					href={firm.emailHref}
-					data-track="generate_lead"
-					data-track-label="footer-email"
-				>
-					Email the Firm
+					Start Intake
 				</a>
 			</div>
 
 			<p class="footer-note">
 				Attorney advertising. The information on this site is for general information only and
 				does not create an attorney-client relationship. Representation begins only after
-				conflict review and a confirmed engagement.
+				conflict review and a confirmed engagement. If you need to explain something before you
+				start, email <a href={firm.emailHref}>the firm directly</a>.
 			</p>
 		</div>
 

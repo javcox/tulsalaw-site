@@ -36,12 +36,16 @@ const schemas = [
 					<span>Start Intake</span>
 				</div>
 				<p class="eyebrow">Guided Intake</p>
-				<h1 class="page-title">Start a consultation request the firm can actually review fast.</h1>
+				<h1 class="page-title">Start the intake in one path the firm can review fast.</h1>
 				<p class="lead">
-					This intake is built to screen fit, timing, conflicts, and service lane before the next
-					step is offered. Use it for personal injury, legal guidance, estate planning, family-law,
-					and business-document matters tied to Oklahoma.
+					Choose the service lane first, answer the fit questions, and send only the core facts
+					needed for review. Most people finish this in about 2 to 4 minutes.
 				</p>
+				<div class="quick-facts">
+					<span class="quick-fact">Choose the matter type first</span>
+					<span class="quick-fact">Mostly multiple choice</span>
+					<span class="quick-fact">Reviewed within 1 business day</span>
+				</div>
 			</div>
 
 			<div class="hero-aside">
@@ -70,6 +74,21 @@ const schemas = [
 				data-default-service={preselectedService}
 				novalidate
 			>
+				<div class="intake-progress" data-intake-progress>
+					<div class="intake-progress-topline">
+						<p class="eyebrow">2 to 4 minutes</p>
+						<p class="mini-copy"><span data-progress-current>Step 1 of 4</span> | No long story required up front.</p>
+					</div>
+					<div class="progress-track" aria-hidden="true">
+						<div class="progress-fill" data-progress-fill></div>
+					</div>
+					<ol class="progress-steps">
+						<li class="is-active" data-progress-step="1"><strong>1</strong><span>Matter</span></li>
+						<li data-progress-step="2"><strong>2</strong><span>Fit</span></li>
+						<li data-progress-step="3"><strong>3</strong><span>Details</span></li>
+						<li data-progress-step="4"><strong>4</strong><span>Send</span></li>
+					</ol>
+				</div>
 				<input type="hidden" name="startedAtMs" value="" data-started-at />
 				<div class="intake-honeypot" aria-hidden="true">
 					<label>
@@ -78,34 +97,14 @@ const schemas = [
 					</label>
 				</div>
 
-				<section class="intake-step-card">
+				<section class="intake-step-card" data-intake-stage="1">
 					<div class="section-head intake-head">
 						<div>
 							<p class="eyebrow">Step 1</p>
-							<h2 class="section-title">Before you begin</h2>
-						</div>
-					</div>
-					<div class="intake-disclaimer">
-						<ul class="info-list">
-							<li>This form is for consultation requests only.</li>
-							<li>Do not send confidential details or documents unless requested.</li>
-							<li>Submitting this form does not create an attorney-client relationship.</li>
-							<li>The firm may decline matters that are outside scope, timing, or fit.</li>
-						</ul>
-						<label class="check-row">
-							<input type="checkbox" name="disclaimerAccepted" value="yes" required />
-							<span>I understand and want to continue with the intake request.</span>
-						</label>
-					</div>
-				</section>
-
-				<section class="intake-step-card">
-					<div class="section-head intake-head">
-						<div>
-							<p class="eyebrow">Step 2</p>
 							<h2 class="section-title">Choose the service lane first</h2>
 						</div>
 					</div>
+					<p class="mini-copy">If you are not sure where the matter fits, choose Legal Guidance and the form will route from there.</p>
 					<div class="service-selector-grid">
 						{
 							intakeServices.map((service) => (
@@ -124,15 +123,28 @@ const schemas = [
 							))
 						}
 					</div>
+					<div class="intake-disclaimer">
+						<ul class="info-list">
+							<li>This form is for consultation requests only.</li>
+							<li>Do not send confidential details or documents unless requested.</li>
+							<li>Submitting this form does not create an attorney-client relationship.</li>
+							<li>The firm may decline matters that are outside scope, timing, or fit.</li>
+						</ul>
+						<label class="check-row">
+							<input type="checkbox" name="disclaimerAccepted" value="yes" required />
+							<span>I understand and want to continue with the intake request.</span>
+						</label>
+					</div>
 				</section>
 
-				<section class="intake-step-card">
+				<section class="intake-step-card" data-intake-stage="2">
 					<div class="section-head intake-head">
 						<div>
-							<p class="eyebrow">Step 3</p>
-							<h2 class="section-title">Who should the firm reply to</h2>
+							<p class="eyebrow">Step 2</p>
+							<h2 class="section-title">Who this is for and how to reply</h2>
 						</div>
 					</div>
+					<p class="mini-copy">Keep this short and factual. The goal is fit review, not a full memo.</p>
 					<div class="field-grid">
 						<label>
 							<span>Full name</span>
@@ -160,13 +172,6 @@ const schemas = [
 					</div>
 				</section>
 
-				<section class="intake-step-card">
-					<div class="section-head intake-head">
-						<div>
-							<p class="eyebrow">Step 4</p>
-							<h2 class="section-title">Universal screening questions</h2>
-						</div>
-					</div>
 					<div class="field-grid field-grid-wide">
 						<div class="question-card">
 							<span>Are you in Oklahoma?</span>
@@ -244,13 +249,14 @@ const schemas = [
 					</div>
 				</section>
 
-				<section class="intake-step-card">
+				<section class="intake-step-card" data-intake-stage="3">
 					<div class="section-head intake-head">
 						<div>
-							<p class="eyebrow">Step 5</p>
+							<p class="eyebrow">Step 3</p>
 							<h2 class="section-title">Service-specific screening questions</h2>
 						</div>
 					</div>
+					<p class="mini-copy">These questions narrow the matter quickly so the firm can tell whether it belongs in the next-step queue.</p>
 					<div class="service-question-group" data-service-group="personal-injury" hidden>
 						<div class="service-question-header">
 							<h3>Personal injury screening</h3>
@@ -768,13 +774,14 @@ const schemas = [
 					</div>
 				</section>
 
-				<section class="intake-step-card">
+				<section class="intake-step-card" data-intake-stage="4">
 					<div class="section-head intake-head">
 						<div>
-							<p class="eyebrow">Step 6</p>
-							<h2 class="section-title">Conflict and summary details</h2>
+							<p class="eyebrow">Step 4</p>
+							<h2 class="section-title">Final details and send</h2>
 						</div>
 					</div>
+					<p class="mini-copy">This is the last part. Keep the summary tight and use only the names needed for a conflict check.</p>
 					<div class="field-grid field-grid-wide">
 						<label>
 							<span>Names of the main parties only</span>

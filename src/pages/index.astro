@@ -71,19 +71,12 @@ const schemas = [
 						class="button button-primary"
 						href={firm.consultationUrl}
 						data-track="generate_lead"
-						data-track-label="home-contact"
+						data-track-label="home-start-intake"
 					>
-						Request a Consultation
-					</a>
-					<a
-						class="button button-secondary"
-						href={firm.emailHref}
-						data-track="generate_lead"
-						data-track-label="home-email"
-					>
-						Email the Firm
+						Start Intake
 					</a>
 				</div>
+				<p class="mini-copy">Takes about 2 to 4 minutes. If you are not sure which lane fits, choose Legal Guidance after you click.</p>
 
 				<div class="hero-meta">
 					<div class="stat-card">
@@ -211,6 +204,6 @@ const schemas = [
 
 	<CtaPanel
 		title="Ready to send a matter in for review?"
-		copy="Use the guided intake to route the matter for fit review, or email the firm directly if you need to explain a detail first."
+		copy="Use the guided intake to route the matter for fit review without waiting on a call back first."
 	/>
 </Layout>

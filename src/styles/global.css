@@ -1166,6 +1166,109 @@ main {
 	gap: 14px;
 }
 
+.quick-facts {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	margin-top: 20px;
+}
+
+.quick-fact {
+	display: inline-flex;
+	align-items: center;
+	padding: 9px 13px;
+	border-radius: 999px;
+	background: rgba(255, 255, 255, 0.84);
+	border: 1px solid rgba(20, 38, 58, 0.08);
+	font-size: 0.9rem;
+	font-weight: 700;
+	color: var(--trust);
+}
+
+.intake-progress {
+	display: grid;
+	gap: 14px;
+	margin-bottom: 22px;
+	padding: 22px 24px;
+	border-radius: 28px;
+	background: var(--surface-wash-strong);
+	border: 1px solid var(--line);
+	box-shadow: var(--shadow-soft);
+}
+
+.intake-progress-topline {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+}
+
+.intake-progress-topline .eyebrow,
+.intake-progress-topline .mini-copy {
+	margin: 0;
+}
+
+.progress-track {
+	position: relative;
+	height: 8px;
+	border-radius: 999px;
+	background: rgba(20, 38, 58, 0.08);
+	overflow: hidden;
+}
+
+.progress-fill {
+	height: 100%;
+	width: 0;
+	border-radius: inherit;
+	background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+	transition: width 220ms ease;
+}
+
+.progress-steps {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 10px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.progress-steps li {
+	display: grid;
+	gap: 6px;
+	justify-items: start;
+	color: var(--ink-soft);
+}
+
+.progress-steps li strong {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.9);
+	border: 1px solid rgba(20, 38, 58, 0.1);
+	font-size: 0.92rem;
+}
+
+.progress-steps li span {
+	font-size: 0.9rem;
+	font-weight: 700;
+}
+
+.progress-steps li.is-active {
+	color: var(--trust);
+}
+
+.progress-steps li.is-active strong,
+.progress-steps li.is-complete strong {
+	background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+	border-color: rgba(36, 74, 107, 0.28);
+	color: #fffaf3;
+}
+
 .service-selector-card {
 	display: block;
 	cursor: pointer;
@@ -1486,6 +1589,10 @@ main {
 		grid-template-columns: 1fr;
 	}
 
+	.progress-steps {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
 	.intake-submit-row {
 		flex-direction: column;
 		align-items: stretch;
@@ -1547,5 +1654,9 @@ main {
 	.hero-actions,
 	.stack-actions {
 		flex-direction: column;
+	}
+
+	.intake-progress {
+		padding: 20px;
 	}
 }

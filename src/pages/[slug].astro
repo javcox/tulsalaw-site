@@ -122,19 +122,12 @@ const schemas = [
 						class="button button-primary"
 						href={`/start-intake/?service=${service.slug}`}
 						data-track="generate_lead"
-						data-track-label={`${service.slug}-contact`}
+						data-track-label={`${service.slug}-start-intake`}
 					>
-						Request a Consultation
-					</a>
-					<a
-						class="button button-secondary"
-						href={firm.emailHref}
-						data-track="generate_lead"
-						data-track-label={`${service.slug}-email`}
-					>
-						Email the Firm
+						Start Intake
 					</a>
 				</div>
+				<p class="mini-copy">This usually takes about 2 to 4 minutes and preselects {service.name.toLowerCase()} for the firm.</p>
 			</div>
 
 			<div class="hero-aside">
@@ -230,6 +223,7 @@ const schemas = [
 
 	<CtaPanel
 		title={`Ready to talk about ${service.name.toLowerCase()}?`}
-		copy="Use the guided intake to send the matter for fit review, or email the firm if you need to add a quick note first."
+		copy="Use the guided intake to send the matter for fit review and move it into the right queue."
+		href={`/start-intake/?service=${service.slug}`}
 	/>
 </Layout>

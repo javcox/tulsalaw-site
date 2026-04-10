@@ -1,15 +1,15 @@
 ---
 const steps = [
 	{
-		title: '1. Tell us the matter',
-		copy: 'Choose the service lane, answer the fit questions, and share only the core facts the firm needs first.',
+		title: '1. Choose the matter type',
+		copy: 'Start with the service lane first so the form can narrow the right questions immediately.',
 	},
 	{
-		title: '2. The request is reviewed',
-		copy: 'New matters are screened for fit, urgency, conflicts, and current availability before the next step is offered.',
+		title: '2. Answer the fit questions',
+		copy: 'Share only the core facts, timing, and contact details the firm needs for a real first review.',
 	},
 	{
-		title: '3. You get the next step',
+		title: '3. Get the next step',
 		copy: 'If it fits, the next move is usually an email with scheduling instructions and the $100 30-minute consultation link.',
 	},
 ];
@@ -18,6 +18,7 @@ const steps = [
 <div class="panel intake-panel">
 	<p class="mini-kicker">3-Step Intake Path</p>
 	<h2 class="mini-title">How requests usually move.</h2>
+	<p class="mini-copy">Most people finish the intake in about 2 to 4 minutes.</p>
 	<ol class="intake-steps">
 		{
 			steps.map((step) => (
