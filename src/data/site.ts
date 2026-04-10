@@ -50,7 +50,7 @@ export const firm = {
 	fullAddress: '10026-A S. Mingo Rd., Suite 238, Tulsa, OK 74133',
 	serviceArea: 'Based in Tulsa near Bixby and Broken Arrow, serving clients across Oklahoma',
 	tagline:
-		'Attorney-led guidance for personal injury review, estate planning, family matters, and business documents across Oklahoma.',
+		'Attorney-led review for personal injury, estate planning, legal guidance, family matters, and business documents across Tulsa, Bixby, Broken Arrow, and Oklahoma.',
 	intakeSummary:
 		'New client matters are reviewed for fit, conflicts, urgency, and scheduling before representation begins.',
 	credentials: [
@@ -85,12 +85,12 @@ export const homepageFAQs = [
 	{
 		question: 'How do consultation requests work?',
 		answer:
-			'The fastest path is the guided intake form on this site. Most requests are reviewed within 1 business day when submitted on a business day, and fit matters usually move next to an email with scheduling instructions and the $100 30-minute consultation payment link.',
+			'The fastest path is the guided intake form on this site. Most requests are reviewed within 1 business day when submitted on a business day. Personal injury matters are screened for fit first, while many planning, family, business, and legal-guidance matters that fit move next to an email with scheduling instructions and the $100 30-minute consultation payment link.',
 	},
 	{
 		question: 'What is the difference between Practice Areas and Simple Services?',
 		answer:
-			'Practice Areas is the full list of injury, planning, family, and business work. Simple Services is the faster path for document-driven matters like estate planning, powers of attorney, uncontested divorce paperwork, LLC formation, and contract review.',
+			'Practice Areas is the full map, including injury review and broader family and business work. Simple Services is the shorter, document-focused path for matters like estate planning, powers of attorney, uncontested-divorce paperwork, LLC formation, and contract review.',
 	},
 ];
 
@@ -99,7 +99,7 @@ export const homepageLanes = [
 		title: 'Personal Injury Review',
 		href: '/personal-injury/',
 		copy:
-			'For Tulsa and nearby Oklahoma injury matters where liability, treatment, insurance, and damages need an honest first review before more time is spent.',
+			'For Tulsa, Bixby, and nearby Oklahoma injury matters where liability, treatment, insurance, and damages need an honest first review before a claim consumes more time.',
 		links: [
 			{ label: 'Car Accidents', href: '/tulsa-car-accident-lawyer/' },
 			{ label: 'Truck Accidents', href: '/tulsa-truck-accident-lawyer/' },
@@ -110,7 +110,7 @@ export const homepageLanes = [
 		title: 'Legal Guidance',
 		href: '/legal-guidance/',
 		copy:
-			'For situations that do not fit neatly into one label yet and need attorney judgment on documents, deadlines, family questions, business decisions, or the smartest next step.',
+			'For situations that need attorney judgment before signing, filing, escalating, or deciding whether the matter belongs in planning, family, business, or injury review.',
 		links: [
 			{ label: 'Family Law', href: '/family-law/' },
 			{ label: 'Business Law', href: '/business-law/' },
@@ -121,7 +121,7 @@ export const homepageLanes = [
 		title: 'Estate Planning',
 		href: '/estate-planning/',
 		copy:
-			'For wills, trusts, powers of attorney, and guardianship-related planning that should be handled before a health event, family change, or avoidable confusion hits.',
+			'For wills, trusts, powers of attorney, and guardianship-related planning that should be handled correctly before a health event, family change, or avoidable confusion hits.',
 		links: [
 			{ label: 'Wills and Trusts', href: '/wills-and-trusts/' },
 			{ label: 'Power of Attorney', href: '/power-of-attorney/' },
@@ -132,7 +132,7 @@ export const homepageLanes = [
 		title: 'More Practice Areas',
 		href: '/practice-areas/',
 		copy:
-			'For family and business matters like uncontested divorce, LLC formation, and contract drafting, plus the full map of related support pages.',
+			'For uncontested divorce, LLC formation, contract review, and the rest of the family and business map when the issue is real but not one of the three main homepage lanes.',
 		links: [
 			{ label: 'Uncontested Divorce', href: '/uncontested-divorce/' },
 			{ label: 'LLC Formation', href: '/llc-formation/' },
@@ -156,7 +156,7 @@ export const services: Service[] = [
 		intro:
 			'The right estate plan should make life easier for the people you care about, not leave them sorting through uncertainty during a crisis. This page is designed for Tulsa-area families who want attorney-guided planning instead of piecing together forms and hoping they work later.',
 		summary:
-			'Tulsa Law helps Oklahoma clients prepare practical estate documents, organize decision-making authority, and put a clear plan in place before problems become expensive. Most estate-planning matters that fit move next to the $100 30-minute consultation path after intake review.',
+			'Tulsa Law helps Oklahoma clients prepare practical estate documents, organize decision-making authority, and put a clear plan in place before problems become expensive. Most estate-planning matters that fit move next to the $100 30-minute consultation path so the family structure, documents, and next drafting steps can be reviewed carefully.',
 		searchPhrases: [
 			'Tulsa estate planning attorney',
 			'Oklahoma wills and trusts lawyer',
@@ -443,7 +443,7 @@ export const services: Service[] = [
 		intro:
 			'When both sides are closer to agreement, the goal should be a clean process, solid paperwork, and fewer avoidable setbacks. This page is meant for people who want a calmer uncontested-divorce path, not a fight-first sales funnel.',
 		summary:
-			'Tulsa Law helps Oklahoma clients move through uncontested-divorce matters with stronger documents, clearer expectations, and direct attorney guidance. Fit matters usually move next to the $100 30-minute consultation path after intake review.',
+			'Tulsa Law helps Oklahoma clients move through uncontested-divorce matters with stronger documents, clearer expectations, and direct attorney guidance. Fit matters usually move next to the $100 30-minute consultation path so the paperwork, agreements, and filing posture can be reviewed before anything important is signed.',
 		searchPhrases: [
 			'Tulsa uncontested divorce lawyer',
 			'Oklahoma uncontested divorce attorney',
@@ -510,7 +510,7 @@ export const services: Service[] = [
 		intro:
 			'Injury matters turn on timing, treatment, liability, and whether someone else can actually be held responsible. A good first review should separate a real claim from a dead end before you spend months pursuing the wrong case.',
 		summary:
-			'Tulsa Law reviews Oklahoma personal injury matters involving vehicle collisions and other injury claims where liability, insurance, and damages need a serious first look. Personal injury matters are screened for fit first rather than being treated like the same offer as planning or consultation-based work.',
+			'Tulsa Law reviews Oklahoma personal injury matters involving vehicle collisions and other injury claims where liability, insurance, and damages need a serious first look. Personal injury matters are screened for fit first so liability, treatment, insurance, and damages can be judged before the matter is treated like a standard consultation.',
 		searchPhrases: [
 			'Tulsa personal injury attorney',
 			'Tulsa car accident lawyer',
@@ -572,7 +572,7 @@ export const services: Service[] = [
 		intro:
 			'Some matters do not start with a clean label. They start with a difficult situation, a deadline, a document, or a decision that needs attorney judgment before the wrong move is made. This is the right lane when the issue is real but the category is not obvious yet.',
 		summary:
-			'Tulsa Law offers legal guidance for Oklahoma clients who need a serious review, a clearer strategy, and help deciding what should happen next before they commit more time or money. Fit matters usually move next to the $100 30-minute consultation path after intake review.',
+			'Tulsa Law offers legal guidance for Oklahoma clients who need a serious review, a clearer strategy, and help deciding what should happen next before they commit more time or money. This is the lane for issues that need attorney judgment first, and fit matters usually move next to the $100 30-minute consultation path after intake review.',
 		searchPhrases: [
 			'Tulsa legal guidance attorney',
 			'Tulsa legal advice consultation',
@@ -1012,7 +1012,7 @@ export const services: Service[] = [
 		intro:
 			'Business formation should not stop at filing a name. The early structure matters because it shapes ownership, authority, and how conflict gets handled later. This page is for owners who want cleaner setup and better documents from the start.',
 		summary:
-			'Tulsa Law helps founders and business owners form Oklahoma LLCs with stronger documentation and more thoughtful upfront planning. Fit matters usually move next to the $100 30-minute consultation path after intake review.',
+			'Tulsa Law helps founders and business owners form Oklahoma LLCs with stronger documentation and more thoughtful upfront planning. Fit matters usually move next to the $100 30-minute consultation path so ownership, authority, and operating-agreement issues can be reviewed before filing becomes the only focus.',
 		searchPhrases: [
 			'Tulsa LLC formation lawyer',
 			'Oklahoma LLC attorney',
@@ -1192,7 +1192,7 @@ export const intakeExpectations: IntakeExpectation[] = [
 	{
 		title: 'Whether a consultation may be paid',
 		copy:
-			'If the matter needs document review, strategy analysis, or detailed injury screening before advice can be given, the next step may be a $100 30-minute consultation sent by email.',
+			'Planning, family, business, and legal-guidance matters that fit often move next to the $100 30-minute consultation path. Personal injury matters are screened for fit first before a deeper review is discussed.',
 	},
 	{
 		title: 'What may not be a fit',

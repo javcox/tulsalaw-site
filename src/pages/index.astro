@@ -10,15 +10,18 @@ import WhyChooseSection from '../components/WhyChooseSection.astro';
 import { featuredServices, firm, getServiceUrl, homepageFAQs, homepageLanes } from '../data/site';
 import Layout from '../layouts/Layout.astro';
 
-const trustItems = ['Tulsa office', '2–4 minute intake', 'Attorney-led review', 'Reviewed within 1 business day'];
+const trustItems = ['Tulsa office', '2-4 minute intake', 'Attorney-led review', 'Reviewed within 1 business day'];
 
 const quickLinks = [
 	{ label: 'Personal Injury Review', href: getServiceUrl('personal-injury') },
 	{ label: 'Legal Guidance', href: getServiceUrl('legal-guidance') },
 	{ label: 'Estate Planning', href: getServiceUrl('estate-planning') },
 	{ label: 'More Practice Areas', href: '/practice-areas/' },
-	{ label: 'Uncontested Divorce', href: getServiceUrl('uncontested-divorce') },
-	{ label: 'LLC Formation', href: getServiceUrl('llc-formation') },
+];
+
+const browseLinks = [
+	{ label: 'Practice Areas', href: '/practice-areas/' },
+	{ label: 'Simple Services', href: '/oklahoma-legal-forms/' },
 ];
 
 const schemas = [
@@ -78,8 +81,9 @@ const schemas = [
 					Tulsa lawyer for personal injury review, estate planning, and clear legal guidance.
 				</h1>
 				<p class="lead">
-					If you need to know whether an injury matter is worth pursuing, what documents need attention,
-					or what should happen next, start the intake. Most requests are reviewed within 1 business day.
+					If you need to know whether an injury matter is worth pursuing, what documents need
+					attention, or what should happen next, start the intake. Most requests are reviewed
+					within 1 business day, and you do not need to write a long memo up front.
 				</p>
 
 				<div class="hero-actions">
@@ -93,7 +97,10 @@ const schemas = [
 					</a>
 					<a class="button button-ghost" href="/practice-areas/">See Practice Areas</a>
 				</div>
-				<p class="mini-copy">Most people finish intake in 2 to 4 minutes. If you are not sure which lane fits, choose Legal Guidance.</p>
+				<p class="mini-copy">
+					Most people finish intake in 2 to 4 minutes. Personal injury matters are screened for
+					fit first. If you are not sure which lane fits, choose Legal Guidance.
+				</p>
 
 				<div class="trust-strip" aria-label="Trust indicators">
 					{trustItems.map((item) => <span>{item}</span>)}
@@ -111,15 +118,25 @@ const schemas = [
 
 			<div class="hero-aside">
 				<div class="panel">
-					<p class="mini-kicker">Practice Areas</p>
-					<h2 class="mini-title">Three main lanes, plus the full service map.</h2>
+					<p class="mini-kicker">Browse</p>
+					<h2 class="mini-title">Three main lanes, plus two ways to keep browsing.</h2>
 					<p class="mini-copy">
-						The homepage stays focused on personal injury review, legal guidance, and estate planning.
-						Practice Areas shows the broader family, business, planning, and injury map without making the homepage feel scattered.
+						The homepage stays focused on personal injury review, legal guidance, and estate
+						planning. Use Practice Areas for the broader family, business, planning, and injury
+						map. Use Simple Services for the shorter, document-focused route.
 					</p>
 					<div class="chips">
 						{
 							quickLinks.map((item) => (
+								<a class="chip" href={item.href}>
+									{item.label}
+								</a>
+							))
+						}
+					</div>
+					<div class="chips">
+						{
+							browseLinks.map((item) => (
 								<a class="chip" href={item.href}>
 									{item.label}
 								</a>
@@ -141,9 +158,12 @@ const schemas = [
 			<div class="section-head">
 				<div>
 					<p class="eyebrow">Start Here</p>
-					<h2 class="section-title">Choose the lane that matches the real problem.</h2>
+					<h2 class="section-title">The three main lanes most people start with, plus the rest of the map.</h2>
 					<p class="section-copy">
-						Personal injury review should not feel like the same offer as planning, business documents, or broader legal guidance. The homepage now separates those paths more clearly before someone starts intake.
+						Personal injury review should not feel like the same offer as planning, business
+						documents, or broader legal guidance. The homepage stays centered on the three routes
+						that most often start the intake, and the fourth card opens the rest of the practice
+						map.
 					</p>
 				</div>
 			</div>
@@ -181,16 +201,19 @@ const schemas = [
 					<li>Start Intake and choose the lane that best fits the matter.</li>
 					<li>The firm reviews fit, timing, conflicts, and urgency.</li>
 					<li>Personal injury matters are screened first for whether the claim appears worth pursuing.</li>
-					<li>Non-injury matters that fit usually move next to an email with scheduling instructions for a $100 30-minute consultation.</li>
+					<li>Planning, family, business, and legal-guidance matters that fit usually move next to an email with scheduling instructions for a $100 30-minute consultation.</li>
 				</ul>
 			</div>
 			<div class="band">
 				<p class="section-label">Before you submit</p>
 				<p class="lead" style="margin-top: 0;">
-					The intake is meant to save time, not create a high-pressure funnel. You do not need to write a long memo, upload documents, or guess the legal strategy before reaching out.
+					The intake is meant to save time, not create a high-pressure funnel. You do not need to
+					write a long memo, upload documents, or guess the legal strategy before reaching out.
 				</p>
 				<div class="quote" style="margin-top: 18px;">
-					This site is built for attorney review, not instant free legal advice. It is strongest for Tulsa and nearby Oklahoma matters that fit the listed practice areas and current availability.
+					This site is built for attorney review, not instant free legal advice. It is strongest for
+					Tulsa, Bixby, Broken Arrow, and nearby Oklahoma matters that fit the listed practice areas
+					and current availability.
 				</div>
 			</div>
 		</div>
@@ -201,7 +224,12 @@ const schemas = [
 			<div class="section-head">
 				<div>
 					<p class="eyebrow">Most Requested</p>
-					<h2 class="section-title">The service pages doing the most work for consult intent</h2>
+					<h2 class="section-title">Core pages people usually choose first</h2>
+					<p class="section-copy">
+						These are the highest-intent entry pages for the site. The separate catch-all card
+						keeps the rest of the practice map available without turning the homepage into a long
+						list of unrelated services.
+					</p>
 				</div>
 			</div>
 
@@ -219,35 +247,35 @@ const schemas = [
 			<div class="section-head">
 				<div>
 					<p class="eyebrow">Client Fit</p>
-					<h2 class="section-title">Who this site is built to help first</h2>
+					<h2 class="section-title">What clients usually want when they start here</h2>
 					<p class="section-copy">
-						The focus stays on high-intent matters with a real next step: families planning ahead,
-						people navigating change, owners protecting the business side, and injury matters that
-						need an honest viability review.
+						Most people reaching out are trying to answer a practical question before the matter
+						gets more expensive, more stressful, or harder to fix later.
 					</p>
 				</div>
 			</div>
 
 			<div class="grid-3">
 				<div class="value-card">
-					<h3>Families planning ahead</h3>
+					<h3>Do I have an injury matter worth pursuing?</h3>
 					<p>
-						Clients who need wills, trusts, powers of attorney, guardianship decisions, and a
-						more organized estate plan.
+						People who need an honest review of liability, treatment, insurance, and damages before
+						they spend months chasing the wrong claim.
 					</p>
 				</div>
 				<div class="value-card">
-					<h3>People navigating change</h3>
+					<h3>Which document or legal path actually fits?</h3>
 					<p>
-						Clients dealing with family-law transitions who want cleaner paperwork and clearer
-						next steps instead of confusion.
+						Clients who need attorney judgment on planning, family, business, or broader legal
+						guidance before signing, filing, or escalating anything important.
 					</p>
 				</div>
 				<div class="value-card">
-					<h3>Owners protecting the business side</h3>
+					<h3>Can this be handled cleanly before it gets messy?</h3>
 					<p>
-						Founders and business owners who want LLC setup, operating agreements, and contracts
-						done with more care than a filing service can offer.
+						Families and business owners who want wills, powers of attorney, uncontested-divorce
+						paperwork, LLC setup, or contract review handled with more care than a template or
+						filing service can offer.
 					</p>
 				</div>
 			</div>
@@ -258,7 +286,7 @@ const schemas = [
 		<div class="shell highlight-band">
 			<div class="band">
 				<p class="eyebrow">Service Area</p>
-				<h2 class="section-title">Tulsa first, with natural relevance for nearby Bixby.</h2>
+				<h2 class="section-title">Tulsa office, with natural relevance for nearby Bixby.</h2>
 				<p class="lead" style="margin-top: 0;">
 					The office is in south Tulsa near Bixby and Broken Arrow, so it makes sense to be explicit
 					about helping clients in Tulsa and nearby communities without turning the site into doorway

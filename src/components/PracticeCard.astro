@@ -19,7 +19,6 @@ const { service } = Astro.props;
 		<div class="category">{service.category}</div>
 		<h3>{service.name}</h3>
 		<p>{service.summary}</p>
-		<p class="mini-copy">Best search fit: {service.searchPhrases[0]}</p>
 
 		<ul class="checklist">
 			{service.includes.slice(0, 3).map((item) => <li>{item}</li>)}
