@@ -16,6 +16,14 @@ const { service } = Astro.props as { service: Service };
 const relatedServices = services.filter((entry) => service.related.includes(entry.slug));
 
 const categoryCopy = {
+	Guidance: {
+		overview:
+			'This is usually a fit when the issue needs attorney judgment before it can be placed in the right lane, filed, signed, or pushed further.',
+		expectation:
+			'Most legal guidance clients want a serious review of the facts, the pressure points, and the smartest next step before they commit more time or money.',
+		consultation:
+			'Legal guidance consultations are often paid because they usually require strategy review, document review, or attorney judgment before a recommendation can be made.',
+	},
 	Planning: {
 		overview:
 			'This is usually a fit when the goal is to get important documents, authority decisions, or family planning handled before a crisis makes everything harder.',

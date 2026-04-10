@@ -4,7 +4,9 @@ import PracticeCard from '../components/PracticeCard.astro';
 import { featuredServices, firm } from '../data/site';
 import Layout from '../layouts/Layout.astro';
 
-const simpleServices = featuredServices.filter((service) => service.slug !== 'personal-injury');
+const simpleServices = featuredServices.filter(
+	(service) => !['personal-injury', 'legal-guidance'].includes(service.slug),
+);
 ---
 
 <Layout

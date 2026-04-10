@@ -67,7 +67,7 @@ export const homepageFAQs = [
 	{
 		question: 'What kinds of legal matters fit this site best?',
 		answer:
-			'Tulsa Law is built around higher-intent legal matters like wills, trusts, powers of attorney, guardianship preparation, personal injury review, uncontested divorce paths, LLC formation, and contract review.',
+			'Tulsa Law is built around higher-intent legal matters like personal injury review, legal guidance consultations, estate planning, powers of attorney, uncontested divorce paths, LLC formation, and contract review.',
 	},
 	{
 		question: 'Does Tulsa Law handle clients outside Tulsa?',
@@ -470,7 +470,399 @@ export const services: Service[] = [
 					'The date range, location, parties involved, injury details, treatment status, insurance information, and anything that helps explain who was at fault.',
 			},
 		],
-		related: [],
+		related: [
+			'tulsa-car-accident-lawyer',
+			'tulsa-truck-accident-lawyer',
+			'tulsa-wrongful-death-lawyer',
+			'tulsa-slip-and-fall-lawyer',
+			'tulsa-motorcycle-accident-lawyer',
+			'tulsa-pedestrian-accident-lawyer',
+		],
+	},
+	{
+		slug: 'legal-guidance',
+		name: 'Legal Guidance',
+		navLabel: 'Legal Guidance',
+		category: 'Guidance',
+		metaTitle: 'Tulsa Legal Guidance Attorney | Matter Review and Next-Step Advice',
+		metaDescription:
+			'Get Tulsa legal guidance when you need an attorney to review the situation, sort the facts, and help decide the smartest next step in Oklahoma.',
+		eyebrow: 'Legal Guidance',
+		heroTitle:
+			'Tulsa legal guidance for people who need an attorney to sort the issue and point to the right next step',
+		intro:
+			'Some matters do not start with a clean label. They start with a difficult situation, a deadline, a document, or a decision that needs attorney judgment before the wrong move is made.',
+		summary:
+			'Tulsa Law offers legal guidance for Oklahoma clients who need a serious review, a clearer strategy, and help deciding what should happen next before they commit more time or money.',
+		searchPhrases: [
+			'Tulsa legal guidance attorney',
+			'Tulsa legal advice consultation',
+			'Oklahoma attorney consultation',
+		],
+		idealFor: [
+			'People who know there is a legal issue but are not yet sure which lane it belongs in',
+			'Clients who need a lawyer to review documents, timing, risks, and next-step options',
+			'Business or family clients trying to avoid a bad decision before signing, filing, or escalating the matter',
+		],
+		includes: [
+			'Attorney review of the issue, timeline, and likely pressure points',
+			'Practical next-step guidance before filing, signing, or escalating',
+			'Direction on whether the matter fits injury, family, planning, or business work',
+			'Consultation-based strategy when the issue needs legal judgment before action',
+		],
+		process: [
+			'We start with the facts, the urgency, and the decision you are trying to make.',
+			'The matter is reviewed for fit, risk, and whether a cleaner lane or document path is available.',
+			'You leave with a clearer next step instead of guessing whether the issue is worth pursuing.',
+		],
+		faqs: [
+			{
+				question: 'When is legal guidance a better fit than a specific service page?',
+				answer:
+					'It is usually the better fit when the issue does not land cleanly in one category yet, or when you need an attorney to review the situation before deciding which path makes the most sense.',
+			},
+			{
+				question: 'Can this help if I am not ready to hire for full representation?',
+				answer:
+					'Yes. Many clients start here because they need a serious review and a smarter next step before deciding how much legal work is actually needed.',
+			},
+			{
+				question: 'What should I bring to a legal guidance consultation?',
+				answer:
+					'Bring the key documents, the timeline, the names involved, any deadline, and a short explanation of the decision or problem you are trying to solve.',
+			},
+		],
+		related: ['personal-injury', 'family-law', 'business-law'],
+	},
+	{
+		slug: 'tulsa-car-accident-lawyer',
+		name: 'Car Accidents',
+		navLabel: 'Car Accidents',
+		category: 'Injury',
+		metaTitle: 'Tulsa Car Accident Lawyer | Injury Claim Review After a Crash',
+		metaDescription:
+			'Speak with a Tulsa car accident lawyer about fault, treatment, insurance, and whether your Oklahoma collision claim is worth pursuing.',
+		eyebrow: 'Car Accidents',
+		heroTitle:
+			'Tulsa car accident lawyer for crash claims where fault, treatment, and insurance need a serious review',
+		intro:
+			'After a car accident, the first question is not just whether you were hurt. It is whether liability, treatment, insurance, and damages line up strongly enough to justify moving forward.',
+		summary:
+			'Tulsa Law reviews Oklahoma car accident matters involving fault disputes, treatment history, insurance issues, and injury-related damages after a crash.',
+		searchPhrases: [
+			'Tulsa car accident lawyer',
+			'Tulsa auto accident attorney',
+			'Oklahoma car wreck lawyer',
+		],
+		idealFor: [
+			'Drivers or passengers hurt in a collision where another driver may be at fault',
+			'People who have begun treatment or have damage documentation ready for review',
+			'Clients who want to know whether the claim looks strong enough to pursue before wasting time',
+		],
+		includes: [
+			'Fault and liability review after a collision',
+			'Insurance and claim-position screening',
+			'Treatment and damages evaluation',
+			'Guidance on what information matters most before moving forward',
+		],
+		process: [
+			'We review the crash facts, the timing, the parties, and the location first.',
+			'The matter is screened for fault, treatment, insurance coverage, and damages support.',
+			'You get a clearer answer on whether the claim appears worth pursuing and what should happen next.',
+		],
+		faqs: [
+			{
+				question: 'What makes a car accident claim stronger?',
+				answer:
+					'Clear liability, documented treatment, meaningful damages, and insurance or another realistic source of recovery usually make the biggest difference.',
+			},
+			{
+				question: 'Should I reach out before treatment is complete?',
+				answer:
+					'Yes. Early review can help you understand whether the claim appears viable and what facts or records are likely to matter most.',
+			},
+			{
+				question: 'What should I gather before contacting the firm?',
+				answer:
+					'The date or date range, location, crash details, insurance information, treatment status, photos, and anything that helps show who caused the wreck.',
+			},
+		],
+		related: ['personal-injury', 'tulsa-truck-accident-lawyer', 'tulsa-motorcycle-accident-lawyer'],
+	},
+	{
+		slug: 'tulsa-truck-accident-lawyer',
+		name: 'Truck Accidents',
+		navLabel: 'Truck Accidents',
+		category: 'Injury',
+		metaTitle: 'Tulsa Truck Accident Lawyer | Commercial Vehicle Injury Claims',
+		metaDescription:
+			'Talk with a Tulsa truck accident lawyer about commercial vehicle crashes, serious injuries, insurance, and liability review in Oklahoma.',
+		eyebrow: 'Truck Accidents',
+		heroTitle:
+			'Tulsa truck accident lawyer for commercial vehicle wrecks that need careful liability and damages review',
+		intro:
+			'Truck accidents can involve larger injuries, multiple layers of insurance, and more than one potentially responsible party. Early review matters.',
+		summary:
+			'Tulsa Law reviews Oklahoma truck accident claims involving commercial drivers, serious collision damage, insurance questions, and whether the matter appears worth pursuing.',
+		searchPhrases: [
+			'Tulsa truck accident lawyer',
+			'Tulsa commercial vehicle accident attorney',
+			'Oklahoma trucking accident lawyer',
+		],
+		idealFor: [
+			'People hurt in collisions involving semis, delivery vehicles, or other commercial trucks',
+			'Clients with treatment, crash reports, or insurance information that can be reviewed early',
+			'People who need to know whether liability and damages support a stronger truck accident claim',
+		],
+		includes: [
+			'Commercial vehicle liability review',
+			'Insurance and coverage screening',
+			'Treatment and damages evaluation',
+			'First-pass review of whether the truck accident claim appears strong enough to pursue',
+		],
+		process: [
+			'We review the crash, the parties involved, and whether a commercial driver or company may be responsible.',
+			'The matter is screened for fault, treatment, damages, and available insurance support.',
+			'You get a clearer sense of whether the claim appears worth further action.',
+		],
+		faqs: [
+			{
+				question: 'Why are truck accident claims often treated differently than ordinary car crashes?',
+				answer:
+					'Truck matters can involve commercial insurance, company responsibility, and larger injury or damages issues, so the early screening usually needs to be more careful.',
+			},
+			{
+				question: 'What helps with a first review of a truck accident claim?',
+				answer:
+					'The crash details, location, photos, treatment records, any report information, and whatever you know about the truck, company, or insurer.',
+			},
+			{
+				question: 'Can Tulsa Law tell me if the matter looks worth pursuing?',
+				answer:
+					'That is the point of the first review. The goal is to determine whether liability, damages, and coverage appear strong enough to justify moving forward.',
+			},
+		],
+		related: ['personal-injury', 'tulsa-car-accident-lawyer', 'tulsa-wrongful-death-lawyer'],
+	},
+	{
+		slug: 'tulsa-motorcycle-accident-lawyer',
+		name: 'Motorcycle Accidents',
+		navLabel: 'Motorcycle Accidents',
+		category: 'Injury',
+		metaTitle: 'Tulsa Motorcycle Accident Lawyer | Injury Claim Review',
+		metaDescription:
+			'Get Tulsa motorcycle accident lawyer review for liability, treatment, insurance, and whether an Oklahoma injury claim appears worth pursuing.',
+		eyebrow: 'Motorcycle Accidents',
+		heroTitle:
+			'Tulsa motorcycle accident lawyer for injury claims where fault and damages need a serious first review',
+		intro:
+			'Motorcycle wrecks often involve significant injury, contested fault, and insurers looking hard at how the crash happened. A serious review can help separate a real claim from a weak one.',
+		summary:
+			'Tulsa Law reviews Oklahoma motorcycle accident matters involving fault disputes, treatment history, and whether the damages support a stronger injury claim.',
+		searchPhrases: [
+			'Tulsa motorcycle accident lawyer',
+			'Tulsa motorcycle injury attorney',
+			'Oklahoma motorcycle wreck lawyer',
+		],
+		idealFor: [
+			'Riders hurt in a crash where another driver may have caused or contributed to the collision',
+			'People with treatment records, photos, or insurance details ready for early review',
+			'Clients who want a realistic assessment of whether the claim appears strong enough to pursue',
+		],
+		includes: [
+			'Motorcycle crash liability review',
+			'Treatment and injury screening',
+			'Insurance and damages evaluation',
+			'Guidance on whether the claim appears worth pursuing',
+		],
+		process: [
+			'We review the crash facts, the vehicles involved, and where fault appears to fall.',
+			'The matter is screened for treatment, damages, insurance, and whether the evidence supports a stronger claim.',
+			'You get a clearer answer on whether the matter is worth more time and attention.',
+		],
+		faqs: [
+			{
+				question: 'Do motorcycle claims often involve fault disputes?',
+				answer:
+					'Yes. That is one reason early review matters. Liability, treatment, and the available evidence all need to be looked at together.',
+			},
+			{
+				question: 'What should I gather for a first review?',
+				answer:
+					'Bring the crash date or date range, location, photos, treatment status, insurance information, and anything that helps show how the collision happened.',
+			},
+			{
+				question: 'Can a motorcycle claim still be worth pursuing if the insurer pushes back early?',
+				answer:
+					'Possibly. The real question is whether the facts, treatment, and damages line up strongly enough once the matter is reviewed carefully.',
+			},
+		],
+		related: ['personal-injury', 'tulsa-car-accident-lawyer', 'tulsa-pedestrian-accident-lawyer'],
+	},
+	{
+		slug: 'tulsa-pedestrian-accident-lawyer',
+		name: 'Pedestrian Accidents',
+		navLabel: 'Pedestrian Accidents',
+		category: 'Injury',
+		metaTitle: 'Tulsa Pedestrian Accident Lawyer | Injury Claim Review',
+		metaDescription:
+			'Talk with a Tulsa pedestrian accident lawyer about fault, treatment, insurance, and whether an Oklahoma injury claim appears worth pursuing.',
+		eyebrow: 'Pedestrian Accidents',
+		heroTitle:
+			'Tulsa pedestrian accident lawyer for injury matters where fault and damages need careful review',
+		intro:
+			'Pedestrian injury claims can be serious very quickly. The key early questions are fault, treatment, insurance, and whether the damages support a meaningful claim.',
+		summary:
+			'Tulsa Law reviews Oklahoma pedestrian accident matters involving driver fault, treatment, damages, and whether the injury claim appears strong enough to move forward.',
+		searchPhrases: [
+			'Tulsa pedestrian accident lawyer',
+			'Tulsa pedestrian injury attorney',
+			'Oklahoma pedestrian accident lawyer',
+		],
+		idealFor: [
+			'People hit while walking or crossing where a driver, business, or other party may be responsible',
+			'Clients with treatment, photo, or incident information ready for review',
+			'People who need to know whether the injury claim appears worth more time and attention',
+		],
+		includes: [
+			'Pedestrian accident liability review',
+			'Treatment and damages screening',
+			'Insurance and recovery-position review',
+			'Guidance on whether the matter appears strong enough to pursue',
+		],
+		process: [
+			'We review how the incident happened, who may be responsible, and what evidence exists.',
+			'The matter is screened for fault, treatment, damages, and available insurance support.',
+			'You get a clearer read on whether the claim appears worth moving forward.',
+		],
+		faqs: [
+			{
+				question: 'What makes a pedestrian injury claim stronger?',
+				answer:
+					'Clear fault, documented treatment, meaningful damages, and usable insurance or another source of recovery usually matter most.',
+			},
+			{
+				question: 'What should I gather before contacting the firm?',
+				answer:
+					'Gather the incident date, location, photos, any report information, treatment status, and anything that helps explain how the pedestrian accident happened.',
+			},
+			{
+				question: 'Can Tulsa Law review whether the claim appears worth pursuing?',
+				answer:
+					'Yes. The first review is meant to help determine whether liability and damages appear strong enough to justify further action.',
+			},
+		],
+		related: ['personal-injury', 'tulsa-car-accident-lawyer', 'tulsa-slip-and-fall-lawyer'],
+	},
+	{
+		slug: 'tulsa-wrongful-death-lawyer',
+		name: 'Wrongful Death',
+		navLabel: 'Wrongful Death',
+		category: 'Injury',
+		metaTitle: 'Tulsa Wrongful Death Lawyer | Fatal Injury Claim Review',
+		metaDescription:
+			'Speak with a Tulsa wrongful death lawyer about fatal injury claims, liability, insurance, and whether an Oklahoma matter appears worth pursuing.',
+		eyebrow: 'Wrongful Death',
+		heroTitle:
+			'Tulsa wrongful death lawyer for fatal injury matters that need serious review of liability, damages, and next steps',
+		intro:
+			'Wrongful death matters are high-stakes and emotionally heavy. The first questions are usually whether another party can be held responsible and whether the claim appears strong enough to move forward.',
+		summary:
+			'Tulsa Law reviews Oklahoma wrongful death matters involving fatal injuries, liability questions, insurance, and whether the claim appears worth pursuing.',
+		searchPhrases: [
+			'Tulsa wrongful death lawyer',
+			'Tulsa wrongful death attorney',
+			'Oklahoma wrongful death lawyer',
+		],
+		idealFor: [
+			'Families who need an early legal review after a fatal injury where another party may be responsible',
+			'People with incident, treatment, insurance, or investigation information ready for review',
+			'Clients who want to understand whether the claim appears strong enough to justify moving forward',
+		],
+		includes: [
+			'Wrongful death liability review',
+			'Insurance and claim-position screening',
+			'High-damages matter assessment',
+			'Guidance on whether the matter appears worth pursuing',
+		],
+		process: [
+			'We review the incident, the parties involved, and the available information about fault.',
+			'The matter is screened for liability, damages, insurance, and whether there appears to be a realistic path forward.',
+			'You get a clearer answer on whether the claim appears strong enough to pursue.',
+		],
+		faqs: [
+			{
+				question: 'What matters most in an early wrongful death review?',
+				answer:
+					'Liability, available evidence, insurance or another source of recovery, and whether the facts support a realistic path forward are usually the key issues.',
+			},
+			{
+				question: 'Can the firm help determine whether the matter appears strong enough to pursue?',
+				answer:
+					'Yes. The point of the first review is to determine whether the facts and damages support a stronger claim.',
+			},
+			{
+				question: 'What should I gather before reaching out?',
+				answer:
+					'Gather the basic timeline, incident details, available reports, insurance information, and anything that helps explain what happened and who may be responsible.',
+			},
+		],
+		related: ['personal-injury', 'tulsa-truck-accident-lawyer', 'tulsa-car-accident-lawyer'],
+	},
+	{
+		slug: 'tulsa-slip-and-fall-lawyer',
+		name: 'Slip and Fall',
+		navLabel: 'Slip and Fall',
+		category: 'Injury',
+		metaTitle: 'Tulsa Slip and Fall Lawyer | Premises Injury Claim Review',
+		metaDescription:
+			'Get Tulsa slip and fall lawyer review for premises liability, treatment, damages, and whether an Oklahoma injury claim appears worth pursuing.',
+		eyebrow: 'Slip and Fall',
+		heroTitle:
+			'Tulsa slip and fall lawyer for premises injury matters where fault and damages need a serious review',
+		intro:
+			'Slip and fall claims often turn on proof. The first review should focus on what happened, what made the condition dangerous, and whether the damages support a meaningful claim.',
+		summary:
+			'Tulsa Law reviews Oklahoma slip and fall and premises injury matters involving hazardous conditions, treatment, damages, and whether the claim appears worth pursuing.',
+		searchPhrases: [
+			'Tulsa slip and fall lawyer',
+			'Tulsa premises liability attorney',
+			'Oklahoma slip and fall lawyer',
+		],
+		idealFor: [
+			'People hurt on another property where unsafe conditions may have caused the injury',
+			'Clients with treatment records, photos, or incident details ready for review',
+			'People who want to know whether the liability and damages support a stronger premises claim',
+		],
+		includes: [
+			'Premises liability and condition review',
+			'Treatment and damages screening',
+			'Insurance and recovery-position review',
+			'Guidance on whether the claim appears worth pursuing',
+		],
+		process: [
+			'We review the location, condition, timing, and what evidence exists about how the fall happened.',
+			'The matter is screened for liability, damages, treatment, and whether the claim appears strong enough to move forward.',
+			'You get a clearer answer on whether the matter appears worth further action.',
+		],
+		faqs: [
+			{
+				question: 'What helps make a slip and fall claim stronger?',
+				answer:
+					'Photos, incident details, documented treatment, and facts that help explain why the condition was dangerous and who may be responsible usually matter most.',
+			},
+			{
+				question: 'Should I reach out even if I am not sure the condition was enough to support a claim?',
+				answer:
+					'Yes. Early review can help determine whether the liability and damages appear strong enough to justify moving forward.',
+			},
+			{
+				question: 'What should I bring to a first review?',
+				answer:
+					'Bring the date or date range, location, photos if available, treatment status, and anything that helps explain what caused the fall and how you were hurt.',
+			},
+		],
+		related: ['personal-injury', 'tulsa-pedestrian-accident-lawyer', 'tulsa-car-accident-lawyer'],
 	},
 	{
 		slug: 'business-law',
@@ -642,6 +1034,7 @@ export const services: Service[] = [
 const featuredServiceOrder = [
 	'personal-injury',
 	'estate-planning',
+	'legal-guidance',
 	'power-of-attorney',
 	'uncontested-divorce',
 	'llc-formation',

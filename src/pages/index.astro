@@ -6,8 +6,19 @@ import IntakePathPanel from '../components/IntakePathPanel.astro';
 import PracticeCard from '../components/PracticeCard.astro';
 import TestimonialsSection from '../components/TestimonialsSection.astro';
 import WhyChooseSection from '../components/WhyChooseSection.astro';
-import { featuredServices, firm, homepageFAQs } from '../data/site';
+import { featuredServices, firm, getServiceUrl, homepageFAQs } from '../data/site';
 import Layout from '../layouts/Layout.astro';
+
+const mapLinks = [
+	{ label: 'Personal Injury', href: getServiceUrl('personal-injury') },
+	{ label: 'Estate Planning', href: getServiceUrl('estate-planning') },
+	{ label: 'Legal Guidance', href: getServiceUrl('legal-guidance') },
+	{ label: 'Power of Attorney', href: getServiceUrl('power-of-attorney') },
+	{ label: 'Uncontested Divorce', href: getServiceUrl('uncontested-divorce') },
+	{ label: 'LLC Formation', href: getServiceUrl('llc-formation') },
+	{ label: 'Contracts', href: getServiceUrl('contract-drafting-review') },
+	{ label: 'More Practice Areas', href: '/practice-areas/' },
+];
 
 const schemas = [
 	{
@@ -19,9 +30,12 @@ const schemas = [
 		email: firm.email,
 		description: firm.tagline,
 		serviceType: [
+			'Legal guidance',
 			'Estate planning',
 			'Power of attorney',
 			'Personal injury',
+			'Car accidents',
+			'Truck accidents',
 			'Guardianship planning',
 			'Uncontested divorce',
 			'LLC formation',
@@ -95,14 +109,13 @@ const schemas = [
 						Simple Services is the faster path for document-driven matters.
 					</p>
 					<div class="chips">
-						<span class="chip">Personal Injury</span>
-						<span class="chip">Estate Planning</span>
-						<span class="chip">Family Law</span>
-						<span class="chip">Power of Attorney</span>
-						<span class="chip">Uncontested Divorce</span>
-						<span class="chip">Business Law</span>
-						<span class="chip">LLC Formation</span>
-						<span class="chip">Contracts</span>
+						{
+							mapLinks.map((item) => (
+								<a class="chip" href={item.href}>
+									{item.label}
+								</a>
+							))
+						}
 					</div>
 					<p class="mini-copy office-copy">
 						Tulsa office: {firm.fullAddress}

@@ -444,6 +444,8 @@ main {
 }
 
 .chip {
+	display: inline-flex;
+	align-items: center;
 	padding: 8px 12px;
 	border-radius: 999px;
 	background: rgba(24, 51, 71, 0.055);

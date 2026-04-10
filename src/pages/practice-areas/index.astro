@@ -1,13 +1,19 @@
 ---
 import CtaPanel from '../../components/CtaPanel.astro';
 import PracticeCard from '../../components/PracticeCard.astro';
-import { services } from '../../data/site';
+import { featuredServices, services } from '../../data/site';
 import Layout from '../../layouts/Layout.astro';
+
+const primarySlugs = new Set(featuredServices.map((service) => service.slug));
+const orderedServices = [
+	...featuredServices,
+	...services.filter((service) => !primarySlugs.has(service.slug)),
+];
 ---
 
 <Layout
 	title="Practice Areas | Tulsa Law"
-	description="Explore Tulsa Law practice areas, including estate planning, personal injury, wills and trusts, powers of attorney, guardianship planning, family-law matters, LLC formation, and contracts."
+	description="Explore Tulsa Law practice areas, including personal injury, legal guidance, estate planning, powers of attorney, family-law matters, LLC formation, and contracts."
 	path="/practice-areas/"
 >
 	<section class="page-hero">
@@ -31,7 +37,7 @@ import Layout from '../../layouts/Layout.astro';
 
 	<section class="section-xl">
 		<div class="shell service-grid">
-			{services.map((service) => <PracticeCard service={service} />)}
+			{orderedServices.map((service) => <PracticeCard service={service} />)}
 		</div>
 	</section>
 
