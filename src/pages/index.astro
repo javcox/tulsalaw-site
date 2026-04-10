@@ -4,6 +4,7 @@ import CtaPanel from '../components/CtaPanel.astro';
 import IntakeExpectationsSection from '../components/IntakeExpectationsSection.astro';
 import IntakePathPanel from '../components/IntakePathPanel.astro';
 import PracticeCard from '../components/PracticeCard.astro';
+import PracticeAreasCard from '../components/PracticeAreasCard.astro';
 import TestimonialsSection from '../components/TestimonialsSection.astro';
 import WhyChooseSection from '../components/WhyChooseSection.astro';
 import { featuredServices, firm, getServiceUrl, homepageFAQs } from '../data/site';
@@ -138,6 +139,7 @@ const schemas = [
 
 			<div class="service-grid">
 				{featuredServices.map((service) => <PracticeCard service={service} />)}
+				<PracticeAreasCard />
 			</div>
 		</div>
 	</section>
