@@ -120,7 +120,7 @@ const schemas = [
 				<div class="hero-actions">
 					<a
 						class="button button-primary"
-						href="/contact/"
+						href={`/start-intake/?service=${service.slug}`}
 						data-track="generate_lead"
 						data-track-label={`${service.slug}-contact`}
 					>
@@ -230,6 +230,6 @@ const schemas = [
 
 	<CtaPanel
 		title={`Ready to talk about ${service.name.toLowerCase()}?`}
-		copy="Send an email or use the consultation page to have the matter reviewed."
+		copy="Use the guided intake to send the matter for fit review, or email the firm if you need to add a quick note first."
 	/>
 </Layout>

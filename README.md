@@ -37,6 +37,7 @@ You only need GitHub Actions variables or local `.env` values if you want to ove
 - `PUBLIC_CLARITY_ID`
 - `PUBLIC_POSTHOG_KEY`
 - `PUBLIC_POSTHOG_HOST`
+- `PUBLIC_INTAKE_API_URL`
 
 Recommended linked domains for GA4 on this project:
 
@@ -73,9 +74,25 @@ If you want `tulsalaw.llc` as the main domain on GitHub Pages:
 
 The site currently routes conversion to:
 
-- phone: `(918) 488-9117`
 - email: `tcinocca@cinoccalaw.com`
-- secure form: `https://cinoccalaw.com/contact/`
+- guided intake: `https://tulsalaw.llc/start-intake/`
+
+## Intake endpoint env vars
+
+The guided intake page expects a POST endpoint that can score the submission and send the summary email. The repo now includes:
+
+- frontend page: `src/pages/start-intake.astro`
+- shared scoring logic: `src/lib/intake.ts`
+- Vercel-style serverless endpoint: `api/intake.ts`
+
+Configure these values in the environment that serves the intake endpoint:
+
+- `PUBLIC_INTAKE_API_URL`
+- `RESEND_API_KEY`
+- `INTAKE_FROM_EMAIL`
+- `INTAKE_TO_EMAIL`
+
+Defaults are documented in `.env.example`. If the site is still served from GitHub Pages, the frontend can stay on GitHub Pages, but the intake endpoint must be deployed somewhere that supports serverless functions and email delivery.
 
 ## Current page set
 
@@ -83,6 +100,7 @@ The site currently routes conversion to:
 - About Tracy
 - Contact
 - FAQ
+- Start Intake
 - Practice Areas index
 - Oklahoma legal forms landing page
 - Estate planning

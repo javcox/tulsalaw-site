@@ -13,17 +13,17 @@ const faqItems = [
 	{
 		question: 'What if I am not sure which practice area fits my issue?',
 		answer:
-			'That is common. Start with the page that feels closest to the matter or use the contact page and explain the issue in plain language.',
+			'That is common. Start with the page that feels closest to the matter or use the guided intake and choose the lane that feels nearest to the issue.',
 	},
 	{
 		question: 'Can I use Tulsa Law even if I found the main firm site first?',
 		answer:
-			'Yes. This site is a focused intake and search site. The main firm site remains available, especially for secure form intake.',
+			'Yes. This site is a focused intake and search site. The guided intake here is the cleanest path for getting the matter reviewed for fit and next steps.',
 	},
 	{
 		question: 'What is the fastest way to hear back?',
 		answer:
-			'Sending a clear email with the matter type, timing, and background information is usually the fastest way to move the intake forward.',
+			'The guided intake is the fastest path because it collects the service lane, timing, and fit details the firm needs first. Email is still available if you need to explain something before starting.',
 	},
 ];
 ---
@@ -45,12 +45,12 @@ const faqItems = [
 				<h1 class="page-title">Questions people ask before they decide to reach out.</h1>
 				<p class="lead">
 					This page is here to reduce friction. If you still have a question after reading, the
-					next best move is an email or a secure consultation request.
+					next best move is the guided intake or a direct email.
 				</p>
 				<div class="pill-row">
 					<span class="pill">Tulsa-based</span>
 					<span class="pill">Oklahoma matters</span>
-					<span class="pill">Email + secure intake</span>
+					<span class="pill">Email + guided intake</span>
 				</div>
 			</div>
 		</div>
@@ -73,6 +73,6 @@ const faqItems = [
 
 	<CtaPanel
 		title="Still deciding whether the matter is a fit?"
-		copy={`Use the contact page, email ${firm.email}, and describe the issue in plain language.`}
+		copy={`Use the guided intake or email ${firm.email} and describe the issue in plain language.`}
 	/>
 </Layout>

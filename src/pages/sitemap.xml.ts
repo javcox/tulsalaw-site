@@ -16,6 +16,7 @@ const staticPaths = [
 	'/oklahoma-legal-forms/',
 	'/power-of-attorney/',
 	'/practice-areas/',
+	'/start-intake/',
 	'/uncontested-divorce/',
 	'/wills-and-trusts/',
 ];

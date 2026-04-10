@@ -32,7 +32,8 @@ export const firm = {
 	legalName: 'Tracy A. Cinocca, P.C.',
 	url: 'https://tulsalaw.llc',
 	legacyUrl: 'https://cinoccalaw.com',
-	consultationUrl: 'https://cinoccalaw.com/contact/',
+	consultationUrl: '/start-intake/',
+	intakeRecipientEmail: 'cinocca@tulsalaw.llc',
 	email: 'tcinocca@cinoccalaw.com',
 	emailHref: 'mailto:tcinocca@cinoccalaw.com?subject=Consultation%20Request%20from%20TulsaLaw.llc',
 	streetAddress: '10026-A S. Mingo Rd., Suite 238',
@@ -77,7 +78,7 @@ export const homepageFAQs = [
 	{
 		question: 'How do consultation requests work?',
 		answer:
-			'The fastest paths are email or the secure consultation request form on the main firm contact page. Most requests are reviewed within 1 business day when submitted on a business day, and matters that require detailed document or strategy review may begin with a paid consultation.',
+			'The fastest path is the guided intake form on this site. Most requests are reviewed within 1 business day when submitted on a business day, and fit matters usually move next to an email with scheduling instructions and the $100 30-minute consultation payment link.',
 	},
 	{
 		question: 'What is the difference between Practice Areas and Simple Services?',
@@ -1096,12 +1097,12 @@ export const intakeExpectations: IntakeExpectation[] = [
 	{
 		title: 'How fast the reply usually works',
 		copy:
-			'Most requests are reviewed within 1 business day when submitted on a business day. If the matter appears to fit, the next step is usually an email reply with scheduling options or a request for a little more information.',
+			'Most requests are reviewed within 1 business day when submitted on a business day. If the matter appears to fit, the next step is usually an email with scheduling instructions or a request for one more piece of information.',
 	},
 	{
 		title: 'Whether a consultation may be paid',
 		copy:
-			'If the matter needs document review, strategy analysis, or detailed injury screening before advice can be given, the first consultation may be paid.',
+			'If the matter needs document review, strategy analysis, or detailed injury screening before advice can be given, the next step may be a $100 30-minute consultation sent by email.',
 	},
 	{
 		title: 'What may not be a fit',

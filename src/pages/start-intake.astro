@@ -1,0 +1,1053 @@
+---
+import IntakePathPanel from '../components/IntakePathPanel.astro';
+import { firm } from '../data/site';
+import { intakeServices } from '../lib/intake';
+import Layout from '../layouts/Layout.astro';
+
+const preselectedServiceParam = Astro.url.searchParams.get('service');
+const preselectedService = intakeServices.some((service) => service.value === preselectedServiceParam)
+	? preselectedServiceParam
+	: 'personal-injury';
+const formEndpoint = import.meta.env.PUBLIC_INTAKE_API_URL ?? '/api/intake';
+
+const schemas = [
+	{
+		'@context': 'https://schema.org',
+		'@type': 'ContactPage',
+		name: 'Tulsa Law Intake Request',
+		url: `${firm.url}/start-intake/`,
+	},
+];
+---
+
+<Layout
+	title="Start Intake | Tulsa Law"
+	description="Use Tulsa Law's guided intake form to request a consultation for personal injury, legal guidance, estate planning, family-law, and business-document matters in Oklahoma."
+	path="/start-intake/"
+	schemas={schemas}
+>
+	<section class="page-hero">
+		<div class="shell page-frame">
+			<div class="hero-card">
+				<div class="breadcrumbs">
+					<a href="/">Home</a>
+					<span>/</span>
+					<span>Start Intake</span>
+				</div>
+				<p class="eyebrow">Guided Intake</p>
+				<h1 class="page-title">Start a consultation request the firm can actually review fast.</h1>
+				<p class="lead">
+					This intake is built to screen fit, timing, conflicts, and service lane before the next
+					step is offered. Use it for personal injury, legal guidance, estate planning, family-law,
+					and business-document matters tied to Oklahoma.
+				</p>
+			</div>
+
+			<div class="hero-aside">
+				<div class="panel">
+					<p class="mini-kicker">What happens after you submit</p>
+					<h2 class="mini-title">Reviewed first. Scheduled second.</h2>
+					<ul class="checklist">
+						<li>Most requests are reviewed within 1 business day.</li>
+						<li>Fit matters usually move next to an email with scheduling instructions.</li>
+						<li>The current consultation path is a $100 30-minute review when the matter fits.</li>
+					</ul>
+				</div>
+				<IntakePathPanel />
+			</div>
+		</div>
+	</section>
+
+	<section class="section-xl">
+		<div class="shell">
+			<form
+				class="intake-form"
+				id="intake-form"
+				data-intake-form
+				data-endpoint={formEndpoint}
+				data-default-service={preselectedService}
+				novalidate
+			>
+				<input type="hidden" name="startedAtMs" value="" data-started-at />
+				<div class="intake-honeypot" aria-hidden="true">
+					<label>
+						Website
+						<input type="text" name="website" tabindex="-1" autocomplete="off" />
+					</label>
+				</div>
+
+				<section class="intake-step-card">
+					<div class="section-head intake-head">
+						<div>
+							<p class="eyebrow">Step 1</p>
+							<h2 class="section-title">Before you begin</h2>
+						</div>
+					</div>
+					<div class="intake-disclaimer">
+						<ul class="info-list">
+							<li>This form is for consultation requests only.</li>
+							<li>Do not send confidential details or documents unless requested.</li>
+							<li>Submitting this form does not create an attorney-client relationship.</li>
+							<li>The firm may decline matters that are outside scope, timing, or fit.</li>
+						</ul>
+						<label class="check-row">
+							<input type="checkbox" name="disclaimerAccepted" value="yes" required />
+							<span>I understand and want to continue with the intake request.</span>
+						</label>
+					</div>
+				</section>
+
+				<section class="intake-step-card">
+					<div class="section-head intake-head">
+						<div>
+							<p class="eyebrow">Step 2</p>
+							<h2 class="section-title">Choose the service lane first</h2>
+						</div>
+					</div>
+					<div class="service-selector-grid">
+						{
+							intakeServices.map((service) => (
+								<label class="service-selector-card">
+									<input
+										type="radio"
+										name="service"
+										value={service.value}
+										required
+										checked={preselectedService === service.value}
+									/>
+									<span>
+										<strong>{service.label}</strong>
+									</span>
+								</label>
+							))
+						}
+					</div>
+				</section>
+
+				<section class="intake-step-card">
+					<div class="section-head intake-head">
+						<div>
+							<p class="eyebrow">Step 3</p>
+							<h2 class="section-title">Who should the firm reply to</h2>
+						</div>
+					</div>
+					<div class="field-grid">
+						<label>
+							<span>Full name</span>
+							<input type="text" name="fullName" maxlength="120" required />
+						</label>
+						<label>
+							<span>Phone number</span>
+							<input
+								type="tel"
+								name="phone"
+								inputmode="tel"
+								pattern="^[0-9+()\\-\\.\\s]{10,}$"
+								title="Enter a valid phone number."
+								required
+							/>
+						</label>
+						<label>
+							<span>Email</span>
+							<input type="email" name="email" maxlength="140" required />
+						</label>
+						<label>
+							<span>Best times to reply</span>
+							<input type="text" name="bestTimes" maxlength="160" placeholder="Morning, afternoon, or specific windows" />
+						</label>
+					</div>
+				</section>
+
+				<section class="intake-step-card">
+					<div class="section-head intake-head">
+						<div>
+							<p class="eyebrow">Step 4</p>
+							<h2 class="section-title">Universal screening questions</h2>
+						</div>
+					</div>
+					<div class="field-grid field-grid-wide">
+						<div class="question-card">
+							<span>Are you in Oklahoma?</span>
+							<div class="toggle-row">
+								<label><input type="radio" name="inOklahoma" value="yes" required /> <span>Yes</span></label>
+								<label><input type="radio" name="inOklahoma" value="no" /> <span>No</span></label>
+							</div>
+						</div>
+						<label>
+							<span>What state is this tied to?</span>
+							<input type="text" name="state" maxlength="80" value="Oklahoma" required />
+						</label>
+						<label>
+							<span>What county is this tied to?</span>
+							<input type="text" name="county" maxlength="80" required />
+						</label>
+						<label>
+							<span>Is this for you, your company, or someone else?</span>
+							<select name="matterFor" required>
+								<option value="">Select one</option>
+								<option value="myself">Myself</option>
+								<option value="my-company">My company</option>
+								<option value="someone-else">Someone else</option>
+							</select>
+						</label>
+						<div class="question-card">
+							<span>Are you the person authorized to make decisions on this matter?</span>
+							<div class="toggle-row">
+								<label><input type="radio" name="decisionMaker" value="yes" required /> <span>Yes</span></label>
+								<label><input type="radio" name="decisionMaker" value="no" /> <span>No</span></label>
+							</div>
+						</div>
+						<div class="question-card">
+							<span>Has any lawyer already been hired on this matter?</span>
+							<div class="toggle-row">
+								<label><input type="radio" name="hasLawyerAlready" value="no" required /> <span>No</span></label>
+								<label><input type="radio" name="hasLawyerAlready" value="yes" /> <span>Yes</span></label>
+							</div>
+						</div>
+						<div class="question-card">
+							<span>Is there a court date, deadline, or filing pressure in the next 14 days?</span>
+							<div class="toggle-row">
+								<label><input type="radio" name="deadlineSoon" value="no" required /> <span>No</span></label>
+								<label><input type="radio" name="deadlineSoon" value="yes" /> <span>Yes</span></label>
+							</div>
+						</div>
+						<label class="full-span">
+							<span>What outcome are you trying to get?</span>
+							<textarea
+								name="outcomeWanted"
+								rows="4"
+								maxlength="280"
+								required
+								placeholder="One or two sentences is enough."
+							></textarea>
+						</label>
+						<label>
+							<span>What kind of help are you looking for?</span>
+							<select name="representationType" required>
+								<option value="">Select one</option>
+								<option value="document-prep">Document preparation</option>
+								<option value="document-review">Document review or screening</option>
+								<option value="ongoing-representation">Ongoing representation</option>
+								<option value="general-information">General information only</option>
+							</select>
+						</label>
+						<div class="question-card">
+							<span>Are you prepared to pay for a consultation if the matter appears to fit?</span>
+							<div class="toggle-row toggle-row-stack">
+								<label><input type="radio" name="consultationOkay" value="yes" required /> <span>Yes</span></label>
+								<label><input type="radio" name="consultationOkay" value="not-sure" /> <span>Not sure yet</span></label>
+								<label><input type="radio" name="consultationOkay" value="no" /> <span>No</span></label>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section class="intake-step-card">
+					<div class="section-head intake-head">
+						<div>
+							<p class="eyebrow">Step 5</p>
+							<h2 class="section-title">Service-specific screening questions</h2>
+						</div>
+					</div>
+					<div class="service-question-group" data-service-group="personal-injury" hidden>
+						<div class="service-question-header">
+							<h3>Personal injury screening</h3>
+							<p>Keep this focused on liability, treatment, timing, and damages.</p>
+						</div>
+						<div class="field-grid field-grid-wide">
+							<label>
+								<span>Opposing party name</span>
+								<input type="text" name="opposingPartyName" maxlength="140" />
+							</label>
+							<label>
+								<span>If unknown, briefly describe the opposing party</span>
+								<input type="text" name="opposingPartyDescription" maxlength="180" />
+							</label>
+							<div class="question-card">
+								<span>Is this an auto-related accident?</span>
+								<div class="toggle-row">
+									<label><input type="radio" name="piAutoRelated" value="yes" data-required="true" /> <span>Yes</span></label>
+									<label><input type="radio" name="piAutoRelated" value="no" /> <span>No</span></label>
+								</div>
+							</div>
+							<div class="field-subgroup" data-pi-subgroup="auto" hidden>
+								<label>
+									<span>Auto accident type</span>
+									<select name="piAutoSubtype" data-required="true">
+										<option value="">Select one</option>
+										<option value="rear-end">Rear-end collision</option>
+										<option value="standard-auto">Standard auto</option>
+										<option value="commercial-vehicle">Commercial vehicle</option>
+										<option value="trucking">Trucking</option>
+										<option value="pedestrian">Pedestrian</option>
+										<option value="motorcycle">Motorcycle</option>
+										<option value="bicycle">Bicycle</option>
+										<option value="other">Other auto-related</option>
+									</select>
+								</label>
+							</div>
+							<div class="field-subgroup" data-pi-subgroup="non-auto" hidden>
+								<label>
+									<span>Non-auto injury type</span>
+									<select name="piNonAutoSubtype" data-required="true">
+										<option value="">Select one</option>
+										<option value="boating-jet-ski">Boating / jet ski</option>
+										<option value="child-attractive-nuisance">Child attractive nuisance</option>
+										<option value="construction-accident">Construction accident</option>
+										<option value="dog-bite">Dog bite</option>
+										<option value="other">Other</option>
+									</select>
+								</label>
+							</div>
+							<div class="question-card">
+								<span>Were you or anyone involved working at the time of the accident?</span>
+								<div class="toggle-row">
+									<label><input type="radio" name="piWorkingAtTime" value="no" data-required="true" /> <span>No</span></label>
+									<label><input type="radio" name="piWorkingAtTime" value="yes" /> <span>Yes</span></label>
+								</div>
+							</div>
+							<label>
+								<span>If yes, explain briefly</span>
+								<input type="text" name="piWorkingExplanation" maxlength="180" />
+							</label>
+							<div class="question-card question-card-full">
+								<span>When did it happen?</span>
+								<div class="toggle-grid">
+									<label><input type="radio" name="piTimingBucket" value="within-30-days" data-required="true" /> <span>Within 30 days</span></label>
+									<label><input type="radio" name="piTimingBucket" value="1-6-months" /> <span>1–6 months ago</span></label>
+									<label><input type="radio" name="piTimingBucket" value="6-12-months" /> <span>6–12 months ago</span></label>
+									<label><input type="radio" name="piTimingBucket" value="1-2-years" /> <span>1–2 years ago</span></label>
+									<label><input type="radio" name="piTimingBucket" value="more-than-2-years" /> <span>More than 2 years ago</span></label>
+									<label><input type="radio" name="piTimingBucket" value="exact-date-known" /> <span>Exact date known</span></label>
+								</div>
+							</div>
+							<div class="field-subgroup" data-pi-timing="date" hidden>
+								<label>
+									<span>Exact date</span>
+									<input type="date" name="piExactDate" data-required="true" />
+								</label>
+							</div>
+							<div class="field-subgroup" data-pi-timing="explanation" hidden>
+						<label class="full-span">
+								<span>If the exact date is not known, explain when it happened or when you learned about it</span>
+									<textarea name="piTimingExplanation" rows="3" maxlength="240" data-required="true"></textarea>
+								</label>
+							</div>
+							<label>
+								<span>City</span>
+								<input type="text" name="piCity" maxlength="100" data-required="true" />
+							</label>
+							<label class="full-span">
+								<span>Short incident description</span>
+								<textarea name="piIncidentDescription" rows="4" maxlength="400" data-required="true"></textarea>
+							</label>
+							<label>
+								<span>Who do you believe is responsible?</span>
+								<input type="text" name="piResponsibleParty" maxlength="160" data-required="true" />
+							</label>
+							<label class="full-span">
+								<span>Why do you believe they are responsible?</span>
+								<textarea name="piResponsibilityWhy" rows="4" maxlength="320" data-required="true"></textarea>
+							</label>
+							<label>
+								<span>Liability assessment</span>
+								<select name="piLiabilityAssessment" data-required="true">
+									<option value="">Select one</option>
+									<option value="clear-other-party">Clear other-party fault</option>
+									<option value="likely-other-party">Likely other-party fault</option>
+									<option value="shared-or-unclear">Shared or unclear</option>
+									<option value="self-fault">Mostly my fault</option>
+								</select>
+							</label>
+							<label>
+								<span>Insurance or ability to pay information if known</span>
+								<select name="piInsuranceStatus" data-required="true">
+									<option value="">Select one</option>
+									<option value="confirmed-insurance">Confirmed insurance</option>
+									<option value="commercial-insurance">Commercial policy / company vehicle</option>
+									<option value="likely-insurance">Likely insurance</option>
+									<option value="no-insurance-known">No insurance known</option>
+									<option value="unknown">Unknown</option>
+								</select>
+							</label>
+							<label class="full-span">
+								<span>Injury description</span>
+								<textarea name="piInjuryDescription" rows="4" maxlength="360" data-required="true"></textarea>
+							</label>
+							<label>
+								<span>Treatment status</span>
+								<select name="piTreatmentStatus" data-required="true">
+									<option value="">Select one</option>
+									<option value="er-ongoing-major">ER visit / ongoing major treatment</option>
+									<option value="ongoing-treatment">Ongoing treatment</option>
+									<option value="initial-treatment-only">Initial treatment only</option>
+									<option value="minor-or-vague">Minor or still vague</option>
+									<option value="no-treatment">No treatment yet</option>
+								</select>
+							</label>
+							<div class="question-card">
+								<span>Did treatment start more than 2 weeks after the incident?</span>
+								<div class="toggle-row">
+									<label><input type="radio" name="piDelayedTreatment" value="no" data-required="true" /> <span>No</span></label>
+									<label><input type="radio" name="piDelayedTreatment" value="yes" /> <span>Yes</span></label>
+								</div>
+							</div>
+							<div class="question-card">
+								<span>Have there been large gaps in care?</span>
+								<div class="toggle-row">
+									<label><input type="radio" name="piGapsInCare" value="no" data-required="true" /> <span>No</span></label>
+									<label><input type="radio" name="piGapsInCare" value="yes" /> <span>Yes</span></label>
+								</div>
+							</div>
+							<label>
+								<span>Medical bills range</span>
+								<select name="piMedicalBillsRange" data-required="true">
+									<option value="">Select one</option>
+									<option value="10k-plus">$10,000+</option>
+									<option value="1k-10k">$1,000–$10,000</option>
+									<option value="under-1k">Under $1,000</option>
+									<option value="none">None yet</option>
+									<option value="unknown">Unknown</option>
+								</select>
+							</label>
+							<label>
+								<span>Missed work</span>
+								<select name="piMissedWork" data-required="true">
+									<option value="">Select one</option>
+									<option value="major">Major</option>
+									<option value="moderate">Moderate</option>
+									<option value="minor">Minor</option>
+									<option value="none">None</option>
+								</select>
+							</label>
+							<label>
+								<span>Property damage</span>
+								<select name="piPropertyDamage" data-required="true">
+									<option value="">Select one</option>
+									<option value="major">Major</option>
+									<option value="moderate">Moderate</option>
+									<option value="minor">Minor</option>
+									<option value="none">None</option>
+								</select>
+							</label>
+							<div class="question-card">
+								<span>Are you keeping a journal or photos to show your damages and recovery?</span>
+								<div class="toggle-row">
+									<label><input type="radio" name="piRecoveryLog" value="yes" data-required="true" /> <span>Yes</span></label>
+									<label><input type="radio" name="piRecoveryLog" value="no" /> <span>No</span></label>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="service-question-group" data-service-group="estate-planning,wills-and-trusts,power-of-attorney" hidden>
+						<div class="service-question-header">
+							<h3>Planning details</h3>
+							<p>Only answer what is needed to show fit and planning depth.</p>
+						</div>
+						<div class="field-grid field-grid-wide">
+							<label>
+								<span>Is this a new plan or an update?</span>
+								<select name="planStage" data-required="true">
+									<option value="">Select one</option>
+									<option value="new-plan">New plan</option>
+									<option value="update-existing">Update an existing plan</option>
+								</select>
+							</label>
+							<label>
+								<span>Who is this planning for?</span>
+								<select name="planForWhom" data-required="true">
+									<option value="">Select one</option>
+									<option value="myself">Myself</option>
+									<option value="my-family">My family</option>
+									<option value="helping-parent">Helping a parent or loved one</option>
+									<option value="for-couple">For me and my spouse / partner</option>
+								</select>
+							</label>
+							<div class="question-card question-card-full">
+								<span>What do you need most?</span>
+								<div class="toggle-grid">
+									<label><input type="checkbox" name="planNeeds" value="wills" /> <span>Wills</span></label>
+									<label><input type="checkbox" name="planNeeds" value="trust-planning" /> <span>Trust planning</span></label>
+									<label><input type="checkbox" name="planNeeds" value="power-of-attorney" /> <span>Power of attorney</span></label>
+									<label><input type="checkbox" name="planNeeds" value="health-directives" /> <span>Health directives</span></label>
+									<label><input type="checkbox" name="planNeeds" value="all-of-the-above" /> <span>All of the above</span></label>
+								</div>
+							</div>
+							<div class="question-card">
+								<span>Can the main signer sign now?</span>
+								<div class="toggle-row">
+									<label><input type="radio" name="planSignerAvailable" value="yes" data-required="true" /> <span>Yes</span></label>
+									<label><input type="radio" name="planSignerAvailable" value="no" /> <span>No</span></label>
+								</div>
+							</div>
+							<div class="question-card">
+								<span>Are there family disputes about money, control, or caregiving?</span>
+								<div class="toggle-row">
+									<label><input type="radio" name="planFamilyDisputes" value="no" data-required="true" /> <span>No</span></label>
+									<label><input type="radio" name="planFamilyDisputes" value="yes" /> <span>Yes</span></label>
+								</div>
+							</div>
+							<div class="question-card">
+								<span>Do you own a business, multiple properties, or out-of-state property?</span>
+								<div class="toggle-row">
+									<label><input type="radio" name="planAssetComplexity" value="no" data-required="true" /> <span>No</span></label>
+									<label><input type="radio" name="planAssetComplexity" value="yes" /> <span>Yes</span></label>
+								</div>
+							</div>
+							<label>
+								<span>Are you looking for basic documents or more customized planning?</span>
+								<select name="planDepth" data-required="true">
+									<option value="">Select one</option>
+									<option value="basic">Basic documents</option>
+									<option value="customized">More customized planning</option>
+								</select>
+							</label>
+						</div>
+					</div>
+
+					<div class="service-question-group" data-service-group="guardianship" hidden>
+						<div class="service-question-header">
+							<h3>Guardianship details</h3>
+							<p>Keep this to the immediate fit questions.</p>
+						</div>
+						<div class="field-grid">
+							<div class="question-card">
+								<span>Is there an emergency right now?</span>
+								<div class="toggle-row">
+									<label><input type="radio" name="guardianshipEmergency" value="no" data-required="true" /> <span>No</span></label>
+									<label><input type="radio" name="guardianshipEmergency" value="yes" /> <span>Yes</span></label>
+								</div>
+							</div>
+							<label>
+								<span>Is this for a minor or an adult?</span>
+								<select name="guardianshipFor" data-required="true">
+									<option value="">Select one</option>
+									<option value="minor">Minor</option>
+									<option value="adult">Adult</option>
+								</select>
+							</label>
+							<div class="question-card">
+								<span>Are the main family members in agreement?</span>
+								<div class="toggle-row">
+									<label><input type="radio" name="guardianshipAgreement" value="yes" data-required="true" /> <span>Yes</span></label>
+									<label><input type="radio" name="guardianshipAgreement" value="no" /> <span>No</span></label>
+								</div>
+							</div>
+							<div class="question-card">
+								<span>Is there already a court case pending?</span>
+								<div class="toggle-row">
+									<label><input type="radio" name="guardianshipExistingCase" value="no" data-required="true" /> <span>No</span></label>
+									<label><input type="radio" name="guardianshipExistingCase" value="yes" /> <span>Yes</span></label>
+								</div>
+							</div>
+							<div class="question-card">
+								<span>Is someone contesting control or decision-making?</span>
+								<div class="toggle-row">
+									<label><input type="radio" name="guardianshipContested" value="no" data-required="true" /> <span>No</span></label>
+									<label><input type="radio" name="guardianshipContested" value="yes" /> <span>Yes</span></label>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="service-question-group" data-service-group="uncontested-divorce" hidden>
+						<div class="service-question-header">
+							<h3>Uncontested divorce details</h3>
+							<p>This should tell the firm whether it really sounds uncontested.</p>
+						</div>
+						<div class="field-grid">
+							<div class="question-card">
+								<span>Do both spouses agree to divorce?</span>
+								<div class="toggle-row">
+									<label><input type="radio" name="divorceBothAgree" value="yes" data-required="true" /> <span>Yes</span></label>
+									<label><input type="radio" name="divorceBothAgree" value="no" /> <span>No</span></label>
+								</div>
+							</div>
+							<div class="question-card">
+								<span>Do both spouses agree on property division?</span>
+								<div class="toggle-row">
+									<label><input type="radio" name="divorcePropertyAgree" value="yes" data-required="true" /> <span>Yes</span></label>
+									<label><input type="radio" name="divorcePropertyAgree" value="no" /> <span>No</span></label>
+								</div>
+							</div>
+							<div class="question-card">
+								<span>Are there minor children?</span>
+								<div class="toggle-row">
+									<label><input type="radio" name="divorceMinorChildren" value="no" data-required="true" /> <span>No</span></label>
+									<label><input type="radio" name="divorceMinorChildren" value="yes" /> <span>Yes</span></label>
+								</div>
+							</div>
+							<div class="question-card">
+								<span>Are custody or support issues disputed?</span>
+								<div class="toggle-row">
+									<label><input type="radio" name="divorceCustodyDisputed" value="no" data-required="true" /> <span>No</span></label>
+									<label><input type="radio" name="divorceCustodyDisputed" value="yes" /> <span>Yes</span></label>
+								</div>
+							</div>
+							<div class="question-card">
+								<span>Is there domestic violence, a protective order, or a safety concern?</span>
+								<div class="toggle-row">
+									<label><input type="radio" name="divorceSafetyConcern" value="no" data-required="true" /> <span>No</span></label>
+									<label><input type="radio" name="divorceSafetyConcern" value="yes" /> <span>Yes</span></label>
+								</div>
+							</div>
+							<div class="question-card">
+								<span>Has anything already been filed?</span>
+								<div class="toggle-row">
+									<label><input type="radio" name="divorceAlreadyFiled" value="no" data-required="true" /> <span>No</span></label>
+									<label><input type="radio" name="divorceAlreadyFiled" value="yes" /> <span>Yes</span></label>
+								</div>
+							</div>
+							<div class="question-card">
+								<span>Is the other spouse represented?</span>
+								<div class="toggle-row">
+									<label><input type="radio" name="divorceOtherLawyer" value="no" data-required="true" /> <span>No</span></label>
+									<label><input type="radio" name="divorceOtherLawyer" value="yes" /> <span>Yes</span></label>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="service-question-group" data-service-group="family-law" hidden>
+						<div class="service-question-header">
+							<h3>Family-law details</h3>
+							<p>This helps separate document work from a broader dispute.</p>
+						</div>
+						<div class="field-grid">
+							<label>
+								<span>What is the main family-law issue?</span>
+								<select name="familyMatterType" data-required="true">
+									<option value="">Select one</option>
+									<option value="divorce">Divorce</option>
+									<option value="custody">Custody or parenting time</option>
+									<option value="support">Child or spousal support</option>
+									<option value="paternity">Paternity</option>
+									<option value="other">Other</option>
+								</select>
+							</label>
+							<div class="question-card">
+								<span>Is the matter already contested?</span>
+								<div class="toggle-row">
+									<label><input type="radio" name="familyContested" value="no" data-required="true" /> <span>No</span></label>
+									<label><input type="radio" name="familyContested" value="yes" /> <span>Yes</span></label>
+								</div>
+							</div>
+							<div class="question-card">
+								<span>Has anything already been filed?</span>
+								<div class="toggle-row">
+									<label><input type="radio" name="familyAlreadyFiled" value="no" data-required="true" /> <span>No</span></label>
+									<label><input type="radio" name="familyAlreadyFiled" value="yes" /> <span>Yes</span></label>
+								</div>
+							</div>
+							<div class="question-card">
+								<span>Is there a safety concern or protective-order issue?</span>
+								<div class="toggle-row">
+									<label><input type="radio" name="familySafetyConcern" value="no" data-required="true" /> <span>No</span></label>
+									<label><input type="radio" name="familySafetyConcern" value="yes" /> <span>Yes</span></label>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="service-question-group" data-service-group="llc-formation,business-law" hidden>
+						<div class="service-question-header">
+							<h3>Business-law details</h3>
+							<p>Keep this focused on setup, agreements, and whether the issue is preventive or cleanup work.</p>
+						</div>
+						<div class="field-grid">
+							<label>
+								<span>Is this for a new business or an existing business?</span>
+								<select name="businessStage" data-required="true">
+									<option value="">Select one</option>
+									<option value="new-business">New business</option>
+									<option value="existing-business">Existing business</option>
+								</select>
+							</label>
+							<label>
+								<span>How many owners are involved?</span>
+								<select name="businessOwners" data-required="true">
+									<option value="">Select one</option>
+									<option value="one-owner">One owner</option>
+									<option value="two-to-three-owners">Two to three owners</option>
+									<option value="four-plus-owners">Four or more owners</option>
+								</select>
+							</label>
+							<label>
+								<span>What do you need most?</span>
+								<select name="businessNeed" data-required="true">
+									<option value="">Select one</option>
+									<option value="formation-only">Formation only</option>
+									<option value="formation-plus-operating-agreement">Formation plus operating agreement</option>
+									<option value="document-review-or-strategy">Document review or strategy</option>
+									<option value="other">Other</option>
+								</select>
+							</label>
+							<label>
+								<span>Are you trying to prevent problems or clean up an existing issue?</span>
+								<select name="businessIntent" data-required="true">
+									<option value="">Select one</option>
+									<option value="prevent">Prevent problems before they start</option>
+									<option value="cleanup">Clean up an existing issue</option>
+								</select>
+							</label>
+							<div class="question-card">
+								<span>Is there already a dispute, contract problem, or lawsuit?</span>
+								<div class="toggle-row">
+									<label><input type="radio" name="businessDispute" value="no" data-required="true" /> <span>No</span></label>
+									<label><input type="radio" name="businessDispute" value="yes" /> <span>Yes</span></label>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="service-question-group" data-service-group="contract-drafting-review" hidden>
+						<div class="service-question-header">
+							<h3>Contract details</h3>
+							<p>Enough detail to separate preventive review from an active dispute.</p>
+						</div>
+						<div class="field-grid">
+							<label>
+								<span>Is this a new contract, review, or dispute?</span>
+								<select name="contractStage" data-required="true">
+									<option value="">Select one</option>
+									<option value="new">New contract</option>
+									<option value="review">Review before signing</option>
+									<option value="dispute">Active dispute</option>
+								</select>
+							</label>
+							<label>
+								<span>Contract type</span>
+								<input type="text" name="contractType" maxlength="120" data-required="true" />
+							</label>
+							<label>
+								<span>Deadline to sign or respond</span>
+								<select name="contractDeadline" data-required="true">
+									<option value="">Select one</option>
+									<option value="within-7-days">Within 7 days</option>
+									<option value="1-4-weeks">1–4 weeks</option>
+									<option value="flexible">Flexible / no immediate deadline</option>
+								</select>
+							</label>
+							<div class="question-card">
+								<span>Is the other side already represented?</span>
+								<div class="toggle-row">
+									<label><input type="radio" name="contractOtherSideRepresented" value="no" data-required="true" /> <span>No</span></label>
+									<label><input type="radio" name="contractOtherSideRepresented" value="yes" /> <span>Yes</span></label>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="service-question-group" data-service-group="legal-guidance" hidden>
+						<div class="service-question-header">
+							<h3>Legal-guidance details</h3>
+							<p>This is for people who need an attorney review before deciding the proper lane.</p>
+						</div>
+						<div class="field-grid">
+							<label>
+								<span>What kind of guidance do you need?</span>
+								<select name="guidanceNeed" data-required="true">
+									<option value="">Select one</option>
+									<option value="issue-review">Issue review and next-step guidance</option>
+									<option value="which-lane">Help deciding the right legal lane</option>
+									<option value="second-look">Second look at a document or situation</option>
+									<option value="just-question">I mostly have a quick question</option>
+								</select>
+							</label>
+							<div class="question-card">
+								<span>Has anything already been filed or become active?</span>
+								<div class="toggle-row">
+									<label><input type="radio" name="guidanceAlreadyFiled" value="no" data-required="true" /> <span>No</span></label>
+									<label><input type="radio" name="guidanceAlreadyFiled" value="yes" /> <span>Yes</span></label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section class="intake-step-card">
+					<div class="section-head intake-head">
+						<div>
+							<p class="eyebrow">Step 6</p>
+							<h2 class="section-title">Conflict and summary details</h2>
+						</div>
+					</div>
+					<div class="field-grid field-grid-wide">
+						<label>
+							<span>Names of the main parties only</span>
+							<input type="text" name="mainParties" maxlength="220" placeholder="Only the names needed for a conflict check" />
+						</label>
+						<label class="full-span">
+							<span>Short summary</span>
+							<textarea
+								name="bestSummary"
+								rows="4"
+								maxlength="700"
+								required
+								placeholder="Keep this tight. Facts, timing, and what you need reviewed."
+							></textarea>
+						</label>
+						<label class="full-span">
+							<span>Anything else you want the firm to know?</span>
+							<textarea
+								name="additionalInfo"
+								rows="3"
+								maxlength="400"
+								placeholder="Optional"
+							></textarea>
+						</label>
+					</div>
+
+					<div class="intake-submit-row">
+						<div class="mini-copy">
+							By submitting, you are requesting review of the matter for fit and next-step
+							availability. If the matter appears to fit, the next step is usually an email with
+							scheduling instructions and the $100 30-minute consultation payment link.
+						</div>
+						<button class="button button-primary" type="submit" data-submit-button>
+							Send intake request
+						</button>
+					</div>
+					<div class="intake-status" data-form-status hidden></div>
+				</section>
+			</form>
+
+			<section class="intake-success-panel" data-form-success hidden>
+				<p class="eyebrow">Request received</p>
+				<h2 class="section-title">Your intake request has been sent for review.</h2>
+				<p class="lead" data-success-copy></p>
+				<div class="stack-actions">
+					<a class="button button-secondary" href="/">
+						Return home
+					</a>
+					<a class="button button-ghost" href="/contact/">
+						Open contact page
+					</a>
+				</div>
+			</section>
+		</div>
+	</section>
+
+	<script is:inline define:vars={{ formEndpoint, preselectedService }}>
+		const form = document.querySelector('[data-intake-form]');
+		const statusBox = document.querySelector('[data-form-status]');
+		const successPanel = document.querySelector('[data-form-success]');
+		const successCopy = document.querySelector('[data-success-copy]');
+		const submitButton = document.querySelector('[data-submit-button]');
+		const startedAtField = document.querySelector('[data-started-at]');
+		const serviceSections = Array.from(document.querySelectorAll('[data-service-group]'));
+		const piAutoGroups = Array.from(document.querySelectorAll('[data-pi-subgroup]'));
+		const piTimingGroups = Array.from(document.querySelectorAll('[data-pi-timing]'));
+
+		if (startedAtField) {
+			startedAtField.value = String(Date.now());
+		}
+
+		const setStatus = (message, tone = 'neutral') => {
+			if (!statusBox) return;
+			statusBox.hidden = !message;
+			statusBox.textContent = message;
+			statusBox.dataset.tone = tone;
+		};
+
+		const setSectionState = (section, enabled) => {
+			section.hidden = !enabled;
+			section.querySelectorAll('input, select, textarea').forEach((field) => {
+				const shouldRequire = field.dataset.required === 'true';
+				field.disabled = !enabled;
+				field.required = enabled && shouldRequire;
+			});
+		};
+
+		const getSelectedService = () => {
+			const checked = form?.querySelector('input[name="service"]:checked');
+			return checked?.value || preselectedService;
+		};
+
+		const updatePiGroups = () => {
+			const selected = getSelectedService();
+			if (selected !== 'personal-injury') {
+				piAutoGroups.forEach((group) => setSectionState(group, false));
+				piTimingGroups.forEach((group) => setSectionState(group, false));
+				return;
+			}
+
+			const autoRelated = form?.querySelector('input[name="piAutoRelated"]:checked')?.value;
+			piAutoGroups.forEach((group) => {
+				const showAuto = group.dataset.piSubgroup === 'auto';
+				setSectionState(group, autoRelated === 'yes' ? showAuto : autoRelated === 'no' ? !showAuto : false);
+			});
+
+			const timingBucket = form?.querySelector('input[name="piTimingBucket"]:checked')?.value;
+			piTimingGroups.forEach((group) => {
+				const showDate = group.dataset.piTiming === 'date';
+				setSectionState(
+					group,
+					timingBucket === 'exact-date-known' ? showDate : timingBucket ? !showDate : false,
+				);
+			});
+		};
+
+		const updateServiceSections = () => {
+			const selected = getSelectedService();
+			serviceSections.forEach((section) => {
+				const matches = section.dataset.serviceGroup
+					.split(',')
+					.map((value) => value.trim())
+					.includes(selected);
+				setSectionState(section, matches);
+			});
+			updatePiGroups();
+		};
+
+		const serializeForm = (formData) => {
+			const payload = {};
+			for (const [key, value] of formData.entries()) {
+				if (payload[key] === undefined) {
+					payload[key] = value;
+				} else if (Array.isArray(payload[key])) {
+					payload[key].push(value);
+				} else {
+					payload[key] = [payload[key], value];
+				}
+			}
+			return payload;
+		};
+
+		const validatePlanningNeeds = () => {
+			const service = getSelectedService();
+			if (!['estate-planning', 'wills-and-trusts', 'power-of-attorney'].includes(service)) {
+				return '';
+			}
+			if (!form?.querySelector('input[name="planNeeds"]:checked')) {
+				return 'Choose at least one planning need before submitting.';
+			}
+			return '';
+		};
+
+		const validateSpecialCases = () => {
+			const planningError = validatePlanningNeeds();
+			if (planningError) return planningError;
+
+			const service = getSelectedService();
+			if (service !== 'personal-injury') {
+				return '';
+			}
+
+			const opposingName = form?.querySelector('[name="opposingPartyName"]')?.value?.trim();
+			const opposingDescription = form
+				?.querySelector('[name="opposingPartyDescription"]')
+				?.value?.trim();
+			if (!opposingName && !opposingDescription) {
+				return 'For personal injury matters, provide the opposing party name or a short description.';
+			}
+
+			const autoRelated = form?.querySelector('input[name="piAutoRelated"]:checked')?.value;
+			if (autoRelated === 'yes' && !form?.querySelector('[name="piAutoSubtype"]')?.value) {
+				return 'Choose the auto-related accident type.';
+			}
+			if (autoRelated === 'no' && !form?.querySelector('[name="piNonAutoSubtype"]')?.value) {
+				return 'Choose the non-auto injury type.';
+			}
+
+			const timingBucket = form?.querySelector('input[name="piTimingBucket"]:checked')?.value;
+			if (timingBucket === 'exact-date-known' && !form?.querySelector('[name="piExactDate"]')?.value) {
+				return 'Enter the exact accident date or choose a different timing option.';
+			}
+			if (
+				timingBucket &&
+				timingBucket !== 'exact-date-known' &&
+				!form?.querySelector('[name="piTimingExplanation"]')?.value?.trim()
+			) {
+				return 'If the exact date is not known, explain when it happened or when you learned about it.';
+			}
+
+			return '';
+		};
+
+		form?.addEventListener('change', (event) => {
+			const target = event.target;
+			if (!(target instanceof HTMLElement)) return;
+			if (
+				target.matches('input[name="service"]') ||
+				target.matches('input[name="piAutoRelated"]') ||
+				target.matches('input[name="piTimingBucket"]')
+			) {
+				updateServiceSections();
+			}
+		});
+
+		updateServiceSections();
+		setStatus('');
+
+		form?.addEventListener('submit', async (event) => {
+			event.preventDefault();
+			setStatus('');
+
+			if (!form.reportValidity()) {
+				setStatus('Please complete the required fields before submitting.', 'error');
+				return;
+			}
+
+			const specialCaseError = validateSpecialCases();
+			if (specialCaseError) {
+				setStatus(specialCaseError, 'error');
+				return;
+			}
+
+			if (!formEndpoint) {
+				setStatus('The intake form is not configured yet. Please try again later.', 'error');
+				return;
+			}
+
+			if (submitButton) {
+				submitButton.setAttribute('disabled', 'disabled');
+				submitButton.setAttribute('aria-busy', 'true');
+				submitButton.textContent = 'Sending...';
+			}
+
+			try {
+				const payload = serializeForm(new FormData(form));
+				const response = await fetch(formEndpoint, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(payload),
+				});
+
+				const data = await response.json().catch(() => ({}));
+				if (!response.ok) {
+					throw new Error(data?.error || 'The intake request could not be sent.');
+				}
+
+				if (window.gtag) {
+					window.gtag('event', 'generate_lead', {
+						event_category: 'intake',
+						event_label: `intake-${data.route || 'submitted'}`,
+					});
+				}
+
+				form.hidden = true;
+				if (successCopy) {
+					successCopy.textContent =
+						data.message ||
+						'Your request has been sent. If the matter appears to fit, the next step is usually an email with scheduling instructions.';
+				}
+				successPanel?.removeAttribute('hidden');
+			} catch (error) {
+				setStatus(
+					error instanceof Error ? error.message : 'Something went wrong while sending the intake request.',
+					'error',
+				);
+			} finally {
+				if (submitButton) {
+					submitButton.removeAttribute('disabled');
+					submitButton.removeAttribute('aria-busy');
+					submitButton.textContent = 'Send intake request';
+				}
+			}
+		});
+	</script>
+</Layout>
