@@ -112,6 +112,7 @@ export function mountIntakeForm() {
 
 	const updateProgress = (stageNumber: number) => {
 		const normalized = Math.min(Math.max(stageNumber, 1), 4);
+		const percent = Math.round((normalized / 4) * 100);
 		progressSteps.forEach((step) => {
 			const value = Number(step.dataset.progressStep || '0');
 			step.classList.toggle('is-active', value === normalized);
@@ -121,7 +122,7 @@ export function mountIntakeForm() {
 			progressFill.style.width = `${(normalized / 4) * 100}%`;
 		}
 		if (progressCurrent) {
-			progressCurrent.textContent = `Step ${normalized} of 4`;
+			progressCurrent.textContent = `Step ${normalized} of 4 - ${percent}% complete`;
 		}
 		if (progressDetail) {
 			progressDetail.textContent = progressMeta[normalized];
