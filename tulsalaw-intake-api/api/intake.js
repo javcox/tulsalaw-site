@@ -1,4 +1,4 @@
-import { evaluateIntake, type IntakeSubmission } from '../lib/intake.ts';
+import { evaluateIntake } from '../lib/intake.js';
 
 const allowedOrigins = new Set([
 	'https://tulsalaw.llc',
@@ -8,9 +8,7 @@ const allowedOrigins = new Set([
 	'http://127.0.0.1:4173',
 ]);
 
-function applyCors(req: { headers?: Record<string, string | string[] | undefined> }, res: {
-	setHeader: (name: string, value: string) => void;
-}) {
+function applyCors(req, res) {
 	const originHeader = req.headers?.origin;
 	const origin = Array.isArray(originHeader) ? originHeader[0] : originHeader;
 	const allowOrigin = origin && allowedOrigins.has(origin) ? origin : 'https://tulsalaw.llc';
@@ -21,17 +19,17 @@ function applyCors(req: { headers?: Record<string, string | string[] | undefined
 	res.setHeader('Vary', 'Origin');
 }
 
-function parseBody(body: unknown): IntakeSubmission {
+function parseBody(body) {
 	if (!body) return {};
-	if (typeof body === 'string') return JSON.parse(body) as IntakeSubmission;
+	if (typeof body === 'string') return JSON.parse(body);
 	if (typeof Buffer !== 'undefined' && Buffer.isBuffer(body)) {
-		return JSON.parse(body.toString('utf8')) as IntakeSubmission;
+		return JSON.parse(body.toString('utf8'));
 	}
-	if (typeof body === 'object') return body as IntakeSubmission;
+	if (typeof body === 'object') return body;
 	return {};
 }
 
-function buildEmailHtml(summaryHtml: string) {
+function buildEmailHtml(summaryHtml) {
 	return `<!doctype html>
 <html lang="en">
 	<head>
@@ -49,23 +47,7 @@ function buildEmailHtml(summaryHtml: string) {
 </html>`;
 }
 
-export default async function handler(
-	req: {
-		method?: string;
-		headers?: Record<string, string | string[] | undefined>;
-		body?: unknown;
-	},
-	res: {
-		status: (code: number) => {
-			setHeader: (name: string, value: string) => void;
-			json: (body: unknown) => void;
-			end: (body?: string) => void;
-		};
-		setHeader: (name: string, value: string) => void;
-		json: (body: unknown) => void;
-		end: (body?: string) => void;
-	},
-) {
+export default async function handler(req, res) {
 	applyCors(req, res);
 
 	if (req.method === 'OPTIONS') {
@@ -93,6 +75,7 @@ export default async function handler(
 
 			const replyTo =
 				typeof payload.email === 'string' && payload.email.includes('@') ? payload.email : undefined;
+
 			const resendResponse = await fetch('https://api.resend.com/emails', {
 				method: 'POST',
 				headers: {
@@ -124,7 +107,8 @@ export default async function handler(
 			message: evaluation.replyMessage,
 		});
 	} catch (error) {
-		const message = error instanceof Error ? error.message : 'Unexpected intake submission failure.';
+		const message =
+			error instanceof Error ? error.message : 'Unexpected intake submission failure.';
 		return res.status(500).json({ error: message });
 	}
 }
