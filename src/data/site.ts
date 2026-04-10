@@ -48,9 +48,9 @@ export const firm = {
 	region: 'Oklahoma',
 	postalCode: '74133',
 	fullAddress: '10026-A S. Mingo Rd., Suite 238, Tulsa, OK 74133',
-	serviceArea: 'Based in Tulsa near Bixby and Broken Arrow, serving clients across Oklahoma',
+	serviceArea: 'Tulsa office serving Tulsa, Bixby, Broken Arrow, and clients across Oklahoma',
 	tagline:
-		'Attorney-led review for personal injury, estate planning, legal guidance, family matters, and business documents across Tulsa, Bixby, Broken Arrow, and Oklahoma.',
+		'Attorney-led review for personal injury, estate planning, legal guidance, family matters, and business documents from a Tulsa office serving Bixby, Broken Arrow, and clients across Oklahoma.',
 	intakeSummary:
 		'New client matters are reviewed for fit, conflicts, urgency, and scheduling before representation begins.',
 	credentials: [
@@ -62,7 +62,7 @@ export const firm = {
 	bioHighlights: [
 		'Tracy A. Cinocca combines legal strategy with business fluency, which is especially helpful for contracts, business setup, and practical document work.',
 		'Her background includes full-time purchasing work during MBA studies, including contract negotiation and acquisitions in a manufacturing environment.',
-		'The practice is based in Tulsa at 10026-A S. Mingo Rd., Suite 238, near Bixby and Broken Arrow, and serves clients across Oklahoma.',
+		'The practice is based in Tulsa at 10026-A S. Mingo Rd., Suite 238 and regularly serves clients from Tulsa, Bixby, Broken Arrow, and elsewhere in Oklahoma.',
 	],
 	brandPillars: [
 		'Clear explanations and practical next steps',
@@ -80,12 +80,12 @@ export const homepageFAQs = [
 	{
 		question: 'Does Tulsa Law handle clients outside Tulsa?',
 		answer:
-			'Yes. The office is in Tulsa near Bixby and Broken Arrow, and the firm reviews matters from clients across Oklahoma that fit the listed practice areas and current availability.',
+			'Yes. The office is in Tulsa and regularly reviews matters for clients in Bixby, Broken Arrow, and elsewhere in Oklahoma when the issue fits the listed practice areas and current availability.',
 	},
 	{
 		question: 'How do consultation requests work?',
 		answer:
-			'The fastest path is the guided intake form on this site. Most requests are reviewed within 1 business day when submitted on a business day. Personal injury matters are screened for fit first, while many planning, family, business, and legal-guidance matters that fit move next to an email with scheduling instructions and the $100 30-minute consultation payment link.',
+			'The fastest path is the guided intake form on this site. Most requests are reviewed within 1 business day when submitted on a business day. Personal injury matters are screened for fit first. Most planning, family, business, and legal-guidance matters that fit move next to an email with scheduling instructions and the $100 30-minute consultation payment link.',
 	},
 	{
 		question: 'What is the difference between Practice Areas and Simple Services?',
@@ -156,7 +156,7 @@ export const services: Service[] = [
 		intro:
 			'The right estate plan should make life easier for the people you care about, not leave them sorting through uncertainty during a crisis. This page is designed for Tulsa-area families who want attorney-guided planning instead of piecing together forms and hoping they work later.',
 		summary:
-			'Tulsa Law helps Oklahoma clients prepare practical estate documents, organize decision-making authority, and put a clear plan in place before problems become expensive. Most estate-planning matters that fit move next to the $100 30-minute consultation path so the family structure, documents, and next drafting steps can be reviewed carefully.',
+			'Tulsa Law helps Oklahoma clients prepare practical estate documents, organize decision-making authority, and put a clear plan in place before problems become expensive. If an estate-planning matter appears to fit after intake review, the next step is usually the $100 30-minute consultation so the family structure, documents, and next drafting steps can be reviewed carefully.',
 		searchPhrases: [
 			'Tulsa estate planning attorney',
 			'Oklahoma wills and trusts lawyer',
@@ -197,12 +197,12 @@ export const services: Service[] = [
 		],
 		related: ['wills-and-trusts', 'power-of-attorney', 'guardianship'],
 		localSupport: {
-			heading: 'Tulsa estate planning with Bixby relevance where it is real',
+			heading: 'Estate planning from a Tulsa office that is easy to reach from Bixby and Broken Arrow',
 			copy:
-				'The office is in south Tulsa near Bixby, which makes this page especially relevant for families in Tulsa, Bixby, and Broken Arrow who want a nearby attorney-guided planning process instead of online forms and guesswork.',
+				'The office is in south Tulsa, so this planning path is a practical nearby option for families in Tulsa, Bixby, Broken Arrow, and surrounding communities who want attorney-guided documents instead of guesswork.',
 			bullets: [
-				'Useful for families updating wills or trusts after marriage, divorce, children, or a move within the Tulsa-Bixby area',
-				'Helpful when aging parents, adult children, or decision-makers are spread between Tulsa, Bixby, and surrounding communities',
+				'Useful for families updating wills or trusts after marriage, divorce, children, or a move',
+				'Helpful when aging parents, adult children, or decision-makers are spread across nearby communities',
 				'Built for practical planning conversations before incapacity or family confusion creates pressure',
 			],
 		},
@@ -443,7 +443,7 @@ export const services: Service[] = [
 		intro:
 			'When both sides are closer to agreement, the goal should be a clean process, solid paperwork, and fewer avoidable setbacks. This page is meant for people who want a calmer uncontested-divorce path, not a fight-first sales funnel.',
 		summary:
-			'Tulsa Law helps Oklahoma clients move through uncontested-divorce matters with stronger documents, clearer expectations, and direct attorney guidance. Fit matters usually move next to the $100 30-minute consultation path so the paperwork, agreements, and filing posture can be reviewed before anything important is signed.',
+			'Tulsa Law helps Oklahoma clients move through uncontested-divorce matters with stronger documents, clearer expectations, and direct attorney guidance. If an uncontested-divorce matter appears to fit after intake review, the next step is usually the $100 30-minute consultation so the paperwork, agreements, and filing posture can be reviewed before anything important is signed.',
 		searchPhrases: [
 			'Tulsa uncontested divorce lawyer',
 			'Oklahoma uncontested divorce attorney',
@@ -484,13 +484,13 @@ export const services: Service[] = [
 		],
 		related: ['family-law', 'estate-planning', 'guardianship'],
 		localSupport: {
-			heading: 'A cleaner uncontested divorce path for Tulsa and nearby Bixby families',
+			heading: 'A calmer uncontested-divorce path for Tulsa, Bixby, and nearby families',
 			copy:
-				'This page is meant for people in Tulsa, Bixby, Broken Arrow, and nearby Oklahoma communities who are looking for a calmer, more organized divorce process when the matter is closer to agreement than conflict.',
+				'This page is for people in Tulsa, Bixby, Broken Arrow, and nearby communities who want a calmer, more organized divorce process when the matter is closer to agreement than conflict.',
 			bullets: [
 				'Useful when both sides want the paperwork handled more carefully, not more aggressively',
 				'Helpful when you need attorney guidance on next steps before filing or signing anything important',
-				'Relevant for clients who want a nearby Tulsa office and an intake-first path instead of a high-pressure sales funnel',
+				'Relevant for clients who want a nearby Tulsa office and an intake-first path instead of a high-pressure process',
 			],
 		},
 		moneyPageLinks: ['family-law', 'legal-guidance'],
@@ -572,7 +572,7 @@ export const services: Service[] = [
 		intro:
 			'Some matters do not start with a clean label. They start with a difficult situation, a deadline, a document, or a decision that needs attorney judgment before the wrong move is made. This is the right lane when the issue is real but the category is not obvious yet.',
 		summary:
-			'Tulsa Law offers legal guidance for Oklahoma clients who need a serious review, a clearer strategy, and help deciding what should happen next before they commit more time or money. This is the lane for issues that need attorney judgment first, and fit matters usually move next to the $100 30-minute consultation path after intake review.',
+			'Tulsa Law offers legal guidance for Oklahoma clients who need a serious review, a clearer strategy, and help deciding what should happen next before they commit more time or money. This is the lane for issues that need attorney judgment first, and if the matter appears to fit after intake review, the next step is usually the $100 30-minute consultation.',
 		searchPhrases: [
 			'Tulsa legal guidance attorney',
 			'Tulsa legal advice consultation',
@@ -1012,7 +1012,7 @@ export const services: Service[] = [
 		intro:
 			'Business formation should not stop at filing a name. The early structure matters because it shapes ownership, authority, and how conflict gets handled later. This page is for owners who want cleaner setup and better documents from the start.',
 		summary:
-			'Tulsa Law helps founders and business owners form Oklahoma LLCs with stronger documentation and more thoughtful upfront planning. Fit matters usually move next to the $100 30-minute consultation path so ownership, authority, and operating-agreement issues can be reviewed before filing becomes the only focus.',
+			'Tulsa Law helps founders and business owners form Oklahoma LLCs with stronger documentation and more thoughtful upfront planning. If an LLC-formation matter appears to fit after intake review, the next step is usually the $100 30-minute consultation so ownership, authority, and operating-agreement issues can be reviewed before filing becomes the only focus.',
 		searchPhrases: [
 			'Tulsa LLC formation lawyer',
 			'Oklahoma LLC attorney',
@@ -1053,12 +1053,12 @@ export const services: Service[] = [
 		],
 		related: ['business-law', 'contract-drafting-review'],
 		localSupport: {
-			heading: 'Tulsa LLC formation help for founders in Tulsa, Bixby, and nearby business corridors',
+			heading: 'LLC formation from a Tulsa office for owners in Tulsa, Bixby, and nearby business corridors',
 			copy:
-				'This page is built for Oklahoma owners who want more than a filing service, especially founders in south Tulsa, Bixby, and Broken Arrow who need entity setup, operating terms, and early-stage business documents that actually fit the business.',
+				'This page is built for Oklahoma owners who want more than a filing service, especially founders in Tulsa, Bixby, Broken Arrow, and nearby business corridors who need entity setup, operating terms, and early-stage business documents that actually fit the business.',
 			bullets: [
 				'Good fit for solo founders and partners launching service businesses, professional firms, and local companies',
-				'Useful when a Bixby or Tulsa-area owner wants a nearby attorney to review ownership, authority, and cleanup issues early',
+				'Useful when an owner wants a nearby attorney to review ownership, authority, and cleanup issues early',
 				'Strong next step if an existing LLC already exists but the documents need tightening before growth or conflict',
 			],
 		},
@@ -1192,7 +1192,7 @@ export const intakeExpectations: IntakeExpectation[] = [
 	{
 		title: 'Whether a consultation may be paid',
 		copy:
-			'Planning, family, business, and legal-guidance matters that fit often move next to the $100 30-minute consultation path. Personal injury matters are screened for fit first before a deeper review is discussed.',
+			'Most planning, family, business, and legal-guidance matters that fit move next to the $100 30-minute consultation path. Personal injury matters are screened for fit first before a deeper review is discussed.',
 	},
 	{
 		title: 'What may not be a fit',

@@ -1,23 +1,15 @@
 ---
 import AttorneySpotlight from '../components/AttorneySpotlight.astro';
 import CtaPanel from '../components/CtaPanel.astro';
-import IntakeExpectationsSection from '../components/IntakeExpectationsSection.astro';
 import IntakePathPanel from '../components/IntakePathPanel.astro';
 import PracticeCard from '../components/PracticeCard.astro';
 import PracticeAreasCard from '../components/PracticeAreasCard.astro';
 import TestimonialsSection from '../components/TestimonialsSection.astro';
 import WhyChooseSection from '../components/WhyChooseSection.astro';
-import { featuredServices, firm, getServiceUrl, homepageFAQs, homepageLanes } from '../data/site';
+import { featuredServices, firm, homepageFAQs, homepageLanes } from '../data/site';
 import Layout from '../layouts/Layout.astro';
 
 const trustItems = ['Tulsa office', '2-4 minute intake', 'Attorney-led review', 'Reviewed within 1 business day'];
-
-const quickLinks = [
-	{ label: 'Personal Injury Review', href: getServiceUrl('personal-injury') },
-	{ label: 'Legal Guidance', href: getServiceUrl('legal-guidance') },
-	{ label: 'Estate Planning', href: getServiceUrl('estate-planning') },
-	{ label: 'More Practice Areas', href: '/practice-areas/' },
-];
 
 const browseLinks = [
 	{ label: 'Practice Areas', href: '/practice-areas/' },
@@ -119,21 +111,13 @@ const schemas = [
 			<div class="hero-aside">
 				<div class="panel">
 					<p class="mini-kicker">Browse</p>
-					<h2 class="mini-title">Three main lanes, plus two ways to keep browsing.</h2>
+					<h2 class="mini-title">Need the wider service map?</h2>
 					<p class="mini-copy">
-						The homepage stays focused on personal injury review, legal guidance, and estate
-						planning. Use Practice Areas for the broader family, business, planning, and injury
-						map. Use Simple Services for the shorter, document-focused route.
+						The homepage is intentionally centered on personal injury review, legal guidance,
+						and estate planning. Use Practice Areas for the broader family, business,
+						planning, and injury map. Use Simple Services for the shorter, document-focused
+						route.
 					</p>
-					<div class="chips">
-						{
-							quickLinks.map((item) => (
-								<a class="chip" href={item.href}>
-									{item.label}
-								</a>
-							))
-						}
-					</div>
 					<div class="chips">
 						{
 							browseLinks.map((item) => (
@@ -144,50 +128,11 @@ const schemas = [
 						}
 					</div>
 					<p class="mini-copy office-copy">
-						Tulsa office near Bixby and Broken Arrow: {firm.fullAddress}
+						Tulsa office serving Bixby and Broken Arrow too: {firm.fullAddress}
 					</p>
 				</div>
 
 				<IntakePathPanel />
-			</div>
-		</div>
-	</section>
-
-	<section class="section-xl">
-		<div class="shell">
-			<div class="section-head">
-				<div>
-					<p class="eyebrow">Start Here</p>
-					<h2 class="section-title">The three main lanes most people start with, plus the rest of the map.</h2>
-					<p class="section-copy">
-						Personal injury review should not feel like the same offer as planning, business
-						documents, or broader legal guidance. The homepage stays centered on the three routes
-						that most often start the intake, and the fourth card opens the rest of the practice
-						map.
-					</p>
-				</div>
-			</div>
-
-			<div class="lane-grid">
-				{homepageLanes.map((lane) => (
-					<article class="lane-card">
-						<div>
-							<p class="section-label">{lane.title}</p>
-							<h3>
-								<a href={lane.href}>{lane.title}</a>
-							</h3>
-							<p>{lane.copy}</p>
-							<div class="chips">
-								{lane.links.map((link) => (
-									<a class="chip" href={link.href}>{link.label}</a>
-								))}
-							</div>
-						</div>
-						<div class="service-card-footer">
-							<a class="text-link" href={lane.href}>Explore lane</a>
-						</div>
-					</article>
-				))}
 			</div>
 		</div>
 	</section>
@@ -201,7 +146,7 @@ const schemas = [
 					<li>Start Intake and choose the lane that best fits the matter.</li>
 					<li>The firm reviews fit, timing, conflicts, and urgency.</li>
 					<li>Personal injury matters are screened first for whether the claim appears worth pursuing.</li>
-					<li>Planning, family, business, and legal-guidance matters that fit usually move next to an email with scheduling instructions for a $100 30-minute consultation.</li>
+					<li>Most planning, family, business, and legal-guidance matters that fit move next to an email with scheduling instructions for the $100 30-minute consultation.</li>
 				</ul>
 			</div>
 			<div class="band">
@@ -305,7 +250,6 @@ const schemas = [
 
 	<WhyChooseSection />
 	<TestimonialsSection />
-	<IntakeExpectationsSection />
 
 	<section class="section">
 		<div class="shell">
