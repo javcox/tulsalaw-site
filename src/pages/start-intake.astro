@@ -8,7 +8,8 @@ const preselectedServiceParam = Astro.url.searchParams.get('service');
 const preselectedService = intakeServices.some((service) => service.value === preselectedServiceParam)
 	? preselectedServiceParam
 	: 'personal-injury';
-const formEndpoint = import.meta.env.PUBLIC_INTAKE_API_URL ?? '/api/intake';
+const formEndpoint = import.meta.env.PUBLIC_INTAKE_API_URL ?? '';
+const formFallbackEndpoint = `https://formsubmit.co/ajax/${firm.intakeRecipientEmail}`;
 
 const schemas = [
 	{
@@ -65,6 +66,7 @@ const schemas = [
 				id="intake-form"
 				data-intake-form
 				data-endpoint={formEndpoint}
+				data-fallback-endpoint={formFallbackEndpoint}
 				data-default-service={preselectedService}
 				novalidate
 			>
@@ -829,225 +831,9 @@ const schemas = [
 		</div>
 	</section>
 
-	<script is:inline define:vars={{ formEndpoint, preselectedService }}>
-		const form = document.querySelector('[data-intake-form]');
-		const statusBox = document.querySelector('[data-form-status]');
-		const successPanel = document.querySelector('[data-form-success]');
-		const successCopy = document.querySelector('[data-success-copy]');
-		const submitButton = document.querySelector('[data-submit-button]');
-		const startedAtField = document.querySelector('[data-started-at]');
-		const serviceSections = Array.from(document.querySelectorAll('[data-service-group]'));
-		const piAutoGroups = Array.from(document.querySelectorAll('[data-pi-subgroup]'));
-		const piTimingGroups = Array.from(document.querySelectorAll('[data-pi-timing]'));
+	<script>
+		import { mountIntakeForm } from '../scripts/start-intake-client';
 
-		if (startedAtField) {
-			startedAtField.value = String(Date.now());
-		}
-
-		const setStatus = (message, tone = 'neutral') => {
-			if (!statusBox) return;
-			statusBox.hidden = !message;
-			statusBox.textContent = message;
-			statusBox.dataset.tone = tone;
-		};
-
-		const setSectionState = (section, enabled) => {
-			section.hidden = !enabled;
-			section.querySelectorAll('input, select, textarea').forEach((field) => {
-				const shouldRequire = field.dataset.required === 'true';
-				field.disabled = !enabled;
-				field.required = enabled && shouldRequire;
-			});
-		};
-
-		const getSelectedService = () => {
-			const checked = form?.querySelector('input[name="service"]:checked');
-			return checked?.value || preselectedService;
-		};
-
-		const updatePiGroups = () => {
-			const selected = getSelectedService();
-			if (selected !== 'personal-injury') {
-				piAutoGroups.forEach((group) => setSectionState(group, false));
-				piTimingGroups.forEach((group) => setSectionState(group, false));
-				return;
-			}
-
-			const autoRelated = form?.querySelector('input[name="piAutoRelated"]:checked')?.value;
-			piAutoGroups.forEach((group) => {
-				const showAuto = group.dataset.piSubgroup === 'auto';
-				setSectionState(group, autoRelated === 'yes' ? showAuto : autoRelated === 'no' ? !showAuto : false);
-			});
-
-			const timingBucket = form?.querySelector('input[name="piTimingBucket"]:checked')?.value;
-			piTimingGroups.forEach((group) => {
-				const showDate = group.dataset.piTiming === 'date';
-				setSectionState(
-					group,
-					timingBucket === 'exact-date-known' ? showDate : timingBucket ? !showDate : false,
-				);
-			});
-		};
-
-		const updateServiceSections = () => {
-			const selected = getSelectedService();
-			serviceSections.forEach((section) => {
-				const matches = section.dataset.serviceGroup
-					.split(',')
-					.map((value) => value.trim())
-					.includes(selected);
-				setSectionState(section, matches);
-			});
-			updatePiGroups();
-		};
-
-		const serializeForm = (formData) => {
-			const payload = {};
-			for (const [key, value] of formData.entries()) {
-				if (payload[key] === undefined) {
-					payload[key] = value;
-				} else if (Array.isArray(payload[key])) {
-					payload[key].push(value);
-				} else {
-					payload[key] = [payload[key], value];
-				}
-			}
-			return payload;
-		};
-
-		const validatePlanningNeeds = () => {
-			const service = getSelectedService();
-			if (!['estate-planning', 'wills-and-trusts', 'power-of-attorney'].includes(service)) {
-				return '';
-			}
-			if (!form?.querySelector('input[name="planNeeds"]:checked')) {
-				return 'Choose at least one planning need before submitting.';
-			}
-			return '';
-		};
-
-		const validateSpecialCases = () => {
-			const planningError = validatePlanningNeeds();
-			if (planningError) return planningError;
-
-			const service = getSelectedService();
-			if (service !== 'personal-injury') {
-				return '';
-			}
-
-			const opposingName = form?.querySelector('[name="opposingPartyName"]')?.value?.trim();
-			const opposingDescription = form
-				?.querySelector('[name="opposingPartyDescription"]')
-				?.value?.trim();
-			if (!opposingName && !opposingDescription) {
-				return 'For personal injury matters, provide the opposing party name or a short description.';
-			}
-
-			const autoRelated = form?.querySelector('input[name="piAutoRelated"]:checked')?.value;
-			if (autoRelated === 'yes' && !form?.querySelector('[name="piAutoSubtype"]')?.value) {
-				return 'Choose the auto-related accident type.';
-			}
-			if (autoRelated === 'no' && !form?.querySelector('[name="piNonAutoSubtype"]')?.value) {
-				return 'Choose the non-auto injury type.';
-			}
-
-			const timingBucket = form?.querySelector('input[name="piTimingBucket"]:checked')?.value;
-			if (timingBucket === 'exact-date-known' && !form?.querySelector('[name="piExactDate"]')?.value) {
-				return 'Enter the exact accident date or choose a different timing option.';
-			}
-			if (
-				timingBucket &&
-				timingBucket !== 'exact-date-known' &&
-				!form?.querySelector('[name="piTimingExplanation"]')?.value?.trim()
-			) {
-				return 'If the exact date is not known, explain when it happened or when you learned about it.';
-			}
-
-			return '';
-		};
-
-		form?.addEventListener('change', (event) => {
-			const target = event.target;
-			if (!(target instanceof HTMLElement)) return;
-			if (
-				target.matches('input[name="service"]') ||
-				target.matches('input[name="piAutoRelated"]') ||
-				target.matches('input[name="piTimingBucket"]')
-			) {
-				updateServiceSections();
-			}
-		});
-
-		updateServiceSections();
-		setStatus('');
-
-		form?.addEventListener('submit', async (event) => {
-			event.preventDefault();
-			setStatus('');
-
-			if (!form.reportValidity()) {
-				setStatus('Please complete the required fields before submitting.', 'error');
-				return;
-			}
-
-			const specialCaseError = validateSpecialCases();
-			if (specialCaseError) {
-				setStatus(specialCaseError, 'error');
-				return;
-			}
-
-			if (!formEndpoint) {
-				setStatus('The intake form is not configured yet. Please try again later.', 'error');
-				return;
-			}
-
-			if (submitButton) {
-				submitButton.setAttribute('disabled', 'disabled');
-				submitButton.setAttribute('aria-busy', 'true');
-				submitButton.textContent = 'Sending...';
-			}
-
-			try {
-				const payload = serializeForm(new FormData(form));
-				const response = await fetch(formEndpoint, {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify(payload),
-				});
-
-				const data = await response.json().catch(() => ({}));
-				if (!response.ok) {
-					throw new Error(data?.error || 'The intake request could not be sent.');
-				}
-
-				if (window.gtag) {
-					window.gtag('event', 'generate_lead', {
-						event_category: 'intake',
-						event_label: `intake-${data.route || 'submitted'}`,
-					});
-				}
-
-				form.hidden = true;
-				if (successCopy) {
-					successCopy.textContent =
-						data.message ||
-						'Your request has been sent. If the matter appears to fit, the next step is usually an email with scheduling instructions.';
-				}
-				successPanel?.removeAttribute('hidden');
-			} catch (error) {
-				setStatus(
-					error instanceof Error ? error.message : 'Something went wrong while sending the intake request.',
-					'error',
-				);
-			} finally {
-				if (submitButton) {
-					submitButton.removeAttribute('disabled');
-					submitButton.removeAttribute('aria-busy');
-					submitButton.textContent = 'Send intake request';
-				}
-			}
-		});
+		mountIntakeForm();
 	</script>
 </Layout>

@@ -79,20 +79,27 @@ The site currently routes conversion to:
 
 ## Intake endpoint env vars
 
-The guided intake page expects a POST endpoint that can score the submission and send the summary email. The repo now includes:
+The guided intake page now has two submission paths:
+
+- default static-safe fallback: `FormSubmit` AJAX delivery to `cinocca@tulsalaw.llc`
+- optional advanced path: a dedicated POST endpoint that can score the submission and send the summary email directly
+
+The repo includes:
 
 - frontend page: `src/pages/start-intake.astro`
 - shared scoring logic: `src/lib/intake.ts`
 - Vercel-style serverless endpoint: `api/intake.ts`
 
-Configure these values in the environment that serves the intake endpoint:
+If you want to use a dedicated endpoint, configure these values in the environment that serves it:
 
 - `PUBLIC_INTAKE_API_URL`
 - `RESEND_API_KEY`
 - `INTAKE_FROM_EMAIL`
 - `INTAKE_TO_EMAIL`
 
-Defaults are documented in `.env.example`. If the site is still served from GitHub Pages, the frontend can stay on GitHub Pages, but the intake endpoint must be deployed somewhere that supports serverless functions and email delivery.
+Defaults are documented in `.env.example`.
+
+If the site stays on GitHub Pages and no `PUBLIC_INTAKE_API_URL` is configured, the frontend will fall back to FormSubmit so submissions can still be emailed out from a static deployment. The recipient may need to confirm the FormSubmit activation email the first time the fallback is used.
 
 ## Current page set
 
