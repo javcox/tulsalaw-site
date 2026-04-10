@@ -8,7 +8,9 @@ const preselectedServiceParam = Astro.url.searchParams.get('service');
 const preselectedService = intakeServices.some((service) => service.value === preselectedServiceParam)
 	? preselectedServiceParam
 	: 'personal-injury';
-const formEndpoint = import.meta.env.PUBLIC_INTAKE_API_URL ?? '';
+const formEndpoint =
+	import.meta.env.PUBLIC_INTAKE_API_URL ??
+	'https://tulsalaw-intake-as0yfj5rk-javcoxs-projects.vercel.app/api/intake';
 const formFallbackEndpoint = `https://formsubmit.co/ajax/${firm.intakeRecipientEmail}`;
 
 const schemas = [

@@ -99,6 +99,10 @@ If you want to use a dedicated endpoint, configure these values in the environme
 
 Defaults are documented in `.env.example`.
 
+Current production intake endpoint:
+
+- `https://tulsalaw-intake-as0yfj5rk-javcoxs-projects.vercel.app/api/intake`
+
 If the site stays on GitHub Pages and no `PUBLIC_INTAKE_API_URL` is configured, the frontend will fall back to FormSubmit so submissions can still be emailed out from a static deployment. The recipient may need to confirm the FormSubmit activation email the first time the fallback is used.
 
 ## Current page set
