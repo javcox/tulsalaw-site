@@ -453,6 +453,21 @@ main {
 	color: var(--trust);
 	font-size: 0.9rem;
 	font-weight: 700;
+	box-shadow: 0 6px 16px rgba(20, 38, 58, 0.04);
+	transition:
+		transform 180ms ease,
+		box-shadow 180ms ease,
+		background-color 180ms ease,
+		border-color 180ms ease;
+}
+
+.chip:hover,
+.chip:focus-visible {
+	transform: translateY(-3px);
+	background: rgba(47, 93, 134, 0.11);
+	border-color: rgba(47, 93, 134, 0.2);
+	box-shadow: 0 14px 28px rgba(20, 38, 58, 0.12);
+	outline: none;
 }
 
 .section-head {
