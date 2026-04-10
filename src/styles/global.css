@@ -1630,16 +1630,40 @@ main {
 	}
 
 	.progress-steps {
-		grid-template-columns: repeat(2, minmax(0, 1fr));
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: 8px;
 	}
 
 	.intake-progress {
+		gap: 10px;
+		padding: 16px 18px;
 		top: 74px;
 	}
 
 	.intake-progress-copy {
-		justify-items: start;
-		text-align: left;
+		justify-items: end;
+		text-align: right;
+	}
+
+	.progress-track {
+		height: 6px;
+	}
+
+	.progress-steps li {
+		gap: 4px;
+		justify-items: center;
+		text-align: center;
+	}
+
+	.progress-steps li strong {
+		width: 28px;
+		height: 28px;
+		font-size: 0.84rem;
+	}
+
+	.progress-steps li span {
+		font-size: 0.72rem;
+		white-space: nowrap;
 	}
 
 	.intake-submit-row {
@@ -1706,7 +1730,45 @@ main {
 	}
 
 	.intake-progress {
-		padding: 20px;
-		top: 66px;
+		gap: 8px;
+		padding: 12px 14px;
+		margin-bottom: 16px;
+		border-radius: 22px;
+		top: 64px;
+	}
+
+	.intake-progress-topline {
+		gap: 6px;
+	}
+
+	.intake-progress-topline .eyebrow {
+		font-size: 0.68rem;
+		letter-spacing: 0.14em;
+	}
+
+	.intake-progress-copy {
+		gap: 0;
+	}
+
+	[data-progress-detail] {
+		display: none;
+	}
+
+	.progress-track {
+		height: 5px;
+	}
+
+	.progress-steps {
+		gap: 6px;
+	}
+
+	.progress-steps li strong {
+		width: 24px;
+		height: 24px;
+		font-size: 0.76rem;
+	}
+
+	.progress-steps li span {
+		font-size: 0.66rem;
 	}
 }
