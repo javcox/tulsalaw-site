@@ -77,7 +77,10 @@ const schemas = [
 				<div class="intake-progress" data-intake-progress>
 					<div class="intake-progress-topline">
 						<p class="eyebrow">2 to 4 minutes</p>
-						<p class="mini-copy"><span data-progress-current>Step 1 of 4</span> | No long story required up front.</p>
+						<div class="intake-progress-copy">
+							<p class="mini-copy"><span data-progress-current>Step 1 of 4</span></p>
+							<p class="mini-copy" data-progress-detail>Choose the matter type first. No long story required up front.</p>
+						</div>
 					</div>
 					<div class="progress-track" aria-hidden="true">
 						<div class="progress-fill" data-progress-fill></div>
@@ -170,8 +173,11 @@ const schemas = [
 							<input type="text" name="bestTimes" maxlength="160" placeholder="Morning, afternoon, or specific windows" />
 						</label>
 					</div>
-				</section>
-
+					<div class="intake-subsection-head">
+						<p class="eyebrow">Fit review</p>
+						<h3>Universal screening questions</h3>
+						<p class="mini-copy">These answers help the firm tell whether the matter belongs in the next-step queue.</p>
+					</div>
 					<div class="field-grid field-grid-wide">
 						<div class="question-card">
 							<span>Are you in Oklahoma?</span>

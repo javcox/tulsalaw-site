@@ -40,6 +40,14 @@ export function mountIntakeForm() {
 	const progressSteps = Array.from(document.querySelectorAll<HTMLElement>('[data-progress-step]'));
 	const progressFill = document.querySelector<HTMLElement>('[data-progress-fill]');
 	const progressCurrent = document.querySelector<HTMLElement>('[data-progress-current]');
+	const progressDetail = document.querySelector<HTMLElement>('[data-progress-detail]');
+
+	const progressMeta: Record<number, string> = {
+		1: 'Choose the matter type first. No long story required up front.',
+		2: 'Reply details and fit questions come next.',
+		3: 'Answer only the service-specific details needed for review.',
+		4: 'Final summary, conflict names, and send.',
+	};
 
 	if (startedAtField) {
 		startedAtField.value = String(Date.now());
@@ -110,10 +118,13 @@ export function mountIntakeForm() {
 			step.classList.toggle('is-complete', value < normalized);
 		});
 		if (progressFill) {
-			progressFill.style.width = `${((normalized - 1) / 3) * 100}%`;
+			progressFill.style.width = `${(normalized / 4) * 100}%`;
 		}
 		if (progressCurrent) {
 			progressCurrent.textContent = `Step ${normalized} of 4`;
+		}
+		if (progressDetail) {
+			progressDetail.textContent = progressMeta[normalized];
 		}
 	};
 
