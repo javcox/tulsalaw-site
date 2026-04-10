@@ -74,11 +74,10 @@ export function mountIntakeForm() {
 	const getStickyOffset = () => {
 		const header = document.querySelector<HTMLElement>('.site-header');
 		const progress = document.querySelector<HTMLElement>('[data-intake-progress]');
-		const headerHeight = header?.getBoundingClientRect().height ?? 0;
-		const progressHeight = progress?.getBoundingClientRect().height ?? 0;
-		const progressTop = progress ? Number.parseFloat(window.getComputedStyle(progress).top) || 0 : 0;
+		const headerBottom = header?.getBoundingClientRect().bottom ?? 0;
+		const progressBottom = progress?.getBoundingClientRect().bottom ?? 0;
 
-		return Math.max(headerHeight + 18, progressTop + progressHeight + 18);
+		return Math.ceil(Math.max(headerBottom, progressBottom) + 24);
 	};
 
 	const scrollFieldIntoView = (field: FormField) => {
@@ -204,6 +203,9 @@ export function mountIntakeForm() {
 		window.setTimeout(() => {
 			firstIssue.field.focus({ preventScroll: true });
 			firstIssue.field.reportValidity();
+			window.setTimeout(() => {
+				scrollFieldIntoView(firstIssue.field);
+			}, 40);
 		}, 140);
 	};
 
