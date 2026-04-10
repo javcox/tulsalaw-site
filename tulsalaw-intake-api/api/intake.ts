@@ -1,4 +1,4 @@
-import { evaluateIntake, type IntakeSubmission } from '../lib/intake';
+import { evaluateIntake, type IntakeSubmission } from '../lib/intake.ts';
 
 const allowedOrigins = new Set([
 	'https://tulsalaw.llc',
