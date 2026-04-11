@@ -43,6 +43,10 @@
 	box-sizing: border-box;
 }
 
+:where([hidden]) {
+	display: none !important;
+}
+
 html {
 	scroll-behavior: smooth;
 }
@@ -1230,6 +1234,15 @@ main {
 	border-top: 1px solid rgba(20, 38, 58, 0.08);
 }
 
+.contact-route-card-primary {
+	border-color: rgba(47, 93, 134, 0.16);
+	box-shadow: 0 18px 34px rgba(20, 38, 58, 0.08);
+}
+
+.contact-route-card-primary .route-card-tag {
+	color: var(--accent);
+}
+
 .lane-card {
 	display: flex;
 	flex-direction: column;
@@ -1511,6 +1524,56 @@ main {
 	color: var(--ink-body);
 }
 
+.intake-hero-card .hero-summary {
+	max-width: 48ch;
+}
+
+.hero-aside-intake {
+	align-content: start;
+}
+
+.intake-review-panel {
+	display: grid;
+	gap: 16px;
+}
+
+.intake-review-panel .mini-title {
+	max-width: none;
+	font-size: 1.42rem;
+	line-height: 1.12;
+}
+
+.intake-review-panel .checklist {
+	margin-top: 2px;
+}
+
+.intake-review-meta {
+	display: grid;
+	gap: 12px;
+	padding-top: 2px;
+}
+
+.intake-review-meta-item {
+	display: grid;
+	gap: 4px;
+	padding: 16px 18px;
+	border-radius: 20px;
+	background: rgba(255, 255, 255, 0.72);
+	border: 1px solid rgba(20, 38, 58, 0.08);
+}
+
+.intake-review-meta-item strong {
+	font-size: 0.96rem;
+	font-weight: 800;
+	letter-spacing: -0.01em;
+	color: var(--trust);
+}
+
+.intake-review-meta-item span {
+	font-size: 0.93rem;
+	color: var(--ink-body);
+}
+
 .footer {
 	padding: 50px 0 60px;
 }
@@ -1668,8 +1731,8 @@ main {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	min-height: clamp(280px, 32vw, 420px);
-	padding: 18px;
+	min-height: clamp(236px, 28vw, 360px);
+	padding: 16px;
 	border-radius: 26px;
 	border: 1px solid rgba(20, 38, 58, 0.08);
 	background:
@@ -1684,7 +1747,7 @@ main {
 	width: auto;
 	max-width: 100%;
 	height: 100%;
-	max-height: clamp(244px, 29vw, 384px);
+	max-height: clamp(212px, 24vw, 320px);
 	object-fit: contain;
 	object-position: center;
 	display: block;
@@ -2024,11 +2087,6 @@ main {
 	border-radius: 28px;
 	background: rgba(244, 248, 252, 0.72);
 	border: 1px solid rgba(20, 38, 58, 0.08);
-}
-
-.service-question-group[hidden],
-.field-subgroup[hidden] {
-	display: none !important;
 }
 
 .service-question-header h3 {

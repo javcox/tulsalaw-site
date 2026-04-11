@@ -1,7 +1,5 @@
 ---
-import IntakeExpectationsSection from '../components/IntakeExpectationsSection.astro';
-import IntakePathPanel from '../components/IntakePathPanel.astro';
-import { featuredServices, firm, getServiceUrl } from '../data/site';
+import { firm } from '../data/site';
 import Layout from '../layouts/Layout.astro';
 
 const schemas = [
@@ -29,100 +27,214 @@ const schemas = [
 					<span>Contact</span>
 				</div>
 				<p class="eyebrow">Contact</p>
-				<h1 class="page-title">Choose the fastest intake path for your matter.</h1>
+				<h1 class="page-title">Choose the safest, fastest path for attorney review.</h1>
 				<p class="lead">
-					New matters are screened for fit, urgency, conflicts, and attorney availability. The
-					fastest path is the guided intake form on this site, with email still available if you
-					need to explain something before starting. Most requests are reviewed within 1 business
-					day when submitted on a business day.
+					Start with the guided intake if you want the office to review the matter in the right
+					context without a long email. Use email when you need to send a short note first. Most
+					requests are reviewed within 1 business day when submitted on a business day.
+				</p>
+				<div class="trust-strip" aria-label="Contact page trust indicators">
+					<span class="quick-fact">Tulsa office</span>
+					<span class="quick-fact">Attorney-led review</span>
+					<span class="quick-fact">2 to 4 minute guided intake</span>
+					<span class="quick-fact">Most requests reviewed within 1 business day</span>
+				</div>
+				<div class="hero-actions">
+					<a
+						class="button button-primary"
+						href={firm.consultationUrl}
+						data-track="generate_lead"
+						data-track-label="contact-start-intake-hero"
+					>
+						Start Intake
+					</a>
+					<a
+						class="button button-ghost"
+						href={firm.emailHref}
+						data-track="generate_lead"
+						data-track-label="contact-email-hero"
+					>
+						Email the Firm
+					</a>
+				</div>
+				<p class="mini-copy hero-summary">
+					Do not send confidential documents unless requested. Submitting intake or email does not
+					create an attorney-client relationship.
 				</p>
 			</div>
 
 			<div class="hero-aside">
 				<div class="panel">
-					<p class="mini-kicker">Tulsa office</p>
-					<h2 class="mini-title">Serving Tulsa, Bixby, Broken Arrow, and Oklahoma from Tulsa.</h2>
-					<p class="mini-copy">{firm.fullAddress}</p>
-					<div class="chips">
-						{featuredServices.map((service) => <span class="chip">{service.name}</span>)}
-					</div>
+					<p class="mini-kicker">Best path for most matters</p>
+					<h2 class="mini-title">Use guided intake when you want the matter routed cleanly.</h2>
+					<ul class="checklist">
+						<li>Choose the service lane first instead of guessing where the issue belongs</li>
+						<li>Send the core facts without writing a full narrative</li>
+						<li>Personal injury matters are screened for fit first</li>
+						<li>Many non-injury matters that fit move next to the $100 30-minute consultation path</li>
+					</ul>
 				</div>
-				<IntakePathPanel />
+				<div class="panel">
+					<p class="mini-kicker">Use email when</p>
+					<h2 class="mini-title">A short note will help before you begin.</h2>
+					<p class="mini-copy">
+						Email works best when you need to mention a deadline, add one practical detail, or
+						ask a short routing question before starting intake.
+					</p>
+					<p class="mini-copy"><strong>{firm.fullAddress}</strong></p>
+				</div>
 			</div>
 		</div>
 	</section>
 
 	<section class="section-xl">
-		<div class="shell contact-grid">
-			<div class="contact-card">
-				<p class="section-label">Email</p>
-				<strong>{firm.email}</strong>
-				<p>Best when you want to explain the matter, timing, and what documents already exist.</p>
-				<div class="stack-actions">
-					<a
-						class="button button-primary"
-						href={firm.emailHref}
-						data-track="generate_lead"
-						data-track-label="contact-email"
-					>
-						Email the firm
-					</a>
+		<div class="shell route-grid">
+			<article class="route-card contact-route-card contact-route-card-primary">
+				<div>
+					<p class="route-card-tag">Primary route</p>
+					<h3>Guided Intake</h3>
+					<p>
+						The cleanest path when you want the matter reviewed for fit, timing, urgency, and
+						next-step routing without writing a long email.
+					</p>
 				</div>
-			</div>
-
-			<div class="contact-card">
-				<p class="section-label">Guided intake form</p>
-				<strong>Structured consultation request</strong>
-				<p>
-					Use the guided intake if you want the matter screened for fit, timing, and next-step routing.
-				</p>
-				<div class="stack-actions">
+				<div class="chips">
+					<span class="chip">2 to 4 minutes</span>
+					<span class="chip">Mostly multiple choice</span>
+					<span class="chip">Attorney-reviewed</span>
+				</div>
+				<div class="route-card-footer">
 					<a
 						class="button button-primary"
 						href={firm.consultationUrl}
 						data-track="generate_lead"
-						data-track-label="contact-secure-form"
+						data-track-label="contact-start-intake-card"
 					>
 						Start Intake
 					</a>
 				</div>
-			</div>
+			</article>
 
-			<div class="contact-card">
-				<p class="section-label">What to send</p>
-				<ul class="info-list">
-					<li>Your matter type and what result you are trying to achieve</li>
-					<li>Any deadline, hearing date, filing pressure, or urgent timing</li>
-					<li>County, location, and whether the matter is already active</li>
-					<li>The best email address and phone number for follow-up</li>
-				</ul>
-			</div>
+			<article class="route-card contact-route-card">
+				<div>
+					<p class="route-card-tag">Secondary route</p>
+					<h3>Email the Firm</h3>
+					<p>
+						Best when a short note will clarify timing, a deadline, or one practical detail before
+						you begin the intake path.
+					</p>
+				</div>
+				<div class="chips">
+					<span class="chip">{firm.email}</span>
+				</div>
+				<div class="route-card-footer">
+					<a
+						class="button button-ghost"
+						href={firm.emailHref}
+						data-track="generate_lead"
+						data-track-label="contact-email-card"
+					>
+						Email the Firm
+					</a>
+				</div>
+			</article>
+
+			<article class="route-card contact-route-card">
+				<div>
+					<p class="route-card-tag">If you are not sure</p>
+					<h3>Use the broader map first</h3>
+					<p>
+						If the matter could fit more than one lane, start with Practice Areas or Legal Guidance
+						before you commit to a narrower path.
+					</p>
+				</div>
+				<div class="chips">
+					<a class="chip" href="/practice-areas/">Practice Areas</a>
+					<a class="chip" href="/legal-guidance/">Legal Guidance</a>
+				</div>
+				<div class="route-card-footer">
+					<a class="button button-ghost" href="/practice-areas/">
+						See Practice Areas
+					</a>
+				</div>
+			</article>
 		</div>
 	</section>
 
-	<IntakeExpectationsSection />
+	<section class="section">
+		<div class="shell highlight-band">
+			<div class="band">
+				<p class="eyebrow">What to send first</p>
+				<h2 class="section-title">Only the details needed to route the matter safely.</h2>
+				<ul class="checklist">
+					<li>Your matter type and the result you are trying to get</li>
+					<li>Any deadline, hearing date, filing pressure, or urgent timing</li>
+					<li>The county, location, and whether anything is already active</li>
+					<li>The best email address and phone number for follow-up</li>
+				</ul>
+				<p class="mini-copy">
+					Do not send confidential documents or a full life story unless the office asks for them.
+				</p>
+			</div>
+			<div class="band">
+				<p class="eyebrow">What happens next</p>
+				<h2 class="section-title">The office reviews first, then sends the next step.</h2>
+				<ol class="intake-steps">
+					<li>
+						<strong>1. The request is reviewed for fit, timing, conflicts, and scope.</strong>
+						<span>That first review is meant to keep the process structured instead of reactive.</span>
+					</li>
+					<li>
+						<strong>2. Personal injury matters are screened for fit first.</strong>
+						<span>Liability, treatment, damages, and insurance are reviewed before a deeper discussion is offered.</span>
+					</li>
+					<li>
+						<strong>3. Many non-injury matters that fit move next to the $100 30-minute consultation path.</strong>
+						<span>That next step is usually sent by email with scheduling instructions.</span>
+					</li>
+				</ol>
+			</div>
+		</div>
+	</section>
 
 	<section class="section">
 		<div class="shell">
 			<div class="section-head">
 				<div>
-					<p class="eyebrow">Start with the right page</p>
-					<h2 class="section-title">If you already know the matter type, go straight there</h2>
+					<p class="eyebrow">Go straight to a lane</p>
+					<h2 class="section-title">Use the closest path if you already know what the matter is.</h2>
 				</div>
 			</div>
 
-			<div class="grid-3">
-				{featuredServices.map((service) => (
-					<div class="card">
-						<h3>{service.name}</h3>
-						<p>{service.summary}</p>
-						<div class="stack-actions">
-							<a class="button button-ghost" href={getServiceUrl(service.slug)}>
-								Open {service.name}
-							</a>
-						</div>
+			<div class="route-grid">
+				<a class="route-card" href="/personal-injury/">
+					<div>
+						<p class="route-card-tag">Injury matters</p>
+						<h3>Personal Injury Review</h3>
+						<p>Best when fault, treatment, damages, and insurance need the first answer.</p>
 					</div>
-				))}
+				</a>
+				<a class="route-card" href="/estate-planning/">
+					<div>
+						<p class="route-card-tag">Planning matters</p>
+						<h3>Estate Planning</h3>
+						<p>Best for wills, trusts, powers of attorney, and guardianship-related planning.</p>
+					</div>
+				</a>
+				<a class="route-card" href="/legal-guidance/">
+					<div>
+						<p class="route-card-tag">Not sure yet</p>
+						<h3>Legal Guidance</h3>
+						<p>Best when the right next legal move still needs attorney judgment first.</p>
+					</div>
+				</a>
+				<a class="route-card" href="/oklahoma-legal-forms/">
+					<div>
+						<p class="route-card-tag">Shorter route</p>
+						<h3>Simple Services</h3>
+						<p>Best for document-focused matters that already fit a shorter, clearer path.</p>
+					</div>
+				</a>
 			</div>
 		</div>
 	</section>

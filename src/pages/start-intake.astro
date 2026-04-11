@@ -1,6 +1,5 @@
 ---
 import { Image } from 'astro:assets';
-import IntakePathPanel from '../components/IntakePathPanel.astro';
 import intakeTrustCollage from '../assets/intake-courtroom-collage.png';
 import { firm } from '../data/site';
 import { intakeServices } from '../lib/intake';
@@ -33,23 +32,29 @@ const schemas = [
 >
 	<section class="page-hero">
 		<div class="shell page-frame">
-			<div class="hero-card">
+			<div class="hero-card intake-hero-card">
 				<div class="breadcrumbs">
 					<a href="/">Home</a>
 					<span>/</span>
 					<span>Start Intake</span>
 				</div>
 				<p class="eyebrow">Guided Intake</p>
-				<h1 class="page-title">Start the intake in one guided path the firm can review quickly.</h1>
+				<h1 class="page-title">Start the guided intake the office can review quickly.</h1>
 				<p class="lead">
-					Choose the right service lane, answer the fit questions, and send only the core facts
-					needed for review. Most people finish this in about 2 to 4 minutes, and most requests are reviewed within 1 business day.
+					Choose the service lane, answer the fit questions, and send only the core facts needed
+					for attorney review. Most people finish in about 2 to 4 minutes, and most requests are
+					reviewed within 1 business day.
 				</p>
-				<div class="quick-facts">
-					<span class="quick-fact">Choose the matter type first</span>
-					<span class="quick-fact">Mostly multiple choice</span>
-					<span class="quick-fact">Reviewed within 1 business day</span>
+				<div class="trust-strip" aria-label="Intake trust indicators">
+					<span>Attorney-led review</span>
+					<span>Tulsa office</span>
+					<span>2 to 4 minute guided intake</span>
+					<span>No documents unless requested</span>
 				</div>
+				<p class="mini-copy hero-summary">
+					The form is designed to collect only the details needed for fit, conflict, scope, and
+					next-step review. Submitting intake does not create an attorney-client relationship.
+				</p>
 				<div class="intake-hero-visual">
 					<Image
 						src={intakeTrustCollage}
@@ -62,18 +67,31 @@ const schemas = [
 				</div>
 			</div>
 
-			<div class="hero-aside">
-				<div class="panel">
-					<p class="mini-kicker">What happens after you submit</p>
-					<h2 class="mini-title">Reviewed first. Scheduled second.</h2>
+			<div class="hero-aside hero-aside-intake">
+				<div class="panel intake-review-panel">
+					<p class="mini-kicker">Attorney-led review</p>
+					<h2 class="mini-title">A safe, structured way to start.</h2>
+					<p class="mini-copy">
+						The guided intake keeps the first review orderly. The office looks first at fit,
+						timing, urgency, conflicts, and what should happen next.
+					</p>
 					<ul class="checklist">
 						<li>Most requests are reviewed within 1 business day.</li>
 						<li>Personal injury matters are screened for fit first.</li>
-						<li>Non-injury matters that fit usually move next to scheduling instructions by email.</li>
+						<li>Next steps are usually sent by email after review.</li>
 						<li>For many non-injury matters that fit, the next step is a $100 30-minute consultation.</li>
 					</ul>
+					<div class="intake-review-meta">
+						<div class="intake-review-meta-item">
+							<strong>Tulsa office</strong>
+							<span>{firm.fullAddress}</span>
+						</div>
+						<div class="intake-review-meta-item">
+							<strong>Send only what is needed first</strong>
+							<span>Do not send confidential documents or a long narrative unless the office asks for more.</span>
+						</div>
+					</div>
 				</div>
-				<IntakePathPanel />
 			</div>
 		</div>
 	</section>
