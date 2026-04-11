@@ -28,10 +28,19 @@ import { featuredServices, firm, getServiceUrl } from '../data/site';
 				{firm.tagline}
 			</p>
 
-			<div class="footer-trust-list">
-				<p><strong>Office</strong> {firm.fullAddress}</p>
-				<p><strong>Reply window</strong> Most requests are reviewed within 1 business day.</p>
-				<p><strong>Service area</strong> {firm.serviceArea}</p>
+			<div class="footer-trust-grid">
+				<div class="footer-trust-card">
+					<strong>Office</strong>
+					<p>{firm.fullAddress}</p>
+				</div>
+				<div class="footer-trust-card">
+					<strong>Reply window</strong>
+					<p>Most requests are reviewed within 1 business day.</p>
+				</div>
+				<div class="footer-trust-card">
+					<strong>Service area</strong>
+					<p>{firm.serviceArea}</p>
+				</div>
 			</div>
 
 			<div class="stack-actions">
@@ -45,12 +54,17 @@ import { featuredServices, firm, getServiceUrl } from '../data/site';
 				</a>
 			</div>
 
-			<p class="footer-note">
-				Attorney advertising. The information on this site is for general information only and
-				does not create an attorney-client relationship. Representation begins only after
-				conflict review and a confirmed engagement. If you need to explain something before you
-				start, email <a href={firm.emailHref}>the firm directly</a>.
-			</p>
+			<div class="footer-notice">
+				<p class="mini-kicker">Attorney advertising and review notice</p>
+				<ul class="legal-note-list">
+					<li>The information on this site is for general information only.</li>
+					<li>Visiting the site, sending email, or submitting intake does not create an attorney-client relationship.</li>
+					<li>Representation begins only after conflict review and a confirmed engagement.</li>
+				</ul>
+				<p class="footer-note">
+					If you need to explain something before you start, <a href={firm.emailHref}>email the firm directly</a>.
+				</p>
+			</div>
 		</div>
 
 		<div class="footer-links">

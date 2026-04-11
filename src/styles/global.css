@@ -2191,6 +2191,130 @@ main {
 	text-decoration-color: currentColor;
 }
 
+.text-link::after {
+	content: '\2192';
+}
+
+.cta-trust-strip {
+	margin-top: 18px;
+}
+
+.cta-panel-note {
+	max-width: 56ch;
+}
+
+.faq-item summary {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+}
+
+.faq-item summary::after {
+	content: '+';
+	flex: 0 0 auto;
+	font-size: 1.2rem;
+	font-weight: 500;
+	line-height: 1;
+	color: var(--accent-deep);
+}
+
+.faq-item details[open] summary::after {
+	content: '-';
+}
+
+.faq-item p {
+	max-width: 70ch;
+}
+
+.review-intro {
+	max-width: 58ch;
+}
+
+.review-topline {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+	width: 100%;
+}
+
+.review-card {
+	gap: 12px;
+}
+
+.review-quote,
+.review-author,
+.review-stars,
+.review-context {
+	margin: 0;
+}
+
+.review-author {
+	font-size: 0.78rem;
+}
+
+.review-context {
+	padding: 7px 12px;
+	border-radius: 999px;
+	background: rgba(69, 107, 90, 0.09);
+	border: 1px solid rgba(69, 107, 90, 0.16);
+	font-size: 0.74rem;
+}
+
+.footer-trust-grid {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 12px;
+	margin-top: 16px;
+}
+
+.footer-trust-card {
+	padding: 16px 18px;
+	border-radius: 18px;
+	background: rgba(255, 255, 255, 0.68);
+	border: 1px solid rgba(20, 38, 58, 0.08);
+}
+
+.footer-trust-card p {
+	margin: 0;
+	font-size: 0.92rem;
+}
+
+.footer-notice {
+	margin-top: 20px;
+	padding-top: 18px;
+	border-top: 1px solid rgba(20, 38, 58, 0.08);
+}
+
+.legal-note-list {
+	display: grid;
+	gap: 10px;
+	margin: 12px 0 0;
+	padding: 0;
+	list-style: none;
+}
+
+.legal-note-list li {
+	display: grid;
+	grid-template-columns: 16px minmax(0, 1fr);
+	gap: 10px;
+	align-items: start;
+	font-size: 0.9rem;
+	color: var(--ink-body);
+}
+
+.legal-note-list li::before {
+	content: '';
+	width: 8px;
+	height: 8px;
+	margin-top: 8px;
+	border-radius: 50%;
+	background: rgba(47, 93, 134, 0.7);
+	box-shadow: 0 0 0 4px rgba(47, 93, 134, 0.08);
+}
+
 @media (prefers-reduced-motion: reduce) {
 	html {
 		scroll-behavior: auto;
@@ -2365,6 +2489,10 @@ main {
 	}
 
 	.footer-links {
+		grid-template-columns: 1fr;
+	}
+
+	.footer-trust-grid {
 		grid-template-columns: 1fr;
 	}
 

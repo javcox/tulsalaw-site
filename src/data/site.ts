@@ -48,9 +48,9 @@ export const firm = {
 	region: 'Oklahoma',
 	postalCode: '74133',
 	fullAddress: '10026-A S. Mingo Rd., Suite 238, Tulsa, OK 74133',
-	serviceArea: 'Tulsa office serving Tulsa, Bixby, Broken Arrow, and clients across Oklahoma',
+	serviceArea: 'Tulsa office serving Tulsa, Bixby, Broken Arrow, and nearby Oklahoma communities',
 	tagline:
-		'Attorney-led review for personal injury, estate planning, legal guidance, family matters, and business documents from a Tulsa office serving Bixby, Broken Arrow, and clients across Oklahoma.',
+		'Attorney-led review for personal injury, estate planning, legal guidance, family matters, and business documents from a Tulsa office serving nearby Oklahoma communities.',
 	intakeSummary:
 		'New client matters are reviewed for fit, conflicts, urgency, and scheduling before representation begins.',
 	credentials: [

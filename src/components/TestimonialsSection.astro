@@ -31,6 +31,11 @@ const reviews = [
 			<div>
 				<p class="eyebrow">Customer Reviews</p>
 				<h2 class="section-title">What clients say about judgment, communication, and next steps</h2>
+				<p class="section-copy review-intro">
+					People deciding whether to reach out usually want signs of candor, clear communication,
+					and a process that does not waste time. These comments speak to those parts of the
+					experience.
+				</p>
 			</div>
 		</div>
 
@@ -38,10 +43,12 @@ const reviews = [
 			{
 				reviews.map((item) => (
 					<article class="review-card">
-						<p class="review-author">{item.author}</p>
-						<p class="review-stars" aria-label="5 out of 5 stars">&starf;&starf;&starf;&starf;&starf;</p>
-						<p class="review-context">{item.context}</p>
+						<div class="review-topline">
+							<p class="review-context">{item.context}</p>
+							<p class="review-stars" aria-label="5 out of 5 stars">&starf;&starf;&starf;&starf;&starf;</p>
+						</div>
 						<p class="review-quote">"{item.quote}"</p>
+						<p class="review-author">{item.author}</p>
 					</article>
 				))
 			}
