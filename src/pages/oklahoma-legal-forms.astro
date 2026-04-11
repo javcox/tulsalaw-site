@@ -27,14 +27,16 @@ const simpleServices = featuredServices.filter(
 				<p class="lead">
 					Simple Services is the shorter route for document-focused matters. It is strongest for
 					estate planning, powers of attorney, guardianship planning, uncontested-divorce
-					paperwork, LLC formation, and contract review. Many matters that fit move next to the
-					$100 30-minute consultation path after intake review.
+					paperwork, LLC formation, and contract review. Use Personal Injury Review for injury
+					matters, Legal Guidance when the lane is still unclear, and Practice Areas when you want
+					the broader service map. Many matters that fit move next to the $100 30-minute
+					consultation path after intake review.
 				</p>
 			</div>
 
 			<div class="hero-aside">
 				<div class="panel">
-					<p class="mini-kicker">Simple Services</p>
+					<p class="mini-kicker">Use Simple Services when</p>
 					<ul class="checklist">
 						<li>Estate documents and planning updates</li>
 						<li>Power of attorney and guardianship planning</li>
@@ -43,12 +45,17 @@ const simpleServices = featuredServices.filter(
 					</ul>
 				</div>
 				<div class="panel">
-					<p class="mini-kicker">How this differs</p>
-					<p class="mini-copy">
-						Use this page when the matter is mostly document-driven and you want the shorter
-						path. Use Practice Areas when you want the broader map, including injury review and
-						wider family or business issues.
-					</p>
+					<p class="mini-kicker">Choose a different path if</p>
+					<ul class="checklist">
+						<li>The issue is an injury claim that needs liability and damages review first.</li>
+						<li>You are not sure whether the matter belongs in planning, family, business, or injury review.</li>
+						<li>You want the broader service map instead of the shorter document route.</li>
+					</ul>
+					<div class="chips">
+						<a class="chip" href="/personal-injury/">Personal Injury Review</a>
+						<a class="chip" href="/legal-guidance/">Legal Guidance</a>
+						<a class="chip" href="/practice-areas/">Practice Areas</a>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -72,19 +79,24 @@ const simpleServices = featuredServices.filter(
 				</ul>
 			</div>
 			<div class="band">
-				<p class="eyebrow">Start Here</p>
-				<h2 class="section-title">If you are not sure where the matter fits, start with the closest service and let the office route it from there.</h2>
+				<p class="eyebrow">Need a wider route?</p>
+				<h2 class="section-title">Use a broader path when the matter is not mostly document-focused.</h2>
 				<ul class="checklist">
-					<li>Choose the service that sounds closest to your issue.</li>
-					<li>Use the guided intake if you would rather route the matter through a fit review first.</li>
-					<li>The office can help determine whether the issue is a good fit for consultation.</li>
+					<li>Use Legal Guidance if the issue crosses lanes or the next step is still unclear.</li>
+					<li>Use Practice Areas if you want the broader family, business, and planning map.</li>
+					<li>Use the guided intake if you would rather let the office route the matter after fit review.</li>
 				</ul>
+				<div class="chips">
+					<a class="chip" href="/legal-guidance/">Legal Guidance</a>
+					<a class="chip" href="/practice-areas/">Practice Areas</a>
+					<a class="chip" href={firm.consultationUrl}>Start Intake</a>
+				</div>
 			</div>
 		</div>
 	</section>
 
 	<CtaPanel
-		title="Ready to talk about your matter?"
-		copy="Send an email or use the guided intake to describe the issue in plain language and request a consultation."
+		title="Ready to send a document-focused matter in for review?"
+		copy="Use the guided intake when you want the shorter route for planning documents, uncontested-divorce paperwork, LLC formation, or contract review."
 	/>
 </Layout>
