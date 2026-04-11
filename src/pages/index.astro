@@ -1,7 +1,6 @@
 ---
 import AttorneySpotlight from '../components/AttorneySpotlight.astro';
 import CtaPanel from '../components/CtaPanel.astro';
-import IntakePathPanel from '../components/IntakePathPanel.astro';
 import PracticeCard from '../components/PracticeCard.astro';
 import PracticeAreasCard from '../components/PracticeAreasCard.astro';
 import TestimonialsSection from '../components/TestimonialsSection.astro';
@@ -11,9 +10,25 @@ import Layout from '../layouts/Layout.astro';
 
 const trustItems = ['Tulsa office', '2-4 minute intake', 'Attorney-led review', 'Reviewed within 1 business day'];
 
-const browseLinks = [
-	{ label: 'Practice Areas', href: '/practice-areas/' },
-	{ label: 'Simple Services', href: '/oklahoma-legal-forms/' },
+const heroFitItems = [
+	{
+		title: 'Personal injury review',
+		copy: 'Car, truck, motorcycle, pedestrian, and related injury matters that need an attorney look at liability, treatment, and damages.',
+	},
+	{
+		title: 'Estate planning',
+		copy: 'Wills, trusts, powers of attorney, guardianship planning, and document updates that should be handled carefully and cleanly.',
+	},
+	{
+		title: 'Legal guidance',
+		copy: 'Family, business, contract, and LLC matters where the next practical step should be clear before anything gets signed, filed, or escalated.',
+	},
+];
+
+const heroProcessItems = [
+	'Choose the closest lane so the matter moves into the right review queue.',
+	'Send only the core facts. Most people finish intake in about 2 to 4 minutes.',
+	'Watch for attorney review. Personal injury is screened for fit first, and many non-injury matters that fit move next to the $100 30-minute consultation path.',
 ];
 
 const schemas = [
@@ -67,15 +82,12 @@ const schemas = [
 >
 	<section class="hero">
 		<div class="shell hero-grid">
-			<div class="hero-card">
+			<div class="hero-card hero-home-card">
 				<p class="eyebrow">Tulsa office. Attorney-led review. Clear next steps.</p>
-				<h1 class="hero-title">
-					Tulsa lawyer for personal injury review, estate planning, and clear legal guidance.
-				</h1>
+				<h1 class="hero-title">Tulsa lawyer for injury review, estate planning, and legal guidance.</h1>
 				<p class="lead">
-					If you need to know whether an injury matter is worth pursuing, what documents need
-					attention, or what should happen next, start the intake. Most requests are reviewed
-					within 1 business day, and you do not need to write a long memo before you begin.
+					Use the guided intake to send the matter into the right review lane. Most requests are
+					reviewed within 1 business day, and most people finish in about 2 to 4 minutes.
 				</p>
 
 				<div class="hero-actions">
@@ -89,80 +101,41 @@ const schemas = [
 					</a>
 					<a class="button button-ghost" href="/practice-areas/">See Practice Areas</a>
 				</div>
-				<p class="mini-copy">
-					Most people finish intake in 2 to 4 minutes. Personal injury matters are screened for
-					fit first. If you are not sure which lane fits, choose Legal Guidance.
+				<p class="hero-summary">
+					The site is strongest for personal injury review, wills and powers of attorney, and
+					practical family, business, or document matters.
+				</p>
+				<p class="mini-copy hero-support-copy">
+					If you are not sure which lane fits, choose Legal Guidance.
 				</p>
 
 				<div class="trust-strip" aria-label="Trust indicators">
 					{trustItems.map((item) => <span>{item}</span>)}
 				</div>
-
-				<div class="hero-meta hero-meta-lanes">
-					{homepageLanes.map((lane, index) => (
-						<a class="stat-card lane-stat" href={lane.href}>
-							<strong>{`0${index + 1}`} {lane.title}</strong>
-							<span>{lane.copy}</span>
-						</a>
-					))}
-				</div>
 			</div>
 
 			<div class="hero-aside">
-				<div class="panel">
-					<p class="mini-kicker">Before you submit</p>
-					<h2 class="mini-title">What the office looks for first.</h2>
-					<p class="mini-copy">
-						The intake is built to route the matter into the right review lane without pushing
-						anyone into a call before the facts are clear.
-					</p>
-					<ul class="checklist">
-						<li>Personal injury matters are screened for fit first.</li>
-						<li>Many non-injury matters that fit move next to the $100 30-minute consultation path.</li>
-						<li>The office reviews fit, timing, conflicts, and urgency before the next step is offered.</li>
-					</ul>
-					<p class="section-label" style="margin-top: 18px;">Need the wider map?</p>
-					<div class="chips">
+				<div class="panel hero-review-panel">
+					<p class="mini-kicker">Best fit matters</p>
+					<h2 class="mini-title">Three kinds of matters the office reviews most often.</h2>
+					<div class="hero-fit-list">
 						{
-							browseLinks.map((item) => (
-								<a class="chip" href={item.href}>
-									{item.label}
-								</a>
+							heroFitItems.map((item) => (
+								<div class="hero-fit-item">
+									<strong>{item.title}</strong>
+									<p>{item.copy}</p>
+								</div>
 							))
 						}
 					</div>
-					<p class="mini-copy office-copy">
-						Tulsa office serving Tulsa, Bixby, Broken Arrow, and nearby communities: {firm.fullAddress}
+					<p class="section-label hero-panel-label">After intake</p>
+					<ol class="hero-process-list">
+						{heroProcessItems.map((item) => <li>{item}</li>)}
+					</ol>
+					<p class="hero-support-note">
+						Tulsa office serving Tulsa, Bixby, Broken Arrow, and nearby communities. The intake
+						is meant to save time, not push anyone into a call before the facts are clear.
 					</p>
-				</div>
-
-				<IntakePathPanel />
-			</div>
-		</div>
-	</section>
-
-	<section class="section">
-		<div class="shell highlight-band">
-			<div class="band">
-				<p class="eyebrow">What Happens Next</p>
-				<h2 class="section-title">A clearer intake path from first request to follow-up.</h2>
-				<ul class="checklist">
-					<li>Start Intake and choose the lane that best fits the matter.</li>
-					<li>The firm reviews fit, timing, conflicts, and urgency.</li>
-					<li>Personal injury matters are screened first for whether the claim appears worth pursuing.</li>
-					<li>Most planning, family, business, and legal-guidance matters that fit move next to an email with scheduling instructions for the $100 30-minute consultation.</li>
-				</ul>
-			</div>
-			<div class="band">
-				<p class="section-label">Before you submit</p>
-				<p class="lead" style="margin-top: 0;">
-					The intake is meant to save time, not create a high-pressure funnel. You do not need to
-					write a long memo, upload documents, or guess the legal strategy before reaching out.
-				</p>
-				<div class="quote" style="margin-top: 18px;">
-					This site is built for attorney review, not instant free legal advice. It is strongest for
-					Tulsa, Bixby, Broken Arrow, and nearby Oklahoma matters that fit the listed practice areas
-					and current availability.
 				</div>
 			</div>
 		</div>

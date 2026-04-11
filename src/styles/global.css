@@ -101,11 +101,11 @@ main {
 }
 
 .header-row {
-	display: flex;
+	display: grid;
+	grid-template-columns: minmax(250px, auto) 1fr auto;
 	align-items: center;
-	justify-content: space-between;
-	gap: 20px;
-	padding: 14px 0;
+	gap: 22px;
+	padding: 14px 0 13px;
 }
 
 .brand {
@@ -161,30 +161,49 @@ main {
 .nav {
 	display: flex;
 	align-items: center;
-	flex-wrap: wrap;
 	justify-content: center;
-	gap: 8px;
+	gap: 22px;
+	min-width: 0;
 }
 
 .nav a {
-	padding: 10px 15px;
-	border-radius: 999px;
-	border: 1px solid rgba(20, 38, 58, 0.03);
+	position: relative;
+	padding: 8px 0;
+	border-radius: 0;
+	border: none;
 	font-size: 0.94rem;
 	color: var(--ink-soft);
 	transition:
-		background 150ms ease,
 		color 150ms ease,
-		border-color 150ms ease,
+		opacity 150ms ease;
+}
+
+.nav a::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: -6px;
+	height: 1.5px;
+	border-radius: 999px;
+	background: linear-gradient(90deg, rgba(47, 93, 134, 0.15), rgba(47, 93, 134, 0.95));
+	opacity: 0;
+	transform: scaleX(0.68);
+	transform-origin: center;
+	transition:
+		opacity 150ms ease,
 		transform 150ms ease;
 }
 
 .nav a:hover,
 .nav a.active {
-	background: rgba(255, 255, 255, 0.82);
-	border-color: rgba(24, 51, 71, 0.1);
-	color: var(--trust-deep);
-	transform: translateY(-1px);
+	color: var(--trust);
+}
+
+.nav a:hover::after,
+.nav a.active::after {
+	opacity: 1;
+	transform: scaleX(1);
 }
 
 .header-cta {
@@ -288,9 +307,9 @@ main {
 
 .hero-grid {
 	display: grid;
-	grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
-	gap: 28px;
-	align-items: stretch;
+	grid-template-columns: minmax(0, 1.14fr) minmax(320px, 0.86fr);
+	gap: 24px;
+	align-items: start;
 }
 
 .hero-card,
@@ -321,6 +340,18 @@ main {
 	height: 220px;
 	border-radius: 50%;
 	background: radial-gradient(circle, rgba(47, 93, 134, 0.07), transparent 68%);
+}
+
+.hero-home-card .hero-title {
+	max-width: 11.6ch;
+}
+
+.hero-home-card .lead {
+	max-width: 46ch;
+}
+
+.hero-support-copy {
+	max-width: 42ch;
 }
 
 .hero-title,
@@ -419,6 +450,85 @@ main {
 .hero-aside .panel {
 	padding: 24px;
 	border-radius: 26px;
+}
+
+.hero-review-panel {
+	display: grid;
+	gap: 18px;
+}
+
+.hero-fit-list {
+	display: grid;
+	gap: 14px;
+}
+
+.hero-fit-item {
+	display: grid;
+	gap: 6px;
+	padding-bottom: 14px;
+	border-bottom: 1px solid rgba(20, 38, 58, 0.08);
+}
+
+.hero-fit-item:last-child {
+	padding-bottom: 0;
+	border-bottom: none;
+}
+
+.hero-fit-item strong {
+	font-size: 1rem;
+	font-weight: 800;
+	letter-spacing: -0.01em;
+	color: var(--trust);
+}
+
+.hero-fit-item p {
+	margin: 0;
+	color: var(--ink-body);
+}
+
+.hero-panel-label {
+	margin-top: 4px;
+}
+
+.hero-process-list {
+	counter-reset: hero-process;
+	display: grid;
+	gap: 12px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.hero-process-list li {
+	counter-increment: hero-process;
+	display: grid;
+	grid-template-columns: 28px minmax(0, 1fr);
+	gap: 12px;
+	align-items: start;
+	color: var(--ink-body);
+}
+
+.hero-process-list li::before {
+	content: counter(hero-process);
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 28px;
+	height: 28px;
+	border-radius: 50%;
+	background: rgba(47, 93, 134, 0.1);
+	border: 1px solid rgba(47, 93, 134, 0.18);
+	font-size: 0.82rem;
+	font-weight: 800;
+	color: var(--accent-deep);
+}
+
+.hero-support-note {
+	margin: 0;
+	padding-top: 16px;
+	border-top: 1px solid rgba(20, 38, 58, 0.08);
+	font-size: 0.92rem;
+	color: var(--ink-body);
 }
 
 .office-copy {
@@ -1885,9 +1995,24 @@ main {
 	}
 
 	.nav a {
+		position: static;
 		white-space: nowrap;
 		padding: 8px 12px;
+		border-radius: 999px;
+		border: 1px solid rgba(20, 38, 58, 0.03);
+		background: transparent;
 		font-size: 0.9rem;
+	}
+
+	.nav a::after {
+		display: none;
+	}
+
+	.nav a:hover,
+	.nav a.active {
+		background: rgba(255, 255, 255, 0.82);
+		border-color: rgba(24, 51, 71, 0.1);
+		color: var(--trust-deep);
 	}
 
 	.header-cta {
@@ -1917,6 +2042,25 @@ main {
 	.grid-3,
 	.grid-4 {
 		grid-template-columns: 1fr;
+	}
+
+	.hero-grid {
+		gap: 18px;
+	}
+
+	.hero-review-panel {
+		gap: 16px;
+	}
+
+	.hero-process-list li {
+		grid-template-columns: 24px minmax(0, 1fr);
+		gap: 10px;
+	}
+
+	.hero-process-list li::before {
+		width: 24px;
+		height: 24px;
+		font-size: 0.76rem;
 	}
 
 	.footer-links {
