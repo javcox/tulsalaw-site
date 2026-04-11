@@ -80,7 +80,7 @@ export const homepageFAQs = [
 	{
 		question: 'Does Tulsa Law handle clients outside Tulsa?',
 		answer:
-			'Yes. The office is in Tulsa and regularly reviews matters for clients in Bixby, Broken Arrow, and elsewhere in Oklahoma when the issue fits the listed practice areas and current availability.',
+			'Yes. The office is in Tulsa and regularly helps clients in Bixby, Broken Arrow, and elsewhere in Oklahoma when the matter fits the listed practice areas.',
 	},
 	{
 		question: 'How do consultation requests work?',
@@ -197,9 +197,9 @@ export const services: Service[] = [
 		],
 		related: ['wills-and-trusts', 'power-of-attorney', 'guardianship'],
 		localSupport: {
-			heading: 'Estate planning from a Tulsa office that is easy to reach from Bixby and Broken Arrow',
+			heading: 'Estate planning from a Tulsa office serving Tulsa, Bixby, Broken Arrow, and nearby families',
 			copy:
-				'The office is in south Tulsa, so this planning path is a practical nearby option for families in Tulsa, Bixby, Broken Arrow, and surrounding communities who want attorney-guided documents instead of guesswork.',
+				'This planning path works well for families in Tulsa, Bixby, Broken Arrow, and nearby communities who want attorney-guided documents instead of piecing forms together on their own.',
 			bullets: [
 				'Useful for families updating wills or trusts after marriage, divorce, children, or a move',
 				'Helpful when aging parents, adult children, or decision-makers are spread across nearby communities',
@@ -484,9 +484,9 @@ export const services: Service[] = [
 		],
 		related: ['family-law', 'estate-planning', 'guardianship'],
 		localSupport: {
-			heading: 'A calmer uncontested-divorce path for Tulsa, Bixby, and nearby families',
+			heading: 'Uncontested-divorce help from a Tulsa office for families in Tulsa, Bixby, Broken Arrow, and nearby communities',
 			copy:
-				'This page is for people in Tulsa, Bixby, Broken Arrow, and nearby communities who want a calmer, more organized divorce process when the matter is closer to agreement than conflict.',
+				'This page fits people who want a calmer, more organized divorce process when the matter is closer to agreement than conflict.',
 			bullets: [
 				'Useful when both sides want the paperwork handled more carefully, not more aggressively',
 				'Helpful when you need attorney guidance on next steps before filing or signing anything important',
@@ -572,7 +572,7 @@ export const services: Service[] = [
 		intro:
 			'Some matters do not start with a clean label. They start with a difficult situation, a deadline, a document, or a decision that needs attorney judgment before the wrong move is made. This is the right lane when the issue is real but the category is not obvious yet.',
 		summary:
-			'Tulsa Law offers legal guidance for Oklahoma clients who need a serious review, a clearer strategy, and help deciding what should happen next before they commit more time or money. This is the lane for issues that need attorney judgment first, and if the matter appears to fit after intake review, the next step is usually the $100 30-minute consultation.',
+			'Tulsa Law offers legal guidance for Oklahoma clients who need a serious review, a clearer strategy, and help deciding what should happen next before they commit more time or money. This page is built for matters that need attorney judgment first, and many that fit move next to the $100 30-minute consultation after intake review.',
 		searchPhrases: [
 			'Tulsa legal guidance attorney',
 			'Tulsa legal advice consultation',
@@ -1053,9 +1053,9 @@ export const services: Service[] = [
 		],
 		related: ['business-law', 'contract-drafting-review'],
 		localSupport: {
-			heading: 'LLC formation from a Tulsa office for owners in Tulsa, Bixby, and nearby business corridors',
+			heading: 'LLC formation from a Tulsa office for owners in Tulsa, Bixby, Broken Arrow, and nearby business corridors',
 			copy:
-				'This page is built for Oklahoma owners who want more than a filing service, especially founders in Tulsa, Bixby, Broken Arrow, and nearby business corridors who need entity setup, operating terms, and early-stage business documents that actually fit the business.',
+				'This page fits owners who want more than a filing service and want the structure, operating terms, and early documents reviewed by an attorney.',
 			bullets: [
 				'Good fit for solo founders and partners launching service businesses, professional firms, and local companies',
 				'Useful when an owner wants a nearby attorney to review ownership, authority, and cleanup issues early',

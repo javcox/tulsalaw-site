@@ -2,23 +2,23 @@
 const steps = [
 	{
 		title: '1. Choose the service lane',
-		copy: 'Start with the closest lane so injury screening, legal guidance, and document consultations are not treated as the same request.',
+		copy: 'Start with the closest lane so the office can review the matter in the right context.',
 	},
 	{
 		title: '2. Send only the core facts',
-		copy: 'Most people finish in 2 to 4 minutes. The form asks for the minimum details needed for fit, timing, and next-step review.',
+		copy: 'Most people finish in 2 to 4 minutes. The form asks for the core details, not a full memo.',
 	},
 	{
 		title: '3. Get the right follow-up',
-		copy: 'Personal injury matters are screened for fit first. Other matters that fit usually move next to scheduling instructions for the $100 30-minute consultation.',
+		copy: 'Personal injury matters are screened for fit first. Many other matters that fit move next to the $100 30-minute consultation path.',
 	},
 ];
 ---
 
 <div class="panel intake-panel">
 	<p class="mini-kicker">Intake Path</p>
-	<h2 class="mini-title">What happens after you start the intake.</h2>
-	<p class="mini-copy">Attorney-led review from the Tulsa office, with most requests reviewed within 1 business day.</p>
+	<h2 class="mini-title">What happens after you submit.</h2>
+	<p class="mini-copy">The office reviews new matters for fit, timing, conflicts, and urgency before the next step is offered.</p>
 	<ol class="intake-steps">
 		{
 			steps.map((step) => (
@@ -29,5 +29,5 @@ const steps = [
 			))
 		}
 	</ol>
-	<p class="mini-copy">Submitting intake does not create an attorney-client relationship, but it does move the matter into the firm review queue.</p>
+	<p class="mini-copy">Submitting intake does not create an attorney-client relationship, but it does move the matter into the review queue.</p>
 </div>
