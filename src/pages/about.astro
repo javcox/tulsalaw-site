@@ -1,10 +1,68 @@
 ---
-import AttorneySpotlight from '../components/AttorneySpotlight.astro';
+import { Image } from 'astro:assets';
+import ownerImage from '../assets/owner.jpg';
 import CtaPanel from '../components/CtaPanel.astro';
-import TestimonialsSection from '../components/TestimonialsSection.astro';
-import WhyChooseSection from '../components/WhyChooseSection.astro';
 import { firm } from '../data/site';
 import Layout from '../layouts/Layout.astro';
+
+const practiceAdvantages = [
+	{
+		title: 'Personal injury review with a practical first filter',
+		copy:
+			'Injury matters usually turn on liability, treatment, damages, and insurance. The first job is to tell whether the facts justify deeper attention instead of treating every claim like it belongs in the same bucket.',
+	},
+	{
+		title: 'Planning and authority documents before pressure builds',
+		copy:
+			'Wills, trusts, powers of attorney, and guardianship-related planning work best when the documents are clear before a health event, family change, or decision-making problem creates more strain.',
+	},
+	{
+		title: 'Legal guidance with business instinct and document discipline',
+		copy:
+			'Contracts, LLC formation, family-law paperwork, and broader legal-guidance matters benefit from attorney review that understands both the legal issue and the practical consequences of what gets signed, filed, or delayed.',
+	},
+];
+
+const foundationTimeline = [
+	{
+		title: 'University of Tulsa',
+		copy: 'J.D. completed in 1997, grounding the legal work in Oklahoma-based training and practice judgment.',
+	},
+	{
+		title: 'Oklahoma City University',
+		copy:
+			'MBA completed in 1994 while working full-time in purchasing and acquisitions, adding practical business discipline to the legal background.',
+	},
+	{
+		title: 'Purchasing and acquisitions background',
+		copy:
+			'That business-side experience included contracts, vendor negotiations, and manufacturing-context decision-making before law practice ever became the public-facing role.',
+	},
+	{
+		title: 'University of Oklahoma and Villanova',
+		copy:
+			'Earlier academic work included a B.A. from the University of Oklahoma and additional mathematics and science studies at Villanova University.',
+	},
+];
+
+const reviewProof = [
+	{
+		author: 'S.C.',
+		context: 'Attorney review',
+		quote:
+			'She is up-front, honest, and forthcoming in her work, and honesty can sometimes be something you need to hear, not what you want to hear.',
+	},
+	{
+		author: 'D.B.',
+		context: 'Pricing and next steps',
+		quote: 'I appreciate upfront details on pricing, time frames, and what to expect.',
+	},
+	{
+		author: 'K.M.',
+		context: 'Family matter',
+		quote: 'Tracy Cinocca helped me navigate my way through a very emotional legal issue.',
+	},
+];
 
 const schemas = [
 	{
@@ -32,68 +90,132 @@ const schemas = [
 
 <Layout
 	title="About Tracy A. Cinocca | Tulsa Attorney Serving Oklahoma"
-	description="Learn about Tracy A. Cinocca, JD, MBA, and the experience behind Tulsa Law's estate planning, personal injury, family law, and business-document practice."
+	description="Learn about Tracy A. Cinocca, JD, MBA, and the practical legal and business background behind Tulsa Law's personal injury review, estate planning, family matters, and business-document work."
 	path="/about/"
 	schemas={schemas}
 >
-	<section class="page-hero">
-		<div class="shell page-frame">
-			<div class="hero-card">
+	<section class="page-hero about-page-hero">
+		<div class="shell about-hero-grid">
+			<div class="hero-card about-hero-copy">
 				<div class="breadcrumbs">
 					<a href="/">Home</a>
 					<span>/</span>
 					<span>About Tracy</span>
 				</div>
 				<p class="eyebrow">About Tracy</p>
-				<h1 class="page-title">A Tulsa attorney with legal depth and practical business instinct.</h1>
+				<h1 class="page-title">Tulsa attorney with legal judgment, business instinct, and a direct review process.</h1>
 				<p class="lead">
-					Tracy A. Cinocca's background blends legal training, MBA-level business understanding,
-					and real contract and acquisition experience. That combination helps clients make better
-					decisions when the stakes touch family, money, ownership, and future planning.
+					People usually land here because the matter is serious enough to need more than a form,
+					but still early enough that the next move matters. Tracy A. Cinocca's background brings
+					together legal training, business discipline, contract experience, and a practical eye
+					for what should happen next.
 				</p>
-				<div class="pill-row">
-					{firm.credentials.map((credential) => <span class="pill">{credential}</span>)}
+
+				<div class="trust-strip" aria-label="About page trust indicators">
+					<span class="quick-fact">Tulsa office</span>
+					<span class="quick-fact">Attorney-led review</span>
+					<span class="quick-fact">J.D. + M.B.A.</span>
+					<span class="quick-fact">Most requests reviewed within 1 business day</span>
 				</div>
+
+				<div class="hero-actions">
+					<a
+						class="button button-primary"
+						href={firm.consultationUrl}
+						data-track="generate_lead"
+						data-track-label="about-start-intake"
+					>
+						Start Intake
+					</a>
+					<a class="button button-ghost" href="/practice-areas/">See Practice Areas</a>
+				</div>
+
+				<p class="mini-copy hero-summary">
+					Personal injury matters are screened for fit first. Many non-injury matters that fit move
+					next to the $100 30-minute consultation path by email.
+				</p>
 			</div>
 
-			<div class="hero-aside">
-				<div class="panel">
-					<p class="mini-kicker">Practice approach</p>
-					<h2 class="mini-title">Clear advice and careful preparation.</h2>
-					<p class="mini-copy">
-						Many matters are easier to handle when clients get advice early, before paperwork or
-						family and business issues become harder to fix.
-					</p>
+			<div class="about-portrait-panel">
+				<div class="about-portrait-frame">
+					<Image
+						src={ownerImage}
+						alt="Tracy A. Cinocca"
+						widths={[420, 620, 860]}
+						sizes="(max-width: 1080px) 100vw, 38vw"
+						loading="eager"
+						format="avif"
+					/>
 				</div>
-				<div class="panel">
-					<p class="mini-kicker">Service area</p>
-					<h2 class="mini-title">Based in Tulsa near Bixby, serving clients across Oklahoma.</h2>
-					<p class="mini-copy">
-						The practice includes estate planning, personal injury matters, family-law matters,
-						and business documents for clients throughout Oklahoma, including nearby Bixby and
-						Broken Arrow.
-					</p>
+				<div class="about-portrait-meta">
+					<strong>Tracy A. Cinocca, J.D.</strong>
+					<span>{firm.legalName}</span>
+					<span>{firm.fullAddress}</span>
+				</div>
+				<div class="about-fact-grid">
+					<div class="stat-card about-fact-card">
+						<strong>University of Tulsa</strong>
+						<span>J.D., completed in 1997</span>
+					</div>
+					<div class="stat-card about-fact-card">
+						<strong>Oklahoma City University</strong>
+						<span>MBA completed while working full-time</span>
+					</div>
+					<div class="stat-card about-fact-card">
+						<strong>Contracts and acquisitions</strong>
+						<span>Business-side experience before law practice</span>
+					</div>
+					<div class="stat-card about-fact-card">
+						<strong>South Tulsa office</strong>
+						<span>Serving Tulsa, Bixby, Broken Arrow, and nearby Oklahoma communities</span>
+					</div>
 				</div>
 			</div>
 		</div>
 	</section>
 
-	<AttorneySpotlight />
-
-	<section class="section-xl">
+	<section class="section">
 		<div class="shell">
 			<div class="section-head">
 				<div>
-					<p class="eyebrow">What stands out</p>
-					<h2 class="section-title">The background behind the legal judgment</h2>
+					<p class="eyebrow">Why this background matters</p>
+					<h2 class="section-title">Serious legal judgment with practical business sense behind it.</h2>
 				</div>
 			</div>
 
-			<div class="grid-3">
-				{firm.bioHighlights.map((item) => (
-					<div class="value-card">
-						<h3>Client-facing advantage</h3>
-						<p>{item}</p>
+			<div class="about-advantage-grid">
+				{practiceAdvantages.map((item) => (
+					<div class="value-card about-advantage-card">
+						<h3>{item.title}</h3>
+						<p>{item.copy}</p>
+					</div>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section class="section-xl">
+		<div class="shell split-copy about-foundation-layout">
+			<div class="band">
+				<p class="eyebrow">Education and business foundation</p>
+				<h2 class="section-title">The legal work is backed by more than legal theory alone.</h2>
+				<p class="lead" style="margin-top: 0;">
+					Before the public-facing attorney role, the foundation included business school,
+					purchasing and acquisitions work, contracts, and analytical study. That blend matters
+					because many client decisions sit at the intersection of documents, money, ownership,
+					and family pressure.
+				</p>
+				<div class="quote about-foundation-quote">
+					Clients do not need a speech. They need the right issue identified clearly, the right
+					documents handled carefully, and the next step explained in plain terms.
+				</div>
+			</div>
+
+			<div class="timeline about-foundation-timeline">
+				{foundationTimeline.map((item) => (
+					<div class="card">
+						<h3>{item.title}</h3>
+						<p>{item.copy}</p>
 					</div>
 				))}
 			</div>
@@ -101,64 +223,63 @@ const schemas = [
 	</section>
 
 	<section class="section">
-		<div class="shell">
-			<div class="section-head">
-				<div>
-					<p class="eyebrow">Education + foundation</p>
-					<h2 class="section-title">A path that blends legal, business, and analytical training</h2>
-				</div>
-			</div>
-
-			<div class="timeline">
-				<div class="card">
-					<h3>University of Tulsa</h3>
-					<p>Law degree completed in 1997.</p>
-				</div>
-				<div class="card">
-					<h3>Oklahoma City University</h3>
-					<p>MBA completed in 1994 while working full-time in purchasing and acquisitions.</p>
-				</div>
-				<div class="card">
-					<h3>University of Oklahoma</h3>
-					<p>BA completed in 1993.</p>
-				</div>
-				<div class="card">
-					<h3>Villanova University</h3>
-					<p>Additional mathematics and science studies, including physics coursework.</p>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<section class="section">
 		<div class="shell highlight-band">
 			<div class="band">
-				<p class="eyebrow">Working style</p>
-				<h2 class="section-title">What clients can expect from the process</h2>
+				<p class="eyebrow">How the office works</p>
+				<h2 class="section-title">A practical review path for Oklahoma legal matters.</h2>
 				<ul class="checklist">
-					{firm.brandPillars.map((item) => <li>{item}</li>)}
+					<li>Tulsa-based attorney review instead of a generic intake handoff</li>
+					<li>Most requests reviewed within 1 business day when submitted on a business day</li>
+					<li>Personal injury matters screened for fit first</li>
+					<li>Many non-injury matters that fit move next to the $100 30-minute consultation path</li>
 				</ul>
 			</div>
 
 			<div class="band">
-				<p class="section-label">Client perspective</p>
+				<p class="eyebrow">Best place to start</p>
+				<h2 class="section-title">Choose the lane that matches the question in front of you.</h2>
 				<p class="lead" style="margin-top: 0;">
-					Estate documents, family-law paperwork, and business agreements are often used at
-					important moments. Clients should understand what the documents do, what choices they
-					are making, and what comes next.
+					Start with personal injury review when fault, treatment, and damages need the first
+					answer. Start with estate planning when authority and documents need to be handled
+					correctly. Start with legal guidance when the right next step still needs attorney
+					judgment.
 				</p>
-				<div class="quote" style="margin-top: 18px;">
-					The goal is simple: clients should feel informed before they sign anything important.
+				<div class="chips">
+					<a class="chip" href="/personal-injury/">Personal Injury Review</a>
+					<a class="chip" href="/estate-planning/">Estate Planning</a>
+					<a class="chip" href="/legal-guidance/">Legal Guidance</a>
+					<a class="chip" href="/practice-areas/">Practice Areas</a>
 				</div>
 			</div>
 		</div>
 	</section>
 
-	<WhyChooseSection />
-	<TestimonialsSection />
+	<section class="section-xl">
+		<div class="shell">
+			<div class="section-head">
+				<div>
+					<p class="eyebrow">Client perspective</p>
+					<h2 class="section-title">What clients say about judgment, candor, and next steps.</h2>
+				</div>
+			</div>
+
+			<div class="review-grid">
+				{reviewProof.map((item) => (
+					<article class="review-card">
+						<p class="review-author">{item.author}</p>
+						<p class="review-stars" aria-label="5 out of 5 stars">&starf;&starf;&starf;&starf;&starf;</p>
+						<p class="review-context">{item.context}</p>
+						<p class="review-quote">"{item.quote}"</p>
+					</article>
+				))}
+			</div>
+		</div>
+	</section>
 
 	<CtaPanel
-		title="Want to send a matter in for review?"
-		copy="Use the guided intake to route the matter for fit review, or email the firm directly if you need to add a quick note first."
+		title="Want to send a matter in for attorney review?"
+		copy="Use the guided intake to route the matter into the right review queue, or use the broader practice map first if you want to confirm the best lane before you begin."
+		secondaryHref="/contact/"
+		secondaryLabel="Contact the Firm"
 	/>
 </Layout>

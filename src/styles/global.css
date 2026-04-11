@@ -845,6 +845,104 @@ main {
 	gap: 18px;
 }
 
+.about-hero-grid {
+	display: grid;
+	grid-template-columns: minmax(0, 1.02fr) minmax(320px, 0.98fr);
+	gap: 24px;
+	align-items: start;
+}
+
+.about-page-hero .hero-card {
+	min-height: 100%;
+}
+
+.about-page-hero .page-title {
+	max-width: 11.5ch;
+}
+
+.about-portrait-panel {
+	display: grid;
+	gap: 18px;
+	padding: 22px;
+	border-radius: 30px;
+	background: var(--surface-wash-strong);
+	border: 1px solid var(--line);
+	box-shadow: var(--shadow-soft);
+}
+
+.about-portrait-frame {
+	overflow: hidden;
+	border-radius: 24px;
+	background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(241, 246, 250, 0.96));
+	border: 1px solid rgba(20, 38, 58, 0.08);
+}
+
+.about-portrait-frame img {
+	width: 100%;
+	height: auto;
+	object-fit: cover;
+}
+
+.about-portrait-meta {
+	display: grid;
+	gap: 4px;
+}
+
+.about-portrait-meta strong {
+	font-size: 1.08rem;
+	font-weight: 800;
+	letter-spacing: -0.02em;
+	color: var(--ink);
+}
+
+.about-portrait-meta span {
+	color: var(--ink-body);
+}
+
+.about-fact-grid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 14px;
+}
+
+.about-fact-card {
+	padding: 18px;
+	border-radius: 22px;
+}
+
+.about-fact-card strong {
+	font-size: 0.98rem;
+}
+
+.about-advantage-grid {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 18px;
+}
+
+.about-advantage-card {
+	display: grid;
+	align-content: start;
+	gap: 10px;
+	min-height: 100%;
+}
+
+.about-advantage-card h3 {
+	max-width: 17ch;
+}
+
+.about-foundation-layout {
+	align-items: stretch;
+}
+
+.about-foundation-timeline {
+	gap: 16px;
+}
+
+.about-foundation-quote {
+	margin-top: 22px;
+}
+
 .related-link-list {
 	display: grid;
 	gap: 12px;
@@ -2061,6 +2159,7 @@ main {
 	.hero-grid,
 	.highlight-band,
 	.page-frame,
+	.about-hero-grid,
 	.spotlight-grid,
 	.footer-grid,
 	.contact-grid,
@@ -2180,6 +2279,8 @@ main {
 
 	.hero-meta,
 	.hero-meta-lanes,
+	.about-fact-grid,
+	.about-advantage-grid,
 	.grid-2,
 	.grid-3,
 	.grid-4 {
@@ -2219,6 +2320,7 @@ main {
 	.review-card,
 	.expectation-card,
 	.portrait-card,
+	.about-portrait-panel,
 	.intake-step-card,
 	.intake-success-panel {
 		padding: 22px;
