@@ -1649,7 +1649,8 @@ main {
 .button-primary,
 .button-secondary,
 .footer-grid .button,
-.cta-panel .button {
+.cta-panel .button-primary,
+.cta-panel .button-secondary {
 	color: #fffaf3;
 }
 
