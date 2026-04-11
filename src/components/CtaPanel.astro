@@ -5,9 +5,17 @@ interface Props {
 	title: string;
 	copy: string;
 	href?: string;
+	secondaryHref?: string;
+	secondaryLabel?: string;
 }
 
-const { title, copy, href = firm.consultationUrl } = Astro.props;
+const {
+	title,
+	copy,
+	href = firm.consultationUrl,
+	secondaryHref = '/practice-areas/',
+	secondaryLabel = 'See Practice Areas',
+} = Astro.props;
 ---
 
 <section class="section">
@@ -29,7 +37,7 @@ const { title, copy, href = firm.consultationUrl } = Astro.props;
 				>
 					Start Intake
 				</a>
-				<a class="button button-ghost" href="/practice-areas/">See Practice Areas</a>
+				<a class="button button-ghost" href={secondaryHref}>{secondaryLabel}</a>
 			</div>
 		</div>
 	</div>

@@ -1,7 +1,5 @@
 ---
 import CtaPanel from '../components/CtaPanel.astro';
-import IntakePathPanel from '../components/IntakePathPanel.astro';
-import PracticeCard from '../components/PracticeCard.astro';
 import { firm, getServiceUrl, services, type Service } from '../data/site';
 import Layout from '../layouts/Layout.astro';
 
@@ -13,11 +11,9 @@ export function getStaticPaths() {
 }
 
 const { service } = Astro.props as { service: Service };
-const relatedServices = services.filter((entry) => service.related.includes(entry.slug));
 const moneyPageServices = services.filter((entry) => service.moneyPageLinks?.includes(entry.slug));
 const siblingSupportServices = services.filter((entry) => service.siblingSupportLinks?.includes(entry.slug));
-const moneyPageLinks = services.filter((entry) => service.moneyPageLinks?.includes(entry.slug));
-const siblingSupportLinks = services.filter((entry) => service.siblingSupportLinks?.includes(entry.slug));
+const relatedServices = services.filter((entry) => service.related.includes(entry.slug));
 
 const categoryCopy = {
 	Guidance: {
@@ -63,6 +59,121 @@ const categoryCopy = {
 } as const;
 
 const currentCategory = categoryCopy[service.category as keyof typeof categoryCopy];
+
+const reviewFocusByCategory = {
+	Guidance: [
+		'What decision has to be made next, and what gets riskier if it waits',
+		'Whether the matter really belongs in family, business, planning, or injury review',
+		'Whether a document, consultation, or broader legal strategy is the right next step',
+	],
+	Planning: [
+		'Who needs authority, protection, or clearer instructions before a crisis',
+		'Whether the current documents still fit the family, assets, and decision-makers',
+		'What should be drafted, updated, or coordinated first so the plan works cleanly later',
+	],
+	Family: [
+		'What is urgent, what can wait, and which filings or agreements matter first',
+		'Whether the matter looks document-driven or likely to expand into a broader family issue',
+		'What next step is practical without making the situation more adversarial than it needs to be',
+	],
+	Injury: [
+		'Whether liability looks strong enough to justify further review',
+		'Whether treatment, damages, and timing support a meaningful claim',
+		'Whether insurance or another realistic source of recovery appears available',
+	],
+	Business: [
+		'Whether the agreement, formation work, or cleanup issue is specific enough to review efficiently',
+		'What risk sits in the paperwork, ownership structure, or deal terms right now',
+		'Whether the matter needs targeted document work or broader legal guidance before moving ahead',
+	],
+} as const;
+
+const pathGuidanceByCategory = {
+	Guidance: {
+		title: 'Use a different path if the next step is already obvious.',
+		copy:
+			'Legal Guidance is best when the issue still needs attorney judgment before it lands in the right bucket. If you already know the matter is mainly planning, injury review, or a short document issue, the narrower path is usually better.',
+		chips: [
+			{ label: 'Legal Guidance', href: '/legal-guidance/' },
+			{ label: 'Practice Areas', href: '/practice-areas/' },
+			{ label: 'Simple Services', href: '/oklahoma-legal-forms/' },
+		],
+		secondaryHref: '/practice-areas/',
+		secondaryLabel: 'See Practice Areas',
+	},
+	Planning: {
+		title: 'Use the shorter planning route if the matter is mostly document-focused.',
+		copy:
+			'These planning pages are often the right place to start, but some clients prefer the shorter Simple Services route when they already know the matter is mostly about documents, updates, or attorney review before drafting.',
+		chips: [
+			{ label: 'Estate Planning', href: '/estate-planning/' },
+			{ label: 'Simple Services', href: '/oklahoma-legal-forms/' },
+			{ label: 'Legal Guidance', href: '/legal-guidance/' },
+		],
+		secondaryHref: '/oklahoma-legal-forms/',
+		secondaryLabel: 'Use Simple Services',
+	},
+	Family: {
+		title: 'Use a broader or shorter route depending on how contained the family matter is.',
+		copy:
+			'Family matters often start in Legal Guidance or Practice Areas. If the issue is mostly an uncontested or document-heavy path, the shorter Simple Services route may save time.',
+		chips: [
+			{ label: 'Legal Guidance', href: '/legal-guidance/' },
+			{ label: 'Practice Areas', href: '/practice-areas/' },
+			{ label: 'Simple Services', href: '/oklahoma-legal-forms/' },
+		],
+		secondaryHref: '/legal-guidance/',
+		secondaryLabel: 'Use Legal Guidance',
+	},
+	Injury: {
+		title: 'Stay in injury review when fault, treatment, and damages are the main question.',
+		copy:
+			'These pages are for injury matters that need an honest fit review first. If the issue also needs broader family, planning, or business judgment, Legal Guidance or the broader practice map may be a better starting point.',
+		chips: [
+			{ label: 'Personal Injury Review', href: '/personal-injury/' },
+			{ label: 'Legal Guidance', href: '/legal-guidance/' },
+			{ label: 'Practice Areas', href: '/practice-areas/' },
+		],
+		secondaryHref: '/personal-injury/',
+		secondaryLabel: 'See Injury Review',
+	},
+	Business: {
+		title: 'Use the shorter route for contained document work, or Legal Guidance if the business issue is wider.',
+		copy:
+			'LLC formation and contract review often fit the shorter Simple Services path. Broader business issues may fit better in Legal Guidance or the wider Practice Areas map.',
+		chips: [
+			{ label: 'Simple Services', href: '/oklahoma-legal-forms/' },
+			{ label: 'Legal Guidance', href: '/legal-guidance/' },
+			{ label: 'Practice Areas', href: '/practice-areas/' },
+		],
+		secondaryHref: '/oklahoma-legal-forms/',
+		secondaryLabel: 'Use Simple Services',
+	},
+} as const;
+
+const currentReviewFocus =
+	reviewFocusByCategory[service.category as keyof typeof reviewFocusByCategory] ?? [];
+const currentPathGuidance =
+	pathGuidanceByCategory[service.category as keyof typeof pathGuidanceByCategory];
+
+const nextStepBullets =
+	service.category === 'Injury'
+		? [
+				'Start with the closest injury page or use the injury review lane.',
+				'Send the core facts on liability, treatment, damages, and insurance instead of a long narrative.',
+				'The office screens the matter for fit first before discussing deeper review.',
+			]
+		: [
+				'Start with the closest page or use the shorter document route if it fits better.',
+				'Send the core facts in about 2 to 4 minutes so the matter lands in the right review queue.',
+				'If the matter fits, the next step is often the $100 30-minute consultation by email.',
+			];
+
+const mergedRelatedServices = [
+	...moneyPageServices,
+	...siblingSupportServices,
+	...relatedServices,
+].filter((entry, index, array) => array.findIndex((candidate) => candidate.slug === entry.slug) === index);
 
 const schemas = [
 	{
@@ -123,6 +234,7 @@ const schemas = [
 				<div class="trust-strip" aria-label="Service page trust indicators">
 					<span class="quick-fact">Tulsa office</span>
 					<span class="quick-fact">Attorney-led review</span>
+					<span class="quick-fact">2 to 4 minute intake</span>
 					<span class="quick-fact">Most requests reviewed within 1 business day</span>
 				</div>
 
@@ -135,7 +247,9 @@ const schemas = [
 					>
 						Start Intake
 					</a>
-					<a class="button button-ghost" href="/practice-areas/">See Practice Areas</a>
+					<a class="button button-ghost" href={currentPathGuidance.secondaryHref}>
+						{currentPathGuidance.secondaryLabel}
+					</a>
 				</div>
 				<p class="mini-copy hero-summary">
 					This usually takes about 2 to 4 minutes, keeps the summary short, routes the matter
@@ -151,26 +265,50 @@ const schemas = [
 						{service.idealFor.map((item) => <li>{item}</li>)}
 					</ul>
 				</div>
-				<IntakePathPanel />
+				<div class="panel intake-panel">
+					<p class="mini-kicker">What happens next</p>
+					<h2 class="mini-title">The review path for this kind of matter.</h2>
+					<ol class="intake-steps">
+						{nextStepBullets.map((step, index) => (
+							<li>
+								<strong>{`${index + 1}. ${step}`}</strong>
+							</li>
+						))}
+					</ol>
+					<p class="mini-copy">
+						Submitting intake does not create an attorney-client relationship, but it does move
+						the matter into the review queue.
+					</p>
+				</div>
 			</div>
 		</div>
 	</section>
 
 	<section class="section-xl">
-		<div class="shell grid-2">
-			<div class="band">
+		<div class="shell service-overview-grid">
+			<div class="panel service-overview-card">
 				<p class="eyebrow">What this can include</p>
-				<h2 class="section-title">Common needs inside this matter type</h2>
+				<h2 class="section-title">Common needs inside this matter.</h2>
 				<ul class="checklist">
 					{service.includes.map((item) => <li>{item}</li>)}
 				</ul>
 			</div>
-			<div class="band">
-				<p class="eyebrow">How the work usually moves</p>
-				<h2 class="section-title">A cleaner path from first question to next step</h2>
+			<div class="panel service-overview-card">
+				<p class="eyebrow">What the office looks for first</p>
+				<h2 class="section-title">The questions that shape the first review.</h2>
 				<ul class="checklist">
-					{service.process.map((item) => <li>{item}</li>)}
+					{currentReviewFocus.map((item) => <li>{item}</li>)}
 				</ul>
+			</div>
+			<div class="panel service-overview-card">
+				<p class="eyebrow">{service.category === 'Injury' ? 'Review path' : 'Next step'}</p>
+				<h2 class="section-title">
+					{service.category === 'Injury'
+						? 'Why this matter is screened for fit first.'
+						: 'How fitting matters usually move next.'}
+				</h2>
+				<p class="mini-copy">{currentCategory.consultation}</p>
+				<div class="quote service-template-quote">{currentCategory.expectation}</div>
 			</div>
 		</div>
 	</section>
@@ -178,21 +316,19 @@ const schemas = [
 	<section class="section">
 		<div class="shell highlight-band">
 			<div class="band">
-				<p class="eyebrow">Before you reach out</p>
-				<h2 class="section-title">What this page is helping you decide.</h2>
-				<p class="lead" style="margin-top: 0;">
-					{currentCategory.overview}
-				</p>
+				<p class="eyebrow">What this page helps you decide</p>
+				<h2 class="section-title">Whether this is the right fit before you commit more time.</h2>
+				<p class="lead" style="margin-top: 0;">{currentCategory.overview}</p>
 			</div>
 			<div class="band">
-				<p class="section-label">Consultation note</p>
-				<p class="lead" style="margin-top: 0;">
-					Most requests are reviewed within 1 business day when submitted on a business day.
-					{` ${currentCategory.consultation}`} Sending a request does not create an
-					attorney-client relationship.
-				</p>
-				<div class="quote" style="margin-top: 18px;">
-					{currentCategory.expectation}
+				<p class="eyebrow">Use a different path instead</p>
+				<h2 class="section-title">{currentPathGuidance.title}</h2>
+				<p class="lead" style="margin-top: 0;">{currentPathGuidance.copy}</p>
+				<div class="chips">
+					{currentPathGuidance.chips.map((chip) => (
+						<a class="chip" href={chip.href}>{chip.label}</a>
+					))}
+					<a class="chip" href={`/start-intake/?service=${service.slug}`}>Start Intake</a>
 				</div>
 			</div>
 		</div>
@@ -200,35 +336,15 @@ const schemas = [
 
 	{service.localSupport && (
 		<section class="section">
-			<div class="shell highlight-band">
-				<div class="band">
+			<div class="shell">
+				<div class="band local-support-band">
 					<p class="eyebrow">Tulsa and Nearby</p>
 					<h2 class="section-title">{service.localSupport.heading}</h2>
 					<p class="lead" style="margin-top: 0;">{service.localSupport.copy}</p>
 				</div>
-				<div class="band">
-					<p class="section-label">Local fit</p>
-					<ul class="checklist" style="margin-top: 18px;">
-						{service.localSupport.bullets.map((item) => <li>{item}</li>)}
-					</ul>
-				</div>
-			</div>
-		</section>
-	)}
-
-	{(moneyPageServices.length > 0 || siblingSupportServices.length > 0) && (
-		<section class="section">
-			<div class="shell">
-				<div class="section-head">
-					<div>
-						<p class="eyebrow">Related Next Steps</p>
-						<h2 class="section-title">Pages that help this matter make more sense</h2>
-					</div>
-				</div>
-				<div class="service-grid">
-					{moneyPageServices.map((entry) => <PracticeCard service={entry} />)}
-					{siblingSupportServices.map((entry) => <PracticeCard service={entry} />)}
-				</div>
+				<ul class="checklist">
+					{service.localSupport.bullets.map((item) => <li>{item}</li>)}
+				</ul>
 			</div>
 		</section>
 	)}
@@ -254,47 +370,34 @@ const schemas = [
 		</div>
 	</section>
 
-	{(moneyPageLinks.length > 0 || siblingSupportLinks.length > 0) && (
+	{mergedRelatedServices.length > 0 && (
 		<section class="section">
-			<div class="shell internal-link-grid">
-				{moneyPageLinks.length > 0 && (
-					<div class="band">
-						<p class="eyebrow">Next Strong Match</p>
-						<h2 class="section-title">Money pages closely tied to this topic</h2>
-						<div class="chips">
-							{moneyPageLinks.map((entry) => (
-								<a class="chip" href={getServiceUrl(entry.slug)}>{entry.name}</a>
-							))}
-						</div>
-					</div>
-				)}
-				{siblingSupportLinks.length > 0 && (
-					<div class="band">
-						<p class="eyebrow">Related Support</p>
-						<h2 class="section-title">Support pages that help visitors choose the right next step</h2>
-						<div class="chips">
-							{siblingSupportLinks.map((entry) => (
-								<a class="chip" href={getServiceUrl(entry.slug)}>{entry.name}</a>
-							))}
-							<a class="chip" href={`/start-intake/?service=${service.slug}`}>Start Intake</a>
-						</div>
-					</div>
-				)}
-			</div>
-		</section>
-	)}
-
-	{relatedServices.length > 0 && (
-		<section class="section-xl">
-			<div class="shell">
-				<div class="section-head">
-					<div>
-						<p class="eyebrow">Related Services</p>
-						<h2 class="section-title">You may also want to review these related services.</h2>
+			<div class="shell split-copy">
+				<div class="band">
+					<p class="eyebrow">Related pages</p>
+					<h2 class="section-title">Pages that may fit the matter more precisely.</h2>
+					<div class="related-link-list">
+						{mergedRelatedServices.slice(0, 5).map((entry) => (
+							<a class="related-link-item" href={getServiceUrl(entry.slug)}>
+								<strong>{entry.name}</strong>
+								<span>{entry.summary}</span>
+							</a>
+						))}
 					</div>
 				</div>
-				<div class="service-grid">
-					{relatedServices.map((entry) => <PracticeCard service={entry} />)}
+				<div class="band">
+					<p class="eyebrow">Wider routes</p>
+					<h2 class="section-title">Use the broader map if this page is only close, not exact.</h2>
+					<p class="mini-copy">
+						The broader routes help when the issue crosses lanes or when you would rather let the
+						office route the matter after a shorter summary.
+					</p>
+					<div class="chips">
+						{currentPathGuidance.chips.map((chip) => (
+							<a class="chip" href={chip.href}>{chip.label}</a>
+						))}
+						<a class="chip" href="/contact/">Contact</a>
+					</div>
 				</div>
 			</div>
 		</section>
@@ -304,5 +407,7 @@ const schemas = [
 		title={`Ready to talk about ${service.name.toLowerCase()}?`}
 		copy="Use the guided intake to send the matter for fit review and move it into the right queue."
 		href={`/start-intake/?service=${service.slug}`}
+		secondaryHref={currentPathGuidance.secondaryHref}
+		secondaryLabel={currentPathGuidance.secondaryLabel}
 	/>
 </Layout>

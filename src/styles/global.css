@@ -820,6 +820,73 @@ main {
 	gap: 18px;
 }
 
+.service-overview-grid {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 20px;
+}
+
+.service-overview-card {
+	display: grid;
+	align-content: start;
+	gap: 12px;
+}
+
+.service-overview-card .section-title {
+	max-width: 14ch;
+}
+
+.service-template-quote {
+	margin-top: 14px;
+}
+
+.local-support-band {
+	display: grid;
+	gap: 18px;
+}
+
+.related-link-list {
+	display: grid;
+	gap: 12px;
+	margin-top: 12px;
+}
+
+.related-link-item {
+	display: grid;
+	gap: 6px;
+	padding: 16px 18px;
+	border-radius: 20px;
+	background: rgba(255, 255, 255, 0.74);
+	border: 1px solid rgba(20, 38, 58, 0.08);
+	color: inherit;
+	text-decoration: none;
+	transition:
+		transform 180ms ease,
+		border-color 180ms ease,
+		box-shadow 180ms ease,
+		background 180ms ease;
+}
+
+.related-link-item:hover,
+.related-link-item:focus-visible {
+	transform: translateY(-2px);
+	border-color: rgba(47, 93, 134, 0.14);
+	box-shadow: 0 12px 24px rgba(20, 38, 58, 0.07);
+	background: rgba(255, 255, 255, 0.92);
+	outline: none;
+}
+
+.related-link-item strong {
+	font-size: 1rem;
+	font-weight: 800;
+	color: var(--ink);
+}
+
+.related-link-item span {
+	color: var(--ink-body);
+	font-size: 0.95rem;
+}
+
 .quote {
 	padding: 22px;
 	border-left: 3px solid rgba(47, 93, 134, 0.28);
@@ -1998,6 +2065,7 @@ main {
 	.footer-grid,
 	.contact-grid,
 	.split-copy,
+	.service-overview-grid,
 	.cta-panel,
 	.internal-link-grid,
 	.local-support-card {
