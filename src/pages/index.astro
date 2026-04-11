@@ -4,7 +4,6 @@ import CtaPanel from '../components/CtaPanel.astro';
 import PracticeCard from '../components/PracticeCard.astro';
 import PracticeAreasCard from '../components/PracticeAreasCard.astro';
 import TestimonialsSection from '../components/TestimonialsSection.astro';
-import WhyChooseSection from '../components/WhyChooseSection.astro';
 import { featuredServices, firm, homepageFAQs, homepageLanes } from '../data/site';
 import Layout from '../layouts/Layout.astro';
 
@@ -25,10 +24,17 @@ const heroFitItems = [
 	},
 ];
 
-const heroProcessItems = [
+const afterIntakeSteps = [
 	'Choose the closest lane so the matter moves into the right review queue.',
 	'Send only the core facts. Most people finish intake in about 2 to 4 minutes.',
 	'Watch for attorney review. Personal injury is screened for fit first, and many non-injury matters that fit move next to the $100 30-minute consultation path.',
+];
+
+const practicalPathBullets = [
+	'Tulsa-based attorney-led review instead of a generic intake handoff',
+	'A guided intake designed to stay practical instead of asking for a long written story',
+	'Clearer next-step guidance for injury, planning, family, business, and document matters',
+	'Fit, conflicts, scope, and current availability are reviewed before the next step is offered',
 ];
 
 const schemas = [
@@ -129,13 +135,10 @@ const schemas = [
 							))
 						}
 					</div>
-					<p class="section-label hero-panel-label">After intake</p>
-					<ol class="hero-process-list">
-						{heroProcessItems.map((item) => <li>{item}</li>)}
-					</ol>
 					<p class="hero-support-note">
-						Tulsa office serving Tulsa, Bixby, Broken Arrow, and nearby communities. The intake
-						is meant to save time, not push anyone into a call before the facts are clear.
+						If the matter crosses more than one lane or the next step is not obvious, choose
+						Legal Guidance. The Tulsa office serves clients in Tulsa, Bixby, Broken Arrow, and
+						nearby communities.
 					</p>
 				</div>
 			</div>
@@ -147,11 +150,11 @@ const schemas = [
 			<div class="section-head">
 				<div>
 					<p class="eyebrow">Most Requested</p>
-					<h2 class="section-title">Core pages people usually choose first</h2>
+					<h2 class="section-title">Choose the lane that fits best.</h2>
 					<p class="section-copy">
-						These are the highest-intent entry pages for the site. The separate catch-all card
-						keeps the rest of the practice map available without turning the homepage into a long
-						list of unrelated services.
+						If the fit is obvious, start there. If it is not, Legal Guidance is the safest
+						starting point. The catch-all card keeps the rest of the practice map available
+						without turning the homepage into a crowded list.
 					</p>
 				</div>
 			</div>
@@ -163,70 +166,36 @@ const schemas = [
 		</div>
 	</section>
 
-	<AttorneySpotlight />
-
-	<section class="section-xl">
-		<div class="shell">
-			<div class="section-head">
-				<div>
-					<p class="eyebrow">Client Fit</p>
-					<h2 class="section-title">What clients usually want when they start here</h2>
-					<p class="section-copy">
-						Most people reaching out are trying to answer a practical question before the matter
-						gets more expensive, more stressful, or harder to fix later.
-					</p>
-				</div>
-			</div>
-
-			<div class="grid-3">
-				<div class="value-card">
-					<h3>Do I have an injury matter worth pursuing?</h3>
-					<p>
-						People who need an honest review of liability, treatment, insurance, and damages before
-						they spend months chasing the wrong claim.
-					</p>
-				</div>
-				<div class="value-card">
-					<h3>Which document or legal path actually fits?</h3>
-					<p>
-						Clients who need attorney judgment on planning, family, business, or broader legal
-						guidance before signing, filing, or escalating anything important.
-					</p>
-				</div>
-				<div class="value-card">
-					<h3>Can this be handled cleanly before it gets messy?</h3>
-					<p>
-						Families and business owners who want wills, powers of attorney, uncontested-divorce
-						paperwork, LLC setup, or contract review handled with more care than a template or
-						filing service can offer.
-					</p>
-				</div>
-			</div>
-		</div>
-	</section>
-
 	<section class="section">
-		<div class="shell highlight-band">
-			<div class="band">
-				<p class="eyebrow">Service Area</p>
-				<h2 class="section-title">Tulsa office serving Tulsa, Bixby, Broken Arrow, and nearby communities.</h2>
-				<p class="lead" style="margin-top: 0;">
-					The office is in south Tulsa, making it a practical nearby option for clients in Tulsa,
-					Bixby, Broken Arrow, and surrounding communities who want direct attorney review.
-				</p>
-			</div>
-			<div class="band">
-				<p class="section-label">Where this matters most</p>
-				<ul class="checklist" style="margin-top: 18px;">
-					<li>Estate planning for families who want documents done correctly instead of relying on generic online forms</li>
-					<li>Uncontested divorce and legal guidance for households in south Tulsa and nearby communities looking for a calmer process</li>
-					<li>LLC formation and contract help for owners working across Tulsa, Bixby, Broken Arrow, and nearby business corridors</li>
-				</ul>
+		<div class="shell">
+			<div class="highlight-band">
+				<div class="band">
+					<p class="eyebrow">After Intake</p>
+					<h2 class="section-title">Reviewed first. Scheduled second.</h2>
+					<p class="lead" style="margin-top: 0;">
+						The path is designed to help the office decide what fits before anyone gets pushed
+						into the wrong call, the wrong expectation, or the wrong legal lane.
+					</p>
+					<ol class="hero-process-list">
+						{afterIntakeSteps.map((item) => <li>{item}</li>)}
+					</ol>
+				</div>
+				<div class="band">
+					<p class="eyebrow">Why This Works</p>
+					<h2 class="section-title">A practical path before time gets wasted.</h2>
+					<ul class="checklist">
+						{practicalPathBullets.map((item) => <li>{item}</li>)}
+					</ul>
+					<div class="quote" style="margin-top: 18px;">
+						Submitting intake does not create an attorney-client relationship. The request is
+						reviewed first for fit, conflicts, timing, and next-step availability.
+					</div>
+				</div>
 			</div>
 		</div>
 	</section>
 
-	<WhyChooseSection />
+	<AttorneySpotlight />
 	<TestimonialsSection />
 
 	<section class="section">
@@ -234,7 +203,11 @@ const schemas = [
 			<div class="section-head">
 				<div>
 					<p class="eyebrow">FAQ</p>
-					<h2 class="section-title">The questions most visitors need answered before they reach out</h2>
+					<h2 class="section-title">The questions people usually want answered before they start.</h2>
+					<p class="section-copy">
+						These are the most common concerns before someone sends a matter in for review or
+						decides whether the site fits what they need.
+					</p>
 				</div>
 			</div>
 
