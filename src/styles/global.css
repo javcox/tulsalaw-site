@@ -343,15 +343,22 @@ main {
 }
 
 .hero-home-card .hero-title {
-	max-width: 11.6ch;
+	max-width: 12.8ch;
 }
 
 .hero-home-card .lead {
-	max-width: 46ch;
+	max-width: 48ch;
 }
 
 .hero-support-copy {
 	max-width: 42ch;
+}
+
+.hero-home-card .hero-summary {
+	margin-top: 12px;
+	max-width: 42ch;
+	font-size: 0.98rem;
+	color: var(--ink-body);
 }
 
 .hero-title,
@@ -2183,7 +2190,7 @@ main {
 	}
 
 	.hero-title {
-		font-size: clamp(2.3rem, 12vw, 3.4rem);
+		font-size: clamp(2.15rem, 11vw, 3.15rem);
 	}
 
 	.page-title {
