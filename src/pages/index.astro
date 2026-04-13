@@ -10,7 +10,7 @@ const trustItems = ['Tulsa office', '2-4 minute intake', 'Attorney-led review', 
 const heroFitItems = [
 	{
 		title: 'Personal injury review',
-		copy: 'Car, truck, motorcycle, pedestrian, and related injury matters that need an attorney look at liability, treatment, and damages.',
+		copy: 'Car, truck, motorcycle, pedestrian, and related injury matters that need an attorney to review liability, treatment, and damages.',
 	},
 	{
 		title: 'Estate planning',
@@ -23,16 +23,16 @@ const heroFitItems = [
 ];
 
 const afterIntakeSteps = [
-	'Choose the closest lane so the matter moves into the right review queue.',
+	'Choose the closest lane so the matter goes to the right review lane.',
 	'Send only the core facts. Most people finish intake in about 2 to 4 minutes.',
-	'Watch for attorney review. Personal injury is screened for fit first, and many non-injury matters that fit move next to the $100 30-minute consultation path.',
+	'Watch for attorney review. Personal injury matters are screened for fit first, and many non-injury matters that fit move next to the $100 30-minute consultation path.',
 ];
 
 const practicalPathBullets = [
-	'Tulsa-based attorney-led review instead of a generic intake handoff',
-	'A guided intake designed to stay practical instead of asking for a long written story',
-	'Clearer next-step guidance for injury, planning, family, business, and document matters',
-	'Fit, conflicts, scope, and current availability are reviewed before the next step is offered',
+	'Attorney review from a Tulsa office, not a generic intake handoff',
+	'A guided intake that stays practical instead of asking for a long written story',
+	'Clear next-step guidance for injury, planning, family, business, and document matters',
+	'Fit, conflicts, scope, and current availability are reviewed before the office offers the next step',
 ];
 
 const homepageRoutes = [
@@ -42,7 +42,7 @@ const homepageRoutes = [
 		copy: lane.copy,
 		tag: ['Personal Injury Review', 'Estate Planning', 'Legal Guidance'].includes(lane.title)
 			? 'Main lane'
-			: 'Broader map',
+			: 'Full service map',
 		links: lane.links,
 		footer:
 			lane.title === 'More Practice Areas'
@@ -106,13 +106,13 @@ const schemas = [
 				<p class="eyebrow">Tulsa office. Attorney-led review. Clear next steps.</p>
 				<h1 class="hero-title">Tulsa attorney for injury review, planning, and legal guidance.</h1>
 				<p class="lead">
-					Use the guided intake for personal injury review, estate planning, powers of attorney,
+					Start with the guided intake for injury review, estate planning, powers of attorney,
 					guardianship, and practical family, business, or document matters. Most requests are
 					reviewed within 1 business day.
 				</p>
 				<p class="hero-summary">
-					Most people finish in about 2 to 4 minutes, and you do not need to write a long memo
-					before you begin.
+					Most people finish in about 2 to 4 minutes, and you do not need to write a long
+					summary before you begin.
 				</p>
 
 				<div class="hero-actions">
@@ -135,10 +135,10 @@ const schemas = [
 				</div>
 			</div>
 
-			<div class="hero-aside">
+				<div class="hero-aside">
 				<div class="panel hero-review-panel">
 					<p class="mini-kicker">Choose the closest first path</p>
-					<h2 class="mini-title">The homepage stays focused on three main lanes.</h2>
+					<h2 class="mini-title">Most people start in one of these three lanes.</h2>
 					<div class="hero-fit-list">
 						{
 							heroFitItems.map((item) => (
@@ -150,8 +150,8 @@ const schemas = [
 					}
 					</div>
 					<p class="hero-support-note">
-						Use Practice Areas when the issue falls outside the three main homepage lanes and
-						you want the broader service map.
+						If none of those three lanes feels right, open Practice Areas for the full service
+						map.
 					</p>
 				</div>
 			</div>
@@ -196,8 +196,7 @@ const schemas = [
 					<p class="eyebrow">After Intake</p>
 					<h2 class="section-title">Reviewed first. Scheduled second.</h2>
 					<p class="lead" style="margin-top: 0;">
-						The path is designed to help the office decide what fits before anyone gets pushed
-						into the wrong call, the wrong expectation, or the wrong legal lane.
+						The office reviews the matter first and then tells you the most practical next step.
 					</p>
 					<ol class="hero-process-list">
 						{afterIntakeSteps.map((item) => <li>{item}</li>)}
@@ -226,10 +225,10 @@ const schemas = [
 			<div class="section-head">
 				<div>
 					<p class="eyebrow">FAQ</p>
-					<h2 class="section-title">The questions people usually want answered before they start.</h2>
+					<h2 class="section-title">Questions people often ask before they start.</h2>
 					<p class="section-copy">
-						These are the most common concerns before someone sends a matter in for review or
-						decides whether the site fits what they need.
+						These are the questions people usually ask before they send a matter in for review
+						or decide whether the site fits what they need.
 					</p>
 				</div>
 			</div>

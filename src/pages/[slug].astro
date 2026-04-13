@@ -18,15 +18,15 @@ const relatedServices = services.filter((entry) => service.related.includes(entr
 const categoryCopy = {
 	Guidance: {
 		overview:
-			'This is usually a fit when the issue needs attorney judgment before it can be placed in the right lane, filed, signed, or pushed further.',
+			'Best for issues that need attorney judgment before anything gets signed, filed, or pushed into the wrong lane.',
 		expectation:
-			'Most legal guidance clients want a serious review of the facts, the pressure points, and the smartest next step before they commit more time or money.',
+			'Most legal-guidance clients want a serious review of the facts, the pressure points, and the smartest next step before they commit more time or money.',
 		consultation:
-			'For many legal-guidance matters that fit, the next step is the $100 30-minute consultation by email because strategy review, document review, or attorney judgment is needed before a recommendation can be made.',
+			'For many legal-guidance matters that fit, the next step is the $100 30-minute consultation by email because strategy review, document review, or attorney judgment is needed before a recommendation is made.',
 	},
 	Planning: {
 		overview:
-			'This is usually a fit when the goal is to get important documents, authority decisions, or family planning handled before a crisis makes everything harder.',
+			'Best for documents, authority decisions, and family planning that should be handled before a crisis makes everything harder.',
 		expectation:
 			'Most planning clients are trying to avoid confusion later. The first question is usually whether the documents match the family, the assets, and the people who may have to act.',
 		consultation:
@@ -34,7 +34,7 @@ const categoryCopy = {
 	},
 	Family: {
 		overview:
-			'This is usually a fit when the matter involves family change, document preparation, filings, agreements, or a need for clearer next steps before tensions rise.',
+			'Best for family matters involving document preparation, filings, agreements, or clearer next steps before tensions rise.',
 		expectation:
 			'Most family-law clients want to know what is urgent, what can wait, and what paperwork or decisions need attention first.',
 		consultation:
@@ -42,7 +42,7 @@ const categoryCopy = {
 	},
 	Injury: {
 		overview:
-			'This is usually a fit when the question is whether an injury matter has enough liability, treatment, insurance, and damages to justify moving forward.',
+			'Best when the real question is whether liability, treatment, insurance, and damages justify moving forward.',
 		expectation:
 			'Most injury clients want an honest first look at fault, treatment, and whether the claim appears strong enough to justify more time and attention.',
 		consultation:
@@ -50,7 +50,7 @@ const categoryCopy = {
 	},
 	Business: {
 		overview:
-			'This is usually a fit when the work involves ownership, agreements, document cleanup, or business decisions that are better handled before they become disputes.',
+			'Best for ownership, agreements, document cleanup, or business decisions that need attention before they become disputes.',
 		expectation:
 			'Most business clients want to know whether the agreement, structure, or filing is sound enough to move forward without avoidable risk.',
 		consultation:
@@ -165,7 +165,7 @@ const nextStepBullets =
 			]
 		: [
 				'Start with the closest page or use the shorter document route if it fits better.',
-				'Send the core facts in about 2 to 4 minutes so the matter lands in the right review queue.',
+				'Send the core facts in about 2 to 4 minutes so the matter lands in the right review lane.',
 				'If the matter fits, the next step is often the $100 30-minute consultation by email.',
 			];
 
@@ -252,8 +252,8 @@ const schemas = [
 					</a>
 				</div>
 				<p class="mini-copy hero-summary">
-					This usually takes about 2 to 4 minutes, keeps the summary short, routes the matter
-					into attorney review, and preselects {service.name.toLowerCase()} for the firm.
+					This usually takes about 2 to 4 minutes, keeps the summary short, and routes the matter
+					to the office in the right category for review.
 					{` ${currentCategory.consultation}`}
 				</p>
 			</div>
@@ -276,8 +276,8 @@ const schemas = [
 						))}
 					</ol>
 					<p class="mini-copy">
-						Submitting intake does not create an attorney-client relationship, but it does move
-						the matter into the review queue.
+						Submitting intake does not create an attorney-client relationship, but it does place
+						the matter into the office review process.
 					</p>
 				</div>
 			</div>
@@ -387,10 +387,10 @@ const schemas = [
 				</div>
 				<div class="band">
 					<p class="eyebrow">Wider routes</p>
-					<h2 class="section-title">Use the broader map if this page is only close, not exact.</h2>
+					<h2 class="section-title">Use the full service map if this page is only close, not exact.</h2>
 					<p class="mini-copy">
 						The broader routes help when the issue crosses lanes or when you would rather let the
-						office route the matter after a shorter summary.
+						office place the matter after a shorter summary.
 					</p>
 					<div class="chips">
 						{currentPathGuidance.chips.map((chip) => (
@@ -405,7 +405,7 @@ const schemas = [
 
 	<CtaPanel
 		title={`Ready to talk about ${service.name.toLowerCase()}?`}
-		copy="Use the guided intake to send the matter for fit review and move it into the right queue."
+		copy="Use the guided intake to send the matter for fit review and place it in the right review lane."
 		href={`/start-intake/?service=${service.slug}`}
 		secondaryHref={currentPathGuidance.secondaryHref}
 		secondaryLabel={currentPathGuidance.secondaryLabel}

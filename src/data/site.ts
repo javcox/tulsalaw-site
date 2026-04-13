@@ -85,7 +85,7 @@ export const homepageFAQs = [
 	{
 		question: 'How do consultation requests work?',
 		answer:
-			'The fastest path is the guided intake form on this site. Most requests are reviewed within 1 business day when submitted on a business day. Personal injury matters are screened for fit first. Most planning, family, business, and legal-guidance matters that fit move next to an email with scheduling instructions and the $100 30-minute consultation payment link.',
+			'The fastest path is the guided intake form on this site. Most requests are reviewed within 1 business day when they are submitted on a business day. Personal injury matters are screened for fit first. Most planning, family, business, and legal-guidance matters that fit move next to an email with scheduling instructions and the $100 30-minute consultation payment link.',
 	},
 	{
 		question: 'What is the difference between Practice Areas and Simple Services?',
@@ -110,7 +110,7 @@ export const homepageLanes = [
 		title: 'Legal Guidance',
 		href: '/legal-guidance/',
 		copy:
-			'For situations that need attorney judgment before signing, filing, escalating, or deciding whether the matter belongs in planning, family, business, or injury review.',
+			'For matters that need attorney judgment before anything gets signed, filed, escalated, or pushed into the wrong lane.',
 		links: [
 			{ label: 'Family Law', href: '/family-law/' },
 			{ label: 'Business Law', href: '/business-law/' },
@@ -132,7 +132,7 @@ export const homepageLanes = [
 		title: 'More Practice Areas',
 		href: '/practice-areas/',
 		copy:
-			'For uncontested divorce, LLC formation, contract review, and the rest of the family and business map when the issue is real but not one of the three main homepage lanes.',
+			'For uncontested divorce, LLC formation, contract review, and the rest of the family and business map when the matter does not belong in the three main homepage lanes.',
 		links: [
 			{ label: 'Uncontested Divorce', href: '/uncontested-divorce/' },
 			{ label: 'LLC Formation', href: '/llc-formation/' },
@@ -1174,7 +1174,7 @@ export const testimonials: Testimonial[] = [
 	{
 		author: 'S.R.',
 		quote:
-			'Miss Cinocca’s experience and expertise is demonstrated in her work and professionalism displayed.',
+			'Miss Cinocca’s experience and expertise are reflected in her work and professionalism.',
 	},
 ];
 
