@@ -5,6 +5,10 @@ import { services } from '../data/site';
 
 const pathname = Astro.url.pathname;
 const servicePaths = new Set(services.map((service) => `/${service.slug}/`));
+const isActive = (href: string) =>
+	href === '/practice-areas/'
+		? pathname.startsWith(href) || servicePaths.has(pathname)
+		: pathname.startsWith(href);
 const navLinks = [
 	{ href: '/practice-areas/', label: 'Practice Areas' },
 	{ href: '/oklahoma-legal-forms/', label: 'Simple Services' },
@@ -37,18 +41,7 @@ const navLinks = [
 		<nav class="nav" aria-label="Primary">
 			{
 				navLinks.map((link) => (
-					<a
-						class={
-							link.href === '/practice-areas/'
-								? pathname.startsWith(link.href) || servicePaths.has(pathname)
-									? 'active'
-									: ''
-								: pathname.startsWith(link.href)
-									? 'active'
-									: ''
-						}
-						href={link.href}
-					>
+					<a class={isActive(link.href) ? 'active' : ''} href={link.href}>
 						{link.label}
 					</a>
 				))
@@ -64,6 +57,25 @@ const navLinks = [
 			>
 				Start Intake
 			</a>
+
+			<details class="mobile-menu">
+				<summary class="mobile-menu-toggle" aria-label="Open navigation menu">
+					<span></span>
+					<span></span>
+					<span></span>
+				</summary>
+				<div class="mobile-menu-panel">
+					<nav class="mobile-menu-nav" aria-label="Mobile primary">
+						{
+							navLinks.map((link) => (
+								<a class={isActive(link.href) ? 'active' : ''} href={link.href}>
+									<span>{link.label}</span>
+								</a>
+							))
+						}
+					</nav>
+				</div>
+			</details>
 		</div>
 	</div>
 </header>
